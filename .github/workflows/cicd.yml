@@ -1,0 +1,29 @@
+name: Build and Deploy to Render
+
+on:
+  push:
+    branches: [ "main" ] # Запускается только при пуше в main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+  # 1. Checkout code
+  - name: Checkout Code
+    uses: actions/checkout@v4
+
+  # 2. Log in to Docker Hub (или другой registry, но для Render можно и без него)
+  # Мы будем билдить образ прямо на Render, поэтому этот шаг можно пропустить.
+  # Но для полноты картины покажу альтернативу с Docker Hub.
+
+  # 3. Build the Docker image
+  - name: Build Docker Image
+    run: docker build -t personal-page:latest .
+
+  # 4. Deploy to Render (используем официальный Action)
+  - name: Deploy to Render
+    uses: johnbeynon/render-deploy-action@v0.0.8
+    with:
+      service-id: ${{ secrets.RENDER_SERVICE_ID }}
+      api-key: ${{ secrets.RENDER_API_KEY }}
