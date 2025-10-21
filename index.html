@@ -3,32 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artem Rivnyi | DevOps Enthusiast</title>
+    <title>Artem Rivnyi | DevOps & AI Portfolio</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#links">Links</a></li>
+        </ul>
+    </nav>
+
     <header>
         <h1>Artem Rivnyi</h1>
         <p>Junior Customer Technical Support Specialist (With DevOps Ambition)</p>
     </header>
+
     <main>
         <section id="about">
             <h2>About Me</h2>
             <p>Motivated and tech-savvy specialist with hands-on experience in AI-powered automation, technical support, and a strong passion for DevOps.</p>
-            <p>This page is automatically deployed using a CI/CD pipeline I built with Docker and GitHub Actions!</p>
+            <p>This portfolio site is automatically deployed using a CI/CD pipeline I built with Docker and GitHub Actions!</p>
+            <div class="tech-stack">
+                <h3>Technologies Used in This Project:</h3>
+                <div class="tech-tags">
+                    <span class="tech-tag">HTML/CSS/JS</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">GitHub Actions</span>
+                    <span class="tech-tag">CI/CD</span>
+                    <span class="tech-tag">Render</span>
+                </div>
+            </div>
         </section>
+
+        <section id="projects">
+            <h2>My Technical Projects</h2>
+            
+            <div class="project">
+                <h3>🤖 AI Email Support System</h3>
+                <p>AI-powered customer support automation for e-commerce with automated classification and response generation.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">OpenAI API</span>
+                    <span class="tech-tag">Flask</span>
+                    <span class="tech-tag">Email Parsing</span>
+                    <span class="tech-tag">Prompt Engineering</span>
+                </div>
+                <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store" target="_blank">View on GitHub →</a>
+            </div>
+
+            <div class="project">
+                <h3>⚙️ DevOps Node.js App</h3>
+                <p>Full CI/CD pipeline demonstrating DevOps automation principles with Docker containers and automated deployment.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">Docker Compose</span>
+                    <span class="tech-tag">GitHub Actions</span>
+                    <span class="tech-tag">CI/CD</span>
+                </div>
+                <a href="https://github.com/ArtemRivnyi/my-devops-node-app" target="_blank">View on GitHub →</a>
+            </div>
+
+            <div class="project">
+                <h3>🎫 AI Ticket Classifier</h3>
+                <p>Automated ticket categorization and routing system using machine learning for efficient support operations.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Machine Learning</span>
+                    <span class="tech-tag">NLP</span>
+                    <span class="tech-tag">Classification</span>
+                </div>
+                <a href="https://github.com/ArtemRivnyi/ai-ticket-classifier" target="_blank">View on GitHub →</a>
+            </div>
+
+            <div class="project">
+                <h3>🚀 DevOps Mini Lab (This Site)</h3>
+                <p>Static portfolio site with automated CI/CD pipeline showcasing Docker and cloud deployment skills.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">HTML/CSS/JS</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">GitHub Actions</span>
+                    <span class="tech-tag">CI/CD</span>
+                    <span class="tech-tag">Render</span>
+                </div>
+                <a href="https://github.com/ArtemRivnyi/personal-page-devops" target="_blank">View on GitHub →</a>
+            </div>
+        </section>
+
         <section id="links">
-            <h2>Links</h2>
-            <ul>
-                <li><a href="https://www.linkedin.com/in/artem-rivnyi/">LinkedIn</a></li>
-                <li><a href="https://github.com/ArtemRivnyi">GitHub</a></li>
-                <li><a href="Rivnyi_Artem_Tech_Support_CV.pdf">My CV (PDF)</a></li>
-            </ul>
+            <h2>Connect With Me</h2>
+            <div class="links-grid">
+                <a href="https://www.linkedin.com/in/artem-rivnyi/" class="link-card" target="_blank">
+                    <strong>LinkedIn</strong>
+                    <span>Professional profile</span>
+                </a>
+                <a href="https://github.com/ArtemRivnyi" class="link-card" target="_blank">
+                    <strong>GitHub</strong>
+                    <span>Code repositories</span>
+                </a>
+                <a href="Rivnyi_Artem_Tech_Support_CV.pdf" class="link-card">
+                    <strong>Download CV</strong>
+                    <span>PDF version</span>
+                </a>
+            </div>
         </section>
     </main>
+
     <footer>
-        <p>Page version: <span id="version">1.0</span></p>
+        <p>Page version: <span id="version">2.0</span> | Automatically deployed via CI/CD</p>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
