@@ -103,6 +103,7 @@ This project serves as both:
 
 **Artem Rivnyi** — Junior Technical Support / DevOps Enthusiast
 
-*   📧 [artemrivnyi@outlook.com](mailto:artemrivnyi@outlook.com)
-*   **Email:** [artemrivnyi@outlook.com](mailto:artemrivnyi@outlook.com)
-*   🔗 [LinkedIn](https://www.linkedin.com/in/artem-rivnyi/)
+* **Email:** [artemrivnyi@outlook.com](mailto:artemrivnyi@outlook.com)  
+* 🔗 [LinkedIn](https://www.linkedin.com/in/artem-rivnyi/)  
+* 🌐 [Personal Projects](https://personal-page-devops.onrender.com/)  
+* 💻 [GitHub](https://github.com/ArtemRivnyi)
