@@ -99,8 +99,10 @@ This project serves as both:
 *   **Cloud Platforms:** Render deployment and configuration
 *   **Version Control:** Git workflows and branch management
 
-## 📞 Contact
+## 🧰 Maintainer
 
-*   **LinkedIn:** [Artem Rivnyi](https://www.linkedin.com/in/artem-rivnyi/)
+**Artem Rivnyi** — Junior Technical Support / DevOps Enthusiast
+
+*   📧 [artemrivnyi@outlook.com](mailto:artemrivnyi@outlook.com)
 *   **Email:** [artemrivnyi@outlook.com](mailto:artemrivnyi@outlook.com)
-*   **GitHub:** [ArtemRivnyi](https://github.com/ArtemRivnyi)
+*   🔗 [LinkedIn](https://www.linkedin.com/in/artem-rivnyi/)
