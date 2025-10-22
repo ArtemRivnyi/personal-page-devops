@@ -163,6 +163,31 @@ p {
     line-height: 1.8;
 }
 
+/* DevOps Philosophy Styles */
+.devops-philosophy {
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 8px;
+    border-left: 4px solid #3498db;
+}
+
+.devops-philosophy h3 {
+    color: #212529;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.devops-philosophy p {
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+.devops-philosophy strong {
+    color: #3498db;
+}
+
 /* Tech Stack Styles */
 .tech-stack {
     margin: 1.5rem 0;
@@ -261,6 +286,27 @@ p {
 
 .project a:active {
     transform: translateY(0);
+}
+
+/* Other Projects Section */
+#other-projects {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px dashed #3498db;
+}
+
+#other-projects h2 {
+    border-bottom-color: #6c757d;
+}
+
+#other-projects .project {
+    background: white;
+    border-left-color: #6c757d;
+    opacity: 0.9;
+}
+
+#other-projects .project:hover {
+    opacity: 1;
+    border-left-color: #3498db;
 }
 
 /* Links Grid */
@@ -400,6 +446,11 @@ footer span {
         padding: 0.4rem 0.8rem;
         font-size: 0.8rem;
     }
+
+    .devops-philosophy {
+        padding: 1.2rem;
+        margin: 1rem 0;
+    }
 }
 
 @media (max-width: 480px) {
@@ -436,4 +487,3 @@ footer span {
         font-size: 0.9rem;
     }
 }
-
