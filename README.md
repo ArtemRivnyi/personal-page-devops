@@ -115,6 +115,9 @@ The live version of the portfolio is available here:
 
 👉 https://personal-page-devops.onrender.com/
 
+## 🤝 Contributing
+This is a personal portfolio project, but suggestions for improvements to the CI/CD pipeline or code structure are welcome.
+
 ## 🧰 Maintainer
 
 **Artem Rivnyi** — Junior Technical Support / DevOps Enthusiast
