@@ -113,7 +113,7 @@ personal-page-devops/
 ## 🌐 Live Demo
 The live version of the portfolio is available here:
 
-* 👉 https://personal-page-devops.onrender.com/
+👉 https://personal-page-devops.onrender.com/
 
 ## 🧰 Maintainer
 
