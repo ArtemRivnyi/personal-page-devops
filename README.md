@@ -21,7 +21,7 @@ A modern, responsive **portfolio website** showcasing my technical projects and 
 *   [🔧 DevOps Skills Demonstrated](#-devops-skills-demonstrated)
 *   [🌐 Live Demo](#-live-demo)
 *   [🤝 Contributing](#-contributing)
-*   [📞 Maintainer](#-maintainer)
+*   [🧰 Maintainer](#-maintainer)
 
 ## 🎯 Project Goals
 
