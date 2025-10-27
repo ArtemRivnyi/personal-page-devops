@@ -10,7 +10,6 @@ README.md
 # Node modules (will be installed in container)
 node_modules/
 npm-debug.log*
-package-lock.json
 
 # Tests and coverage
 tests/
