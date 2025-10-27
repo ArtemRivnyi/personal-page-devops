@@ -1,0 +1,11 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "color-function-notation": "modern",
+    "alpha-value-notation": "percentage",
+    "font-family-name-quotes": "always-where-recommended",
+    "rule-empty-line-before": ["always", { "except": ["first-nested", "after-single-line-comment"] }],
+    "media-feature-range-notation": "context",
+    "no-descending-specificity": null
+  }
+}

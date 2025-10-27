@@ -1,0 +1,55 @@
+{
+  "name": "personal-page-devops",
+  "version": "3.3.0",
+  "type": "module",
+  "description": "Modern portfolio with automated CI/CD pipeline",
+  "main": "script.js",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "lint": "eslint script.js",
+    "lint:fix": "eslint script.js --fix",
+    "stylelint": "stylelint style.css",
+    "stylelint:fix": "stylelint style.css --fix",
+    "html-validate": "html-validate index.html",
+    "validate": "npm run lint && npm run stylelint && npm run html-validate",
+    "validate:fix": "npm run lint:fix && npm run stylelint:fix",
+    "bump-version": "npm version patch && echo Updated to v$(node -p \"require('./package.json').version\")",
+    "prepare": "npm run validate",
+    "ci": "npm run validate && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArtemRivnyi/personal-page-devops.git"
+  },
+  "keywords": [
+    "DevOps",
+    "AI",
+    "Portfolio",
+    "JavaScript",
+    "Docker",
+    "CI/CD",
+    "Automation"
+  ],
+  "author": "Artem Rivnyi <artemrivnyi@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ArtemRivnyi/personal-page-devops/issues"
+  },
+  "homepage": "https://github.com/ArtemRivnyi/personal-page-devops#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.38.0",
+    "eslint": "^9.38.0",
+    "globals": "^16.4.0",
+    "html-validate": "^8.18.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^30.2.0",
+    "stylelint": "^16.2.1",
+    "stylelint-config-standard": "^36.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

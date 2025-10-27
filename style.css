@@ -16,14 +16,14 @@ body {
 
 /* Navigation Styles */
 nav {
-    background: rgba(255, 255, 255, 0.98);
+    background: rgb(255 255 255 / 98%);
     backdrop-filter: blur(10px);
     padding: 1.2rem 0;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    border-bottom: 1px solid rgba(52, 58, 64, 0.1);
+    box-shadow: 0 4px 20px rgb(0 0 0 / 8%);
+    border-bottom: 1px solid rgb(52 58 64 / 10%);
 }
 
 nav ul {
@@ -72,7 +72,7 @@ header {
     padding: 3rem 2rem;
     background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
     border-radius: 15px;
-    box-shadow: 0 15px 40px rgba(52, 152, 219, 0.2);
+    box-shadow: 0 15px 40px rgb(52 152 219 / 20%);
     color: white;
     text-align: center;
     position: relative;
@@ -86,7 +86,7 @@ header::before {
     right: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background: radial-gradient(circle, rgb(255 255 255 / 10%) 1px, transparent 1px);
     background-size: 50px 50px;
     animation: float 20s linear infinite;
 }
@@ -95,13 +95,14 @@ header::before {
     0% {
         transform: translate(0, 0);
     }
+
     100% {
         transform: translate(50px, 50px);
     }
 }
 
 header h1 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: Montserrat, sans-serif;
     font-size: 3rem;
     font-weight: 800;
     margin-bottom: 0.8rem;
@@ -112,7 +113,7 @@ header h1 {
 
 header p {
     font-size: 1.2rem;
-    opacity: 0.95;
+    opacity: 95%;
     position: relative;
     z-index: 1;
     font-weight: 500;
@@ -130,17 +131,17 @@ section {
     background: white;
     padding: 2.5rem;
     border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 25px rgb(0 0 0 / 8%);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 section:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 12px 35px rgb(0 0 0 / 12%);
 }
 
 h2 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: Montserrat, sans-serif;
     color: #212529;
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
@@ -151,7 +152,7 @@ h2 {
 }
 
 h3 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: Montserrat, sans-serif;
     color: #212529;
     font-weight: 700;
     font-size: 1.1rem;
@@ -214,13 +215,13 @@ p {
     font-size: 0.85rem;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.25);
+    box-shadow: 0 4px 12px rgb(52 152 219 / 25%);
     cursor: default;
 }
 
 .tech-tag:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 18px rgba(52, 152, 219, 0.35);
+    box-shadow: 0 6px 18px rgb(52 152 219 / 35%);
 }
 
 /* Project Card Styles */
@@ -231,7 +232,7 @@ p {
     border-left: 5px solid #3498db;
     border-radius: 10px;
     transition: all 0.3s ease;
-    border-top: 1px solid rgba(52, 152, 219, 0.1);
+    border-top: 1px solid rgb(52 152 219 / 10%);
     position: relative;
     overflow: hidden;
 }
@@ -243,14 +244,14 @@ p {
     right: 0;
     width: 100px;
     height: 100px;
-    background: radial-gradient(circle, rgba(52, 152, 219, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgb(52 152 219 / 10%) 0%, transparent 70%);
     border-radius: 50%;
     transform: translate(30%, -30%);
 }
 
 .project:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(52, 152, 219, 0.15);
+    box-shadow: 0 12px 30px rgb(52 152 219 / 15%);
     border-left-color: #2980b9;
 }
 
@@ -275,13 +276,13 @@ p {
     border-radius: 8px;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    box-shadow: 0 4px 15px rgb(52 152 219 / 30%);
     font-size: 0.95rem;
 }
 
 .project a:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+    box-shadow: 0 6px 20px rgb(52 152 219 / 40%);
 }
 
 .project a:active {
@@ -301,11 +302,11 @@ p {
 #other-projects .project {
     background: white;
     border-left-color: #6c757d;
-    opacity: 0.9;
+    opacity: 90%;
 }
 
 #other-projects .project:hover {
-    opacity: 1;
+    opacity: 100%;
     border-left-color: #3498db;
 }
 
@@ -326,7 +327,7 @@ p {
     border-radius: 10px;
     transition: all 0.3s ease;
     border: 2px solid transparent;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
     position: relative;
     overflow: hidden;
 }
@@ -338,14 +339,14 @@ p {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgb(52 152 219 / 10%), transparent);
     transition: left 0.5s ease;
 }
 
 .link-card:hover {
     border-color: #3498db;
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.2);
+    box-shadow: 0 8px 25px rgb(52 152 219 / 20%);
 }
 
 .link-card:hover::before {
@@ -358,7 +359,7 @@ p {
     margin-bottom: 0.5rem;
     color: #3498db;
     font-weight: 700;
-    font-family: 'Montserrat', sans-serif;
+    font-family: Montserrat, sans-serif;
 }
 
 .link-card span {
@@ -376,11 +377,11 @@ footer {
     color: white;
     text-align: center;
     border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 25px rgb(0 0 0 / 15%);
 }
 
 footer p {
-    opacity: 0.85;
+    opacity: 85%;
     color: #e9ecef;
     margin: 0;
     font-size: 0.95rem;
@@ -392,7 +393,7 @@ footer span {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (width <= 768px) {
     header, main, footer {
         margin: 1rem;
         padding: 1.5rem;
@@ -453,7 +454,7 @@ footer span {
     }
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px) {
     header h1 {
         font-size: 1.8rem;
     }

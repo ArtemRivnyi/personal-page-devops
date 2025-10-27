@@ -1,5 +1,49 @@
+# Git
 .git
 .github
+.gitignore
+
+# Documentation
 README.md
+*.md
+
+# Node modules (will be installed in container)
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Tests and coverage
+tests/
+coverage/
+*.test.js
+jest.config.js
+jest.setup.js
+
+# Development files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Configuration files not needed in production
+.env.example
+.htmlvalidate.json
+.stylelintrc.json
+eslint.config.mjs
+
+# Docker files
 Dockerfile
 .dockerignore
+docker-compose.yml
+
+# Logs
+*.log
+
+# Old versions
+OLD VERSIONS I/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
