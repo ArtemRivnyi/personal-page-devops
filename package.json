@@ -15,7 +15,6 @@
     "validate": "npm run lint && npm run stylelint && npm run html-validate",
     "validate:fix": "npm run lint:fix && npm run stylelint:fix",
     "bump-version": "npm version patch && echo Updated to v$(node -p \"require('./package.json').version\")",
-    "prepare": "npm run validate",
     "ci": "npm run validate && npm test"
   },
   "repository": {
