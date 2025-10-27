@@ -1,6 +1,5 @@
 # Dependencies
 node_modules/
-package-lock.json
 
 # Test coverage
 coverage/
@@ -42,6 +41,3 @@ Thumbs.db
 
 # Docker
 .dockerignore
-
-# Old versions (if you have backup folders)
-OLD VERSIONS I/
