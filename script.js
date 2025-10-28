@@ -67,9 +67,18 @@ class MatrixRain {
     draw() {
         const dark = document.body.classList.contains('dark-theme');
 
-        // Gentler cleaning to avoid artefacts
-        this.ctx.fillStyle = dark ? 'rgba(0,0,0,0.12)' : 'rgba(255,255,255,0.20)';
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        // FIXED: Complete clear every 50 frames to prevent artifacts
+        if (!this.frameCount) this.frameCount = 0;
+        this.frameCount++;
+        
+        if (this.frameCount % 50 === 0) {
+            // Full clear every 50 frames
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        } else {
+            // Normal fade effect
+            this.ctx.fillStyle = dark ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.25)';
+            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        }
 
         this.ctx.fillStyle = dark ? '#00ff66' : '#004400';
         const maxY = this.canvas.height;
@@ -97,12 +106,12 @@ class MatrixRain {
 document.addEventListener('DOMContentLoaded', () => {
     setupThemeToggle();
 
-    // Gradient sans artefacts
+    // Gradient overlay
     const gradient = document.createElement('div');
     gradient.className = 'gradient-overlay';
     document.body.appendChild(gradient);
 
-    // Canvas avec optimisation
+    // Matrix canvas
     const canvas = document.createElement('canvas');
     canvas.id = 'matrix-canvas';
     canvas.width = window.innerWidth;
@@ -120,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     new MatrixRain('matrix-canvas');
 
-    // We provide the appropriate nappies
+    // Set proper z-index for content
     const container = document.querySelector('.container');
     if (container) {
         container.style.position = 'relative';
@@ -128,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         container.style.transform = 'translateZ(0)';
     }
 
-    // Light animation of the appearance of sections
+    // Intersection observer for section animations
     const obs = new IntersectionObserver(
         (entries) => entries.forEach((e) => {
             if (e.isIntersecting) {
