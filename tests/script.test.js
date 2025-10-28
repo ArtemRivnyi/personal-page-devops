@@ -4,15 +4,17 @@
 
 import { debounce, setupThemeToggle, MatrixRain } from '../script.js';
 
-// Mock canvas getContext before any tests run
+// Mock canvas getContext before any tests run (without jest.fn)
 beforeAll(() => {
-  HTMLCanvasElement.prototype.getContext = jest.fn(() => ({
-    fillStyle: '',
-    fillRect: jest.fn(),
-    fillText: jest.fn(),
-    font: '',
-    textBaseline: '',
-  }));
+  HTMLCanvasElement.prototype.getContext = function() {
+    return {
+      fillStyle: '',
+      fillRect: function() {},
+      fillText: function() {},
+      font: '',
+      textBaseline: '',
+    };
+  };
 });
 
 describe('debounce function', () => {
