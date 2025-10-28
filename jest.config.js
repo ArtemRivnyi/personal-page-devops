@@ -7,8 +7,10 @@ export default {
   ],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   collectCoverageFrom: [
-    'script.js',
-    '!**/node_modules/**'
+    'script.exports.js',  // Test the exports file instead
+    '!script.js',         // Exclude browser-only file
+    '!**/node_modules/**',
+    '!**/tests/**'
   ],
   coverageThreshold: {
     global: {
