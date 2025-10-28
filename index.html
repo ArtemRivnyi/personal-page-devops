@@ -3,207 +3,298 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Artem Rivnyi - DevOps &amp; AI Portfolio. Showcasing technical projects and expertise in automation, cloud deployment, and AI-powered solutions.">
-    <meta name="keywords" content="DevOps, AI, Portfolio, Technical Support, Python, Docker, GitHub Actions">
-    <meta name="author" content="Artem Rivnyi">
-    <title>Artem Rivnyi | DevOps &amp; AI Portfolio</title>
+    <meta name="description" content="Artem Rivnyi - DevOps Engineer & Technical Support Specialist">
+    <title>Artem Rivnyi - Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%233498db'>A</text></svg>">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#other-projects">Experiments</a></li>
-            <li><a href="#links">Connect</a></li>
-        </ul>
-    </nav>
+    <!-- Matrix canvas, theme toggle and gradient background are added via JavaScript -->
+    
+    <div class="container">
+        <header>
+            <h1 class="name-title">
+                <!-- Name with Midjourney-like gradient effect -->
+                <span class="gradient-text">Artem Rivnyi</span>
+            </h1>
+            <p class="subtitle">DevOps Engineer | Technical Support Specialist | AI Enthusiast</p>
+            
+            <div class="social-links">
+                <a href="https://github.com/ArtemRivnyi" class="social-link" target="_blank" rel="noopener">
+                    <span>💻</span> GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/artem-rivnyi" class="social-link" target="_blank" rel="noopener">
+                    <span>💼</span> LinkedIn
+                </a>
+                <a href="docs/cv.pdf" class="social-link" download>
+                    <span>📄</span> Download CV
+                </a>
+            </div>
+        </header>
 
-    <header>
-        <h1>Artem Rivnyi</h1>
-        <p>Junior Customer Technical Support Specialist (With DevOps Ambition|AI Automation)</p>
-    </header>
-
-    <main>
         <section id="about">
             <h2>About Me</h2>
-            <p>I'm a motivated and tech-savvy specialist with hands-on experience in AI-powered automation, technical support, and a strong passion for DevOps. I transform complex infrastructure challenges into elegant, automated solutions using modern cloud technologies and containerization.</p>
-            <p>This portfolio site is automatically deployed using a CI/CD pipeline I built with Docker and GitHub Actions—a practical demonstration of the DevOps principles I'm passionate about.</p>
-            <div class="devops-philosophy">
-                <h3>DevOps Philosophy in Action:</h3>
-                <p>This portfolio embodies the DevOps principles I practice: <strong>Infrastructure as Code</strong> through Docker, <strong>Continuous Deployment</strong> via GitHub Actions, and <strong>Cloud-Native</strong> hosting on Render. Every code change triggers an automated pipeline that builds, tests, and deploys the updated version.</p>
-            </div>
+            <p>
+                I'm a motivated and tech-savvy specialist with hands-on experience in AI-powered automation, 
+                technical support, and a strong passion for DevOps. I transform complex infrastructure challenges 
+                into elegant, automated solutions using modern cloud technologies and containerization.
+            </p>
+            <h3>DevOps Philosophy in Action:</h3>
+            <p>
+                This portfolio embodies the DevOps principles I practice: Infrastructure as Code through Docker, 
+                Continuous Deployment via GitHub Actions, and Cloud-Native hosting on Render. Every code change 
+                triggers an automated pipeline that builds, tests, and deploys the updated version.
+            </p>
         </section>
+
         <section id="projects">
             <h2>Technical Projects</h2>
 
-            <article class="project">
+            <div class="project-card">
                 <h3>🤖 AI Email Support System</h3>
-                <p>An intelligent, automated email support system for e-commerce platforms. This solution leverages local LLMs and vector embeddings to classify customer inquiries, retrieve relevant information from a knowledge base, and generate personalized responses—significantly reducing response time and improving customer satisfaction.</p>
-                <div class="tech-stack">
-                    <div class="tech-tags">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Ollama</span>
-                        <span class="tech-tag">FAISS</span>
-                        <span class="tech-tag">Gmail API</span>
-                        <span class="tech-tag">RAG</span>
-                        <span class="tech-tag">Docker</span>
-                    </div>
+                <p>
+                    An intelligent, automated email support system for e-commerce platforms. Built with Python, Ollama, 
+                    and the Gmail API, it classifies customer emails using local LLMs, retrieves relevant information 
+                    from a knowledge base via FAISS vector search (RAG), and generates personalized responses. Features 
+                    context-aware generation with gemma:7b to minimize hallucinations and ensure accurate, helpful replies.
+                </p>
+                <div class="tech-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Ollama</span>
+                    <span class="tag">FAISS</span>
+                    <span class="tag">Gmail API</span>
+                    <span class="tag">RAG</span>
+                    <span class="tag">Docker</span>
+                    <span class="tag">Gemma 7B</span>
+                    <span class="tag">Google OAuth</span>
                 </div>
-                <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
-            </article>
+                <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store" class="project-link" target="_blank">
+                    View on GitHub →
+                </a>
+            </div>
 
-            <article class="project">
+            <div class="project-card">
                 <h3>⚙️ DevOps Node.js Application</h3>
-                <p>A comprehensive demonstration of DevOps automation principles. This project showcases a complete CI/CD pipeline with Docker containerization, automated testing, and deployment to cloud platforms. The pipeline automatically builds, tests, and deploys the application on every code push.</p>
-                <div class="tech-stack">
-                    <div class="tech-tags">
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">Express</span>
-                        <span class="tech-tag">Docker</span>
-                        <span class="tech-tag">Docker Compose</span>
-                        <span class="tech-tag">GitHub Actions</span>
-                        <span class="tech-tag">PowerShell</span>
-                    </div>
+                <p>
+                    A comprehensive demonstration of DevOps automation principles. This project showcases a complete 
+                    CI/CD pipeline with Docker containerization, automated testing via Mocha & Chai, and local deployment 
+                    automation using PowerShell. Features Express.js web server with morgan logging, Docker Compose 
+                    orchestration, and conceptual cloud deployment guides for GCP Cloud Run.
+                </p>
+                <div class="tech-tags">
+                    <span class="tag">Node.js</span>
+                    <span class="tag">Express</span>
+                    <span class="tag">Docker</span>
+                    <span class="tag">Docker Compose</span>
+                    <span class="tag">GitHub Actions</span>
+                    <span class="tag">PowerShell</span>
+                    <span class="tag">Mocha</span>
+                    <span class="tag">Chai</span>
                 </div>
-                <a href="https://github.com/ArtemRivnyi/my-devops-node-app" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
-            </article>
+                <a href="https://github.com/ArtemRivnyi/my-devops-node-app" class="project-link" target="_blank">
+                    View on GitHub →
+                </a>
+            </div>
 
-            <article class="project">
+            <div class="project-card">
                 <h3>☁️ AWS S3 Simulator (MinIO)</h3>
-                <p>A lightweight, fully self-contained local S3 environment for development and testing. Powered by <strong>MinIO</strong> and <strong>Docker Compose</strong>, this project provides a fully S3-compatible, isolated sandbox for validating application logic and S3 API interactions without connecting to real AWS resources.</p>
-                <div class="tech-stack">
-                    <div class="tech-tags">
-                        <span class="tech-tag">MinIO</span>
-                        <span class="tech-tag">Docker</span>
-                        <span class="tech-tag">Docker Compose</span>
-                        <span class="tech-tag">Bash Scripting</span>
-                        <span class="tech-tag">AWS CLI</span>
-                    </div>
+                <p>
+                    A lightweight, fully self-contained local S3 environment for development and testing. Powered by 
+                    MinIO and Docker Compose, this project provides a fully S3-compatible, isolated sandbox for 
+                    validating application logic and S3 API interactions without connecting to real AWS resources. 
+                    Includes bash scripting for automation and AWS CLI integration.
+                </p>
+                <div class="tech-tags">
+                    <span class="tag">MinIO</span>
+                    <span class="tag">Docker</span>
+                    <span class="tag">Docker Compose</span>
+                    <span class="tag">Bash Scripting</span>
+                    <span class="tag">AWS CLI</span>
+                    <span class="tag">S3 API</span>
                 </div>
-                <a href="https://github.com/ArtemRivnyi/aws-s3-simulator" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
-            </article>
+                <a href="https://github.com/ArtemRivnyi/aws-s3-simulator" class="project-link" target="_blank">
+                    View on GitHub →
+                </a>
+            </div>
 
-            <article class="project">
-                <h3>🎫 AI Ticket Classifier</h3>
-                <p>An intelligent ticket categorization and routing system that uses machine learning and natural language processing to automatically classify support tickets. This system improves operational efficiency by routing tickets to the appropriate teams and reducing manual classification overhead.</p>
-                <div class="tech-stack">
-                    <div class="tech-tags">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Machine Learning</span>
-                        <span class="tech-tag">NLP</span>
-                        <span class="tech-tag">Scikit-learn</span>
-                        <span class="tech-tag">Classification</span>
-                    </div>
+            <div class="project-card">
+                <h3>🎫 AI Ticket Classifier (OpenAI | Gemini)</h3>
+                <p>
+                    A Flask-based RESTful API that uses AI for instant, automated classification and triage of support 
+                    tickets. Two versions available: OpenAI GPT (legacy branch) and Google Gemini 2.0 Flash (main branch). 
+                    Features health checks, automatic restarts, input validation with pydantic, CI/CD via GitHub Actions, 
+                    and Docker Compose deployment. Classifies tickets into categories like Network Issue, Account Problem, 
+                    Payment Issue, and Feature Request.
+                </p>
+                <div class="tech-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Flask</span>
+                    <span class="tag">Google Gemini</span>
+                    <span class="tag">OpenAI</span>
+                    <span class="tag">Docker</span>
+                    <span class="tag">Docker Compose</span>
+                    <span class="tag">Pydantic</span>
+                    <span class="tag">GitHub Actions</span>
+                    <span class="tag">Pytest</span>
                 </div>
-                <a href="https://github.com/ArtemRivnyi/ai-ticket-classifier" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
-            </article>
+                <a href="https://github.com/ArtemRivnyi/ai-ticket-classifier" class="project-link" target="_blank">
+                    View on GitHub →
+                </a>
+            </div>
 
-            <article class="project">
+            <div class="project-card">
                 <h3>🚀 Personal Portfolio with CI/CD</h3>
-                <p>This portfolio website itself is a DevOps project! It demonstrates a complete automated deployment pipeline. Every code change triggers a GitHub Actions workflow that builds a Docker image, runs tests, and automatically deploys to Render—showcasing real-world DevOps practices.</p>
-                <div class="tech-stack">
-                    <div class="tech-tags">
-                        <span class="tech-tag">HTML5</span>
-                        <span class="tech-tag">CSS3</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Docker</span>
-                        <span class="tech-tag">GitHub Actions</span>
-                        <span class="tech-tag">Render</span>
-                    </div>
+                <p>
+                    This portfolio website itself is a DevOps project! Features a complete automated deployment pipeline 
+                    with animated matrix rain background (inspired by Midjourney), gradient overlays, and dark mode toggle. 
+                    Every code change triggers a GitHub Actions workflow that builds a Docker image and automatically 
+                    deploys to Render—showcasing real-world DevOps practices with Infrastructure as Code.
+                </p>
+                <div class="tech-tags">
+                    <span class="tag">HTML5</span>
+                    <span class="tag">CSS3</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">Docker</span>
+                    <span class="tag">GitHub Actions</span>
+                    <span class="tag">Render</span>
+                    <span class="tag">CI/CD</span>
+                    <span class="tag">Nginx</span>
                 </div>
-                <a href="https://github.com/ArtemRivnyi/personal-page-devops" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
-            </article>
+                <a href="https://github.com/ArtemRivnyi/personal-page-devops" class="project-link" target="_blank">
+                    View on GitHub →
+                </a>
+            </div>
 
-            <article class="project">
+            <div class="project-card">
                 <h3>🐳 Docker Multi-Container Demo</h3>
-                <p>A practical demonstration of deploying a multi-container application using Docker Compose. This project highlights container networking, environment variable management, and isolated service orchestration — a key DevOps skill for scalable system design.</p>
-                <div class="tech-stack">
-                    <div class="tech-tags">
-                        <span class="tech-tag">Docker</span>
-                        <span class="tech-tag">Docker Compose</span>
-                        <span class="tech-tag">Nginx</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">MongoDB</span>
-                    </div>
+                <p>
+                    A production-ready demonstration of multi-service orchestration using Docker Compose. Features a 
+                    Node.js Express API with Redis caching, health checks, automatic restart policies, data persistence 
+                    with volumes, service discovery, cross-platform compatibility, and comprehensive error handling. 
+                    Includes Makefile for convenient development workflows and detailed documentation on container 
+                    networking and deployment strategies.
+                </p>
+                <div class="tech-tags">
+                    <span class="tag">Docker</span>
+                    <span class="tag">Docker Compose</span>
+                    <span class="tag">Node.js</span>
+                    <span class="tag">Express</span>
+                    <span class="tag">Redis</span>
+                    <span class="tag">Nginx</span>
+                    <span class="tag">Makefile</span>
                 </div>
-                <a href="https://github.com/ArtemRivnyi/docker-multi-container-demo" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
-            </article>
-        </section>
-
-        <section id="other-projects">
-            <h2>Other Projects &amp; Experiments</h2>
-            <article class="project">
-                <h3>🐧 Arch Linux Configuration</h3>
-                <p>Comprehensive system configuration with optimized dotfiles, automation scripts, and development environment setup. Includes customized terminal, window manager configurations, and productivity tools for an efficient Linux workflow.</p>
-                <div class="tech-stack">
-                    <div class="tech-tags">
-                        <span class="tech-tag">Linux</span>
-                        <span class="tech-tag">Bash Scripting</span>
-                        <span class="tech-tag">System Configuration</span>
-                        <span class="tech-tag">Dotfiles</span>
-                        <span class="tech-tag">Automation</span>
-                    </div>
-                </div>
-                <a href="https://github.com/ArtemRivnyi/arch.pc" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
-            </article>
-
-            <article class="project">
-                <h3>⚙️ Bash Toolkit</h3>
-                <p>A comprehensive collection of lightweight, cross-platform Bash scripts for system administration and DevOps automation. Includes tools for network diagnostics, system monitoring, backup management, log cleanup, and service health checks—designed for minimal dependencies and maximum portability across Linux, macOS, and Windows environments.</p>
-                <div class="tech-stack">
-                    <div class="tech-tags">
-                        <span class="tech-tag">Bash</span>
-                        <span class="tech-tag">Shell Scripting</span>
-                        <span class="tech-tag">System Administration</span>
-                        <span class="tech-tag">DevOps</span>
-                        <span class="tech-tag">Cross-Platform</span>
-                    </div>
-                </div>
-                <a href="https://github.com/ArtemRivnyi/bash-toolbox" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
-            </article>
-
-            <article class="project">
-                <h3>🧠 AI Laboratory Works</h3>
-                <p>Collection of academic and experimental projects in machine learning and artificial intelligence. Includes implementations of various algorithms, data analysis pipelines, and research experiments covering fundamental AI concepts and applications.</p>
-                <div class="tech-stack">
-                    <div class="tech-tags">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Machine Learning</span>
-                        <span class="tech-tag">Data Science</span>
-                        <span class="tech-tag">Jupyter</span>
-                        <span class="tech-tag">Research</span>
-                    </div>
-                </div>
-                <a href="https://github.com/ArtemRivnyi/AI_labs" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
-            </article>
-        </section>
-
-        <section id="links">
-            <h2>Connect With Me</h2>
-            <p>I'm always interested in discussing DevOps, AI automation, and technical challenges. Feel free to reach out through any of these channels:</p>
-            <div class="links-grid">
-                <a href="https://www.linkedin.com/in/artem-rivnyi/" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <strong>LinkedIn</strong>
-                    <span>Professional profile &amp; updates</span>
-                </a>
-                <a href="https://github.com/ArtemRivnyi" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <strong>GitHub</strong>
-                    <span>Code repositories &amp; projects</span>
-                </a>
-                <a href="Rivnyi_Artem_Tech_Support_CV.pdf" class="link-card" download>
-                    <strong>Download CV</strong>
-                    <span>PDF resume</span>
+                <a href="https://github.com/ArtemRivnyi/docker-multi-container-demo" class="project-link" target="_blank">
+                    View on GitHub →
                 </a>
             </div>
         </section>
-    </main>
 
-    <footer>
-        <p>Portfolio Version: <span id="version">3.3</span> | Automatically deployed via CI/CD Pipeline</p>
-    </footer>
+        <section id="other-projects">
+            <h2>Other Projects & Experiments</h2>
 
-<script type="module" src="script.js"></script>
+            <div class="project-card">
+                <h3>🐧 Arch Linux Configuration</h3>
+                <p>
+                    Comprehensive system configuration repository with optimized dotfiles, automation scripts, and 
+                    development environment setup. Includes customized terminal configurations, window manager setups, 
+                    and productivity tools for an efficient Linux workflow. Features automated installation scripts 
+                    and system optimization tweaks for Arch Linux environments.
+                </p>
+                <div class="tech-tags">
+                    <span class="tag">Linux</span>
+                    <span class="tag">Arch Linux</span>
+                    <span class="tag">Bash Scripting</span>
+                    <span class="tag">Dotfiles</span>
+                    <span class="tag">Automation</span>
+                    <span class="tag">System Configuration</span>
+                </div>
+                <a href="https://github.com/ArtemRivnyi/arch.pc" class="project-link" target="_blank">
+                    View on GitHub →
+                </a>
+            </div>
+
+            <div class="project-card">
+                <h3>⚙️ Bash Toolkit</h3>
+                <p>
+                    Collection of lightweight, cross-platform Bash scripts for developers, sysadmins, and DevOps. 
+                    Automate system monitoring, service checks, backups, log cleanup, and network tasks with minimal 
+                    dependencies. Works on Linux, Windows (via Git Bash), and hybrid environments.
+                </p>
+                <div class="tech-tags">
+                    <span class="tag">Bash Scripting</span>
+                    <span class="tag">Linux</span>
+                    <span class="tag">Automation</span>
+                    <span class="tag">System Administration</span>
+                </div>
+                <a href="https://github.com/ArtemRivnyi/bash-toolbox" class="project-link" target="_blank">
+                    View on GitHub →
+                </a>
+            </div>
+
+            <div class="project-card">
+                <h3>🧠 AI Laboratory Works</h3>
+                <p>
+                    This repository contains a collection of laboratory assignments focused on Artificial Intelligence 
+                    concepts, implemented primarily in Python. Each lab explores different aspects of AI, including 
+                    clustering, genetic algorithms, and neural networks.
+                </p>
+                <div class="tech-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">AI/ML</span>
+                    <span class="tag">NumPy</span>
+                    <span class="tag">Genetic Algorithms</span>
+                    <span class="tag">Clustering</span>
+                    <span class="tag">Neural Networks</span>
+                </div>
+                <a href="https://github.com/ArtemRivnyi/AI_labs" class="project-link" target="_blank">
+                    View on GitHub →
+                </a>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Core Skills & Technologies</h2>
+            <div class="skills-grid">
+                <!-- DevOps -->
+                <div class="skill-category">
+                    <h3>DevOps & Cloud</h3>
+                    <ul>
+                        <li><span class="skill-tag">Docker</span></li>
+                        <li><span class="skill-tag">Kubernetes (Basic)</span></li>
+                        <li><span class="skill-tag">GitHub Actions (CI/CD)</span></li>
+                        <li><span class="skill-tag">Linux / Bash</span></li>
+                        <li><span class="skill-tag">AWS (S3, EC2, IAM)</span></li>
+                        <li><span class="skill-tag">Render / Vercel</span></li>
+                    </ul>
+                </div>
+                <!-- Programming -->
+                <div class="skill-category">
+                    <h3>Programming & Scripting</h3>
+                    <ul>
+                        <li><span class="skill-tag">Python</span></li>
+                        <li><span class="skill-tag">JavaScript / Node.js</span></li>
+                        <li><span class="skill-tag">Bash Scripting</span></li>
+                        <li><span class="skill-tag">PowerShell</span></li>
+                        <li><span class="skill-tag">HTML5 / CSS3</span></li>
+                    </ul>
+                </div>
+                <!-- AI/ML -->
+                <div class="skill-category">
+                    <h3>AI / Machine Learning</h3>
+                    <ul>
+                        <li><span class="skill-tag">LLM Integration (OpenAI, Gemini)</span></li>
+                        <li><span class="skill-tag">RAG / Vector DB (FAISS)</span></li>
+                        <li><span class="skill-tag">Ollama (Local LLMs)</span></li>
+                        <li><span class="skill-tag">NumPy / Pandas</span></li>
+                        <li><span class="skill-tag">Clustering / NN</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>&copy; 2025 Artem Rivnyi. Built with DevOps in mind.</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
