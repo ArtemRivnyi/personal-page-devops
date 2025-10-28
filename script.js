@@ -1,5 +1,18 @@
 // script.js
 
+// Debounce utility function
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
 function setupThemeToggle() {
     const toggle = document.createElement('button');
     toggle.id = 'theme-toggle';
@@ -35,7 +48,7 @@ function setupThemeToggle() {
 class MatrixRain {
     constructor(id = 'matrix-canvas') {
         this.canvas = document.getElementById(id);
-        this.ctx = this.canvas.getContext('2d', { 
+        this.ctx = this.canvas.getContext('2d', {
             alpha: true,
             desynchronized: true,
             willReadFrequently: false
@@ -66,7 +79,7 @@ class MatrixRain {
 
     draw() {
         const dark = document.body.classList.contains('dark-theme');
-        
+
         // Gentler cleaning to avoid artefacts
         this.ctx.fillStyle = dark ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.15)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -138,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }),
         { threshold: 0.1 }
     );
-    
+
     document.querySelectorAll('section').forEach((s) => {
         s.style.opacity = '0';
         s.style.transform = 'translateY(20px)';
@@ -146,3 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
         obs.observe(s);
     });
 });
+
+// Export for testing (ES6 modules)
+export { debounce, setupThemeToggle, MatrixRain };
