@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { debounce } from '../script.js';
+import { debounce, setupThemeToggle, MatrixRain } from '../script.js';
 
 describe('debounce function', () => {
   test('should exist and be a function', () => {
@@ -54,6 +54,114 @@ describe('debounce function', () => {
       expect(callCount).toBe(1);
       done();
     }, 250);
+  });
+});
+
+describe('setupThemeToggle', () => {
+  beforeEach(() => {
+    document.body.innerHTML = '';
+    localStorage.clear();
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+    localStorage.clear();
+  });
+
+  test('should create theme toggle button', () => {
+    setupThemeToggle();
+    const toggle = document.getElementById('theme-toggle');
+    expect(toggle).toBeTruthy();
+    expect(toggle.tagName).toBe('BUTTON');
+  });
+
+  test('should set aria-label on toggle button', () => {
+    setupThemeToggle();
+    const toggle = document.getElementById('theme-toggle');
+    expect(toggle.getAttribute('aria-label')).toBe('Toggle theme');
+  });
+
+  test('should respect saved theme preference', () => {
+    localStorage.setItem('theme', 'dark');
+    setupThemeToggle();
+    expect(document.body.classList.contains('dark-theme')).toBe(true);
+  });
+
+  test('should toggle theme on click', () => {
+    setupThemeToggle();
+    const toggle = document.getElementById('theme-toggle');
+    const initialTheme = document.body.classList.contains('dark-theme');
+    
+    toggle.click();
+    
+    expect(document.body.classList.contains('dark-theme')).toBe(!initialTheme);
+  });
+
+  test('should save theme to localStorage', () => {
+    setupThemeToggle();
+    const toggle = document.getElementById('theme-toggle');
+    
+    toggle.click();
+    
+    const savedTheme = localStorage.getItem('theme');
+    expect(savedTheme).toBeTruthy();
+    expect(['light', 'dark']).toContain(savedTheme);
+  });
+});
+
+describe('MatrixRain', () => {
+  beforeEach(() => {
+    document.body.innerHTML = '<canvas id="test-canvas"></canvas>';
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  test('should create MatrixRain instance', () => {
+    const matrix = new MatrixRain('test-canvas');
+    expect(matrix).toBeTruthy();
+    expect(matrix.canvas).toBeTruthy();
+  });
+
+  test('should have correct initial properties', () => {
+    const matrix = new MatrixRain('test-canvas');
+    expect(matrix.font).toBe(16);
+    expect(matrix.speed).toBe(0.6);
+    expect(matrix.density).toBe(0.3);
+  });
+
+  test('should initialize canvas context', () => {
+    const matrix = new MatrixRain('test-canvas');
+    expect(matrix.ctx).toBeTruthy();
+    expect(typeof matrix.ctx.fillRect).toBe('function');
+  });
+
+  test('should calculate columns based on canvas width', () => {
+    const matrix = new MatrixRain('test-canvas');
+    const expectedCols = Math.floor(matrix.canvas.width / matrix.font);
+    expect(matrix.cols).toBe(expectedCols);
+  });
+
+  test('should initialize drops array', () => {
+    const matrix = new MatrixRain('test-canvas');
+    expect(Array.isArray(matrix.drops)).toBe(true);
+    expect(matrix.drops.length).toBe(matrix.cols);
+  });
+
+  test('should have resize method', () => {
+    const matrix = new MatrixRain('test-canvas');
+    expect(typeof matrix.resize).toBe('function');
+  });
+
+  test('should have draw method', () => {
+    const matrix = new MatrixRain('test-canvas');
+    expect(typeof matrix.draw).toBe('function');
+  });
+
+  test('should have loop method', () => {
+    const matrix = new MatrixRain('test-canvas');
+    expect(typeof matrix.loop).toBe('function');
   });
 });
 
