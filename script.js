@@ -57,7 +57,7 @@ class MatrixRain {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
         this.cols = Math.floor(this.canvas.width / this.font);
-        this.drops = Array.from({ length: this.cols }, (_, i) =>
+        this.drops = Array.from({ length: this.cols }, () =>
             Math.random() < this.density ? Math.random() * -50 : null
         );
         this.ctx.font = `${this.font}px monospace`;

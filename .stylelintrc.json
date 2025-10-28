@@ -6,6 +6,17 @@
     "font-family-name-quotes": "always-where-recommended",
     "rule-empty-line-before": ["always", { "except": ["first-nested", "after-single-line-comment"] }],
     "media-feature-range-notation": "context",
-    "no-descending-specificity": null
+    "no-descending-specificity": null,
+    "property-no-vendor-prefix": null,
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": [
+          "text-fill-color",
+          "-webkit-text-fill-color",
+          "-webkit-background-clip"
+        ]
+      }
+    ]
   }
 }
