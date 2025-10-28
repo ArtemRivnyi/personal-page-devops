@@ -1,4 +1,4 @@
-// script.js
+// script.exports.js - Only for testing purposes
 
 // Debounce utility function
 function debounce(func, wait) {
@@ -107,55 +107,4 @@ class MatrixRain {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    setupThemeToggle();
-
-    // Gradient sans artefacts
-    const gradient = document.createElement('div');
-    gradient.className = 'gradient-overlay';
-    document.body.appendChild(gradient);
-
-    // Canvas avec optimisation
-    const canvas = document.createElement('canvas');
-    canvas.id = 'matrix-canvas';
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    canvas.style.cssText = `
-        position:fixed;top:0;left:0;width:100%;height:100%;
-        z-index:-3;pointer-events:none;
-        opacity:0.15;background:transparent;
-        mix-blend-mode:multiply;
-        will-change:transform;
-        transform:translateZ(0);
-        contain:paint layout size;
-    `;
-    document.body.appendChild(canvas);
-
-    new MatrixRain('matrix-canvas');
-
-    // We provide the appropriate nappies
-    const container = document.querySelector('.container');
-    if (container) {
-        container.style.position = 'relative';
-        container.style.zIndex = '10';
-        container.style.transform = 'translateZ(0)';
-    }
-
-    // Light animation of the appearance of sections
-    const obs = new IntersectionObserver(
-        (entries) => entries.forEach((e) => {
-            if (e.isIntersecting) {
-                e.target.style.opacity = '1';
-                e.target.style.transform = 'translateY(0)';
-            }
-        }),
-        { threshold: 0.1 }
-    );
-
-    document.querySelectorAll('section').forEach((s) => {
-        s.style.opacity = '0';
-        s.style.transform = 'translateY(20px)';
-        s.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        obs.observe(s);
-    });
-});
+export { debounce, setupThemeToggle, MatrixRain };
