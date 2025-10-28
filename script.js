@@ -68,7 +68,7 @@ class MatrixRain {
         const dark = document.body.classList.contains('dark-theme');
 
         // Gentler cleaning to avoid artefacts
-        this.ctx.fillStyle = dark ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.15)';
+        this.ctx.fillStyle = dark ? 'rgba(0,0,0,0.12)' : 'rgba(255,255,255,0.20)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.fillStyle = dark ? '#00ff66' : '#004400';
