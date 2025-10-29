@@ -44,10 +44,10 @@ class MatrixRain {
         this.font = 16;
         this.cols = 0;
         this.drops = [];
-        this.density = 0.05; // Very sparse effect
+        this.density = 0.1; // Moderate density - sparse, but not too rare
         this.last = 0;
         this.delay = 1000 / 30; // Increase FPS to 30 for smoother animation (30 FPS)
-        this.speed = 0.3; // Even slower drop speed
+        this.speed = 0.6; // Below average speed
         this.resize();
         window.addEventListener('resize', () => this.resize(), { passive: true });
         requestAnimationFrame((t) => this.loop(t));
@@ -72,29 +72,19 @@ class MatrixRain {
         this.frameCount++;
         
         // Normal fade effect - increased transparency for quick trail fade
-        this.ctx.fillStyle = dark ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.05)'; // Maximum visibility for light theme trails
+        this.ctx.fillStyle = dark ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.15)'; // Reduced transparency for light theme to make trails more visible
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.ctx.fillStyle = dark ? '#00ff66' : '#000000'; // Black for light theme for maximum contrast
+        this.ctx.fillStyle = dark ? '#00ff66' : '#007bff'; // Blue for light theme for better contrast
         const maxY = this.canvas.height;
         const len = this.chars.length;
 
         for (let i = 0; i < this.cols; i++) {
-            if (this.drops[i] == null) {
-                // Logic to prevent drops in adjacent columns
-                const prevDrop = this.drops[i - 1];
-                const nextDrop = this.drops[i + 1];
-                const shouldDrop = Math.random() < this.density;
-
-                if (shouldDrop && (!prevDrop || prevDrop * this.font > 50) && (!nextDrop || nextDrop * this.font > 50)) {
-                    this.drops[i] = Math.random() * -50;
-                }
-                continue;
-            }
+            if (this.drops[i] == null) continue;
             const y = this.drops[i] * this.font;
             const ch = this.chars[(Math.random() * len) | 0];
             this.ctx.fillText(ch, i * this.font, y);
-            if (y > maxY && Math.random() > 0.98) this.drops[i] = 0; // Increased frequency (20% more drops)
+            if (y > maxY && Math.random() > 0.985) this.drops[i] = 0; // Moderate chance of restart (not too rare)
             this.drops[i] += this.speed;
         }
     }
@@ -126,8 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
         z-index:-3;pointer-events:none;
         opacity:0.15;background:transparent;
         mix-blend-mode:normal;
-        will-change:transform;
-        transform:translateZ(0);
+
+
         contain:paint layout size;
     `;
     document.body.appendChild(canvas);
@@ -139,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (container) {
         container.style.position = 'relative';
         container.style.zIndex = '10';
-        container.style.transform = 'translateZ(0)';
+
     }
 
     // Intersection observer for section animations
