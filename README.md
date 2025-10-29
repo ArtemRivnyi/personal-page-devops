@@ -24,6 +24,7 @@ A modern, responsive **portfolio website** showcasing technical projects and ski
 *   [📁 Project Structure](#-project-structure)
 *   [🌐 Live Demo](#-live-demo)
 *   [🤝 Contributing](#-contributing)
+*   [📄 License](#-license)
 *   [🧰 Maintainer](#-maintainer)
 
 ## 🎯 Project Goals
@@ -146,6 +147,14 @@ The live version of the portfolio is available here:
 ## 🤝 Contributing
 
 This is a personal portfolio project, but suggestions for improvements to the CI/CD pipeline, code structure, or documentation are welcome.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
 
 ## 🧰 Maintainer
 
