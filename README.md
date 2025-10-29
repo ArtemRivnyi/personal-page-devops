@@ -24,6 +24,7 @@ A modern, responsive **portfolio website** showcasing technical projects and ski
 *   [📁 Project Structure](#-project-structure)
 *   [🌐 Live Demo](#-live-demo)
 *   [🤝 Contributing](#-contributing)
+*   [📄 License](#-license)
 *   [🧰 Maintainer](#-maintainer)
 
 ## 🎯 Project Goals
