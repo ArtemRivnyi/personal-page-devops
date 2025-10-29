@@ -19,8 +19,8 @@
     --toggle-border: #dee2e6;
 
     /* Matrix Colors */
-    --matrix-color: rgb(0 150 0 / 50%);
-    --matrix-color-light: rgb(0 255 0 / 80%);
+    --matrix-color: rgb(0 150 0 / 80%);
+    --matrix-color-light: rgb(0 255 0 / 100%);
 
     /* Gradient Colors */
     --g1: #f0c; /* Pink */
@@ -76,12 +76,12 @@ body {
     height: 100%;
     z-index: -3;
     pointer-events: none;
-    opacity: 18%;
+    opacity: 50%;
     background: transparent;
     will-change: transform;
     transform: translateZ(0);
     contain: paint;
-    mix-blend-mode: normal;
+    
 }
 
 .gradient-overlay {
@@ -96,18 +96,22 @@ body {
                 radial-gradient(circle at 80% 20%, var(--g2) 0%, transparent 25%),
                 radial-gradient(circle at 50% 50%, var(--g3) 0%, transparent 25%),
                 radial-gradient(circle at 10% 10%, var(--g4) 0%, transparent 25%);
-    background-size: 400% 400%;
-    animation: gradient-animation 20s ease infinite;
+    background-size: 600% 600%; /* Stretch gradient for less visible circles */
+    animation: gradient-animation 60s ease infinite; /* Slower animation */
     will-change: opacity;
     pointer-events: none;
 }
 
 @keyframes gradient-animation {
-    0% { background-position: 0% 50%; }
+    0% { background-position: 0% 0%; }
 
-    50% { background-position: 100% 50%; }
+    25% { background-position: 100% 0%; }
 
-    100% { background-position: 0% 50%; }
+    50% { background-position: 100% 100%; }
+
+    75% { background-position: 0% 100%; }
+
+    100% { background-position: 0% 0%; }
 }
 
 /* --- Layout and Structure --- */
