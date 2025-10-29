@@ -147,6 +147,14 @@ The live version of the portfolio is available here:
 
 This is a personal portfolio project, but suggestions for improvements to the CI/CD pipeline, code structure, or documentation are welcome.
 
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
 ## 🧰 Maintainer
 
 **Artem Rivnyi** — Junior Technical Support / DevOps Enthusiast
