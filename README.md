@@ -35,7 +35,7 @@ The live version of the portfolio is available here: [https://personal-page-devo
 
 This is a snapshot of the main page, demonstrating the clean, responsive design and dark mode functionality.
 
-<img src="https://github.com/user-attachments/assets/87b1b62b-3407-41b5-8989-c4aefd465d62" alt="Screenshot of the Personal Portfolio Website Main Page" width="960" height="420" />
+![Portfolio_Screenshot](./assets/Portfolio_Screenshot.png)
 
 ## 🎯 Project Goals
 
@@ -80,7 +80,7 @@ The entire deployment process is fully automated using **GitHub Actions** for Co
 
 The following diagram illustrates the flow from code commit to live deployment:
 
-<img src="https://github.com/user-attachments/assets/9d140f4f-c265-4ecc-ad32-8390fe29819f" alt="CI/CD Pipeline Diagram" width="1248" height="832" />
+![ci_cd_pipeline_diagram](./assets/ci_cd_pipeline_diagram.png)
 
 ### Workflow Steps
 
