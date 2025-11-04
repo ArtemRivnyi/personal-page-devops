@@ -6,11 +6,12 @@
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 [![CI Status](https://github.com/ArtemRivnyi/personal-page-devops/actions/workflows/cicd.yml/badge.svg)](https://github.com/ArtemRivnyi/personal-page-devops/actions/workflows/cicd.yml)
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Online-brightgreen.svg)](https://personal-page-devops.onrender.com/)
 [![Code Quality](https://img.shields.io/badge/Code_Quality-High-blue.svg)](https://github.com/ArtemRivnyi/personal-page-devops)
+[![Last Commit](https://img.shields.io/github/last-commit/ArtemRivnyi/personal-page-devops?label=Last%20Update&style=flat-square )](https://github.com/ArtemRivnyi/personal-page-devops/commits/main )
+[![GitHub Stars](https://img.shields.io/github/stars/ArtemRivnyi/personal-page-devops?style=social )](https://github.com/ArtemRivnyi/personal-page-devops/stargazers )
 
 A modern, responsive **portfolio website** showcasing technical projects and skills, featuring a robust and fully automated **Continuous Integration/Continuous Deployment (CI/CD) pipeline**. This project serves as a practical demonstration of DevOps expertise, ensuring a consistent environment through Docker and seamless, zero-downtime deployment via Render.
 
