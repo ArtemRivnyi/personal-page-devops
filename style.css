@@ -239,16 +239,57 @@ body.dark-theme .tag {
     border: 1px solid #00aaff20;
 }
 
-.project-link {
-    display: inline-block;
-    margin-top: 10px;
-    color: var(--link-color);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s;
+.project-links {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 15px;
 }
 
-.project-link:hover {
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.95em;
+}
+
+.primary-link {
+    background: linear-gradient(45deg, var(--accent-color), #0056b3);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    border: none;
+}
+
+.primary-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+    color: white;
+}
+
+.secondary-link {
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+.secondary-link:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Fallback for existing links not using primary/secondary classes */
+.project-link:not(.primary-link):not(.secondary-link) {
+    color: var(--link-color);
+    margin-top: 10px;
+}
+
+.project-link:not(.primary-link):not(.secondary-link):hover {
     color: var(--link-hover);
 }
 
