@@ -1,5 +1,18 @@
 // script.js
 
+// Debounce utility for performance optimization
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
 function setupThemeToggle() {
     const toggle = document.createElement('button');
     toggle.id = 'theme-toggle';
@@ -49,7 +62,7 @@ class MatrixRain {
         this.delay = 1000 / 30; // Increase FPS to 30 for smoother animation (30 FPS)
         this.speed = 0.6; // Below average speed
         this.resize();
-        window.addEventListener('resize', () => this.resize(), { passive: true });
+        window.addEventListener('resize', debounce(() => this.resize(), 150), { passive: true });
         requestAnimationFrame((t) => this.loop(t));
     }
 
@@ -173,13 +186,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Back to Top Button
     const backToTopButton = document.getElementById('back-to-top');
     if (backToTopButton) {
-        window.addEventListener('scroll', () => {
+        const handleScroll = () => {
             if (window.scrollY > 300) {
                 backToTopButton.classList.add('visible');
             } else {
                 backToTopButton.classList.remove('visible');
             }
-        });
+        };
+
+        window.addEventListener('scroll', debounce(handleScroll, 100), { passive: true });
+
 
         backToTopButton.addEventListener('click', () => {
             window.scrollTo({
