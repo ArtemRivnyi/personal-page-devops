@@ -23,14 +23,18 @@
     --matrix-color-light: rgb(0 255 0 / 100%);
 
     /* Gradient Colors */
-    --g1: #f0c;
+
     /* Pink */
-    --g2: #33f;
+    --g1: #f0c;
+
     /* Blue */
-    --g3: #0fc;
+    --g2: #33f;
+
     /* Cyan */
-    --g4: #fc0;
+    --g3: #0fc;
+
     /* Yellow */
+    --g4: #fc0;
 }
 
 /* Dark Theme Colors */
@@ -52,14 +56,18 @@ body.dark-theme {
     --matrix-color-light: rgb(0 255 0 / 50%);
 
     /* Gradient Colors (Darker Midjourney inspired) */
-    --g1: #8a008a;
+
     /* Darker Pink */
-    --g2: #00008a;
+    --g1: #8a008a;
+
     /* Darker Blue */
-    --g3: #008a8a;
+    --g2: #00008a;
+
     /* Darker Cyan */
-    --g4: #8a8a00;
+    --g3: #008a8a;
+
     /* Darker Yellow */
+    --g4: #8a8a00;
 }
 
 body {
@@ -103,8 +111,10 @@ body {
         radial-gradient(circle at 50% 50%, var(--g3) 0%, transparent 25%),
         radial-gradient(circle at 10% 10%, var(--g4) 0%, transparent 25%);
     background-size: 600% 600%;
+
     /* Stretch gradient for less visible circles */
     animation: gradient-animation 60s ease infinite;
+
     /* Slower animation */
     will-change: opacity, transform;
     pointer-events: none;
@@ -197,6 +207,7 @@ header {
     color: var(--text-secondary);
     margin-bottom: 20px;
     min-height: 1.6em;
+
     /* Prevent layout shift */
 }
 
@@ -208,21 +219,21 @@ header {
 
 @keyframes blink {
     50% {
-        opacity: 0;
+        opacity: 0%;
     }
 }
 
 @keyframes pulse-glow {
     0% {
-        box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4);
+        box-shadow: 0 0 0 0 rgb(0 255 136 / 40%);
     }
 
     70% {
-        box-shadow: 0 0 0 10px rgba(0, 255, 136, 0);
+        box-shadow: 0 0 0 10px rgb(0 255 136 / 0%);
     }
 
     100% {
-        box-shadow: 0 0 0 0 rgba(0, 255, 136, 0);
+        box-shadow: 0 0 0 0 rgb(0 255 136 / 0%);
     }
 }
 
@@ -341,13 +352,13 @@ body.dark-theme .tag {
 .primary-link {
     background: linear-gradient(45deg, var(--accent-color), #0056b3);
     color: white;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 4px 15px rgb(0 123 255 / 30%);
     border: none;
 }
 
 .primary-link:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+    box-shadow: 0 6px 20px rgb(0 123 255 / 40%);
     color: white;
 }
 
@@ -364,12 +375,12 @@ body.dark-theme .tag {
 }
 
 /* Fallback for existing links not using primary/secondary classes */
-.project-link:not(.primary-link):not(.secondary-link) {
+.project-link:is(:not(.primary-link), :not(.secondary-link)) {
     color: var(--link-color);
     margin-top: 10px;
 }
 
-.project-link:not(.primary-link):not(.secondary-link):hover {
+.project-link:is(:not(.primary-link), :not(.secondary-link)):hover {
     color: var(--link-hover);
 }
 
@@ -400,8 +411,8 @@ html {
 
 /* Modern Tech Style for Skills */
 .skill-category {
-    background: rgba(17, 25, 40, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgb(17 25 40 / 75%);
+    border: 1px solid rgb(255 255 255 / 10%);
     border-radius: 12px;
     padding: 20px;
     backdrop-filter: blur(12px);
@@ -411,48 +422,47 @@ html {
 
 /* Light Mode Overrides for Skills */
 body:not(.dark-theme) .skill-category {
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    background: rgb(255 255 255 / 80%);
+    border: 1px solid rgb(0 0 0 / 10%);
+    box-shadow: 0 4px 6px rgb(0 0 0 / 5%);
 }
 
 body:not(.dark-theme) .skill-category:hover {
-    border-color: rgba(0, 0, 0, 0.2);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-color: rgb(0 0 0 / 20%);
+    box-shadow: 0 8px 20px rgb(0 0 0 / 10%);
 }
 
 body:not(.dark-theme) .skill-category h3 {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgb(0 0 0 / 10%);
     color: #333;
 }
 
 /* Specific H3 Colors for Light Mode to maintain distinction but ensure contrast */
+
+/* DevOps - Blue */
 body:not(.dark-theme) .skill-category:nth-child(1) h3 {
     color: #007bff;
 }
 
-/* DevOps - Blue */
+/* AI - Purple */
 body:not(.dark-theme) .skill-category:nth-child(2) h3 {
     color: #6f42c1;
 }
 
-/* AI - Purple */
+/* Web - Green */
 body:not(.dark-theme) .skill-category:nth-child(3) h3 {
     color: #198754;
 }
 
-/* Web - Green */
+/* Languages - Pink/Red */
 body:not(.dark-theme) .skill-category:nth-child(4) h3 {
     color: #d63384;
 }
 
-/* Languages - Pink/Red */
-
-
 .skill-category:hover {
     transform: translateY(-5px);
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border-color: rgb(255 255 255 / 30%);
+    box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
 }
 
 .skill-category h3 {
