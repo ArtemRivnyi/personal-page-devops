@@ -23,10 +23,14 @@
     --matrix-color-light: rgb(0 255 0 / 100%);
 
     /* Gradient Colors */
-    --g1: #f0c; /* Pink */
-    --g2: #33f; /* Blue */
-    --g3: #0fc; /* Cyan */
-    --g4: #fc0; /* Yellow */
+    --g1: #f0c;
+    /* Pink */
+    --g2: #33f;
+    /* Blue */
+    --g3: #0fc;
+    /* Cyan */
+    --g4: #fc0;
+    /* Yellow */
 }
 
 /* Dark Theme Colors */
@@ -48,10 +52,14 @@ body.dark-theme {
     --matrix-color-light: rgb(0 255 0 / 50%);
 
     /* Gradient Colors (Darker Midjourney inspired) */
-    --g1: #8a008a; /* Darker Pink */
-    --g2: #00008a; /* Darker Blue */
-    --g3: #008a8a; /* Darker Cyan */
-    --g4: #8a8a00; /* Darker Yellow */
+    --g1: #8a008a;
+    /* Darker Pink */
+    --g2: #00008a;
+    /* Darker Blue */
+    --g3: #008a8a;
+    /* Darker Cyan */
+    --g4: #8a8a00;
+    /* Darker Yellow */
 }
 
 body {
@@ -79,7 +87,7 @@ body {
     opacity: 50%;
     background: transparent;
     contain: paint;
-    
+
 }
 
 .gradient-overlay {
@@ -91,25 +99,37 @@ body {
     z-index: -2;
     opacity: 10%;
     background: radial-gradient(circle at 20% 80%, var(--g1) 0%, transparent 25%),
-                radial-gradient(circle at 80% 20%, var(--g2) 0%, transparent 25%),
-                radial-gradient(circle at 50% 50%, var(--g3) 0%, transparent 25%),
-                radial-gradient(circle at 10% 10%, var(--g4) 0%, transparent 25%);
-    background-size: 600% 600%; /* Stretch gradient for less visible circles */
-    animation: gradient-animation 60s ease infinite; /* Slower animation */
+        radial-gradient(circle at 80% 20%, var(--g2) 0%, transparent 25%),
+        radial-gradient(circle at 50% 50%, var(--g3) 0%, transparent 25%),
+        radial-gradient(circle at 10% 10%, var(--g4) 0%, transparent 25%);
+    background-size: 600% 600%;
+    /* Stretch gradient for less visible circles */
+    animation: gradient-animation 60s ease infinite;
+    /* Slower animation */
     will-change: opacity, transform;
     pointer-events: none;
 }
 
 @keyframes gradient-animation {
-    0% { background-position: 0% 0%; }
+    0% {
+        background-position: 0% 0%;
+    }
 
-    25% { background-position: 100% 0%; }
+    25% {
+        background-position: 100% 0%;
+    }
 
-    50% { background-position: 100% 100%; }
+    50% {
+        background-position: 100% 100%;
+    }
 
-    75% { background-position: 0% 100%; }
+    75% {
+        background-position: 0% 100%;
+    }
 
-    100% { background-position: 0% 0%; }
+    100% {
+        background-position: 0% 0%;
+    }
 }
 
 /* --- Layout and Structure --- */
@@ -138,12 +158,58 @@ header {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     display: inline-block;
+    position: relative;
+}
+
+/* Glitch Effect */
+.gradient-text:hover {
+    animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+}
+
+@keyframes glitch {
+    0% {
+        transform: translate(0)
+    }
+
+    20% {
+        transform: translate(-2px, 2px)
+    }
+
+    40% {
+        transform: translate(-2px, -2px)
+    }
+
+    60% {
+        transform: translate(2px, 2px)
+    }
+
+    80% {
+        transform: translate(2px, -2px)
+    }
+
+    100% {
+        transform: translate(0)
+    }
 }
 
 .subtitle {
     font-size: 1.2em;
     color: var(--text-secondary);
     margin-bottom: 20px;
+    min-height: 1.6em;
+    /* Prevent layout shift */
+}
+
+.typing-cursor::after {
+    content: '|';
+    animation: blink 1s step-start infinite;
+    color: var(--accent-color);
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
 }
 
 /* --- Social Links --- */
@@ -314,6 +380,38 @@ body.dark-theme .tag {
     transition: background-color 0.5s, border-color 0.5s;
 }
 
+/* Terminal Style for Skills */
+.terminal-style {
+    background-color: #1e1e1e !important;
+    border: 1px solid #333 !important;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.terminal-style h3 {
+    color: #0af !important;
+    border-bottom: 1px solid #333 !important;
+    font-size: 1.1em;
+}
+
+.terminal-style h3::before {
+    content: '> ';
+    color: #0f0;
+}
+
+.terminal-style .skill-tag {
+    background-color: transparent !important;
+    color: #0f0 !important;
+    border: 1px solid #0f0;
+    font-family: monospace;
+    border-radius: 4px;
+}
+
+.terminal-style .skill-tag:hover {
+    background-color: #0f0 !important;
+    color: #000 !important;
+}
+
 .skill-category h3 {
     margin-top: 0;
     color: var(--accent-color);
@@ -375,7 +473,7 @@ footer {
 }
 
 /* --- Media Queries for Responsiveness --- */
-@media (width <= 768px) {
+@media (width <=768px) {
     .name-title {
         font-size: 2.5em;
     }

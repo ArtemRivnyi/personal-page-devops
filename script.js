@@ -98,7 +98,28 @@ class MatrixRain {
     }
 }
 
+// Typing Animation
+const subtitleText = "DevOps Engineer | Technical Support Specialist | AI Enthusiast";
+const subtitleElement = document.querySelector('.subtitle');
+let charIndex = 0;
+
+function typeSubtitle() {
+    if (subtitleElement && charIndex < subtitleText.length) {
+        subtitleElement.textContent += subtitleText.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeSubtitle, 50); // Typing speed
+    } else if (subtitleElement) {
+        subtitleElement.classList.remove('typing-cursor'); // Remove cursor when done
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    if (subtitleElement) {
+        subtitleElement.textContent = ''; // Clear initial text
+        subtitleElement.classList.add('typing-cursor');
+        setTimeout(typeSubtitle, 1000); // Start after 1s delay
+    }
+
     setupThemeToggle();
 
     // Gradient overlay
