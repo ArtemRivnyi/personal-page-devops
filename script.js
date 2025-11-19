@@ -70,7 +70,7 @@ class MatrixRain {
         // FIXED: Complete clear every 50 frames to prevent artifacts
         if (!this.frameCount) this.frameCount = 0;
         this.frameCount++;
-        
+
         // Normal fade effect - increased transparency for quick trail fade
         this.ctx.fillStyle = dark ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.15)'; // Reduced transparency for light theme to make trails more visible
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -170,4 +170,22 @@ document.addEventListener('DOMContentLoaded', () => {
         s.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         obs.observe(s);
     });
+    // Back to Top Button
+    const backToTopButton = document.getElementById('back-to-top');
+    if (backToTopButton) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 });
