@@ -389,6 +389,69 @@ body.dark-theme .tag {
     color: var(--link-hover);
 }
 
+/* --- Featured Project Styling --- */
+.featured-project {
+    position: relative;
+    border: 2px solid #667eea;
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+}
+
+.featured-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.featured-project h3 {
+    color: #667eea;
+    margin-top: 8px;
+}
+
+.achievements-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 16px 0;
+}
+
+.achievements-list li {
+    padding: 8px 0;
+    padding-left: 8px;
+    border-left: 3px solid #667eea;
+    margin-bottom: 8px;
+    background: rgba(102, 126, 234, 0.05);
+    border-radius: 4px;
+}
+
+.achievements-list li strong {
+    color: #667eea;
+}
+
+/* Dark mode adjustments for featured project */
+body.dark-theme .featured-project {
+    border-color: #8b9aed;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+}
+
+body.dark-theme .featured-project h3 {
+    color: #a0aef7;
+}
+
+body.dark-theme .achievements-list li {
+    background: rgba(102, 126, 234, 0.15);
+    border-left-color: #8b9aed;
+}
+
+body.dark-theme .achievements-list li strong {
+    color: #a0aef7;
+}
+
 /* --- Skills Grid --- */
 #skills {
     padding-bottom: 60px;
