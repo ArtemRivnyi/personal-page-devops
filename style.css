@@ -393,8 +393,8 @@ body.dark-theme .tag {
 .featured-project {
     position: relative;
     border: 2px solid #667eea;
-    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    box-shadow: 0 8px 30px rgb(102 126 234 / 30%);
+    background: linear-gradient(135deg, rgb(102 126 234 / 5%) 0%, rgb(118 75 162 / 5%) 100%);
 }
 
 .featured-badge {
@@ -406,7 +406,7 @@ body.dark-theme .tag {
     font-size: 0.85rem;
     font-weight: 600;
     margin-bottom: 12px;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 4px 15px rgb(102 126 234 / 40%);
 }
 
 .featured-project h3 {
@@ -425,7 +425,7 @@ body.dark-theme .tag {
     padding-left: 8px;
     border-left: 3px solid #667eea;
     margin-bottom: 8px;
-    background: rgba(102, 126, 234, 0.05);
+    background: rgb(102 126 234 / 5%);
     border-radius: 4px;
 }
 
@@ -436,7 +436,7 @@ body.dark-theme .tag {
 /* Dark mode adjustments for featured project */
 body.dark-theme .featured-project {
     border-color: #8b9aed;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    background: linear-gradient(135deg, rgb(102 126 234 / 10%) 0%, rgb(118 75 162 / 10%) 100%);
 }
 
 body.dark-theme .featured-project h3 {
@@ -444,7 +444,7 @@ body.dark-theme .featured-project h3 {
 }
 
 body.dark-theme .achievements-list li {
-    background: rgba(102, 126, 234, 0.15);
+    background: rgb(102 126 234 / 15%);
     border-left-color: #8b9aed;
 }
 
