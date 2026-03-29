@@ -96,15 +96,27 @@ jobs:
     name: Deploy to AWS S3 & CloudFront
     runs-on: ubuntu-latest
     needs: [security-scan]
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: false # github.ref == 'refs/heads/main' && github.event_name == 'push'
     environment:
       name: production
       url: https://artemrivnyi.com
     steps:
+      - name: Check for AWS credentials
+        id: check-secrets
+        run: |
+          if [ -z "${{ secrets.AWS_ACCESS_KEY_ID }}" ] || [ -z "${{ secrets.AWS_SECRET_ACCESS_KEY }}" ]; then
+            echo "has_credentials=false" >> $GITHUB_OUTPUT
+            echo "⚠️ AWS credentials not configured — skipping deployment."
+          else
+            echo "has_credentials=true" >> $GITHUB_OUTPUT
+          fi
+
       - name: Checkout code
+        if: steps.check-secrets.outputs.has_credentials == 'true'
         uses: actions/checkout@v4
 
       - name: Configure AWS Credentials
+        if: steps.check-secrets.outputs.has_credentials == 'true'
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -112,6 +124,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Setup Terraform
+        if: steps.check-secrets.outputs.has_credentials == 'true'
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_wrapper: false
@@ -124,6 +137,7 @@ jobs:
       #     terraform apply -auto-approve
 
       - name: Deploy Static Content to S3
+        if: steps.check-secrets.outputs.has_credentials == 'true'
         run: |
           # Sync all static files except hidden folders like .git or node_modules
           aws s3 sync . s3://${{ secrets.AWS_S3_BUCKET_NAME }} \
@@ -135,6 +149,7 @@ jobs:
             --exclude "Readme.md"
 
       - name: Invalidate CloudFront Cache
+        if: steps.check-secrets.outputs.has_credentials == 'true'
         run: |
           aws cloudfront create-invalidation \
             --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} \
@@ -143,6 +158,10 @@ jobs:
       - name: Create deployment notification
         if: success()
         run: |
-          echo "🎉 Successfully deployed static site to AWS S3 & CloudFront!"
-          echo "📊 Version: ${{ github.sha }}"
-          echo "🔗 URL: https://artemrivnyi.com"
+          if [ "${{ steps.check-secrets.outputs.has_credentials }}" == "true" ]; then
+            echo "🎉 Successfully deployed static site to AWS S3 & CloudFront!"
+            echo "📊 Version: ${{ github.sha }}"
+            echo "🔗 URL: https://artemrivnyi.com"
+          else
+            echo "ℹ️ Deployment skipped — configure AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY secrets to enable."
+          fi
