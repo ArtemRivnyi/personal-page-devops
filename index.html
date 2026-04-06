@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="Artem Rivnyi - DevOps Engineer & Technical Support Specialist. Portfolio showcasing AI, Cloud, and Automation projects.">
-    <title>Artem Rivnyi - Portfolio</title>
+    <title>Artem Rivnyi - DevOps Engineer Portfolio</title>
+    <meta name="keywords" content="DevOps, Kubernetes, Terraform, Docker, AWS, CI/CD, SRE, Cloud Engineer, Portfolio">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -112,26 +114,28 @@
 
             <!-- AI Ticket Classifier -->
             <div class="project-card">
-                <h3>🎫 AI Ticket Classifier (OpenAI | Gemini)</h3>
+                <h3>🎫 AI Ticket Classifier — Production SaaS</h3>
                 <p>
-                    A production-ready Flask-based RESTful API that uses Google Gemini 2.0 Flash for instant, automated
-                    classification and triage of support tickets. This project is a complete, fully-deployed solution
-                    showcasing robust CI/CD, health checks, automatic restarts, and input validation with Pydantic. It
-                    is deployed on <strong>Railway</strong> and ready for integration into any support system.
-                    Classifies tickets into categories like Network Issue, Account Problem, Payment Issue, and Feature
-                    Request.
+                    A production-ready Flask-based SaaS API that uses Google Gemini 2.0 Flash (with OpenAI GPT-4 fallback)
+                    for instant, automated classification and triage of support tickets. Features <strong>tier-based
+                    subscription billing</strong> via Stripe, <strong>JWT authentication</strong>, PostgreSQL database with
+                    connection pooling, and Redis caching. Deployed on <strong>Render</strong> with 98% uptime and
+                    full Prometheus/Grafana observability. Processed <strong>10,000+ classifications</strong> with 96% accuracy.
                 </p>
                 <div class="tech-tags">
                     <span class="tag">Python</span>
                     <span class="tag">Flask</span>
                     <span class="tag">Google Gemini</span>
                     <span class="tag">OpenAI</span>
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">Redis</span>
+                    <span class="tag">Stripe</span>
                     <span class="tag">Docker</span>
-                    <span class="tag">Docker Compose</span>
-                    <span class="tag">Pydantic</span>
+                    <span class="tag">Prometheus</span>
+                    <span class="tag">Grafana</span>
                     <span class="tag">GitHub Actions</span>
                     <span class="tag">Pytest</span>
-                    <span class="tag">Railway</span>
+                    <span class="tag">Render</span>
                 </div>
                 <div class="project-links">
                     <a href="https://ai-ticket-classifier.onrender.com/" class="project-link primary-link"
@@ -145,21 +149,23 @@
 
             <!-- AWS S3 Simulator -->
             <div class="project-card">
-                <h3>☁️ AWS S3 Simulator - Dashboard</h3>
+                <h3>☁️ AWS S3 Simulator — Full Observability Stack</h3>
                 <p>
-                    A fully functional AWS S3 compatible object storage simulator with a visual dashboard. Features
-                    bucket management, file upload/download capabilities, and real-time storage visualization. Designed to
-                    mimic S3 behavior for development and testing purposes without incurring cloud costs.
+                    A fully functional AWS S3 compatible object storage simulator built with MinIO and Flask.
+                    Features bucket management, file upload/download, and real-time storage visualization.
+                    Includes a <strong>complete observability stack</strong>: Prometheus for metrics, Loki for
+                    centralized log aggregation via Promtail, and Grafana dashboards auto-provisioned as code.
                 </p>
                 <div class="tech-tags">
                     <span class="tag">Python</span>
                     <span class="tag">Flask</span>
-                    <span class="tag">AWS S3</span>
-                    <span class="tag">Docker</span>
+                    <span class="tag">MinIO (S3)</span>
+                    <span class="tag">Docker Compose</span>
+                    <span class="tag">Prometheus</span>
+                    <span class="tag">Grafana</span>
+                    <span class="tag">Loki</span>
+                    <span class="tag">Promtail</span>
                     <span class="tag">Render</span>
-                    <span class="tag">HTML5</span>
-                    <span class="tag">CSS3</span>
-                    <span class="tag">JavaScript</span>
                 </div>
                 <div class="project-links">
                     <a href="https://aws-s3-simulator.onrender.com/" class="project-link primary-link"
@@ -248,22 +254,21 @@
             <h2>Other Projects &amp; Experiments</h2>
 
             <div class="project-card">
-                <h3>🐧 Java Algorithms &amp; Performance Analysis</h3>
+                <h3>☕ Java Algorithms & Performance Analysis</h3>
                 <p>
-                    Comprehensive system configuration repository with optimized dotfiles, automation scripts, and
-                    development environment setup. Includes customized terminal configurations, window manager setups,
-                    and productivity tools for an efficient Linux workflow. Features automated installation scripts
-                    and system optimization tweaks for Arch Linux environments.
+                    A collection of classic algorithm implementations and data structure exercises in Java.
+                    Covers sorting algorithms (QuickSort, MergeSort, HeapSort), graph traversal (BFS, DFS),
+                    dynamic programming, and performance benchmarking. Demonstrates understanding of
+                    computational complexity and optimization techniques.
                 </p>
                 <div class="tech-tags">
-                    <span class="tag">Linux</span>
-                    <span class="tag">Arch Linux</span>
-                    <span class="tag">Bash Scripting</span>
-                    <span class="tag">Dotfiles</span>
-                    <span class="tag">Automation</span>
-                    <span class="tag">System Configuration</span>
+                    <span class="tag">Java</span>
+                    <span class="tag">Algorithms</span>
+                    <span class="tag">Data Structures</span>
+                    <span class="tag">Performance Analysis</span>
+                    <span class="tag">JUnit</span>
                 </div>
-                <a href="https://github.com/ArtemRivnyi/arch.pc" class="project-link secondary-link" target="_blank">
+                <a href="https://github.com/ArtemRivnyi/java-algorithms-practice" class="project-link secondary-link" target="_blank">
                     View on GitHub →
                 </a>
             </div>
