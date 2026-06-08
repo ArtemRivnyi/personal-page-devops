@@ -8,7 +8,7 @@
         content="Artem Rivnyi - DevOps Engineer & Technical Support Specialist. Portfolio showcasing AI, Cloud, and Automation projects.">
     <title>Artem Rivnyi - DevOps Engineer Portfolio</title>
     <meta name="keywords" content="DevOps, Kubernetes, Terraform, Docker, AWS, CI/CD, SRE, Cloud Engineer, Portfolio">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    <link rel="icon" href="assets/icons/favicon.png">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -23,13 +23,16 @@
             <p class="subtitle">DevOps Engineer | Technical Support Specialist | AI Enthusiast</p>
             <div class="social-links">
                 <a href="https://github.com/ArtemRivnyi" class="social-link" target="_blank" rel="noopener">
-                    <span>💻</span> GitHub
+                    <span class="icon-github"></span> GitHub
                 </a>
                 <a href="https://www.linkedin.com/in/artem-rivnyi" class="social-link" target="_blank" rel="noopener">
-                    <span>💼</span> LinkedIn
+                    <span class="icon-linkedin"></span> LinkedIn
+                </a>
+                <a href="https://www.freelancer.com/u/ArtemRivnyi" class="social-link" target="_blank" rel="noopener">
+                    <span class="icon-freelancer"></span> Freelancer
                 </a>
                 <a href="docs/Artem.Rivnyi.CV.pdf" class="social-link" download>
-                    <span>📄</span> Download CV
+                    <span class="icon-cv"></span> Download CV
                 </a>
             </div>
         </header>
@@ -55,7 +58,7 @@
             <!-- FEATURED PROJECT - AI Email Support System -->
             <div class="project-card featured-project">
                 <div class="featured-badge">⭐ Featured Project</div>
-                <h3>🤖 AI Email Support System - Enterprise Production Platform</h3>
+                <h3><span class="project-logo logo-ai-email"></span>AI Email Support System - Enterprise Production Platform</h3>
                 <p>
                     <strong>Production-ready, privacy-first AI email automation platform with complete DevOps infrastructure.</strong>
                 </p>
@@ -69,11 +72,11 @@
                     <strong>Key Achievements:</strong>
                 </p>
                 <ul class="achievements-list">
-                    <li>📊 <strong>94%+ accuracy</strong> in email classification and response generation</li>
-                    <li>⚡ <strong>100+ emails/day</strong> processing capacity with async queue system</li>
-                    <li>🔒 <strong>Complete privacy</strong> - all AI processing happens locally (no external API calls)</li>
-                    <li>📈 <strong>Production-ready</strong> with Prometheus monitoring, Grafana dashboards, automated health checks</li>
-                    <li>📚 <strong>Full documentation</strong> including runbooks, deployment guides, operational checklists</li>
+                    <li><span class="icon-accuracy"></span><strong>94%+ accuracy</strong> in email classification and response generation</li>
+                    <li><span class="icon-speed"></span><strong>100+ emails/day</strong> processing capacity with async queue system</li>
+                    <li><span class="icon-privacy"></span><strong>Complete privacy</strong> - all AI processing happens locally (no external API calls)</li>
+                    <li><span class="icon-production"></span><strong>Production-ready</strong> with Prometheus monitoring, Grafana dashboards, automated health checks</li>
+                    <li><span class="icon-docs"></span><strong>Full documentation</strong> including runbooks, deployment guides, operational checklists</li>
                 </ul>
                 <div class="tech-tags">
                     <!-- Backend & AI -->
@@ -99,7 +102,7 @@
                 <div class="project-links">
                     <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store/blob/main/docs/images/dashboard.png" 
                        class="project-link primary-link" target="_blank">
-                        📊 View Dashboard →
+                        View Dashboard →
                     </a>
                     <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store" 
                        class="project-link secondary-link" target="_blank">
@@ -107,14 +110,14 @@
                     </a>
                     <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store/blob/main/docs/" 
                        class="project-link secondary-link" target="_blank">
-                        📖 Documentation →
+                        Documentation →
                     </a>
                 </div>
             </div>
 
             <!-- AI Ticket Classifier -->
             <div class="project-card">
-                <h3>🎫 AI Ticket Classifier — Production SaaS</h3>
+                <h3><span class="project-logo logo-ticket"></span>AI Ticket Classifier — Production SaaS</h3>
                 <p>
                     A production-ready Flask-based SaaS API that uses Google Gemini 2.0 Flash (with OpenAI GPT-4 fallback)
                     for instant, automated classification and triage of support tickets. Features <strong>tier-based
@@ -147,9 +150,32 @@
                 </div>
             </div>
 
+            <!-- UA-IE Car Scout -->
+            <div class="project-card">
+                <h3>UA-IE Car Scout — Real-time Market Aggregator</h3>
+                <p>
+                    A powerful real-time meta-search engine and financial calculator designed to bridge the Ukrainian and Irish automotive markets. Aggregates listings from <strong>6 top marketplaces</strong>, normalizes prices using live exchange rates, and calculates exact Irish customs and VAT duties. Features a React/Vite frontend and an Express.js backend with advanced anti-bot scraping (Puppeteer Stealth).
+                </p>
+                <div class="tech-tags">
+                    <span class="tag">React</span>
+                    <span class="tag">Vite</span>
+                    <span class="tag">Node.js</span>
+                    <span class="tag">Express</span>
+                    <span class="tag">Puppeteer</span>
+                    <span class="tag">Web Scraping</span>
+                    <span class="tag">Render</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://ua-ie-car-scout-web.onrender.com/" class="project-link primary-link"
+                        target="_blank">View Live Demo →</a>
+                    <a href="https://github.com/ArtemRivnyi/ua-ie-car-scout" class="project-link secondary-link"
+                        target="_blank">View on GitHub →</a>
+                </div>
+            </div>
+
             <!-- AWS S3 Simulator -->
             <div class="project-card">
-                <h3>☁️ AWS S3 Simulator — Full Observability Stack</h3>
+                <h3><span class="project-logo logo-aws-s3"></span>AWS S3 Simulator — Full Observability Stack</h3>
                 <p>
                     A fully functional AWS S3 compatible object storage simulator built with MinIO and Flask.
                     Features bucket management, file upload/download, and real-time storage visualization.
@@ -177,7 +203,7 @@
 
             <!-- Caching Microservice with Load Balancing -->
             <div class="project-card">
-                <h3>⚡ High-Performance Microservice + Load Balancing</h3>
+                <h3><span class="project-logo logo-microservice"></span>High-Performance Microservice + Load Balancing</h3>
                 <p>
                     Node.js microservice architecture with <strong>Traefik reverse proxy</strong> and <strong>3 API replicas</strong> for horizontal scaling. Validated <strong>1000 req/sec</strong> throughput with k6 load testing and sub-500ms p95 latency. Includes Terraform + Ansible IaC for AWS EC2 provisioning.
                 </p>
@@ -191,15 +217,11 @@
                     <span class="tag">Ansible</span>
                     <span class="tag">AWS EC2</span>
                 </div>
-                <div class="project-links">
-                    <a href="https://github.com/ArtemRivnyi/Caching-Microservice-Template" class="project-link secondary-link"
-                        target="_blank">View on GitHub →</a>
-                </div>
             </div>
 
             <!-- DevOps Node.js Application -->
             <div class="project-card">
-                <h3>⚙️ DevOps Node.js Application</h3>
+                <h3><span class="project-logo logo-devops"></span>DevOps Node.js Application</h3>
                 <p>
                     A comprehensive demonstration of DevOps automation principles. This project showcases a complete
                     CI/CD pipeline with Docker containerization, automated testing via Mocha &amp; Chai, and local
@@ -226,7 +248,7 @@
 
             <!-- Docker Multi-Container Demo -->
             <div class="project-card">
-                <h3>🐳 Docker Multi-Container Demo</h3>
+                <h3><span class="project-logo logo-docker"></span>Docker Multi-Container Demo</h3>
                 <p>
                     A production-ready demonstration of multi-service orchestration using Docker Compose. Features a
                     Node.js Express API with Redis caching, health checks, automatic restart policies, data
@@ -254,7 +276,7 @@
             <h2>Other Projects &amp; Experiments</h2>
 
             <div class="project-card">
-                <h3>☕ Java Algorithms &amp; Performance Analysis</h3>
+                <h3>Java Algorithms &amp; Performance Analysis</h3>
                 <p>
                     A collection of classic algorithm implementations and data structure exercises in Java.
                     Covers sorting algorithms (QuickSort, MergeSort, HeapSort), graph traversal (BFS, DFS),
@@ -274,7 +296,7 @@
             </div>
 
             <div class="project-card">
-                <h3>⚙️ Bash Toolkit</h3>
+                <h3>Bash Toolkit</h3>
                 <p>
                     Collection of lightweight, cross-platform Bash scripts for developers, sysadmins, and DevOps.
                     Automate system monitoring, service checks, backups, log cleanup, and network tasks with minimal
@@ -293,7 +315,7 @@
             </div>
 
             <div class="project-card">
-                <h3>🧠 AI Fundamentals Practice</h3>
+                <h3>AI Fundamentals Practice</h3>
                 <p>
                     This repository contains a collection of laboratory assignments focused on
                     Artificial Intelligence concepts, implemented primarily in Python. Each lab explores different aspects
