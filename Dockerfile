@@ -26,7 +26,8 @@ COPY --from=builder /build/index.html /usr/share/nginx/html/
 COPY --from=builder /build/style.css /usr/share/nginx/html/
 COPY --from=builder /build/script.js /usr/share/nginx/html/
 
-# Copy docs folder (if exists)
+# Copy assets and docs folders
+COPY --from=builder /build/assets /usr/share/nginx/html/assets/
 COPY --from=builder /build/docs /usr/share/nginx/html/docs/
 
 # Copy Nginx configuration
