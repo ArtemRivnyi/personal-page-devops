@@ -672,23 +672,138 @@ footer {
     }
 }
 /* Custom Icons */
-.icon-github { display: inline-block; width: 24px; height: 24px; background-image: url('assets/icons/icon-github.png'); background-size: contain; background-repeat: no-repeat; vertical-align: middle; }
-.icon-linkedin { display: inline-block; width: 24px; height: 24px; background-image: url('assets/icons/icon-linkedin.png'); background-size: contain; background-repeat: no-repeat; vertical-align: middle; }
-.icon-freelancer { display: inline-block; width: 24px; height: 24px; background-image: url('assets/icons/icon-freelancer.png'); background-size: contain; background-repeat: no-repeat; vertical-align: middle; }
-.icon-cv { display: inline-block; width: 24px; height: 24px; background-image: url('assets/icons/icon-cv.png'); background-size: contain; background-repeat: no-repeat; vertical-align: middle; }
+.icon-github {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('assets/icons/icon-github.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+.icon-linkedin {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('assets/icons/icon-linkedin.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+.icon-freelancer {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('assets/icons/icon-freelancer.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+.icon-cv {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('assets/icons/icon-cv.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
 
 /* Achievement Icons */
-.icon-accuracy { display: inline-block; width: 20px; height: 20px; background-image: url('assets/icons/icon-accuracy.png'); background-size: contain; background-repeat: no-repeat; vertical-align: middle; margin-right: 6px; margin-bottom: 2px; }
-.icon-speed { display: inline-block; width: 20px; height: 20px; background-image: url('assets/icons/icon-speed.png'); background-size: contain; background-repeat: no-repeat; vertical-align: middle; margin-right: 6px; margin-bottom: 2px; }
-.icon-privacy { display: inline-block; width: 20px; height: 20px; background-image: url('assets/icons/icon-privacy.png'); background-size: contain; background-repeat: no-repeat; vertical-align: middle; margin-right: 6px; margin-bottom: 2px; }
-.icon-production { display: inline-block; width: 20px; height: 20px; background-image: url('assets/icons/icon-production.png'); background-size: contain; background-repeat: no-repeat; vertical-align: middle; margin-right: 6px; margin-bottom: 2px; }
-.icon-docs { display: inline-block; width: 20px; height: 20px; background-image: url('assets/icons/icon-docs.png'); background-size: contain; background-repeat: no-repeat; vertical-align: middle; margin-right: 6px; margin-bottom: 2px; }
+.icon-accuracy {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url('assets/icons/icon-accuracy.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    margin-right: 6px;
+    margin-bottom: 2px;
+}
+
+.icon-speed {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url('assets/icons/icon-speed.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    margin-right: 6px;
+    margin-bottom: 2px;
+}
+
+.icon-privacy {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url('assets/icons/icon-privacy.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    margin-right: 6px;
+    margin-bottom: 2px;
+}
+
+.icon-production {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url('assets/icons/icon-production.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    margin-right: 6px;
+    margin-bottom: 2px;
+}
+
+.icon-docs {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url('assets/icons/icon-docs.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    margin-right: 6px;
+    margin-bottom: 2px;
+}
 
 /* Project Logos */
-.project-logo { display: inline-block; width: 32px; height: 32px; background-size: contain; background-repeat: no-repeat; vertical-align: middle; margin-right: 10px; }
-.logo-ai-email { background-image: url('assets/icons/project-ai-email.png'); }
-.logo-ticket { background-image: url('assets/icons/project-ticket.png'); }
-.logo-aws-s3 { background-image: url('assets/icons/project-aws-s3.png'); }
-.logo-microservice { background-image: url('assets/icons/project-microservice.png'); }
-.logo-devops { background-image: url('assets/icons/project-devops.png'); }
-.logo-docker { background-image: url('assets/icons/project-docker.png'); }
+.project-logo {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.logo-ai-email {
+    background-image: url('assets/icons/project-ai-email.png');
+}
+
+.logo-ticket {
+    background-image: url('assets/icons/project-ticket.png');
+}
+
+.logo-aws-s3 {
+    background-image: url('assets/icons/project-aws-s3.png');
+}
+
+.logo-microservice {
+    background-image: url('assets/icons/project-microservice.png');
+}
+
+.logo-devops {
+    background-image: url('assets/icons/project-devops.png');
+}
+
+.logo-docker {
+    background-image: url('assets/icons/project-docker.png');
+}
