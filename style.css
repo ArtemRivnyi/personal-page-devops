@@ -674,6 +674,7 @@ footer {
 /* Custom Icons */
 .icon-github { display: inline-block; width: 24px; height: 24px; background-image: url('assets/icons/icon-github.png'); background-size: contain; background-repeat: no-repeat; vertical-align: middle; }
 .icon-linkedin { display: inline-block; width: 24px; height: 24px; background-image: url('assets/icons/icon-linkedin.png'); background-size: contain; background-repeat: no-repeat; vertical-align: middle; }
+.icon-freelancer { display: inline-block; width: 24px; height: 24px; background-image: url('assets/icons/icon-freelancer.png'); background-size: contain; background-repeat: no-repeat; vertical-align: middle; }
 .icon-cv { display: inline-block; width: 24px; height: 24px; background-image: url('assets/icons/icon-cv.png'); background-size: contain; background-repeat: no-repeat; vertical-align: middle; }
 
 /* Achievement Icons */
