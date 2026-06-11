@@ -24,6 +24,412 @@
     --matrix-color-light: rgb(0 255 128 / 50%);
 
     /* Gradient Colors (Deep, subtle glowing orbs) */
+    --g1: #4f46e5; /* Indigo */
+    --g2: #2563eb; /* Blue */
+    --g3: #0ea5e9; /* Sky */
+    --g4: #8b5cf6; /* Violet */
+}
+
+body {
+    font-family: 'Space Grotesk', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    isolation: isolate;
+
+}
+
+/* --- Matrix Canvas and Gradient Background --- */
+#matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+    pointer-events: none;
+    opacity: 5%;
+    background: transparent;
+    contain: paint;
+
+}
+
+.gradient-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    opacity: 10%;
+    background: radial-gradient(circle at 20% 80%, var(--g1) 0%, transparent 25%),
+        radial-gradient(circle at 80% 20%, var(--g2) 0%, transparent 25%),
+        radial-gradient(circle at 50% 50%, var(--g3) 0%, transparent 25%),
+        radial-gradient(circle at 10% 10%, var(--g4) 0%, transparent 25%);
+    background-size: 600% 600%;
+
+    /* Stretch gradient for less visible circles */
+    animation: gradient-animation 60s ease infinite;
+
+    /* Slower animation */
+    will-change: opacity, transform;
+    pointer-events: none;
+}
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    25% {
+        background-position: 100% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+
+    75% {
+        background-position: 0% 100%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+/* --- Layout and Structure --- */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+header {
+    text-align: center;
+    padding: 50px 0 30px;
+}
+
+.name-title {
+    font-size: max(48px, 3.5em);
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.gradient-text {
+    color: #667eea;
+    display: inline-block;
+    position: relative;
+}
+
+/* Glitch Effect */
+.gradient-text:hover {
+    animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+}
+
+@keyframes glitch {
+    0% {
+        transform: translate(0)
+    }
+
+    20% {
+        transform: translate(-2px, 2px)
+    }
+
+    40% {
+        transform: translate(-2px, -2px)
+    }
+
+    60% {
+        transform: translate(2px, 2px)
+    }
+
+    80% {
+        transform: translate(2px, -2px)
+    }
+
+    100% {
+        transform: translate(0)
+    }
+}
+
+.subtitle {
+    font-size: 1.2em;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    min-height: 1.6em;
+
+    /* Prevent layout shift */
+}
+
+.typing-cursor::after {
+    content: '|';
+    animation: blink 1s step-start infinite;
+    color: var(--accent-color);
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0%;
+    }
+}
+
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 0 0% rgb(0 255 136 / 40%);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgb(0 255 136 / 0%);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0% rgb(0 255 136 / 0%);
+    }
+}
+
+/* --- Social Links --- */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-link {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.social-link:hover {
+    color: var(--link-hover);
+}
+
+.social-link span {
+    margin-right: 5px;
+}
+
+/* --- Sections --- */
+section {
+    padding: 40px 0;
+    border-bottom: 1px solid var(--card-border);
+    content-visibility: auto;
+    contain-intrinsic-size: auto 500px;
+}
+
+section:last-of-type {
+    border-bottom: none;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    border-left: 5px solid var(--accent-color);
+    padding-left: 10px;
+}
+
+h3 {
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* --- Project Cards --- */
+.project-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
+    contain: layout style paint;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.project-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgb(0 0 0 / 40%), 0 0 20px var(--accent-glow);
+    border-color: rgb(255 255 255 / 20%);
+}
+
+.project-card h3 {
+    margin-top: 0;
+    color: var(--accent-color);
+}
+
+.tech-tags {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.tag {
+    display: inline-block;
+    background-color: rgb(255 255 255 / 5%);
+    color: var(--text-primary);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85em;
+    font-weight: 500;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    border: 1px solid rgb(255 255 255 / 10%);
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    background-color: rgb(255 255 255 / 10%);
+    border-color: rgb(255 255 255 / 30%);
+    transform: translateY(-2px);
+}
+
+.project-links {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.95em;
+}
+
+.primary-link {
+    background: var(--accent-color);
+    color: white !important;
+    box-shadow: 0 4px 15px var(--accent-glow);
+    border: 2px solid var(--accent-color);
+}
+
+.primary-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgb(102 126 234 / 40%);
+    background: #764ba2;
+    border-color: #764ba2;
+}
+
+.secondary-link {
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+.secondary-link:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Fallback for existing links not using primary/secondary classes */
+.project-link:is(:not(.primary-link), :not(.secondary-link)) {
+    color: var(--link-color);
+    margin-top: 10px;
+}
+
+.project-link:is(:not(.primary-link), :not(.secondary-link)):hover {
+    color: var(--link-hover);
+}
+
+/* --- Featured Project Styling --- */
+.featured-project {
+    position: relative;
+    border: 2px solid #8b9aed;
+    box-shadow: 0 8px 30px rgb(102 126 234 / 30%);
+    background: linear-gradient(135deg, rgb(102 126 234 / 10%) 0%, rgb(118 75 162 / 10%) 100%);
+}
+
+.featured-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 15px rgb(102 126 234 / 40%);
+}
+
+.featured-project h3 {
+    color: #a0aef7;
+    margin-top: 8px;
+}
+
+.achievements-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 16px 0;
+}
+
+.achievements-list li {
+    padding: 8px 0;
+    padding-left: 8px;
+    border-left: 3px solid #8b9aed;
+    margin-bottom: 8px;
+    background: rgb(102 126 234 / 15%);
+    border-radius: 4px;
+}
+
+.achievements-list li strong {
+    color: #a0aef7;
+}
+
+/* --- Skills Grid --- */
+#skills {
+    padding-bottom: 60px;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 20px;
+}
+
+/* Modern Tech Style for Skills */
+.skill-category {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 24px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease, box-shadow 0.4s ease;
+    contain: layout style paint;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.skill-category:hover {
+    transform: translateY(-5px);
+    border-color: rgb(255 255 255 / 30%);
     box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
 }
 
