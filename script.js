@@ -13,38 +13,7 @@ function debounce(func, wait) {
     };
 }
 
-function setupThemeToggle() {
-    const toggle = document.createElement('button');
-    toggle.id = 'theme-toggle';
-    toggle.setAttribute('aria-label', 'Toggle theme');
-    document.body.appendChild(toggle);
-
-    function setTheme(dark) {
-        document.body.classList.toggle('dark-theme', dark);
-        localStorage.setItem('theme', dark ? 'dark' : 'light');
-        toggle.innerHTML = dark ? '🌙' : '☀️';
-
-        const canvas = document.getElementById('matrix-canvas');
-        if (canvas) {
-            if (dark) {
-                canvas.style.opacity = '0.25';
-                canvas.style.mixBlendMode = 'screen';
-            } else {
-                canvas.style.opacity = '0.15';
-                canvas.style.mixBlendMode = 'multiply';
-            }
-        }
-    }
-
-    const saved = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setTheme(saved === 'dark' || (!saved && prefersDark));
-
-    toggle.addEventListener('click', () =>
-        setTheme(!document.body.classList.contains('dark-theme'))
-    );
-}
-
+// Removed setupThemeToggle to enforce Premium Dark Mode
 class MatrixRain {
     constructor(id = 'matrix-canvas') {
         this.canvas = document.getElementById(id);
@@ -84,11 +53,11 @@ class MatrixRain {
         if (!this.frameCount) this.frameCount = 0;
         this.frameCount++;
 
-        // Normal fade effect - increased transparency for quick trail fade
-        this.ctx.fillStyle = dark ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.15)'; // Reduced transparency for light theme to make trails more visible
+        // Normal fade effect
+        this.ctx.fillStyle = 'rgba(0,0,0,0.15)'; 
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.ctx.fillStyle = dark ? '#00ff66' : '#007bff'; // Blue for light theme for better contrast
+        this.ctx.fillStyle = '#00ff66'; 
         const maxY = this.canvas.height;
         const len = this.chars.length;
 
@@ -133,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(typeSubtitle, 1000); // Start after 1s delay
     }
 
-    setupThemeToggle();
+    // Removed theme toggle call
 
     // Gradient overlay
     const gradient = document.createElement('div');
