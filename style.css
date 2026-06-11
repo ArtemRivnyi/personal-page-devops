@@ -71,7 +71,7 @@ body.dark-theme {
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Space Grotesk', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
@@ -92,7 +92,7 @@ body {
     height: 100%;
     z-index: -3;
     pointer-events: none;
-    opacity: 50%;
+    opacity: 5%;
     background: transparent;
     contain: paint;
 
@@ -157,7 +157,7 @@ header {
 }
 
 .name-title {
-    font-size: 3.5em;
+    font-size: max(48px, 3.5em);
     margin-bottom: 5px;
     font-weight: 700;
 }

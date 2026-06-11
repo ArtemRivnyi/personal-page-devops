@@ -9,6 +9,9 @@
     <title>Artem Rivnyi - DevOps Engineer Portfolio</title>
     <meta name="keywords" content="DevOps, Kubernetes, Terraform, Docker, AWS, CI/CD, SRE, Cloud Engineer, Portfolio">
     <link rel="icon" href="assets/icons/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=3">
 </head>
 
@@ -21,17 +24,11 @@
                 <span class="gradient-text">Artem Rivnyi</span>
             </h1>
             <p class="subtitle">DevOps Engineer | Technical Support Specialist | AI Enthusiast</p>
-            <div class="social-links">
-                <a href="https://github.com/ArtemRivnyi" class="social-link" target="_blank" rel="noopener">
-                    <span class="icon-github"></span> GitHub
+            <div class="social-links" style="gap: 15px;">
+                <a href="#projects" class="project-link primary-link">
+                    View Projects
                 </a>
-                <a href="https://www.linkedin.com/in/artem-rivnyi" class="social-link" target="_blank" rel="noopener">
-                    <span class="icon-linkedin"></span> LinkedIn
-                </a>
-                <a href="https://www.freelancer.com/u/ArtemRivnyi" class="social-link" target="_blank" rel="noopener">
-                    <span class="icon-freelancer"></span> Freelancer
-                </a>
-                <a href="docs/Artem.Rivnyi.CV.pdf" class="social-link" download>
+                <a href="docs/Artem.Rivnyi.CV.pdf" class="project-link secondary-link" download>
                     <span class="icon-cv"></span> Download CV
                 </a>
             </div>
@@ -64,9 +61,8 @@
                 </p>
                 <p>
                     A sophisticated microservices-based system that autonomously processes customer support emails using RAG
-                    architecture with local LLMs. Built from the ground up with enterprise-grade reliability, monitoring,
-                    and scalability. Features Docker containerization, Kubernetes orchestration, full CI/CD pipeline, and
-                    real-time admin dashboard - showcasing end-to-end DevOps expertise.
+                    architecture with local LLMs. Features Docker containerization, Kubernetes orchestration, a full CI/CD pipeline, and
+                    real-time admin dashboard.
                 </p>
                 <p>
                     <strong>Key Achievements:</strong>
@@ -79,25 +75,11 @@
                     <li><span class="icon-docs"></span><strong>Full documentation</strong> including runbooks, deployment guides, operational checklists</li>
                 </ul>
                 <div class="tech-tags">
-                    <!-- Backend & AI -->
                     <span class="tag">Python</span>
-                    <span class="tag">Flask</span>
-                    <span class="tag">Ollama</span>
-                    <span class="tag">Gemma 7B</span>
-                    <span class="tag">FAISS</span>
-                    <span class="tag">RAG</span>
-                    <!-- DevOps & Infrastructure -->
                     <span class="tag">Docker</span>
                     <span class="tag">Kubernetes</span>
                     <span class="tag">GitHub Actions</span>
-                    <span class="tag">Prometheus</span>
-                    <span class="tag">Grafana</span>
-                    <span class="tag">Streamlit</span>
-                    <!-- Additional -->
-                    <span class="tag">Redis Queue</span>
-                    <span class="tag">Gmail API</span>
-                    <span class="tag">OAuth 2.0</span>
-                    <span class="tag">Microservices</span>
+                    <span class="tag">RAG</span>
                 </div>
                 <div class="project-links">
                     <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store/blob/main/docs/images/dashboard.png" 
@@ -119,26 +101,15 @@
             <div class="project-card">
                 <h3><span class="project-logo logo-ticket"></span>AI Ticket Classifier — Production SaaS</h3>
                 <p>
-                    A production-ready Flask-based SaaS API that uses Google Gemini 2.0 Flash (with OpenAI GPT-4 fallback)
-                    for instant, automated classification and triage of support tickets. Features <strong>tier-based
-                    subscription billing</strong> via Stripe, <strong>JWT authentication</strong>, PostgreSQL database with
-                    connection pooling, and Redis caching. Deployed on <strong>Render</strong> with 98% uptime and
-                    full Prometheus/Grafana observability. Processed <strong>10,000+ classifications</strong> with 96% accuracy.
+                    A production-ready Flask SaaS API using Google Gemini 2.0 Flash for automated support ticket classification.
+                    Features tier-based Stripe billing, PostgreSQL, Redis caching, and full Prometheus/Grafana observability.
                 </p>
                 <div class="tech-tags">
                     <span class="tag">Python</span>
                     <span class="tag">Flask</span>
                     <span class="tag">Google Gemini</span>
-                    <span class="tag">OpenAI</span>
                     <span class="tag">PostgreSQL</span>
-                    <span class="tag">Redis</span>
-                    <span class="tag">Stripe</span>
                     <span class="tag">Docker</span>
-                    <span class="tag">Prometheus</span>
-                    <span class="tag">Grafana</span>
-                    <span class="tag">GitHub Actions</span>
-                    <span class="tag">Pytest</span>
-                    <span class="tag">Render</span>
                 </div>
                 <div class="project-links">
                     <a href="https://ai-ticket-classifier.onrender.com/" class="project-link primary-link"
@@ -154,13 +125,12 @@
             <div class="project-card">
                 <h3>UA-IE Car Scout — Real-time Market Aggregator</h3>
                 <p>
-                    A powerful real-time meta-search engine and financial calculator designed to bridge the Ukrainian and Irish automotive markets. Aggregates listings from <strong>6 top marketplaces</strong>, normalizes prices using live exchange rates, and calculates exact Irish customs and VAT duties. Features a React/Vite frontend and an Express.js backend with advanced anti-bot scraping (Puppeteer Stealth).
+                    A real-time meta-search engine and financial calculator bridging the Ukrainian and Irish automotive markets. 
+                    Aggregates listings from 6 marketplaces and features advanced anti-bot scraping with Puppeteer.
                 </p>
                 <div class="tech-tags">
                     <span class="tag">React</span>
-                    <span class="tag">Vite</span>
                     <span class="tag">Node.js</span>
-                    <span class="tag">Express</span>
                     <span class="tag">Puppeteer</span>
                     <span class="tag">Web Scraping</span>
                     <span class="tag">Render</span>
@@ -180,20 +150,14 @@
                 <h3><span class="project-logo logo-aws-s3"></span>AWS S3 Simulator — Full Observability Stack</h3>
                 <p>
                     A fully functional AWS S3 compatible object storage simulator built with MinIO and Flask.
-                    Features bucket management, file upload/download, and real-time storage visualization.
-                    Includes a <strong>complete observability stack</strong>: Prometheus for metrics, Loki for
-                    centralized log aggregation via Promtail, and Grafana dashboards auto-provisioned as code.
+                    Includes a complete observability stack with Prometheus, Loki, Promtail, and Grafana.
                 </p>
                 <div class="tech-tags">
                     <span class="tag">Python</span>
-                    <span class="tag">Flask</span>
                     <span class="tag">MinIO (S3)</span>
                     <span class="tag">Docker Compose</span>
                     <span class="tag">Prometheus</span>
                     <span class="tag">Grafana</span>
-                    <span class="tag">Loki</span>
-                    <span class="tag">Promtail</span>
-                    <span class="tag">Render</span>
                 </div>
                 <div class="project-links">
                     <a href="https://aws-s3-simulator.onrender.com/" class="project-link primary-link"
@@ -207,16 +171,14 @@
             <div class="project-card">
                 <h3><span class="project-logo logo-microservice"></span>High-Performance Microservice + Load Balancing</h3>
                 <p>
-                    Node.js microservice architecture with <strong>Traefik reverse proxy</strong> and <strong>3 API replicas</strong> for horizontal scaling. Validated <strong>1000 req/sec</strong> throughput with k6 load testing and sub-500ms p95 latency. Includes Terraform + Ansible IaC for AWS EC2 provisioning.
+                    Node.js microservice architecture with Traefik reverse proxy and 3 API replicas for horizontal scaling. 
+                    Validated 1000 req/sec throughput with k6 load testing and sub-500ms p95 latency.
                 </p>
                 <div class="tech-tags">
                     <span class="tag">Node.js</span>
                     <span class="tag">Traefik</span>
                     <span class="tag">Redis</span>
-                    <span class="tag">Docker Compose</span>
-                    <span class="tag">k6 Load Testing</span>
                     <span class="tag">Terraform</span>
-                    <span class="tag">Ansible</span>
                     <span class="tag">AWS EC2</span>
                 </div>
             </div>
@@ -225,17 +187,10 @@
             <div class="project-card">
                 <h3><span class="project-logo logo-devops"></span>DevOps Node.js Application</h3>
                 <p>
-                    A comprehensive demonstration of DevOps automation principles. This project showcases a complete
-                    CI/CD pipeline with Docker containerization, automated testing via Mocha &amp; Chai, and local
-                    deployment. This portfolio website itself is a DevOps project! Features a complete automated
-                    deployment pipeline with animated matrix rain background, gradient overlays, and dark mode toggle.
-                    Every code change triggers a GitHub Actions workflow that builds a Docker image and
-                    automatically deploys to Render—showcasing real-world DevOps practices with Infrastructure as Code.
+                    A comprehensive demonstration of DevOps automation principles showcasing a complete CI/CD pipeline with Docker containerization.
+                    Every code change triggers a GitHub Actions workflow that automatically deploys to Render.
                 </p>
                 <div class="tech-tags">
-                    <span class="tag">HTML5</span>
-                    <span class="tag">CSS3</span>
-                    <span class="tag">JavaScript</span>
                     <span class="tag">Docker</span>
                     <span class="tag">GitHub Actions</span>
                     <span class="tag">Render</span>
@@ -252,17 +207,12 @@
             <div class="project-card">
                 <h3><span class="project-logo logo-docker"></span>Docker Multi-Container Demo</h3>
                 <p>
-                    A production-ready demonstration of multi-service orchestration using Docker Compose. Features a
-                    Node.js Express API with Redis caching, health checks, automatic restart policies, data
-                    persistence with volumes, service discovery, cross-platform compatibility, and comprehensive error
-                    handling. Includes Makefile for convenient development workflows and detailed documentation on container
-                    networking and deployment strategies.
+                    A demonstration of multi-service orchestration using Docker Compose with a Node.js Express API and Redis caching.
+                    Features health checks, data persistence, service discovery, and comprehensive error handling.
                 </p>
                 <div class="tech-tags">
-                    <span class="tag">Docker</span>
                     <span class="tag">Docker Compose</span>
                     <span class="tag">Node.js</span>
-                    <span class="tag">Express</span>
                     <span class="tag">Redis</span>
                     <span class="tag">Nginx</span>
                     <span class="tag">Makefile</span>
@@ -343,7 +293,7 @@
             <div class="skills-grid">
                 <!-- DevOps & Cloud -->
                 <div class="skill-category">
-                    <h3>DevOps &amp; Cloud</h3>
+                    <h3>☁️ DevOps &amp; Cloud</h3>
                     <ul>
                         <li><span class="skill-tag">Docker</span></li>
                         <li><span class="skill-tag">Docker Compose</span></li>
@@ -367,7 +317,7 @@
 
                 <!-- AI & Machine Learning -->
                 <div class="skill-category">
-                    <h3>AI &amp; Machine Learning</h3>
+                    <h3>🧠 AI &amp; Machine Learning</h3>
                     <ul>
                         <li><span class="skill-tag">Python</span></li>
                         <li><span class="skill-tag">OpenAI API</span></li>
@@ -386,7 +336,7 @@
 
                 <!-- Backend & Web Development -->
                 <div class="skill-category">
-                    <h3>Backend &amp; Web</h3>
+                    <h3>⚙️ Backend &amp; Web</h3>
                     <ul>
                         <li><span class="skill-tag">Node.js</span></li>
                         <li><span class="skill-tag">Express.js</span></li>
@@ -403,7 +353,7 @@
 
                 <!-- Languages & Tools -->
                 <div class="skill-category">
-                    <h3>Languages &amp; Tools</h3>
+                    <h3>🛠️ Languages &amp; Tools</h3>
                     <ul>
                         <li><span class="skill-tag">Python</span></li>
                         <li><span class="skill-tag">JavaScript</span></li>
@@ -421,6 +371,17 @@
         </section>
 
         <footer>
+            <div class="footer-social" style="display: flex; justify-content: center; gap: 20px; margin-bottom: 15px;">
+                <a href="https://github.com/ArtemRivnyi" target="_blank" rel="noopener" title="GitHub">
+                    <span class="icon-github"></span>
+                </a>
+                <a href="https://www.linkedin.com/in/artem-rivnyi" target="_blank" rel="noopener" title="LinkedIn">
+                    <span class="icon-linkedin"></span>
+                </a>
+                <a href="https://www.freelancer.com/u/ArtemRivnyi" target="_blank" rel="noopener" title="Freelancer">
+                    <span class="icon-freelancer"></span>
+                </a>
+            </div>
             <p>&copy; 2026 Artem Rivnyi. Built with DevOps in mind.</p>
         </footer>
     </div>
