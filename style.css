@@ -255,9 +255,6 @@ h3 {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
-    contain: layout style paint;
-    transform: translateZ(0);
-    will-change: transform;
 }
 
 .project-card:hover {
@@ -422,9 +419,6 @@ html {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease, box-shadow 0.4s ease;
-    contain: layout style paint;
-    transform: translateZ(0);
-    will-change: transform;
 }
 
 .skill-category:hover {
