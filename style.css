@@ -222,8 +222,6 @@ header {
 section {
     padding: 40px 0;
     border-bottom: 1px solid var(--card-border);
-    content-visibility: auto;
-    contain-intrinsic-size: auto 500px;
 }
 
 section:last-of-type {
@@ -252,15 +250,14 @@ h3 {
     margin-bottom: 24px;
     position: relative;
     z-index: 1;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
 .project-card:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgb(0 0 0 / 40%), 0 0 20px var(--accent-glow);
-    border-color: rgb(255 255 255 / 20%);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px var(--accent-glow);
+    border-color: rgba(255, 255, 255, 0.2);
+    z-index: 10;
 }
 
 .project-card h3 {
@@ -416,15 +413,16 @@ html {
     border: 1px solid var(--card-border);
     border-radius: 16px;
     padding: 24px;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    z-index: 1;
 }
 
 .skill-category:hover {
     transform: translateY(-5px);
-    border-color: rgb(255 255 255 / 30%);
-    box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    z-index: 10;
 }
 
 .skill-category h3 {
