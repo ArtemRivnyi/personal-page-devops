@@ -112,7 +112,7 @@ class MatrixRain {
 }
 
 // Typing Animation
-const subtitleText = "DevOps Engineer | Technical Support Specialist | AI Enthusiast";
+const subtitleText = "AI & DevOps Specialist";
 const subtitleElement = document.querySelector('.subtitle');
 let charIndex = 0;
 
