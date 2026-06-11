@@ -39,16 +39,16 @@
 
 /* Dark Theme Colors */
 body.dark-theme {
-    --bg-primary: #121212;
-    --bg-secondary: #1e1e1e;
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #121212;
     --text-primary: #e0e0e0;
     --text-secondary: #aaa;
-    --accent-color: #0af;
-    --card-bg: rgb(30 30 30 / 80%);
-    --card-border: #333;
-    --link-color: #0af;
-    --link-hover: #07a;
-    --toggle-bg: #1e1e1e;
+    --accent-color: #667eea;
+    --card-bg: rgb(20 20 20 / 80%);
+    --card-border: #222;
+    --link-color: #667eea;
+    --link-hover: #764ba2;
+    --toggle-bg: #1a1a1a;
     --toggle-border: #333;
 
     /* Matrix Colors */
@@ -163,10 +163,7 @@ header {
 }
 
 .gradient-text {
-    background: linear-gradient(45deg, var(--g1), var(--g2), var(--g3), var(--g4));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #667eea;
     display: inline-block;
     position: relative;
 }
@@ -355,16 +352,17 @@ body.dark-theme .tag {
 }
 
 .primary-link {
-    background: linear-gradient(45deg, var(--accent-color), #0056b3);
+    background: var(--accent-color);
     color: white !important;
-    box-shadow: 0 4px 15px rgb(0 123 255 / 30%);
-    border: none;
+    box-shadow: 0 4px 15px rgb(102 126 234 / 30%);
+    border: 2px solid var(--accent-color);
 }
 
 .primary-link:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgb(0 123 255 / 40%);
-    color: white !important;
+    box-shadow: 0 6px 20px rgb(102 126 234 / 40%);
+    background: #764ba2;
+    border-color: #764ba2;
 }
 
 .secondary-link {
@@ -807,4 +805,47 @@ footer {
 
 .logo-docker {
     background-image: url('assets/icons/project-docker.png');
+}
+
+/* Open to Work Badge */
+.availability-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-bottom: 20px;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.pulsing-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #10b981;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    position: relative;
+}
+
+.pulsing-dot::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 50%;
+    border: 2px solid #10b981;
+    animation: pulse 1.5s linear infinite;
+    opacity: 0;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.5); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0; }
 }
