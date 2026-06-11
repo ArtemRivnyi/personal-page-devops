@@ -255,8 +255,8 @@ h3 {
 
 .project-card:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px var(--accent-glow);
-    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgb(0 0 0 / 40%), 0 0 20px var(--accent-glow);
+    border-color: rgb(255 255 255 / 20%);
     z-index: 10;
 }
 
@@ -420,8 +420,8 @@ html {
 
 .skill-category:hover {
     transform: translateY(-5px);
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border-color: rgb(255 255 255 / 30%);
+    box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
     z-index: 10;
 }
 
