@@ -47,8 +47,6 @@ class MatrixRain {
     }
 
     draw() {
-        const dark = document.body.classList.contains('dark-theme');
-
         // FIXED: Complete clear every 50 frames to prevent artifacts
         if (!this.frameCount) this.frameCount = 0;
         this.frameCount++;
