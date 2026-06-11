@@ -8,20 +8,20 @@
     /* Premium Dark Theme Colors (Apple/HyperLiquid inspired) */
     --bg-primary: #050505;
     --bg-secondary: #0f0f11;
-    --text-primary: #ffffff;
+    --text-primary: #fff;
     --text-secondary: #a1a1aa;
     --accent-color: #3b82f6; /* Modern Blue */
-    --accent-glow: rgba(59, 130, 246, 0.5);
-    --card-bg: rgba(20, 20, 25, 0.6);
-    --card-border: rgba(255, 255, 255, 0.08);
+    --accent-glow: rgb(59 130 246 / 50%);
+    --card-bg: rgb(20 20 25 / 60%);
+    --card-border: rgb(255 255 255 / 8%);
     --link-color: #60a5fa;
     --link-hover: #93c5fd;
-    --toggle-bg: rgba(255, 255, 255, 0.05);
-    --toggle-border: rgba(255, 255, 255, 0.1);
+    --toggle-bg: rgb(255 255 255 / 5%);
+    --toggle-border: rgb(255 255 255 / 10%);
 
     /* Matrix Colors */
-    --matrix-color: rgba(0, 255, 128, 0.2);
-    --matrix-color-light: rgba(0, 255, 128, 0.5);
+    --matrix-color: rgb(0 255 128 / 20%);
+    --matrix-color-light: rgb(0 255 128 / 50%);
 
     /* Gradient Colors (Deep, subtle glowing orbs) */
     box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
@@ -311,14 +311,14 @@ footer {
 .availability-badge {
     display: inline-flex;
     align-items: center;
-    background: rgba(16, 185, 129, 0.1);
+    background: rgb(16 185 129 / 10%);
     color: #10b981;
     padding: 6px 12px;
     border-radius: 20px;
     font-size: 0.85em;
     font-weight: 600;
     margin-bottom: 20px;
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    border: 1px solid rgb(16 185 129 / 30%);
 }
 
 .pulsing-dot {
@@ -334,18 +334,17 @@ footer {
 .pulsing-dot::after {
     content: '';
     position: absolute;
-    top: -4px;
-    left: -4px;
-    right: -4px;
-    bottom: -4px;
+    inset: -4px;
     border-radius: 50%;
     border: 2px solid #10b981;
     animation: pulse 1.5s linear infinite;
-    opacity: 0;
+    opacity: 0%;
 }
 
 @keyframes pulse {
-    0% { transform: scale(0.5); opacity: 0; }
-    50% { opacity: 1; }
-    100% { transform: scale(1.5); opacity: 0; }
+    0% { transform: scale(0.5); opacity: 0%; }
+
+    50% { opacity: 100%; }
+
+    100% { transform: scale(1.5); opacity: 0%; }
 }
