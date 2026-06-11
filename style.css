@@ -342,9 +342,17 @@ footer {
 }
 
 @keyframes pulse {
-    0% { transform: scale(0.5); opacity: 0%; }
+    0% {
+        transform: scale(0.5);
+        opacity: 0%;
+    }
 
-    50% { opacity: 100%; }
+    50% {
+        opacity: 100%;
+    }
 
-    100% { transform: scale(1.5); opacity: 0%; }
+    100% {
+        transform: scale(1.5);
+        opacity: 0%;
+    }
 }
