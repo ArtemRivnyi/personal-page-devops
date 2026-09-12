@@ -1518,7 +1518,7 @@ footer {
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--link-color);
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 }
 
 .timeline-desc {
@@ -1526,6 +1526,164 @@ footer {
     color: var(--text-secondary);
     line-height: 1.6;
     margin: 0;
+}
+
+/* Company Brand Header in Timeline */
+.company-brand-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.company-logo-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background-color: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+}
+
+.logo-byour {
+    background-color: #0d1117;
+    border-color: rgb(255 255 255 / 15%);
+    color: #fff;
+}
+
+.logo-synergy {
+    background-color: rgb(59 130 246 / 12%);
+    border-color: rgb(59 130 246 / 25%);
+    color: #3b82f6;
+}
+
+.logo-astromind {
+    background-color: rgb(168 85 247 / 12%);
+    border-color: rgb(168 85 247 / 25%);
+    color: #a855f7;
+}
+
+.logo-windigo {
+    background-color: rgb(245 158 11 / 12%);
+    border-color: rgb(245 158 11 / 25%);
+    color: #f59e0b;
+}
+
+.tag-active {
+    background-color: rgb(16 185 129 / 10%);
+    border-color: rgb(16 185 129 / 30%);
+    color: #10b981;
+}
+
+.timeline-duration {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 2px;
+}
+
+.timeline-lead {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin: 12px 0;
+    line-height: 1.6;
+}
+
+.timeline-achievements,
+.timeline-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 12px 0;
+    padding-left: 0;
+}
+
+.timeline-achievements li,
+.timeline-bullets li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.timeline-achievements li::before,
+.timeline-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+}
+
+.timeline-skills-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+}
+
+.skill-chip {
+    font-size: 0.76rem;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background-color: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+    color: var(--text-secondary);
+}
+
+.timeline-media-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 14px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background-color: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+}
+
+.media-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.media-monogram {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #fff;
+}
+
+.media-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.media-title {
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.media-desc {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    line-height: 1.35;
 }
 
 /* Technologies Pill Badge Cloud (Screenshot 2 Style) */
@@ -1613,7 +1771,7 @@ footer {
 
 .dot-rag { background-color: #a855f7; }
 
-/* Certifications (Screenshot 3 Style) */
+/* Certifications (Screenshot 2 Style) */
 .cert-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -1637,11 +1795,75 @@ footer {
     box-shadow: 0 6px 18px rgb(0 0 0 / 8%);
 }
 
-.cert-top {
+.cert-featured {
+    border-color: rgb(59 130 246 / 35%);
+    background: linear-gradient(135deg, var(--card-bg) 0%, rgb(59 130 246 / 5%) 100%);
+}
+
+.cert-header-with-logo {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.cert-issuer-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    flex-shrink: 0;
+    background-color: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+}
+
+.box-openai {
+    background-color: #000;
+    color: #fff;
+}
+
+.box-ms {
+    background-color: rgb(243 83 37 / 10%);
+}
+
+.box-canonical {
+    background-color: rgb(233 84 32 / 10%);
+}
+
+.box-docker {
+    background-color: rgb(36 150 237 / 10%);
+}
+
+.box-cisco {
+    background-color: rgb(4 159 217 / 10%);
+}
+
+.box-ibm {
+    background-color: rgb(15 98 254 / 10%);
+}
+
+.box-google {
+    background-color: rgb(66 133 244 / 10%);
+}
+
+.box-epam {
+    background-color: rgb(57 194 215 / 10%);
+}
+
+.cert-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+.cert-meta-row {
+    display: flex;
+    align-items: center;
     gap: 10px;
+    margin-top: 2px;
+    flex-wrap: wrap;
 }
 
 .cert-date {
@@ -1683,6 +1905,75 @@ footer {
     color: var(--link-color);
 }
 
+.cert-id {
+    font-size: 0.74rem;
+    font-family: monospace;
+    color: var(--text-muted);
+}
+
+.cert-skills-tag {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.diamond-icon {
+    color: var(--accent-color);
+    font-size: 0.85rem;
+}
+
+.cert-preview-card {
+    background-color: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-top: 8px;
+}
+
+.preview-badge-row {
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.preview-text {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin: 0;
+}
+
+.cert-action-row {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.cert-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--link-color);
+    background-color: var(--tag-bg);
+    border: 1px solid var(--card-border);
+    transition: all 0.2s ease;
+}
+
+.cert-link-btn:hover {
+    border-color: var(--link-color);
+    color: var(--link-hover);
+    background-color: var(--card-hover-bg);
+    transform: translateY(-1px);
+}
+
 .cert-skills {
     font-size: 0.82rem;
     color: var(--text-secondary);
@@ -1690,7 +1981,7 @@ footer {
     margin-top: 4px;
 }
 
-/* Education (Screenshot 3 Style) */
+/* Education (Screenshot 2 Style) */
 .education-card {
     background-color: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -1716,6 +2007,15 @@ footer {
     padding-top: 3px;
 }
 
+.edu-header-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+}
+
 .edu-degree {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.22rem;
@@ -1731,10 +2031,10 @@ footer {
     margin-bottom: 2px;
 }
 
-.edu-faculty {
+.edu-activity {
     font-size: 0.88rem;
     color: var(--text-secondary);
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
 .edu-desc {
