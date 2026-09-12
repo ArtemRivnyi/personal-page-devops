@@ -1240,10 +1240,7 @@ body.light-theme .site-header {
     margin-left: 0;
 }
 
-.av-1 {
-    background-color: #38bdf8;
-    background-image: url("assets/avatar_maki.png");
-}
+.av-1 { background-color: #38bdf8; }
 
 .av-2 { background-color: #a855f7; }
 
@@ -1302,6 +1299,10 @@ body.light-theme .site-header {
     animation: drawer-pop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.chat-drawer[hidden] {
+    display: none !important;
+}
+
 @keyframes drawer-pop {
     from {
         opacity: 0%;
@@ -1341,7 +1342,14 @@ body.light-theme .site-header {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    color: var(--accent-blue);
+    font-size: 0.72rem;
+    font-weight: 700;
 }
 
 .chat-online-indicator {
@@ -1416,12 +1424,14 @@ body.light-theme .site-header {
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
-}
-
-.msg-avatar-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    color: var(--accent-blue);
+    font-size: 0.65rem;
+    font-weight: 700;
 }
 
 .msg-bubble {
