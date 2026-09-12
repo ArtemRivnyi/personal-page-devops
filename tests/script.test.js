@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { debounce, setupThemeToggle, MatrixRain } from '../script.exports.js';
+import { debounce, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026 } from '../script.exports.js';
 
 // Mock canvas getContext before any tests run (without jest.fn)
 beforeAll(() => {
@@ -247,5 +247,260 @@ describe('debounce edge cases', () => {
       expect(result).toBe(6);
       done();
     }, 100);
+  });
+});
+
+describe('initTournamentCarousel', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <div class="tournament-carousel" id="tournament-carousel">
+        <div class="carousel-counter" id="carousel-counter">1 / 3</div>
+        <div class="carousel-slides" id="carousel-slides">
+          <div class="carousel-slide active" data-index="0">
+            <img src="slide1.jpg" alt="Slide 1" class="carousel-img lightbox-trigger">
+            <div class="carousel-caption">Caption 1</div>
+          </div>
+          <div class="carousel-slide" data-index="1">
+            <img src="slide2.jpg" alt="Slide 2" class="carousel-img lightbox-trigger">
+            <div class="carousel-caption">Caption 2</div>
+          </div>
+          <div class="carousel-slide" data-index="2">
+            <img src="slide3.jpg" alt="Slide 3" class="carousel-img lightbox-trigger">
+            <div class="carousel-caption">Caption 3</div>
+          </div>
+        </div>
+        <button type="button" class="carousel-nav-btn prev-btn" id="carousel-prev">‹</button>
+        <button type="button" class="carousel-nav-btn next-btn" id="carousel-next">›</button>
+        <div class="carousel-dots" id="carousel-dots"></div>
+      </div>
+    `;
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  test('should handle missing carousel gracefully', () => {
+    document.body.innerHTML = '';
+    expect(() => initTournamentCarousel()).not.toThrow();
+  });
+
+  test('should initialize dots and counter', () => {
+    initTournamentCarousel();
+    const dots = document.querySelectorAll('.carousel-dot');
+    expect(dots.length).toBe(3);
+    expect(dots[0].classList.contains('active')).toBe(true);
+    const counter = document.getElementById('carousel-counter');
+    expect(counter.textContent).toBe('1 / 3');
+  });
+
+  test('should navigate next and prev', () => {
+    initTournamentCarousel();
+    const nextBtn = document.getElementById('carousel-next');
+    const prevBtn = document.getElementById('carousel-prev');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const counter = document.getElementById('carousel-counter');
+
+    nextBtn.click();
+    expect(slides[1].classList.contains('active')).toBe(true);
+    expect(counter.textContent).toBe('2 / 3');
+
+    nextBtn.click();
+    expect(slides[2].classList.contains('active')).toBe(true);
+    expect(counter.textContent).toBe('3 / 3');
+
+    // Wrap around to start
+    nextBtn.click();
+    expect(slides[0].classList.contains('active')).toBe(true);
+    expect(counter.textContent).toBe('1 / 3');
+
+    // Wrap around backward
+    prevBtn.click();
+    expect(slides[2].classList.contains('active')).toBe(true);
+    expect(counter.textContent).toBe('3 / 3');
+  });
+
+  test('should navigate when clicking dots', () => {
+    initTournamentCarousel();
+    const dots = document.querySelectorAll('.carousel-dot');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const counter = document.getElementById('carousel-counter');
+
+    dots[2].click();
+    expect(slides[2].classList.contains('active')).toBe(true);
+    expect(dots[2].classList.contains('active')).toBe(true);
+    expect(counter.textContent).toBe('3 / 3');
+  });
+
+  test('should handle touch swipe', () => {
+    initTournamentCarousel();
+    const carousel = document.getElementById('tournament-carousel');
+    const slides = document.querySelectorAll('.carousel-slide');
+
+    // Swipe left (next)
+    carousel.dispatchEvent(new CustomEvent('touchstart', {
+      bubbles: true,
+      detail: {}
+    }));
+    // emulate changedTouches
+    const touchStartEvent = new Event('touchstart');
+    touchStartEvent.changedTouches = [{ screenX: 200 }];
+    carousel.dispatchEvent(touchStartEvent);
+
+    const touchEndEvent = new Event('touchend');
+    touchEndEvent.changedTouches = [{ screenX: 100 }];
+    carousel.dispatchEvent(touchEndEvent);
+
+    expect(slides[1].classList.contains('active')).toBe(true);
+  });
+});
+
+describe('initLightbox', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <div id="lightbox-modal" hidden role="dialog">
+        <div id="lightbox-backdrop"></div>
+        <button id="lightbox-close" type="button">×</button>
+        <img id="lightbox-img" src="" alt="">
+        <div id="lightbox-caption"></div>
+      </div>
+      <div class="carousel-slide">
+        <img src="tourney.jpg" alt="Trophy Cup" class="lightbox-trigger">
+        <div class="carousel-caption">Trophy Cup Winner 2021</div>
+      </div>
+      <button type="button" class="lightbox-trigger view-diploma-btn" data-target="diploma.png">View Diploma</button>
+    `;
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  test('should handle missing modal gracefully', () => {
+    document.body.innerHTML = '';
+    expect(() => initLightbox()).not.toThrow();
+  });
+
+  test('should open image when image trigger clicked', () => {
+    initLightbox();
+    const imgTrigger = document.querySelector('img.lightbox-trigger');
+    const modal = document.getElementById('lightbox-modal');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+
+    imgTrigger.click();
+
+    expect(modal.hasAttribute('hidden')).toBe(false);
+    expect(lightboxImg.getAttribute('src')).toBe('tourney.jpg');
+    expect(lightboxCaption.textContent).toBe('Trophy Cup Winner 2021');
+    expect(document.body.style.overflow).toBe('hidden');
+  });
+
+  test('should open diploma when data-target button clicked', () => {
+    initLightbox();
+    const btnTrigger = document.querySelector('button.lightbox-trigger');
+    const modal = document.getElementById('lightbox-modal');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+
+    btnTrigger.click();
+
+    expect(modal.hasAttribute('hidden')).toBe(false);
+    expect(lightboxImg.getAttribute('src')).toBe('diploma.png');
+    expect(lightboxCaption.textContent).toContain('Bachelor');
+  });
+
+  test('should close when close button clicked', () => {
+    initLightbox();
+    const imgTrigger = document.querySelector('img.lightbox-trigger');
+    const modal = document.getElementById('lightbox-modal');
+    const closeBtn = document.getElementById('lightbox-close');
+
+    imgTrigger.click();
+    expect(modal.hasAttribute('hidden')).toBe(false);
+
+    closeBtn.click();
+    expect(modal.hasAttribute('hidden')).toBe(true);
+    expect(document.body.style.overflow).toBe('');
+  });
+
+  test('should close when backdrop clicked', () => {
+    initLightbox();
+    const imgTrigger = document.querySelector('img.lightbox-trigger');
+    const modal = document.getElementById('lightbox-modal');
+    const backdrop = document.getElementById('lightbox-backdrop');
+
+    imgTrigger.click();
+    expect(modal.hasAttribute('hidden')).toBe(false);
+
+    backdrop.click();
+    expect(modal.hasAttribute('hidden')).toBe(true);
+  });
+
+  test('should close on Escape keydown', () => {
+    initLightbox();
+    const imgTrigger = document.querySelector('img.lightbox-trigger');
+    const modal = document.getElementById('lightbox-modal');
+
+    imgTrigger.click();
+    expect(modal.hasAttribute('hidden')).toBe(false);
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    expect(modal.hasAttribute('hidden')).toBe(true);
+  });
+});
+
+describe('initGitHubHeatmap', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <div id="activity-summary-badge">1,002 contributions in 2026</div>
+      <h3 id="activity-contrib-count">1,002 contributions in 2026</h3>
+      <div id="github-heatmap"></div>
+      <button type="button" class="year-pill active" data-year="2026">2026</button>
+      <button type="button" class="year-pill" data-year="2025">2025</button>
+    `;
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  test('should handle missing heatmap container gracefully', () => {
+    document.body.innerHTML = '';
+    expect(() => initGitHubHeatmap()).not.toThrow();
+  });
+
+  test('should render 53 weeks x 7 days = 371 cells for 2026', () => {
+    initGitHubHeatmap();
+    const cells = document.querySelectorAll('.heatmap-cell');
+    expect(cells.length).toBe(53 * 7);
+  });
+
+  test('should render active cells for known 2026 contribution dates matching 1,002 contributions', () => {
+    initGitHubHeatmap();
+    const activeCells = document.querySelectorAll('.heatmap-cell:not(.level-0)');
+    expect(activeCells.length).toBe(82);
+    expect(REAL_CONTRIBUTIONS_2026.length).toBe(82);
+    const totalCount = REAL_CONTRIBUTIONS_2026.reduce((acc, cur) => acc + cur.c, 0);
+    expect(totalCount).toBe(1002);
+  });
+
+  test('should switch years and update headings when clicking year buttons', () => {
+    initGitHubHeatmap();
+    const btn2025 = document.querySelector('.year-pill[data-year="2025"]');
+    const btn2026 = document.querySelector('.year-pill[data-year="2026"]');
+    const heading = document.getElementById('activity-contrib-count');
+    const badge = document.getElementById('activity-summary-badge');
+
+    btn2025.click();
+    expect(btn2025.classList.contains('active')).toBe(true);
+    expect(btn2026.classList.contains('active')).toBe(false);
+    expect(heading.textContent).toContain('2025');
+    expect(badge.textContent).toContain('2025');
+
+    btn2026.click();
+    expect(btn2026.classList.contains('active')).toBe(true);
+    expect(heading.textContent).toBe('1,002 contributions in 2026');
+    expect(badge.textContent).toBe('1,002 contributions in 2026');
   });
 });
