@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { debounce, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026 } from '../script.exports.js';
+import { debounce, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail } from '../script.exports.js';
 
 // Mock canvas getContext before any tests run (without jest.fn)
 beforeAll(() => {
@@ -504,3 +504,172 @@ describe('initGitHubHeatmap', () => {
     expect(badge.textContent).toBe('1,002 contributions in 2026');
   });
 });
+
+describe('initStackedCards', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <div id="tournament-stack">
+        <div class="stacked-card card-pos-1"><img src="cups.jpg"></div>
+        <div class="stacked-card card-pos-2"><img src="stage.jpg"></div>
+        <div class="stacked-card card-pos-3"><img src="matches.jpg"></div>
+        <div class="stacked-card card-pos-4"><img src="awards.jpg"></div>
+      </div>
+    `;
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  test('should handle missing stack gracefully', () => {
+    document.body.innerHTML = '';
+    expect(() => initStackedCards()).not.toThrow();
+  });
+
+  test('should cycle card position classes when stack clicked', () => {
+    initStackedCards();
+    const stack = document.getElementById('tournament-stack');
+    const cards = stack.querySelectorAll('.stacked-card');
+
+    expect(cards[0].classList.contains('card-pos-1')).toBe(true);
+    expect(cards[1].classList.contains('card-pos-2')).toBe(true);
+
+    // click stack background
+    stack.click();
+
+    expect(cards[0].classList.contains('card-pos-2')).toBe(true);
+    expect(cards[1].classList.contains('card-pos-3')).toBe(true);
+  });
+
+  test('should not cycle stack if clicking directly on img (handled by lightbox)', () => {
+    initStackedCards();
+    const stack = document.getElementById('tournament-stack');
+    const img = stack.querySelector('img');
+    const card = stack.querySelector('.card-pos-1');
+
+    img.click();
+    expect(card.classList.contains('card-pos-1')).toBe(true);
+  });
+});
+
+describe('initChatWidget', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <button type="button" id="chat-widget-btn">Chat</button>
+      <div id="chat-drawer" hidden>
+        <button type="button" id="chat-close-btn">×</button>
+        <div id="chat-messages"></div>
+        <div id="chat-quick-chips">
+          <button type="button" class="quick-chip" data-query="stack">What is Artem's stack?</button>
+        </div>
+        <form id="chat-input-form">
+          <input type="text" id="chat-input" value="">
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    `;
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  test('should handle missing chat widget gracefully', () => {
+    document.body.innerHTML = '';
+    expect(() => initChatWidget()).not.toThrow();
+  });
+
+  test('should toggle drawer hidden attribute when button clicked', () => {
+    initChatWidget();
+    const btn = document.getElementById('chat-widget-btn');
+    const drawer = document.getElementById('chat-drawer');
+
+    expect(drawer.hasAttribute('hidden')).toBe(true);
+    btn.click();
+    expect(drawer.hasAttribute('hidden')).toBe(false);
+    btn.click();
+    expect(drawer.hasAttribute('hidden')).toBe(true);
+  });
+
+  test('should close drawer when close button clicked', () => {
+    initChatWidget();
+    const btn = document.getElementById('chat-widget-btn');
+    const drawer = document.getElementById('chat-drawer');
+    const closeBtn = document.getElementById('chat-close-btn');
+
+    btn.click();
+    expect(drawer.hasAttribute('hidden')).toBe(false);
+    closeBtn.click();
+    expect(drawer.hasAttribute('hidden')).toBe(true);
+  });
+
+  test('should add messages when quick chip clicked', (done) => {
+    initChatWidget();
+    const chip = document.querySelector('.quick-chip');
+    const messages = document.getElementById('chat-messages');
+
+    chip.click();
+
+    expect(messages.children.length).toBe(1);
+    expect(messages.children[0].textContent).toContain("What is Artem's stack?");
+
+    setTimeout(() => {
+      expect(messages.children.length).toBe(2);
+      expect(messages.children[1].textContent).toContain('AWS');
+      done();
+    }, 350);
+  });
+
+  test('should handle form submission with custom query', (done) => {
+    initChatWidget();
+    const form = document.getElementById('chat-input-form');
+    const input = document.getElementById('chat-input');
+    const messages = document.getElementById('chat-messages');
+
+    input.value = 'Tell me about Byour infrastructure';
+    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+
+    expect(messages.children.length).toBe(1);
+    expect(input.value).toBe('');
+
+    setTimeout(() => {
+      expect(messages.children.length).toBe(2);
+      expect(messages.children[1].textContent).toContain('BYOUR');
+      done();
+    }, 400);
+  });
+});
+
+describe('initCopyEmail', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <span id="email-address">artemrivnyi@outlook.com</span>
+      <button type="button" id="copy-email-btn">Copy</button>
+      <div id="copy-toast" hidden>Copied</div>
+    `;
+    // Mock navigator.clipboard
+    Object.assign(navigator, {
+      clipboard: {
+        writeText: (text) => Promise.resolve(text)
+      }
+    });
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  test('should handle missing copy button gracefully', () => {
+    document.body.innerHTML = '';
+    expect(() => initCopyEmail()).not.toThrow();
+  });
+
+  test('should copy email and show toast on click', async () => {
+    initCopyEmail();
+    const btn = document.getElementById('copy-email-btn');
+    const toast = document.getElementById('copy-toast');
+
+    await btn.click();
+    expect(toast.hasAttribute('hidden')).toBe(false);
+  });
+});

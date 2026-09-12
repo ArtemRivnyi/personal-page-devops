@@ -311,14 +311,22 @@ function initGitHubHeatmap() {
     renderYear('2026');
 }
 
-// Copy Email Functionality
 function initCopyEmail() {
     const copyBtn = document.getElementById('copy-email-btn');
     const emailAddress = document.getElementById('email-address');
-    if (!copyBtn || !emailAddress) return;
+    const toast = document.getElementById('copy-toast');
+    if (!copyBtn) return;
+
+    function showToast() {
+        if (!toast) return;
+        toast.removeAttribute('hidden');
+        setTimeout(() => {
+            toast.setAttribute('hidden', '');
+        }, 2500);
+    }
 
     copyBtn.addEventListener('click', async () => {
-        const email = emailAddress.textContent.trim();
+        const email = emailAddress ? emailAddress.textContent.trim() : 'artemrivnyi@outlook.com';
         try {
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 await navigator.clipboard.writeText(email);
@@ -332,13 +340,13 @@ function initCopyEmail() {
             }
             const originalText = copyBtn.textContent;
             copyBtn.textContent = 'Copied!';
-            copyBtn.style.backgroundColor = '#10b981';
+            showToast();
             setTimeout(() => {
                 copyBtn.textContent = originalText;
-                copyBtn.style.backgroundColor = '';
             }, 2000);
         } catch {
             copyBtn.textContent = 'Copied!';
+            showToast();
             setTimeout(() => {
                 copyBtn.textContent = 'Copy';
             }, 2000);
@@ -346,27 +354,132 @@ function initCopyEmail() {
     });
 }
 
-// System Status Popover
-function initStatusWidget() {
-    const toggleBtn = document.getElementById('status-toggle-btn');
-    const popover = document.getElementById('status-popover');
-    if (!toggleBtn || !popover) return;
+// Interactive Rotated Stacked Photo Cards (@onlyrenbl Outside the IDE)
+function initStackedCards() {
+    const stack = document.getElementById('tournament-stack');
+    if (!stack) return;
 
-    toggleBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isHidden = popover.hasAttribute('hidden');
+    const cards = Array.from(stack.querySelectorAll('.stacked-card'));
+    if (!cards.length) return;
+
+    stack.addEventListener('click', (e) => {
+        // If clicking on an image directly, lightbox handles enlargement;
+        // if clicking on the card/caption/wrapper, cycle top card to back!
+        if (e.target.tagName.toLowerCase() === 'img') return;
+
+        const classes = ['card-pos-1', 'card-pos-2', 'card-pos-3', 'card-pos-4'];
+        cards.forEach((card) => {
+            for (let i = 0; i < classes.length; i++) {
+                if (card.classList.contains(classes[i])) {
+                    card.classList.remove(classes[i]);
+                    const nextClass = classes[(i + 1) % classes.length];
+                    card.classList.add(nextClass);
+                    break;
+                }
+            }
+        });
+    });
+}
+
+// Floating AI Chat Assistant Widget (@onlyrenbl frame_40s)
+function initChatWidget() {
+    const btn = document.getElementById('chat-widget-btn');
+    const drawer = document.getElementById('chat-drawer');
+    const closeBtn = document.getElementById('chat-close-btn');
+    const messages = document.getElementById('chat-messages');
+    const form = document.getElementById('chat-input-form');
+    const input = document.getElementById('chat-input');
+    const chipsContainer = document.getElementById('chat-quick-chips');
+
+    if (!btn || !drawer) return;
+
+    btn.addEventListener('click', () => {
+        const isHidden = drawer.hasAttribute('hidden');
         if (isHidden) {
-            popover.removeAttribute('hidden');
+            drawer.removeAttribute('hidden');
+            if (input) input.focus();
         } else {
-            popover.setAttribute('hidden', '');
+            drawer.setAttribute('hidden', '');
         }
     });
 
-    document.addEventListener('click', (e) => {
-        if (!popover.contains(e.target) && e.target !== toggleBtn) {
-            popover.setAttribute('hidden', '');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            drawer.setAttribute('hidden', '');
+        });
+    }
+
+    const answers = {
+        stack: "Artem specializes in cloud infrastructure & DevOps: AWS (EC2, S3, RDS, Bedrock, VPC, Route53, WAF), Kubernetes, Docker, Terraform & Terragrunt, and automated CI/CD pipelines (GitLab CI & GitHub Actions). On the development side, he works with Python, Node.js, React, Next.js, and PostgreSQL.",
+        byour: "At BYOUR, Artem serves as Lead DevOps Engineer & Referral Partner, designing modular AWS environments via Terraform/Terragrunt, integrating AWS Bedrock for Minerva AI applicant scoring, and setting up Route53 automated failover with RDS read replicas.",
+        tournament: "Outside the IDE, Artem organized large-scale competitive LAN tournaments for over 100 participants at Windigo Arena (Dnipro, Ukraine), managing live arena logistics, bracket scheduling, and LAN network routing. The event was officially sponsored by Red Bull, Yalantis Education, and SoftServe Education.",
+        contact: "You can reach Artem directly at artemrivnyi@outlook.com or connect via LinkedIn (linkedin.com/in/artem-rivnyi) and Freelancer (freelancer.com/u/ArtemRivnyi). He is available for freelance contracts and engineering roles!"
+    };
+
+    function addMessage(text, isUser = false) {
+        if (!messages) return;
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `chat-msg ${isUser ? 'user-msg' : 'bot-msg'}`;
+
+        if (!isUser) {
+            const avatarDiv = document.createElement('div');
+            avatarDiv.className = 'msg-avatar-icon';
+            const img = document.createElement('img');
+            img.src = 'assets/avatar_maki.png';
+            img.alt = 'Artem';
+            avatarDiv.appendChild(img);
+            msgDiv.appendChild(avatarDiv);
         }
-    });
+
+        const bubble = document.createElement('div');
+        bubble.className = 'msg-bubble';
+        bubble.textContent = text;
+        msgDiv.appendChild(bubble);
+
+        messages.appendChild(msgDiv);
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+    if (chipsContainer) {
+        chipsContainer.addEventListener('click', (e) => {
+            const chip = e.target.closest('.quick-chip');
+            if (!chip) return;
+            const query = chip.dataset.query;
+            const question = chip.textContent.trim();
+            addMessage(question, true);
+
+            setTimeout(() => {
+                const answer = answers[query] || "Thanks for your question! Feel free to email artemrivnyi@outlook.com for detailed inquiries.";
+                addMessage(answer, false);
+            }, 300);
+        });
+    }
+
+    if (form && input) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const text = input.value.trim();
+            if (!text) return;
+
+            addMessage(text, true);
+            input.value = '';
+
+            const lower = text.toLowerCase();
+            setTimeout(() => {
+                let reply = "Thanks for asking! I'm happy to discuss cloud architecture, DevOps automation, or collaboration opportunities. Drop me a line at artemrivnyi@outlook.com!";
+                if (lower.includes('stack') || lower.includes('tech') || lower.includes('skill')) {
+                    reply = answers.stack;
+                } else if (lower.includes('byour')) {
+                    reply = answers.byour;
+                } else if (lower.includes('tournament') || lower.includes('esport') || lower.includes('outside') || lower.includes('game')) {
+                    reply = answers.tournament;
+                } else if (lower.includes('contact') || lower.includes('hire') || lower.includes('email')) {
+                    reply = answers.contact;
+                }
+                addMessage(reply, false);
+            }, 350);
+        });
+    }
 }
 
 // Back to Top Button
@@ -565,11 +678,14 @@ function initLightbox() {
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Matrix Background
-    const canvas = document.createElement('canvas');
-    canvas.id = 'matrix-canvas';
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    document.body.appendChild(canvas);
+    let canvas = document.getElementById('matrix-canvas');
+    if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.id = 'matrix-canvas';
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        document.body.appendChild(canvas);
+    }
     new MatrixRain('matrix-canvas');
 
     // 2. Theme Toggle
@@ -584,18 +700,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Copy Email
     initCopyEmail();
 
-    // 6. Status Widget
-    initStatusWidget();
-
-    // 7. Back to Top
+    // 6. Back to Top
     initBackToTop();
 
-    // 8. Section Reveal Animations
+    // 7. Section Reveal Animations
     initSectionObserver();
+
+    // 8. Outside the IDE Stacked Photo Cards
+    initStackedCards();
 
     // 9. Tournament Carousel
     initTournamentCarousel();
 
     // 10. Lightbox Modal
     initLightbox();
+
+    // 11. AI Chat Assistant Widget
+    initChatWidget();
 });

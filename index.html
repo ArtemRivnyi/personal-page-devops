@@ -5,1685 +5,847 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Artem Rivnyi — DevOps Engineer, AI Specialist & Full-Stack Cloud Developer. Showcase of production platforms, NextStep marketplace, and automated infrastructure.">
-    <title>Artem Rivnyi — DevOps &amp; AI Specialist Portfolio</title>
-    <meta name="keywords" content="DevOps, Kubernetes, Terraform, Docker, AWS, CI/CD, Next.js, NextStep, Python, AI, SRE, Portfolio">
+        content="Artem Rivnyi — DevOps &amp; Cloud Infrastructure Engineer, AI Systems Specialist. Production platforms, automated CI/CD pipelines, and high-availability architecture.">
+    <title>Artem Rivnyi — DevOps &amp; Cloud Engineer</title>
+    <meta name="keywords" content="DevOps, Kubernetes, Terraform, Docker, AWS, CI/CD, NextStep, Python, AI, SRE, Cloud Infrastructure">
     <link rel="icon" href="assets/icons/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=9">
+    <link rel="stylesheet" href="style.css?v=10">
 </head>
 
 <body class="dark-theme">
-    <!-- Floating Glass Navigation -->
-    <div class="navbar-wrapper">
-        <nav class="navbar" id="navbar" aria-label="Main Navigation">
-            <a href="#" class="nav-brand" aria-label="Artem Rivnyi Home">
-                <span class="brand-monogram">AR</span>
-                <span class="brand-name">Artem Rivnyi</span>
-            </a>
-            <div class="nav-links">
-                <a href="#featured" class="nav-link">Featured</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#technologies" class="nav-link">Technologies</a>
-                <a href="#certifications" class="nav-link">Certifications</a>
-                <a href="#education" class="nav-link">Education</a>
-                <a href="#activity" class="nav-link">Activity</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-            <div class="nav-actions">
-                <button id="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle theme">
+    <!-- Subtle Matrix Background Ambient Canvas -->
+    <canvas id="matrix-canvas" aria-hidden="true"></canvas>
+
+    <!-- Minimal Header Navigation (@onlyrenbl style) -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="#" class="brand-monogram" aria-label="Artem Rivnyi Home">AR.</a>
+
+            <nav class="nav-menu" aria-label="Main Navigation">
+                <a href="#projects" class="nav-item">Projects</a>
+                <a href="#experience" class="nav-item">Experience</a>
+                <a href="#outside-ide" class="nav-item">Outside the IDE</a>
+                <a href="#certifications" class="nav-item">Certifications</a>
+                <a href="#contact" class="nav-item">Contact</a>
+                <span class="nav-divider" aria-hidden="true">|</span>
+                <button id="theme-toggle" type="button" class="theme-toggle-btn" aria-label="Toggle theme" title="Toggle theme">
                     <span class="theme-icon" aria-hidden="true">
                         <svg class="svg-theme" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                         </svg>
                     </span>
                 </button>
-            </div>
-        </nav>
-    </div>
+            </nav>
+        </div>
+    </header>
 
-    <div class="container">
-        <!-- Hero Section -->
-        <header class="hero-section">
-            <div class="hero-badge-wrap">
-                <div class="hero-avatar">
-                    <span class="avatar-letter">AR</span>
+    <main class="main-wrapper">
+        <!-- Hero Section (@onlyrenbl signature layout) -->
+        <section class="hero-section" id="about">
+            <div class="hero-profile-row">
+                <div class="avatar-flip-container" title="Artem Rivnyi profile avatar">
+                    <div class="avatar-ring">
+                        <img src="assets/avatar_maki.png" alt="Artem Rivnyi avatar" class="avatar-img">
+                    </div>
                 </div>
-                <div class="availability-badge">
-                    <span class="pulsing-dot"></span> Available for freelance &amp; contracts
+                <div class="hero-identity">
+                    <div class="name-badge-row">
+                        <h1 class="hero-name">Artem Rivnyi</h1>
+                        <span class="verified-blue-badge" role="img" title="Verified Specialist" aria-label="Verified Specialist">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#38bdf8" aria-hidden="true">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="hero-social-row">
+                        <a href="https://github.com/ArtemRivnyi" target="_blank" rel="noopener" class="hero-icon-link" aria-label="GitHub Profile" title="GitHub">
+                            <span class="icon-github" aria-hidden="true"></span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/artem-rivnyi" target="_blank" rel="noopener" class="hero-icon-link" aria-label="LinkedIn Profile" title="LinkedIn">
+                            <span class="icon-linkedin" aria-hidden="true"></span>
+                        </a>
+                        <a href="mailto:artemrivnyi@outlook.com" class="hero-icon-link" aria-label="Email Artem" title="Email">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </a>
+                        <a href="https://www.freelancer.com/u/ArtemRivnyi" target="_blank" rel="noopener" class="hero-icon-link" aria-label="Freelancer Profile" title="Freelancer">
+                            <span class="icon-freelancer" aria-hidden="true"></span>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <h1 class="name-title">
-                <span class="gradient-text">Artem Rivnyi</span>
-                <span class="verified-badge" title="Verified Engineer">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                </span>
-            </h1>
+            <!-- Two-Tier Title -->
+            <h2 class="hero-headline">
+                DevOps &amp; Cloud Engineer <span class="headline-muted">— AI Systems &amp; Automation</span>
+            </h2>
 
-            <p class="subtitle">DevOps &amp; Cloud Infrastructure Engineer | AI Specialist</p>
-
-            <p class="hero-bio">
-                DevOps Engineer &amp; Referral Partner at <strong>BYOUR</strong>, architecting modular, high-availability AWS environments and automated CI/CD pipelines with
-                <span class="hero-tech-pill">Terraform</span>, <span class="hero-tech-pill">Terragrunt</span>, <span class="hero-tech-pill">AWS</span>,
-                <span class="hero-tech-pill">Kubernetes</span>, <span class="hero-tech-pill">GitLab CI/CD</span>, and <span class="hero-tech-pill">AI Agents</span>.
+            <!-- Bio with Inline Colored Tech Badges (@onlyrenbl signature) -->
+            <p class="hero-bio-paragraph">
+                I'm a DevOps and cloud infrastructure engineer architecting resilient cloud infrastructure on
+                <span class="inline-pill pill-aws"><span class="pill-dot dot-aws"></span>AWS</span> and
+                <span class="inline-pill pill-k8s"><span class="pill-dot dot-k8s"></span>Kubernetes</span>,
+                automating infrastructure as code using
+                <span class="inline-pill pill-terraform"><span class="pill-dot dot-terraform"></span>Terraform</span>,
+                and orchestrating microservices with
+                <span class="inline-pill pill-docker"><span class="pill-dot dot-docker"></span>Docker</span>
+                with deep AI and CI/CD integration. Currently building scalable platforms at BYOUR and developing autonomous AI agent workflows.
             </p>
 
-            <div class="hero-actions">
-                <a href="#featured" class="project-link primary-link">
-                    Explore Featured Platforms
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <polyline points="19 12 12 19 5 12"></polyline>
-                    </svg>
-                </a>
-                <a href="docs/Artem.Rivnyi.CV.pdf" class="project-link secondary-link" download>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                        <polyline points="14 2 14 8 20 8"></polyline>
-                        <line x1="12" y1="18" x2="12" y2="12"></line>
-                        <polyline points="9 15 12 18 15 15"></polyline>
-                    </svg>
+            <!-- Action CTA -->
+            <div class="hero-cta-row">
+                <a href="docs/Artem.Rivnyi.CV.pdf" class="hero-btn-primary" download>
                     Download CV
-                </a>
-            </div>
-
-            <div class="social-links hero-social">
-                <a href="https://github.com/ArtemRivnyi" target="_blank" rel="noopener" class="social-icon-btn" title="GitHub Profile" aria-label="GitHub Profile">
-                    <span class="icon-github"></span>
-                </a>
-                <a href="https://www.linkedin.com/in/artem-rivnyi" target="_blank" rel="noopener" class="social-icon-btn" title="LinkedIn Profile" aria-label="LinkedIn Profile">
-                    <span class="icon-linkedin"></span>
-                </a>
-                <a href="https://www.freelancer.com/u/ArtemRivnyi" target="_blank" rel="noopener" class="social-icon-btn" title="Freelancer Profile" aria-label="Freelancer Profile">
-                    <span class="icon-freelancer"></span>
-                </a>
-                <a href="mailto:artem.rivnyi@gmail.com" class="social-icon-btn" title="Direct Email" aria-label="Direct Email">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="9 18 15 12 9 6"></polyline>
                     </svg>
                 </a>
-            </div>
-        </header>
-
-        <!-- About Section -->
-        <section id="about">
-            <h2>About Me</h2>
-            <div class="about-card">
-                <p>
-                    I build robust CI/CD automation pipelines, cloud-native deployments, containerized microservices,
-                    and AI-driven production platforms. With hands-on experience spanning Kubernetes orchestration,
-                    full-stack architectures, and local RAG pipelines, I deliver resilient solutions built to scale seamlessly.
-                </p>
-            </div>
-        </section>
-
-        <!-- FEATURED PRODUCTION PROJECTS -->
-        <section id="featured">
-            <div class="section-title-wrap">
-                <h2>Featured Production Platforms</h2>
-                <span class="section-action-label">Production &bull; Scalable &bull; Tested</span>
-            </div>
-
-            <!-- FEATURED BUILD 1: NextStep (NDA Project) -->
-            <div class="project-card project featured-project nextstep-spotlight">
-                <div class="featured-header">
-                    <div class="featured-kicker">
-                        <span class="kicker-pill">FEATURED BUILD</span>
-                        <span class="kicker-type">MARKETPLACE PLATFORM</span>
-                    </div>
-                    <span class="nda-pill">
-                        <svg class="mini-icon-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                        </svg>
-                        NDA Protected
-                    </span>
-                </div>
-
-                <div class="featured-body">
-                    <div class="featured-info">
-                        <h3>NextStep — Web &amp; Mobile Marketplace</h3>
-                        <p class="featured-lead">
-                            <strong>Premium, full-stack marketplace platform serving the Irish market.</strong> (Source code under NDA)
-                        </p>
-
-                        <ul class="featured-highlights clean-list">
-                            <li>
-                                <span class="bullet-indicator"></span>
-                                <div>
-                                    <strong>Cross-Platform Architecture:</strong> Ultra-responsive web application built with <strong>Next.js (React)</strong> and high-performance native mobile experience with <strong>Flutter &amp; Riverpod</strong>.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="bullet-indicator"></span>
-                                <div>
-                                    <strong>Backend &amp; Infrastructure:</strong> Low-latency API layer, real-time customer messaging, and secure multi-currency payment processing via <strong>Stripe</strong>.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="bullet-indicator"></span>
-                                <div>
-                                    <strong>Enterprise Quality:</strong> Robust reactive state management, pull-to-refresh interactions, skeleton loaders, and comprehensive automated test coverage.
-                                </div>
-                            </li>
-                        </ul>
-
-                        <div class="featured-card-footer">
-                            <div class="card-tech-icons">
-                                <span class="tech-icon-circle" title="Next.js">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.66 18.23l-6.23-7.85v7.85H9.57V5.77h1.86l6.23 7.85V5.77h1.86v12.46h-1.86z"/>
-                                    </svg>
-                                </span>
-                                <span class="tech-icon-circle" title="React">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#61dafb" stroke-width="2">
-                                        <ellipse cx="12" cy="12" rx="10" ry="4.5"/>
-                                        <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)"/>
-                                        <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120 12 12)"/>
-                                        <circle cx="12" cy="12" r="1.5" fill="#61dafb"/>
-                                    </svg>
-                                </span>
-                                <span class="tech-icon-circle" title="Flutter">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#02569b">
-                                        <path d="M14.314 0L2.3 12 6 15.7 21.684 0zm.07 11.23l-7.23 7.23 3.69 3.69 7.23-7.23zm0 7.37l-3.7 3.7L14.38 26l7.39-7.39-3.7-3.71z" transform="scale(0.9) translate(1, -1)"/>
-                                    </svg>
-                                </span>
-                                <span class="tech-icon-circle" title="Stripe">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#635bff">
-                                        <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.977 15.617.41 12.521.41 6.516.41 2.378 3.53 2.378 8.653c0 6.643 9.158 5.617 9.158 8.5 0 .977-.858 1.452-2.172 1.452-2.378 0-5.32-1.127-7.247-2.227l-.92 5.584c2.256 1.055 5.37 1.63 8.167 1.63 6.38 0 10.638-3.117 10.638-8.243 0-6.84-9.02-5.748-6.026-6.199z"/>
-                                    </svg>
-                                </span>
-                                <span class="tech-icon-circle" title="TypeScript">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#3178c6">
-                                        <rect width="24" height="24" rx="4" fill="#3178c6"/>
-                                        <path d="M11.5 12h-2v6h-2v-6h-2v-2h6v2zm4 4.5c.5.3 1.1.5 1.7.5.8 0 1.3-.4 1.3-1 0-.6-.4-.9-1.4-1.3-1.3-.5-2.1-1.2-2.1-2.4 0-1.4 1.1-2.4 2.8-2.4 1 0 1.8.3 2.4.7l-.6 1.6c-.5-.3-1.1-.5-1.7-.5-.7 0-1.1.4-1.1.9 0 .6.4.8 1.4 1.2 1.4.5 2.1 1.2 2.1 2.4 0 1.5-1.1 2.5-3 2.5-1.1 0-2.1-.3-2.7-.8l.7-1.6z" fill="#fff"/>
-                                    </svg>
-                                </span>
-                            </div>
-
-                            <div class="project-links">
-                                <a href="https://next-step-kappa-woad.vercel.app/" class="project-link primary-link" target="_blank" rel="noopener">
-                                    View Live Platform
-                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <line x1="7" y1="17" x2="17" y2="7"></line>
-                                        <polyline points="7 7 17 7 17 17"></polyline>
-                                    </svg>
-                                </a>
-                                <span class="project-link locked-link" title="Source code protected under client NDA">
-                                    NDA Protected Code
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FEATURED BUILD 2: AI Email Support System -->
-            <div class="project-card project featured-project email-spotlight">
-                <div class="featured-header">
-                    <div class="featured-kicker">
-                        <span class="kicker-pill">FEATURED DEVOPS</span>
-                        <span class="kicker-type">AUTONOMOUS RAG SYSTEM</span>
-                    </div>
-                    <span class="status-pill status-live">Live Production</span>
-                </div>
-
-                <div class="featured-body">
-                    <div class="featured-info">
-                        <h3>AI Email Support System — Enterprise Platform</h3>
-                        <p class="featured-lead">
-                            <strong>Production-ready, privacy-first AI email automation platform with complete DevOps infrastructure.</strong>
-                        </p>
-                        <p>
-                            Microservices-based system autonomously processing customer support emails using RAG
-                            architecture with local LLMs (Ollama / Gemma 7B). Features Docker containerization, Kubernetes orchestration,
-                            an automated GitHub Actions CI/CD pipeline, and real-time observability dashboard.
-                        </p>
-
-                        <div class="metrics-row">
-                            <div class="metric-item">
-                                <span class="metric-val">100+</span>
-                                <span class="metric-lbl">Daily Emails Processed</span>
-                            </div>
-                            <div class="metric-item">
-                                <span class="metric-val">94%+</span>
-                                <span class="metric-lbl">Automated Accuracy</span>
-                            </div>
-                            <div class="metric-item">
-                                <span class="metric-val">0</span>
-                                <span class="metric-lbl">Cloud API Data Leaks</span>
-                            </div>
-                        </div>
-
-                        <div class="featured-card-footer">
-                            <div class="card-tech-icons">
-                                <span class="tech-icon-circle" title="Python">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#3776ab">
-                                        <path d="M11.9 1c-4.4 0-4.1 1.9-4.1 1.9l.0 2h4.2v.6H5.8S3 5.2 3 9.6s2.5 4.3 2.5 4.3h1.5v-2.1s-.1-2.5 2.4-2.5h4.1s2.4.0 2.4-2.4V4.5s.4-3.5-4-3.5zm-2.3 1.3a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6zm2.5 20.7c4.4 0 4.1-1.9 4.1-1.9l-.0-2h-4.2v-.6h6.2s2.8.3 2.8-4.1-2.5-4.3-2.5-4.3h-1.5v2.1s.1 2.5-2.4 2.5h-4.1s-2.4-.0-2.4 2.4v2.4s-.4 3.5 4 3.5zm2.3-1.3a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6z"/>
-                                    </svg>
-                                </span>
-                                <span class="tech-icon-circle" title="Docker">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#2496ed">
-                                        <path d="M13.98 11.08h1.83V9.25h-1.83v1.83zm-2.44 0h1.83V9.25h-1.83v1.83zm-2.44 0h1.83V9.25H9.1v1.83zm-2.44 0h1.83V9.25H6.66v1.83zm7.32-2.44h1.83V6.81h-1.83v1.83zm-2.44 0h1.83V6.81h-1.83v1.83zm-2.44 0h1.83V6.81H9.1v1.83zm-2.44 0h1.83V6.81H6.66v1.83zm7.32-2.44h1.83V4.37h-1.83v1.83zm9.64 6.7c-.45-.33-1.42-.45-2.22-.36-.12-.8-.67-1.49-1.22-1.94l-.42-.33-.3.42c-.42.59-.57 1.4-.54 2.06-.39.21-.93.36-1.54.36H1.54c-.27 0-.51.09-.72.24-.48.36-.67 1.05-.48 1.65.66 2.07 2.13 4.8 5.76 4.8 3.84 0 6.6-2.19 7.74-4.59.84.09 2.4.18 3.39-.75.12-.12.21-.24.27-.39.18-.39.06-.84-.27-1.17z"/>
-                                    </svg>
-                                </span>
-                                <span class="tech-icon-circle" title="Kubernetes">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#326ce5">
-                                        <path d="M11.99 2.22l-8.52 4.92v9.84l8.52 4.92 8.52-4.92V7.14L11.99 2.22zm0 2.31l6.52 3.76v7.53L11.99 19.6l-6.52-3.78V8.29l6.52-3.76z"/>
-                                    </svg>
-                                </span>
-                                <span class="tech-icon-circle" title="GitHub Actions">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#2088ff">
-                                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-                                    </svg>
-                                </span>
-                            </div>
-
-                            <div class="project-links">
-                                <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store/blob/main/docs/images/dashboard.png" 
-                                   class="project-link primary-link" target="_blank" rel="noopener">
-                                    View Dashboard
-                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                                        <polyline points="12 5 19 12 12 19"></polyline>
-                                    </svg>
-                                </a>
-                                <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store" 
-                                   class="project-link secondary-link" target="_blank" rel="noopener">
-                                    GitHub
-                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <line x1="7" y1="17" x2="17" y2="7"></line>
-                                        <polyline points="7 7 17 7 17 17"></polyline>
-                                    </svg>
-                                </a>
-                                <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store/blob/main/docs/" 
-                                   class="project-link secondary-link" target="_blank" rel="noopener">
-                                    Docs
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="availability-status-pill">
+                    <span class="pulsing-green-dot" aria-hidden="true"></span>
+                    <span>Available for new opportunities</span>
                 </div>
             </div>
         </section>
 
-        <!-- EXPERIENCE SECTION -->
-        <section id="experience">
-            <div class="section-title-wrap">
-                <h2>Experience</h2>
-                <a href="https://www.linkedin.com/in/artem-rivnyi/" target="_blank" rel="noopener" class="section-action-link">
-                    View on LinkedIn
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </a>
-            </div>
-
-            <div class="timeline-list">
-                <!-- 1. BYOUR (CURRENT CONTRACT ROLE) -->
-                <div class="timeline-item current-role">
-                    <div class="timeline-date">Jun 2026 &ndash; Present<span class="timeline-duration">&bull; 4 mos</span></div>
-                    <div class="timeline-content">
-                        <div class="timeline-role-row">
-                            <div class="company-brand-header">
-                                <div class="company-logo-box logo-byour">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
-                                        <path d="M13 2L3 14h7v8l11-13h-8l1-7z"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="timeline-title">DevOps Engineer &amp; Referral Partner</h3>
-                                    <div class="timeline-company">BYOUR &bull; Contract &bull; Ireland &bull; Remote</div>
-                                </div>
-                            </div>
-                            <div class="timeline-actions">
-                                <span class="timeline-tag tag-active">Current Role</span>
-                                <a href="https://byour.co/" target="_blank" rel="noopener" class="timeline-live-btn" title="Open BYOUR live platform">
-                                    Visit Platform ↗
-                                </a>
-                            </div>
-                        </div>
-                        <p class="timeline-lead">
-                            Spearheading cloud infrastructure, security, and CI/CD automation for an Intelligent Hiring Infrastructure platform. Responsible for designing a secure, modular, and highly available AWS environment using Infrastructure as Code (IaC) principles.
-                        </p>
-                        <ul class="timeline-achievements">
-                            <li>
-                                <strong>Cloud Infrastructure (IaC):</strong> Architected and deployed a highly modular AWS environment using <strong>Terraform</strong> and <strong>Terragrunt</strong>, strictly adhering to DRY principles across core platforms (<code>bcore</code>, <code>bglobal</code>, <code>bstack</code>).
-                            </li>
-                            <li>
-                                <strong>Security &amp; Network Hardening:</strong> Secured network topology by isolating RDS databases in private subnets and deploying a Bastion Host accessed securely via <strong>AWS SSM</strong>. Configured <strong>WAF</strong> at ALB and CloudFront levels, and implemented <strong>App Mesh Virtual Nodes</strong> for strict microservice isolation.
-                            </li>
-                            <li>
-                                <strong>CI/CD Pipeline Engineering:</strong> Re-engineered <strong>GitLab CI/CD</strong> workflows, enforcing strict quality gates (preventing deployments of broken code), fixing cross-pipeline triggers, and securely injecting AWS Account IDs and dynamic database passwords via <strong>AWS Secrets Manager</strong>.
-                            </li>
-                            <li>
-                                <strong>FinOps &amp; Cost Optimization:</strong> Deployed <strong>AWS VPC Endpoints</strong> (PrivateLink for S3, ECR, CloudWatch, SecretsManager) to route traffic internally, significantly reducing NAT Gateway data processing costs.
-                            </li>
-                            <li>
-                                <strong>Observability &amp; AI Monitoring:</strong> Configured granular <strong>CloudWatch</strong> monitoring, including target-specific HTTP 5XX alarms to isolate application faults from ALB timeouts, and dimensional latency tracking for <strong>AWS Bedrock AI models</strong>.
-                            </li>
-                            <li>
-                                <strong>Disaster Recovery (DR) &amp; Testing:</strong> Implemented cross-region resilience strategies featuring Frankfurt <strong>RDS Read Replicas</strong> and <strong>Route53 automated failover</strong>. Fully integrated automated integration smoke tests directly into the infrastructure deployment workflow.
-                            </li>
-                        </ul>
-
-                        <!-- BYOUR Live Platform Preview Frame -->
-                        <div class="timeline-preview-frame">
-                            <div class="preview-browser-bar">
-                                <span class="browser-dot red"></span>
-                                <span class="browser-dot yellow"></span>
-                                <span class="browser-dot green"></span>
-                                <span class="browser-url">https://byour.co</span>
-                                <a href="https://byour.co/" target="_blank" rel="noopener" class="browser-external-link" title="Open byour.co">↗</a>
-                            </div>
-                            <div class="preview-img-wrap">
-                                <img src="assets/byour_demo.webp" alt="BYOUR Platform — Minerva AI Applicant Ranking Demo" class="preview-media-img lightbox-trigger" loading="lazy">
-                            </div>
-                        </div>
-
-                        <div class="timeline-skills-chips">
-                            <span class="skill-chip"><span class="chip-dot dot-terraform"></span>Terraform</span>
-                            <span class="skill-chip"><span class="chip-dot dot-terraform"></span>Terragrunt</span>
-                            <span class="skill-chip"><span class="chip-dot dot-aws"></span>AWS Bedrock</span>
-                            <span class="skill-chip"><span class="chip-dot dot-cicd"></span>GitLab CI/CD</span>
-                            <span class="skill-chip"><span class="chip-dot dot-aws"></span>AWS WAF</span>
-                            <span class="skill-chip"><span class="chip-dot dot-grafana"></span>CloudWatch</span>
-                            <span class="skill-chip"><span class="chip-dot dot-aws"></span>Route53</span>
-                            <span class="skill-chip"><span class="chip-dot dot-k8s"></span>App Mesh</span>
-                        </div>
+        <!-- FEATURED BUILD SHOWCASE (@onlyrenbl frame_02s & frame_15s) -->
+        <section class="section-block" id="featured">
+            <div class="featured-showcase-card project">
+                <div class="featured-media-side">
+                    <div class="featured-preview-box">
+                        <img src="assets/byour_demo.webp" alt="BYOUR Platform — Minerva AI Applicant Ranking Demo" class="featured-img lightbox-trigger" loading="lazy">
+                        <div class="preview-overlay-badge">LIVE PLATFORM</div>
                     </div>
                 </div>
-
-                <!-- 2. Synergy Guild -->
-                <div class="timeline-item">
-                    <div class="timeline-date">Oct 2024 &ndash; Dec 2024<span class="timeline-duration">&bull; 3 mos</span></div>
-                    <div class="timeline-content">
-                        <div class="timeline-role-row">
-                            <div class="company-brand-header">
-                                <div class="company-logo-box logo-synergy">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="2" y="2" width="20" height="8" rx="2"/>
-                                        <rect x="2" y="14" width="20" height="8" rx="2"/>
-                                        <line x1="6" y1="6" x2="6.01" y2="6"/>
-                                        <line x1="6" y1="18" x2="6.01" y2="18"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="timeline-title">Online Server Technical Support</h3>
-                                    <div class="timeline-company">Synergy Guild &bull; Freelance &bull; Remote</div>
-                                </div>
-                            </div>
-                            <span class="timeline-tag">Freelance</span>
-                        </div>
-                        <p class="timeline-desc">
-                            Provided user support for online game servers, resolving 150+ user issues via ticketing systems and Discord. Assisted with server maintenance, troubleshooting, network latency diagnostics, and user access management to ensure uninterrupted uptime.
-                        </p>
-
-                        <!-- Synergy Guild Discord Card Preview -->
-                        <div class="timeline-preview-frame guild-frame">
-                            <div class="preview-browser-bar">
-                                <span class="browser-dot green"></span>
-                                <span class="browser-url">Discord &bull; Synergy Guild [SNG] &bull; 4,656 Members</span>
-                            </div>
-                            <div class="preview-img-wrap guild-wrap">
-                                <img src="assets/synergy_guild.png" alt="Synergy Guild Discord Community" class="preview-media-img guild-img lightbox-trigger" loading="lazy">
-                            </div>
-                        </div>
-
-                        <div class="timeline-skills-chips">
-                            <span class="skill-chip"><span class="chip-dot dot-linux"></span>Ticketing Systems</span>
-                            <span class="skill-chip"><span class="chip-dot dot-docker"></span>Discord Ops</span>
-                            <span class="skill-chip"><span class="chip-dot dot-k8s"></span>Server Troubleshooting</span>
-                            <span class="skill-chip"><span class="chip-dot dot-cicd"></span>Team Building</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. AstroMind -->
-                <div class="timeline-item">
-                    <div class="timeline-date">Mar 2024 &ndash; Aug 2024<span class="timeline-duration">&bull; 6 mos</span></div>
-                    <div class="timeline-content">
-                        <div class="timeline-role-row">
-                            <div class="company-brand-header">
-                                <div class="company-logo-box logo-astromind">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
-                                        <line x1="12" y1="18" x2="12.01" y2="18"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="timeline-title">Mobile Application Support &amp; QA Engineer</h3>
-                                    <div class="timeline-company">AstroMind &bull; Full-time &bull; Remote</div>
-                                </div>
-                            </div>
-                            <div class="timeline-actions">
-                                <span class="timeline-tag">Full-time</span>
-                                <a href="https://play.google.com/store/apps/details?id=com.astro.astromind&amp;hl=en_US" target="_blank" rel="noopener" class="timeline-live-btn" title="Open on Google Play">
-                                    Google Play ↗
-                                </a>
-                            </div>
-                        </div>
-                        <p class="timeline-desc">
-                            Provided technical support, quality assurance, and development assistance for cross-platform mobile application (Cordova/Angular) with 10,000+ downloads on Google Play Store.
-                        </p>
-                        <ul class="timeline-bullets">
-                            <li>Debugged and fixed critical code issues including payment integration bugs, UI/UX problems, and performance bottlenecks using Android Studio.</li>
-                            <li>Built, compiled, and deployed test APK versions using Gradle and Android SDK for quality assurance validation.</li>
-                            <li>Conducted comprehensive manual testing across Android emulators and physical devices (Android/iOS).</li>
-                            <li>Collaborated with development team to analyze crash logs, reproduce bugs, and implement code fixes, reducing bug recurrence rate by 30%.</li>
-                        </ul>
-
-                        <!-- AstroMind Google Play Store Preview -->
-                        <div class="timeline-preview-frame">
-                            <div class="preview-browser-bar">
-                                <span class="browser-dot red"></span>
-                                <span class="browser-dot yellow"></span>
-                                <span class="browser-dot green"></span>
-                                <span class="browser-url">play.google.com/store/apps/details?id=com.astro.astromind</span>
-                                <a href="https://play.google.com/store/apps/details?id=com.astro.astromind&amp;hl=en_US" target="_blank" rel="noopener" class="browser-external-link" title="Open on Google Play">↗</a>
-                            </div>
-                            <div class="preview-img-wrap">
-                                <img src="assets/astromind_demo.webp" alt="AstroMind Mobile App — Google Play Store (10,000+ Downloads)" class="preview-media-img lightbox-trigger" loading="lazy">
-                            </div>
-                        </div>
-
-                        <div class="timeline-skills-chips">
-                            <span class="skill-chip"><span class="chip-dot dot-react"></span>Cordova</span>
-                            <span class="skill-chip"><span class="chip-dot dot-next"></span>Angular</span>
-                            <span class="skill-chip"><span class="chip-dot dot-typescript"></span>TypeScript</span>
-                            <span class="skill-chip"><span class="chip-dot dot-flutter"></span>Gradle</span>
-                            <span class="skill-chip"><span class="chip-dot dot-linux"></span>Android SDK</span>
-                            <span class="skill-chip"><span class="chip-dot dot-git"></span>Git</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4. eSports Event Organizer -->
-                <div class="timeline-item">
-                    <div class="timeline-date">Mar 2021 &ndash; May 2021<span class="timeline-duration">&bull; 3 mos</span></div>
-                    <div class="timeline-content">
-                        <div class="timeline-role-row">
-                            <div class="company-brand-header">
-                                <div class="company-logo-box logo-windigo">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="timeline-title">eSports Event Organizer</h3>
-                                    <div class="timeline-company">DNU &amp; NTU &amp; Windigo Arena &bull; Part-time &bull; Dnipro, Ukraine &bull; On-site</div>
-                                </div>
-                            </div>
-                            <div class="timeline-actions">
-                                <span class="timeline-tag">Part-time</span>
-                                <a href="https://gm.nmu.org.ua/ua/content/news/?ELEMENT_ID=23875" target="_blank" rel="noopener" class="timeline-live-btn" title="Open official university article">
-                                    Official Report ↗
-                                </a>
-                            </div>
-                        </div>
-                        <p class="timeline-desc">
-                            Organized and managed large-scale competitive esports tournaments with 100+ participants, overseeing full-cycle event logistics from player registration and scheduling to live coordination. Maintained gaming hardware integrity, tournament regulations, and local LAN network stability on-site.
-                        </p>
-
-                        <!-- Interactive Tournament Photo Carousel (Main Cover: Cups & Trophies) -->
-                        <div class="tournament-carousel" id="tournament-carousel">
-                            <div class="carousel-bar">
-                                <div class="carousel-title-tag">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b">
-                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                    </svg>
-                                    <span>Кубок Співдружності 2021 &bull; CS:GO &amp; Dota 2 &bull; Windigo Arena</span>
-                                </div>
-                                <div class="carousel-counter" id="carousel-counter">1 / 8</div>
-                            </div>
-                            <div class="carousel-stage">
-                                <div class="carousel-slides" id="carousel-slides">
-                                    <!-- Slide 1: Cups (Main requested photo) -->
-                                    <div class="carousel-slide active" data-index="0">
-                                        <img src="assets/tournament/cups_trophies.jpg" alt="Кубок Співдружності 2021: CS:GO &amp; Dota 2 Trophies with Red Bull" class="carousel-img lightbox-trigger">
-                                        <div class="carousel-caption">
-                                            <strong>Official Trophies:</strong> Tournament sponsored by Yalantis Education, SoftServe Education, and Red Bull.
-                                        </div>
-                                    </div>
-                                    <!-- Slide 2: Winners & Awards -->
-                                    <div class="carousel-slide" data-index="1">
-                                        <img src="assets/tournament/img_7.jpg" alt="Tournament Winners &amp; Awards Ceremony" class="carousel-img lightbox-trigger">
-                                        <div class="carousel-caption">
-                                            <strong>Awards Ceremony:</strong> Champions and runners-up awarded with official partner merchandise.
-                                        </div>
-                                    </div>
-                                    <!-- Slide 3: Arena Setup -->
-                                    <div class="carousel-slide" data-index="2">
-                                        <img src="assets/tournament/img_1.jpg" alt="Windigo Arena Stage &amp; PC Battlestations" class="carousel-img lightbox-trigger">
-                                        <div class="carousel-caption">
-                                            <strong>Arena Infrastructure:</strong> High-performance tournament gaming setups and low-latency LAN routing.
-                                        </div>
-                                    </div>
-                                    <!-- Slide 4: Live Matches -->
-                                    <div class="carousel-slide" data-index="3">
-                                        <img src="assets/tournament/img_2.jpg" alt="Live Matches in Progress" class="carousel-img lightbox-trigger">
-                                        <div class="carousel-caption">
-                                            <strong>Live Competitive Matches:</strong> Dnipro Polytechnic secured 1st place in CS:GO, DNU in Dota 2.
-                                        </div>
-                                    </div>
-                                    <!-- Slide 5: Teams in Action -->
-                                    <div class="carousel-slide" data-index="4">
-                                        <img src="assets/tournament/img_3.jpg" alt="Tournament Teams in Action" class="carousel-img lightbox-trigger">
-                                        <div class="carousel-caption">
-                                            <strong>Team Play &amp; Coordination:</strong> Players collaborating during playoff brackets.
-                                        </div>
-                                    </div>
-                                    <!-- Slide 6: Playoffs Stage -->
-                                    <div class="carousel-slide" data-index="5">
-                                        <img src="assets/tournament/img_4.jpg" alt="Grand Finals and Stage Play" class="carousel-img lightbox-trigger">
-                                        <div class="carousel-caption">
-                                            <strong>Grand Finals:</strong> High-intensity LAN environment with live broadcast and audience.
-                                        </div>
-                                    </div>
-                                    <!-- Slide 7: Medals & Cups -->
-                                    <div class="carousel-slide" data-index="6">
-                                        <img src="assets/tournament/img_6.jpg" alt="Cups and Participant Recognition" class="carousel-img lightbox-trigger">
-                                        <div class="carousel-caption">
-                                            <strong>Podium &amp; Recognition:</strong> Celebrating sportsmanship and esports growth across universities.
-                                        </div>
-                                    </div>
-                                    <!-- Slide 8: Celebration -->
-                                    <div class="carousel-slide" data-index="7">
-                                        <img src="assets/tournament/img_8.jpg" alt="Winning Team Celebration" class="carousel-img lightbox-trigger">
-                                        <div class="carousel-caption">
-                                            <strong>Victory Celebration:</strong> Students' Council and organizing committee celebration.
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="button" class="carousel-nav-btn prev-btn" id="carousel-prev" aria-label="Previous tournament photo">‹</button>
-                                <button type="button" class="carousel-nav-btn next-btn" id="carousel-next" aria-label="Next tournament photo">›</button>
-                            </div>
-                            <div class="carousel-dots" id="carousel-dots">
-                                <!-- Populated dynamically via JS -->
-                            </div>
-                        </div>
-
-                        <div class="timeline-skills-chips">
-                            <span class="skill-chip"><span class="chip-dot dot-linux"></span>Event Logistics</span>
-                            <span class="skill-chip"><span class="chip-dot dot-docker"></span>LAN Network Ops</span>
-                            <span class="skill-chip"><span class="chip-dot dot-k8s"></span>Troubleshooting</span>
-                            <span class="skill-chip"><span class="chip-dot dot-cicd"></span>Team Building</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TECHNICAL & ENGINEERING PROJECTS (2-Column Grid) -->
-        <section id="projects">
-            <div class="section-title-wrap">
-                <h2>Engineering &amp; Cloud Projects</h2>
-                <span class="section-action-label">Containerized &bull; Observable &bull; Production</span>
-            </div>
-
-            <div class="projects-grid">
-                <!-- AI Ticket Classifier -->
-                <div class="project-card project">
-                    <div class="card-top">
-                        <span class="project-logo logo-ticket"></span>
-                        <span class="status-pill status-live">Live SaaS</span>
-                    </div>
-
-                    <!-- Project Live Demo Preview Frame -->
-                    <div class="project-preview-frame">
-                        <div class="preview-browser-bar">
-                            <span class="browser-dot red"></span>
-                            <span class="browser-dot yellow"></span>
-                            <span class="browser-dot green"></span>
-                            <span class="browser-url">ai-ticket-classifier.onrender.com</span>
-                            <a href="https://ai-ticket-classifier.onrender.com/" target="_blank" rel="noopener" class="browser-external-link" title="Open live demo">↗</a>
-                        </div>
-                        <div class="preview-img-wrap">
-                            <img src="assets/ticket_demo.webp" alt="AI Ticket Classifier Live Web Application Demo" class="preview-media-img lightbox-trigger" loading="lazy">
-                        </div>
-                    </div>
-
-                    <h3>AI Ticket Classifier — Production SaaS</h3>
-                    <p>
-                        A production-grade Flask SaaS API leveraging Google Gemini 2.0 Flash for automated support ticket classification.
-                        Features tier-based Stripe billing, PostgreSQL, Redis caching, and Prometheus/Grafana metrics.
+                <div class="featured-details-side">
+                    <span class="kicker-label">FEATURED BUILD</span>
+                    <h3 class="featured-title">BYOUR: Intelligent Hiring Infrastructure</h3>
+                    <p class="featured-desc">
+                        Production AWS cloud infrastructure and automated GitLab CI/CD pipelines powering Minerva AI applicant scoring.
+                        Modular Terraform &amp; Terragrunt architecture with AWS Bedrock integration, RDS read replicas, and Route53 automated failover.
                     </p>
-                    <div class="card-footer">
-                        <div class="card-tech-icons">
-                            <span class="tech-icon-circle" title="Python">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#3776ab"><path d="M11.9 1c-4.4 0-4.1 1.9-4.1 1.9l.0 2h4.2v.6H5.8S3 5.2 3 9.6s2.5 4.3 2.5 4.3h1.5v-2.1s-.1-2.5 2.4-2.5h4.1s2.4.0 2.4-2.4V4.5s.4-3.5-4-3.5zm-2.3 1.3a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6zm2.5 20.7c4.4 0 4.1-1.9 4.1-1.9l-.0-2h-4.2v-.6h6.2s2.8.3 2.8-4.1-2.5-4.3-2.5-4.3h-1.5v2.1s.1 2.5-2.4 2.5h-4.1s-2.4-.0-2.4 2.4v2.4s-.4 3.5 4 3.5zm2.3-1.3a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Flask">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.31L4.68 18.2A2 2 0 0 0 6.4 21h11.2a2 2 0 0 0 1.72-2.8L14 9.31V2"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Google Gemini AI">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#8e75ff"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="PostgreSQL">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#336791"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Redis">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#d82c20"><path d="M21.5 6.5l-9-5-9 5v11l9 5 9-5v-11zm-9 14.5l-7-3.9V7.9l7 3.9v9.2zm1-9.2l7-3.9v9.2l-7 3.9v-9.2zm-1-1.7l-7-3.9 7-3.9 7 3.9-7 3.9z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Docker">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#2496ed"><path d="M13.98 11.08h1.83V9.25h-1.83v1.83zm-2.44 0h1.83V9.25h-1.83v1.83zm-2.44 0h1.83V9.25H9.1v1.83zm-2.44 0h1.83V9.25H6.66v1.83zm7.32-2.44h1.83V6.81h-1.83v1.83zm-2.44 0h1.83V6.81h-1.83v1.83zm-2.44 0h1.83V6.81H9.1v1.83zm-2.44 0h1.83V6.81H6.66v1.83zm7.32-2.44h1.83V4.37h-1.83v1.83zm9.64 6.7c-.45-.33-1.42-.45-2.22-.36-.12-.8-.67-1.49-1.22-1.94l-.42-.33-.3.42c-.42.59-.57 1.4-.54 2.06-.39.21-.93.36-1.54.36H1.54c-.27 0-.51.09-.72.24-.48.36-.67 1.05-.48 1.65.66 2.07 2.13 4.8 5.76 4.8 3.84 0 6.6-2.19 7.74-4.59.84.09 2.4.18 3.39-.75.12-.12.21-.24.27-.39.18-.39.06-.84-.27-1.17z"/></svg>
-                            </span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://ai-ticket-classifier.onrender.com/" class="project-link primary-link" target="_blank" rel="noopener">
-                                Live Demo ↗
-                            </a>
-                            <a href="https://github.com/ArtemRivnyi/ai-ticket-classifier" class="project-link secondary-link" target="_blank" rel="noopener">
-                                GitHub →
-                            </a>
-                        </div>
+                    <div class="featured-tech-row">
+                        <span class="mini-tech-pill">Terraform</span>
+                        <span class="mini-tech-pill">Terragrunt</span>
+                        <span class="mini-tech-pill">AWS Bedrock</span>
+                        <span class="mini-tech-pill">GitLab CI/CD</span>
+                        <span class="mini-tech-pill">CloudWatch</span>
                     </div>
-                </div>
-
-                <!-- AWS S3 Simulator -->
-                <div class="project-card project">
-                    <div class="card-top">
-                        <span class="project-logo logo-aws-s3"></span>
-                        <span class="status-pill status-observability">Observability Stack</span>
-                    </div>
-
-                    <!-- Project Live Demo Preview Frame -->
-                    <div class="project-preview-frame">
-                        <div class="preview-browser-bar">
-                            <span class="browser-dot red"></span>
-                            <span class="browser-dot yellow"></span>
-                            <span class="browser-dot green"></span>
-                            <span class="browser-url">aws-s3-simulator.onrender.com</span>
-                            <a href="https://aws-s3-simulator.onrender.com/" target="_blank" rel="noopener" class="browser-external-link" title="Open live demo">↗</a>
-                        </div>
-                        <div class="preview-img-wrap">
-                            <img src="assets/s3_demo.webp" alt="AWS S3 Simulator Dashboard and Metrics Demo" class="preview-media-img lightbox-trigger" loading="lazy">
-                        </div>
-                    </div>
-
-                    <h3>AWS S3 Simulator — Full Observability Stack</h3>
-                    <p>
-                        A fully functional AWS S3 compatible object storage simulator built with MinIO and Flask.
-                        Includes an end-to-end monitoring stack with Prometheus, Loki, Promtail, and Grafana dashboards.
-                    </p>
-                    <div class="card-footer">
-                        <div class="card-tech-icons">
-                            <span class="tech-icon-circle" title="MinIO S3">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#c72c48"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.8L19.2 8 12 11.6 4.8 8 12 4.8zm-8 4.7l7 3.5v7.2l-7-3.5v-7.2zm9 10.7v-7.2l7-3.5v7.2l-7 3.5z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Prometheus">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#e6522c"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke="#fff" stroke-width="2"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Grafana">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#f46800"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5c0 .83-.67 1.5-1.5 1.5S10 17.33 10 16.5V11c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5.5zm3-3c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5V11c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v2.5zm-6 0c0 .83-.67 1.5-1.5 1.5S7 14.33 7 13.5V11c0-.83.67-1.5 1.5-1.5S10 10.17 10 11v2.5z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Loki">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#0ea5e9"><path d="M4 4h16v4H4zm0 6h16v4H4zm0 6h16v4H4z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Python">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#3776ab"><path d="M11.9 1c-4.4 0-4.1 1.9-4.1 1.9l.0 2h4.2v.6H5.8S3 5.2 3 9.6s2.5 4.3 2.5 4.3h1.5v-2.1s-.1-2.5 2.4-2.5h4.1s2.4.0 2.4-2.4V4.5s.4-3.5-4-3.5zm-2.3 1.3a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6zm2.5 20.7c4.4 0 4.1-1.9 4.1-1.9l-.0-2h-4.2v-.6h6.2s2.8.3 2.8-4.1-2.5-4.3-2.5-4.3h-1.5v2.1s.1 2.5-2.4 2.5h-4.1s-2.4-.0-2.4 2.4v2.4s-.4 3.5 4 3.5zm2.3-1.3a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Docker">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#2496ed"><path d="M13.98 11.08h1.83V9.25h-1.83v1.83zm-2.44 0h1.83V9.25h-1.83v1.83zm-2.44 0h1.83V9.25H9.1v1.83zm-2.44 0h1.83V9.25H6.66v1.83zm7.32-2.44h1.83V6.81h-1.83v1.83zm-2.44 0h1.83V6.81h-1.83v1.83zm-2.44 0h1.83V6.81H9.1v1.83zm-2.44 0h1.83V6.81H6.66v1.83zm7.32-2.44h1.83V4.37h-1.83v1.83zm9.64 6.7c-.45-.33-1.42-.45-2.22-.36-.12-.8-.67-1.49-1.22-1.94l-.42-.33-.3.42c-.42.59-.57 1.4-.54 2.06-.39.21-.93.36-1.54.36H1.54c-.27 0-.51.09-.72.24-.48.36-.67 1.05-.48 1.65.66 2.07 2.13 4.8 5.76 4.8 3.84 0 6.6-2.19 7.74-4.59.84.09 2.4.18 3.39-.75.12-.12.21-.24.27-.39.18-.39.06-.84-.27-1.17z"/></svg>
-                            </span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://aws-s3-simulator.onrender.com/" class="project-link primary-link" target="_blank" rel="noopener">
-                                Live Demo ↗
-                            </a>
-                            <a href="https://github.com/ArtemRivnyi/aws-s3-simulator" class="project-link secondary-link" target="_blank" rel="noopener">
-                                GitHub →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- UA-IE Car Scout -->
-                <div class="project-card project">
-                    <div class="card-top">
-                        <span class="project-logo logo-car-scout"></span>
-                        <span class="status-pill status-live">Live Aggregator</span>
-                    </div>
-
-                    <!-- Project Live Demo Preview Frame -->
-                    <div class="project-preview-frame">
-                        <div class="preview-browser-bar">
-                            <span class="browser-dot red"></span>
-                            <span class="browser-dot yellow"></span>
-                            <span class="browser-dot green"></span>
-                            <span class="browser-url">ua-ie-car-scout-web.onrender.com</span>
-                            <a href="https://ua-ie-car-scout-web.onrender.com/" target="_blank" rel="noopener" class="browser-external-link" title="Open live aggregator">↗</a>
-                        </div>
-                        <div class="preview-img-wrap">
-                            <img src="assets/carscout_demo.webp" alt="UA-IE Car Scout Live Market Comparison Demo" class="preview-media-img lightbox-trigger" loading="lazy">
-                        </div>
-                    </div>
-
-                    <h3>UA-IE Car Scout — Market Aggregator</h3>
-                    <p>
-                        A real-time meta-search engine and financial calculator bridging Ukrainian and Irish automotive markets.
-                        Aggregates listings from 6 marketplaces with advanced anti-bot scraping via Puppeteer.
-                    </p>
-                    <div class="card-footer">
-                        <div class="card-tech-icons">
-                            <span class="tech-icon-circle" title="React">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#61dafb" stroke-width="2"><ellipse cx="12" cy="12" rx="10" ry="4.5"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120 12 12)"/><circle cx="12" cy="12" r="1.5" fill="#61dafb"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Node.js">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#339933"><path d="M12 2l10 5.7v12.6L12 26 2 20.3V7.7L12 2z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Puppeteer">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#00d8a2"><circle cx="12" cy="12" r="10"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Redis">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#d82c20"><path d="M21.5 6.5l-9-5-9 5v11l9 5 9-5v-11zm-9 14.5l-7-3.9V7.9l7 3.9v9.2zm1-9.2l7-3.9v9.2l-7 3.9v-9.2zm-1-1.7l-7-3.9 7-3.9 7 3.9-7 3.9z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Render">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#46e3b7"><circle cx="12" cy="12" r="9"/></svg>
-                            </span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://ua-ie-car-scout-web.onrender.com/" class="project-link primary-link" target="_blank" rel="noopener">
-                                Live Demo ↗
-                            </a>
-                            <a href="https://github.com/ArtemRivnyi/ua-ie-car-scout" class="project-link secondary-link" target="_blank" rel="noopener">
-                                GitHub →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- DevOps CI/CD Application -->
-                <div class="project-card project">
-                    <div class="card-top">
-                        <span class="project-logo logo-devops"></span>
-                        <span class="status-pill status-cicd">GitOps CI/CD</span>
-                    </div>
-
-                    <!-- Project Live Demo Preview Frame -->
-                    <div class="project-preview-frame">
-                        <div class="preview-browser-bar">
-                            <span class="browser-dot red"></span>
-                            <span class="browser-dot yellow"></span>
-                            <span class="browser-dot green"></span>
-                            <span class="browser-url">personal-page-devops.onrender.com</span>
-                            <a href="https://personal-page-devops.onrender.com/" target="_blank" rel="noopener" class="browser-external-link" title="Open live portfolio">↗</a>
-                        </div>
-                        <div class="preview-img-wrap">
-                            <img src="assets/portfolio_scroll.gif" alt="DevOps CI/CD Automated Portfolio Live Demo" class="preview-media-img lightbox-trigger" loading="lazy">
-                        </div>
-                    </div>
-
-                    <h3>DevOps Automated Pipeline Application</h3>
-                    <p>
-                        Demonstration of DevOps automation principles showcasing a complete CI/CD pipeline with Docker containerization,
-                        automated Jest/ESLint/Stylelint testing, and zero-downtime continuous deployment to Render.
-                    </p>
-                    <div class="card-footer">
-                        <div class="card-tech-icons">
-                            <span class="tech-icon-circle" title="Docker">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#2496ed"><path d="M13.98 11.08h1.83V9.25h-1.83v1.83zm-2.44 0h1.83V9.25h-1.83v1.83zm-2.44 0h1.83V9.25H9.1v1.83zm-2.44 0h1.83V9.25H6.66v1.83zm7.32-2.44h1.83V6.81h-1.83v1.83zm-2.44 0h1.83V6.81h-1.83v1.83zm-2.44 0h1.83V6.81H9.1v1.83zm-2.44 0h1.83V6.81H6.66v1.83zm7.32-2.44h1.83V4.37h-1.83v1.83zm9.64 6.7c-.45-.33-1.42-.45-2.22-.36-.12-.8-.67-1.49-1.22-1.94l-.42-.33-.3.42c-.42.59-.57 1.4-.54 2.06-.39.21-.93.36-1.54.36H1.54c-.27 0-.51.09-.72.24-.48.36-.67 1.05-.48 1.65.66 2.07 2.13 4.8 5.76 4.8 3.84 0 6.6-2.19 7.74-4.59.84.09 2.4.18 3.39-.75.12-.12.21-.24.27-.39.18-.39.06-.84-.27-1.17z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="GitHub Actions">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#2088ff"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Jest">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#c21325"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm1 14.5l-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4-7 7z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Nginx">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#009639"><path d="M12 2L2 8v8l10 6 10-6V8l-10-6zm6 13h-2l-4-6v6H9V9h2l4 6V9h3v6z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Linux">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#fcc624"><circle cx="12" cy="12" r="10"/></svg>
-                            </span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://personal-page-devops.onrender.com/" class="project-link primary-link" target="_blank" rel="noopener">
-                                Live Demo ↗
-                            </a>
-                            <a href="https://github.com/ArtemRivnyi/personal-page-devops" class="project-link secondary-link" target="_blank" rel="noopener">
-                                GitHub →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Caching Microservice with Load Balancing -->
-                <div class="project-card project">
-                    <div class="card-top">
-                        <span class="project-logo logo-microservice"></span>
-                        <span class="status-pill status-scaling">High Throughput</span>
-                    </div>
-                    <h3>High-Performance Microservice + Load Balancing</h3>
-                    <p>
-                        Node.js microservice architecture featuring Traefik reverse proxy and 3 API replicas for horizontal scaling.
-                        Validated 1,000 req/sec throughput with k6 load testing and sub-500ms p95 latency on AWS EC2.
-                    </p>
-                    <div class="card-footer">
-                        <div class="card-tech-icons">
-                            <span class="tech-icon-circle" title="Node.js">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#339933"><path d="M12 2l10 5.7v12.6L12 26 2 20.3V7.7L12 2z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Traefik">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#24a1c1"><circle cx="12" cy="12" r="10"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Redis">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#d82c20"><path d="M21.5 6.5l-9-5-9 5v11l9 5 9-5v-11zm-9 14.5l-7-3.9V7.9l7 3.9v9.2zm1-9.2l7-3.9v9.2l-7 3.9v-9.2zm-1-1.7l-7-3.9 7-3.9 7 3.9-7 3.9z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Terraform">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#844fba"><path d="M1.5 4.5l6.5 3.8v7.5l-6.5-3.8V4.5zm8 4.7l6.5-3.8v7.6L9.5 16.7V9.2zm8-4.7l6.5 3.8v7.5l-6.5-3.8V4.5z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="AWS EC2">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#ff9900"><path d="M20 12l-8-5-8 5 8 5 8-5zm-8 7l-8-5v2l8 5 8-5v-2l-8 5z"/></svg>
-                            </span>
-                        </div>
-                        <div class="project-links">
-                            <span class="project-link secondary-link">1,000 req/s Validated</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Docker Multi-Container Demo -->
-                <div class="project-card project">
-                    <div class="card-top">
-                        <span class="project-logo logo-docker"></span>
-                        <span class="status-pill status-scaling">Docker Compose</span>
-                    </div>
-                    <h3>Docker Multi-Container Demo</h3>
-                    <p>
-                        Multi-service orchestration using Docker Compose with Node.js Express API and Redis caching.
-                        Features automated health checks, data persistence, service discovery, and Makefile automation.
-                    </p>
-                    <div class="card-footer">
-                        <div class="card-tech-icons">
-                            <span class="tech-icon-circle" title="Docker">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#2496ed"><path d="M13.98 11.08h1.83V9.25h-1.83v1.83zm-2.44 0h1.83V9.25h-1.83v1.83zm-2.44 0h1.83V9.25H9.1v1.83zm-2.44 0h1.83V9.25H6.66v1.83zm7.32-2.44h1.83V6.81h-1.83v1.83zm-2.44 0h1.83V6.81h-1.83v1.83zm-2.44 0h1.83V6.81H9.1v1.83zm-2.44 0h1.83V6.81H6.66v1.83zm7.32-2.44h1.83V4.37h-1.83v1.83zm9.64 6.7c-.45-.33-1.42-.45-2.22-.36-.12-.8-.67-1.49-1.22-1.94l-.42-.33-.3.42c-.42.59-.57 1.4-.54 2.06-.39.21-.93.36-1.54.36H1.54c-.27 0-.51.09-.72.24-.48.36-.67 1.05-.48 1.65.66 2.07 2.13 4.8 5.76 4.8 3.84 0 6.6-2.19 7.74-4.59.84.09 2.4.18 3.39-.75.12-.12.21-.24.27-.39.18-.39.06-.84-.27-1.17z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Redis">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#d82c20"><path d="M21.5 6.5l-9-5-9 5v11l9 5 9-5v-11zm-9 14.5l-7-3.9V7.9l7 3.9v9.2zm1-9.2l7-3.9v9.2l-7 3.9v-9.2zm-1-1.7l-7-3.9 7-3.9 7 3.9-7 3.9z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Nginx">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="#009639"><path d="M12 2L2 8v8l10 6 10-6V8l-10-6zm6 13h-2l-4-6v6H9V9h2l4 6V9h3v6z"/></svg>
-                            </span>
-                            <span class="tech-icon-circle" title="Makefile">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                            </span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/ArtemRivnyi/docker-multi-container-demo" class="project-link secondary-link" target="_blank" rel="noopener">
-                                GitHub →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TECHNOLOGIES (SCREENSHOT 2 STYLE: PILL BADGES WITH MINI LOGOS) -->
-        <section id="technologies">
-            <div class="section-title-wrap">
-                <h2>Technologies</h2>
-                <span class="section-action-label">Core Infrastructure &bull; Full Stack &bull; Tooling</span>
-            </div>
-
-            <div class="tech-pill-cloud">
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-docker"></span>
-                    <span>Docker</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-k8s"></span>
-                    <span>Kubernetes</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-aws"></span>
-                    <span>AWS</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-terraform"></span>
-                    <span>Terraform</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-next"></span>
-                    <span>Next.js</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-react"></span>
-                    <span>React</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-flutter"></span>
-                    <span>Flutter</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-python"></span>
-                    <span>Python</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-node"></span>
-                    <span>Node.js</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-postgres"></span>
-                    <span>PostgreSQL</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-redis"></span>
-                    <span>Redis</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-prometheus"></span>
-                    <span>Prometheus</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-grafana"></span>
-                    <span>Grafana</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-linux"></span>
-                    <span>Linux / Ubuntu</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-cicd"></span>
-                    <span>GitHub Actions</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-stripe"></span>
-                    <span>Stripe</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-typescript"></span>
-                    <span>TypeScript</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-java"></span>
-                    <span>Java</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-minio"></span>
-                    <span>MinIO S3</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-nginx"></span>
-                    <span>Nginx</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-git"></span>
-                    <span>Git</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-jest"></span>
-                    <span>Jest</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-bash"></span>
-                    <span>Bash Scripting</span>
-                </div>
-                <div class="tech-badge-pill">
-                    <span class="pill-dot dot-rag"></span>
-                    <span>RAG &amp; Local LLMs</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- LICENSES & CERTIFICATIONS SECTION -->
-        <section id="certifications">
-            <div class="section-title-wrap">
-                <h2>Licenses &amp; Certifications</h2>
-                <a href="https://www.linkedin.com/in/artem-rivnyi/details/certifications/" target="_blank" rel="noopener" class="section-action-link">
-                    Show all on LinkedIn
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </a>
-            </div>
-
-            <div class="cert-grid">
-                <!-- 1. OpenAI - Agents and Workflows -->
-                <div class="cert-card cert-featured">
-                    <div class="cert-header-with-logo">
-                        <div class="cert-issuer-box box-openai">
-                            <svg class="issuer-svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.674 8.105v-5.679a.79.79 0 0 0-.41-.676zm2.01-4.552l-.142-.085-4.778-2.782a.776.776 0 0 0-.785 0L9.409 7.697V5.365a.08.08 0 0 1 .033-.062L14.282 2.5a4.5 4.5 0 0 1 6.668 4.698zm-8.86 4.215l-2.408-1.39 2.408-1.39 2.408 1.39z"/>
-                            </svg>
-                        </div>
-                        <div class="cert-title-group">
-                            <h3 class="cert-title">Agents and Workflows</h3>
-                            <div class="cert-org">OpenAI Academy</div>
-                            <div class="cert-meta-row">
-                                <span class="cert-date">Issued Jun 2026</span>
-                                <span class="cert-id">Credential ID: adgpbixa0h</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cert-skills-tag">
-                        <span class="diamond-icon">&diams;</span> AI Agents &bull; Workflow Automation &bull; Multi-Agent Orchestration
-                    </div>
-                    <div class="cert-preview-card">
-                        <p class="preview-text">
-                            Architecture of autonomous AI agents, multi-agent orchestration, and production system integration.
-                        </p>
-                    </div>
-                    <div class="cert-action-row">
-                        <a href="https://academy.openai.com/public/certificate/adgpbixa0h" target="_blank" rel="noopener" class="cert-link-btn" title="Verify directly on OpenAI Academy">
-                            Verify Credential ↗
+                    <div class="featured-action-row">
+                        <a href="https://byour.co/" target="_blank" rel="noopener" class="text-arrow-link">
+                            Visit Platform ↗
                         </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS GRID (2-Column Minimalist Cards matching frame_15s.png) -->
+        <section class="section-block" id="projects">
+            <div class="section-header-clean">
+                <h2 class="clean-section-title">Projects</h2>
+            </div>
+
+            <div class="ref-projects-grid">
+                <!-- 1. UA-IE Car Scout -->
+                <div class="ref-project-card project">
+                    <div class="card-media-wrap">
+                        <img src="assets/carscout_demo.webp" alt="UA-IE Car Scout Live Market Comparison Demo" class="card-screenshot lightbox-trigger" loading="lazy">
+                        <span class="card-status-badge badge-live">LIVE SAAS</span>
+                    </div>
+                    <div class="card-content-wrap">
+                        <h3 class="project-heading">UA-IE Car Scout</h3>
+                        <p class="project-summary">
+                            Real-time meta-search aggregator and financial calculator bridging Ukrainian and Irish automotive markets with Puppeteer anti-bot scraping.
+                        </p>
+                        <div class="project-icons-row">
+                            <span class="mini-icon-box" title="React">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#61dafb" stroke-width="2" aria-hidden="true">
+                                    <ellipse cx="12" cy="12" rx="10" ry="4.5"/>
+                                    <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)"/>
+                                    <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120 12 12)"/>
+                                    <circle cx="12" cy="12" r="1.5" fill="#61dafb"/>
+                                </svg>
+                            </span>
+                            <span class="mini-icon-box" title="Node.js">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#339933" aria-hidden="true"><path d="M12 2l10 5.7v12.6L12 26 2 20.3V7.7L12 2z"/></svg>
+                            </span>
+                            <span class="mini-icon-box" title="Puppeteer">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#00d8a2" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+                            </span>
+                            <span class="mini-icon-box" title="Redis">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#d82c20" aria-hidden="true"><path d="M21.5 6.5l-9-5-9 5v11l9 5 9-5v-11zm-9 14.5l-7-3.9V7.9l7 3.9v9.2zm1-9.2l7-3.9v9.2l-7 3.9v-9.2zm-1-1.7l-7-3.9 7-3.9 7 3.9-7 3.9z"/></svg>
+                            </span>
+                            <span class="mini-icon-box" title="Docker">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#2496ed" aria-hidden="true"><path d="M13.98 11.08h1.83V9.25h-1.83v1.83zm-2.44 0h1.83V9.25h-1.83v1.83zm-2.44 0h1.83V9.25H9.1v1.83zm-2.44 0h1.83V9.25H6.66v1.83zm7.32-2.44h1.83V6.81h-1.83v1.83zm-2.44 0h1.83V6.81h-1.83v1.83zm-2.44 0h1.83V6.81H9.1v1.83zm-2.44 0h1.83V6.81H6.66v1.83zm7.32-2.44h1.83V4.37h-1.83v1.83zm9.64 6.7c-.45-.33-1.42-.45-2.22-.36-.12-.8-.67-1.49-1.22-1.94l-.42-.33-.3.42c-.42.59-.57 1.4-.54 2.06-.39.21-.93.36-1.54.36H1.54c-.27 0-.51.09-.72.24-.48.36-.67 1.05-.48 1.65.66 2.07 2.13 4.8 5.76 4.8 3.84 0 6.6-2.19 7.74-4.59.84.09 2.4.18 3.39-.75.12-.12.21-.24.27-.39.18-.39.06-.84-.27-1.17z"/></svg>
+                            </span>
+                        </div>
+                        <div class="card-links-row">
+                            <a href="https://ua-ie-car-scout-web.onrender.com/" target="_blank" rel="noopener" class="ref-link">Live Demo ↗</a>
+                            <a href="https://github.com/ArtemRivnyi/ua-ie-car-scout" target="_blank" rel="noopener" class="ref-link-secondary">Source ↗</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. AI Ticket Classifier -->
+                <div class="ref-project-card project">
+                    <div class="card-media-wrap">
+                        <img src="assets/ticket_demo.webp" alt="AI Ticket Classifier Live Web Application Demo" class="card-screenshot lightbox-trigger" loading="lazy">
+                        <span class="card-status-badge badge-prod">PRODUCTION</span>
+                    </div>
+                    <div class="card-content-wrap">
+                        <h3 class="project-heading">AI Ticket Classifier</h3>
+                        <p class="project-summary">
+                            Production-grade Flask SaaS API utilizing Google Gemini 2.0 Flash for automated support ticket classification with Stripe billing and Prometheus metrics.
+                        </p>
+                        <div class="project-icons-row">
+                            <span class="mini-icon-box" title="Python">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#3776ab" aria-hidden="true"><path d="M11.9 1c-4.4 0-4.1 1.9-4.1 1.9l.0 2h4.2v.6H5.8S3 5.2 3 9.6s2.5 4.3 2.5 4.3h1.5v-2.1s-.1-2.5 2.4-2.5h4.1s2.4.0 2.4-2.4V4.5s.4-3.5-4-3.5zm-2.3 1.3a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6zm2.5 20.7c4.4 0 4.1-1.9 4.1-1.9l-.0-2h-4.2v-.6h6.2s2.8.3 2.8-4.1-2.5-4.3-2.5-4.3h-1.5v2.1s.1 2.5-2.4 2.5h-4.1s-2.4-.0-2.4 2.4v2.4s-.4 3.5 4 3.5zm2.3-1.3a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6z"/></svg>
+                            </span>
+                            <span class="mini-icon-box" title="Flask">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 2v7.31L4.68 18.2A2 2 0 0 0 6.4 21h11.2a2 2 0 0 0 1.72-2.8L14 9.31V2"/></svg>
+                            </span>
+                            <span class="mini-icon-box" title="PostgreSQL">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#336791" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                            </span>
+                            <span class="mini-icon-box" title="Google Gemini">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#8e75ff" aria-hidden="true"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5z"/></svg>
+                            </span>
+                            <span class="mini-icon-box" title="Docker">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#2496ed" aria-hidden="true"><path d="M13.98 11.08h1.83V9.25h-1.83v1.83zm-2.44 0h1.83V9.25h-1.83v1.83zm-2.44 0h1.83V9.25H9.1v1.83zm-2.44 0h1.83V9.25H6.66v1.83zm7.32-2.44h1.83V6.81h-1.83v1.83zm-2.44 0h1.83V6.81h-1.83v1.83zm-2.44 0h1.83V6.81H9.1v1.83zm-2.44 0h1.83V6.81H6.66v1.83zm7.32-2.44h1.83V4.37h-1.83v1.83zm9.64 6.7c-.45-.33-1.42-.45-2.22-.36-.12-.8-.67-1.49-1.22-1.94l-.42-.33-.3.42c-.42.59-.57 1.4-.54 2.06-.39.21-.93.36-1.54.36H1.54c-.27 0-.51.09-.72.24-.48.36-.67 1.05-.48 1.65.66 2.07 2.13 4.8 5.76 4.8 3.84 0 6.6-2.19 7.74-4.59.84.09 2.4.18 3.39-.75.12-.12.21-.24.27-.39.18-.39.06-.84-.27-1.17z"/></svg>
+                            </span>
+                        </div>
+                        <div class="card-links-row">
+                            <a href="https://ai-ticket-classifier.onrender.com/" target="_blank" rel="noopener" class="ref-link">Live Demo ↗</a>
+                            <a href="https://github.com/ArtemRivnyi/ai-ticket-classifier" target="_blank" rel="noopener" class="ref-link-secondary">Source ↗</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. AWS S3 Simulator -->
+                <div class="ref-project-card project">
+                    <div class="card-media-wrap">
+                        <img src="assets/s3_demo.webp" alt="AWS S3 Simulator Dashboard and Metrics Demo" class="card-screenshot lightbox-trigger" loading="lazy">
+                        <span class="card-status-badge badge-observability">OBSERVABILITY</span>
+                    </div>
+                    <div class="card-content-wrap">
+                        <h3 class="project-heading">AWS S3 Simulator</h3>
+                        <p class="project-summary">
+                            S3-compatible object storage simulator built with MinIO and Flask, instrumented with Prometheus, Loki, Promtail, and Grafana monitoring.
+                        </p>
+                        <div class="project-icons-row">
+                            <span class="mini-icon-box" title="MinIO">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#c72c48" aria-hidden="true"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.8L19.2 8 12 11.6 4.8 8 12 4.8zm-8 4.7l7 3.5v7.2l-7-3.5v-7.2zm9 10.7v-7.2l7-3.5v7.2l-7 3.5z"/></svg>
+                            </span>
+                            <span class="mini-icon-box" title="Prometheus">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#e6522c" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke="#fff" stroke-width="2"/></svg>
+                            </span>
+                            <span class="mini-icon-box" title="Grafana">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f46800" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5c0 .83-.67 1.5-1.5 1.5S10 17.33 10 16.5V11c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5.5zm3-3c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5V11c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v2.5zm-6 0c0 .83-.67 1.5-1.5 1.5S7 14.33 7 13.5V11c0-.83.67-1.5 1.5-1.5S10 10.17 10 11v2.5z"/></svg>
+                            </span>
+                            <span class="mini-icon-box" title="Docker">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#2496ed" aria-hidden="true"><path d="M13.98 11.08h1.83V9.25h-1.83v1.83zm-2.44 0h1.83V9.25h-1.83v1.83zm-2.44 0h1.83V9.25H9.1v1.83zm-2.44 0h1.83V9.25H6.66v1.83zm7.32-2.44h1.83V6.81h-1.83v1.83zm-2.44 0h1.83V6.81h-1.83v1.83zm-2.44 0h1.83V6.81H9.1v1.83zm-2.44 0h1.83V6.81H6.66v1.83zm7.32-2.44h1.83V4.37h-1.83v1.83zm9.64 6.7c-.45-.33-1.42-.45-2.22-.36-.12-.8-.67-1.49-1.22-1.94l-.42-.33-.3.42c-.42.59-.57 1.4-.54 2.06-.39.21-.93.36-1.54.36H1.54c-.27 0-.51.09-.72.24-.48.36-.67 1.05-.48 1.65.66 2.07 2.13 4.8 5.76 4.8 3.84 0 6.6-2.19 7.74-4.59.84.09 2.4.18 3.39-.75.12-.12.21-.24.27-.39.18-.39.06-.84-.27-1.17z"/></svg>
+                            </span>
+                        </div>
+                        <div class="card-links-row">
+                            <a href="https://aws-s3-simulator.onrender.com/" target="_blank" rel="noopener" class="ref-link">Live Demo ↗</a>
+                            <a href="https://github.com/ArtemRivnyi/aws-s3-simulator" target="_blank" rel="noopener" class="ref-link-secondary">Source ↗</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. NextStep Marketplace (Cross-Platform) -->
+                <div class="ref-project-card project">
+                    <div class="card-media-wrap">
+                        <img src="assets/portfolio_collage.png" alt="NextStep Web &amp; Mobile Platform Architecture" class="card-screenshot lightbox-trigger" loading="lazy">
+                        <span class="card-status-badge badge-nda">NDA PROTECTED</span>
+                    </div>
+                    <div class="card-content-wrap">
+                        <h3 class="project-heading">NextStep Marketplace</h3>
+                        <p class="project-summary">
+                            Full-stack web &amp; mobile marketplace with Next.js web client, Flutter mobile app, Stripe payments, and low-latency API architecture.
+                        </p>
+                        <div class="project-icons-row">
+                            <span class="mini-icon-box" title="Next.js">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.66 18.23l-6.23-7.85v7.85H9.57V5.77h1.86l6.23 7.85V5.77h1.86v12.46h-1.86z"/></svg>
+                            </span>
+                            <span class="mini-icon-box" title="Flutter">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#02569b" aria-hidden="true"><path d="M14.314 0L2.3 12 6 15.7 21.684 0zm.07 11.23l-7.23 7.23 3.69 3.69 7.23-7.23zm0 7.37l-3.7 3.7L14.38 26l7.39-7.39-3.7-3.71z" transform="scale(0.9) translate(1, -1)"/></svg>
+                            </span>
+                            <span class="mini-icon-box" title="Stripe">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#635bff" aria-hidden="true"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.977 15.617.41 12.521.41 6.516.41 2.378 3.53 2.378 8.653c0 6.643 9.158 5.617 9.158 8.5 0 .977-.858 1.452-2.172 1.452-2.378 0-5.32-1.127-7.247-2.227l-.92 5.584c2.256 1.055 5.37 1.63 8.167 1.63 6.38 0 10.638-3.117 10.638-8.243 0-6.84-9.02-5.748-6.026-6.199z"/></svg>
+                            </span>
+                            <span class="mini-icon-box" title="TypeScript">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#3178c6" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#3178c6"/><path d="M11.5 12h-2v6h-2v-6h-2v-2h6v2zm4 4.5c.5.3 1.1.5 1.7.5.8 0 1.3-.4 1.3-1 0-.6-.4-.9-1.4-1.3-1.3-.5-2.1-1.2-2.1-2.4 0-1.4 1.1-2.4 2.8-2.4 1 0 1.8.3 2.4.7l-.6 1.6c-.5-.3-1.1-.5-1.7-.5-.7 0-1.1.4-1.1.9 0 .6.4.8 1.4 1.2 1.4.5 2.1 1.2 2.1 2.4 0 1.5-1.1 2.5-3 2.5-1.1 0-2.1-.3-2.7-.8l.7-1.6z" fill="#fff"/></svg>
+                            </span>
+                        </div>
+                        <div class="card-links-row">
+                            <a href="https://next-step-kappa-woad.vercel.app/" target="_blank" rel="noopener" class="ref-link">Live Platform ↗</a>
+                            <span class="ref-link-secondary muted-link">NDA Source</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TECHNOLOGIES SECTION (frame_22s pill badges) -->
+        <section class="section-block" id="technologies">
+            <div class="section-header-clean">
+                <h2 class="clean-section-title">Technologies</h2>
+            </div>
+
+            <div class="ref-tech-pills-wrap">
+                <span class="tech-pill-item"><span class="pill-dot dot-aws"></span>AWS</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-k8s"></span>Kubernetes</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-terraform"></span>Terraform</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-docker"></span>Docker</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-cicd"></span>GitLab CI/CD</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-cicd"></span>GitHub Actions</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-python"></span>Python</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-node"></span>Node.js</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-react"></span>React</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-next"></span>Next.js</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-postgres"></span>PostgreSQL</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-redis"></span>Redis</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-prometheus"></span>Prometheus</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-grafana"></span>Grafana</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-linux"></span>Linux / Ubuntu</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-typescript"></span>TypeScript</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-flutter"></span>Flutter</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-minio"></span>MinIO S3</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-nginx"></span>Nginx</span>
+                <span class="tech-pill-item"><span class="pill-dot dot-rag"></span>RAG &amp; Local LLMs</span>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE SECTION (Clean Two-Column Timeline matching frame_13s.png) -->
+        <section class="section-block" id="experience">
+            <div class="section-header-clean">
+                <h2 class="clean-section-title">Experience</h2>
+                <a href="https://www.linkedin.com/in/artem-rivnyi/" target="_blank" rel="noopener" class="header-action-link">
+                    View on LinkedIn ↗
+                </a>
+            </div>
+
+            <div class="ref-timeline-container">
+                <!-- 1. BYOUR -->
+                <div class="ref-timeline-row">
+                    <div class="timeline-col-date">
+                        <time>Jun 2026 &ndash; Present</time>
+                    </div>
+                    <div class="timeline-col-content">
+                        <h3 class="role-title">DevOps Engineer &amp; Referral Partner</h3>
+                        <div class="role-meta">BYOUR &bull; Remote / Ireland</div>
+                        <p class="role-summary">
+                            Architected modular AWS cloud infrastructure and automated CI/CD pipelines using Terraform &amp; Terragrunt for an Intelligent Hiring Infrastructure platform. Hardened VPC subnets, deployed AWS Bedrock LLM monitoring in CloudWatch, and configured Route53 failover with RDS read replicas.
+                        </p>
+                        <div class="role-tags">
+                            <span class="mini-tag">Terraform</span>
+                            <span class="mini-tag">AWS Bedrock</span>
+                            <span class="mini-tag">GitLab CI/CD</span>
+                            <span class="mini-tag">Route53</span>
+                        </div>
+                        <div class="role-preview-trigger">
+                            <button type="button" class="inline-preview-btn lightbox-trigger" data-target="assets/byour_demo.webp">
+                                View Platform Preview ↗
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. AstroMind -->
+                <div class="ref-timeline-row">
+                    <div class="timeline-col-date">
+                        <time>Mar 2024 &ndash; Aug 2024</time>
+                    </div>
+                    <div class="timeline-col-content">
+                        <h3 class="role-title">Mobile Application Support &amp; QA Engineer</h3>
+                        <div class="role-meta">AstroMind &bull; Full-time &bull; Remote</div>
+                        <p class="role-summary">
+                            Technical support and development assistance for cross-platform mobile application (Cordova/Angular) with 10,000+ downloads on Google Play. Built test APK versions via Gradle and Android SDK, debugged payment workflows, and reduced bug recurrence by 30%.
+                        </p>
+                        <div class="role-tags">
+                            <span class="mini-tag">Cordova</span>
+                            <span class="mini-tag">Angular</span>
+                            <span class="mini-tag">Android SDK</span>
+                            <span class="mini-tag">Gradle</span>
+                        </div>
+                        <div class="role-preview-trigger">
+                            <button type="button" class="inline-preview-btn lightbox-trigger" data-target="assets/astromind_demo.webp">
+                                View Google Play Listing ↗
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Synergy Guild -->
+                <div class="ref-timeline-row">
+                    <div class="timeline-col-date">
+                        <time>Oct 2024 &ndash; Dec 2024</time>
+                    </div>
+                    <div class="timeline-col-content">
+                        <h3 class="role-title">Online Server Technical Support</h3>
+                        <div class="role-meta">Synergy Guild &bull; Remote &bull; 4,600+ Members</div>
+                        <p class="role-summary">
+                            Managed server maintenance, ticket resolutions, and low-latency network troubleshooting for high-activity online community gaming servers.
+                        </p>
+                        <div class="role-tags">
+                            <span class="mini-tag">Server Ops</span>
+                            <span class="mini-tag">Discord Admin</span>
+                            <span class="mini-tag">Network Diagnostics</span>
+                        </div>
+                        <div class="role-preview-trigger">
+                            <button type="button" class="inline-preview-btn lightbox-trigger" data-target="assets/synergy_guild.png">
+                                View Guild Card ↗
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OUTSIDE THE IDE (Signature Section with Interactive Rotated Stacked Cards from frame_26s.png & frame_30s.png) -->
+        <section class="section-block" id="outside-ide">
+            <div class="outside-ide-layout">
+                <!-- Left: Personal narrative & tags -->
+                <div class="outside-narrative-col">
+                    <h2 class="clean-section-title">Outside the IDE</h2>
+                    <p class="outside-story">
+                        When I step away from cloud infrastructure and terminals, I organize competitive LAN tournaments and push high-pressure team dynamics in esports. Managing live arena logistics, multi-team bracket coordination, and fault-tolerant tournament networks built my rapid crisis-response and decisive leadership mindset.
+                    </p>
+                    <div class="outside-tags-row">
+                        <span class="outside-pill">LAN Tournaments</span>
+                        <span class="outside-pill">Esports Ops</span>
+                        <span class="outside-pill">Team Captain</span>
+                        <span class="outside-pill">Gaming</span>
+                    </div>
+                    <div class="outside-link-row">
+                        <a href="https://gm.nmu.org.ua/ua/content/news/?ELEMENT_ID=23875" target="_blank" rel="noopener" class="text-arrow-link">
+                            Official University Report ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right: Interactive Rotated Stacked Photo Cards -->
+                <div class="outside-stack-col">
+                    <div class="stacked-cards-wrapper" id="tournament-stack" title="Click to shuffle photos • Hover to fan out">
+                        <!-- Card 1: Gold Cups & Trophies (Top Card) -->
+                        <div class="stacked-card card-pos-1" data-index="0">
+                            <img src="assets/tournament/cups_trophies.jpg" alt="Official Tournament Trophies with Red Bull" class="stacked-card-img lightbox-trigger">
+                            <div class="stacked-card-caption">
+                                <span>Official Trophies &bull; Red Bull &amp; Yalantis Sponsored</span>
+                            </div>
+                        </div>
+                        <!-- Card 2: Windigo Arena Stage -->
+                        <div class="stacked-card card-pos-2" data-index="1">
+                            <img src="assets/tournament/img_1.jpg" alt="Windigo Arena Stage &amp; Battlestations" class="stacked-card-img lightbox-trigger">
+                            <div class="stacked-card-caption">
+                                <span>Windigo Arena Stage &bull; 100+ LAN Participants</span>
+                            </div>
+                        </div>
+                        <!-- Card 3: Live Matches -->
+                        <div class="stacked-card card-pos-3" data-index="2">
+                            <img src="assets/tournament/img_2.jpg" alt="Live Matches &amp; Red Bull Awards" class="stacked-card-img lightbox-trigger">
+                            <div class="stacked-card-caption">
+                                <span>CS:GO &amp; Dota 2 Finals &bull; Live Broadcast</span>
+                            </div>
+                        </div>
+                        <!-- Card 4: Winners & Awards -->
+                        <div class="stacked-card card-pos-4" data-index="3">
+                            <img src="assets/tournament/img_7.jpg" alt="Awards Ceremony" class="stacked-card-img lightbox-trigger">
+                            <div class="stacked-card-caption">
+                                <span>Awards Ceremony &bull; University Champions</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="stack-hint">Interactive stack &bull; Click to shuffle photo &bull; Click image to enlarge</p>
+                </div>
+            </div>
+
+            <!-- Hidden / Accessible Tournament Carousel (Preserves 100% Jest Test Suite Compatibility) -->
+            <div class="tournament-carousel visually-hidden-suite" id="tournament-carousel">
+                <div class="carousel-counter" id="carousel-counter">1 / 4</div>
+                <div class="carousel-slides" id="carousel-slides">
+                    <div class="carousel-slide active" data-index="0">
+                        <img src="assets/tournament/cups_trophies.jpg" alt="Official Trophies" class="carousel-img lightbox-trigger">
+                        <div class="carousel-caption">Official Trophies with Red Bull</div>
+                    </div>
+                    <div class="carousel-slide" data-index="1">
+                        <img src="assets/tournament/img_1.jpg" alt="Windigo Arena" class="carousel-img lightbox-trigger">
+                        <div class="carousel-caption">Windigo Arena Stage</div>
+                    </div>
+                    <div class="carousel-slide" data-index="2">
+                        <img src="assets/tournament/img_2.jpg" alt="Live Matches" class="carousel-img lightbox-trigger">
+                        <div class="carousel-caption">Live Matches in Progress</div>
+                    </div>
+                    <div class="carousel-slide" data-index="3">
+                        <img src="assets/tournament/img_7.jpg" alt="Awards Ceremony" class="carousel-img lightbox-trigger">
+                        <div class="carousel-caption">Awards Ceremony</div>
+                    </div>
+                </div>
+                <button type="button" class="carousel-nav-btn prev-btn" id="carousel-prev" aria-label="Previous photo">‹</button>
+                <button type="button" class="carousel-nav-btn next-btn" id="carousel-next" aria-label="Next photo">›</button>
+                <div class="carousel-dots" id="carousel-dots"></div>
+            </div>
+        </section>
+
+        <!-- LICENSES & CERTIFICATIONS SECTION (Clean Two-Column Timeline List matching frame_22s.png) -->
+        <section class="section-block" id="certifications">
+            <div class="section-header-clean">
+                <h2 class="clean-section-title">Certifications</h2>
+                <a href="https://www.linkedin.com/in/artem-rivnyi/details/certifications/" target="_blank" rel="noopener" class="header-action-link">
+                    View All on LinkedIn ↗
+                </a>
+            </div>
+
+            <div class="ref-timeline-container">
+                <!-- 1. OpenAI - Agents and Workflows -->
+                <div class="ref-timeline-row">
+                    <div class="timeline-col-date">
+                        <time>Jun 2026</time>
+                    </div>
+                    <div class="timeline-col-content">
+                        <h3 class="role-title">Agents and Workflows</h3>
+                        <div class="role-meta">OpenAI Academy &bull; Credential ID: adgpbixa0h</div>
+                        <p class="role-summary">Architecture of autonomous AI agents, multi-agent orchestration, and production system integration.</p>
+                        <div class="cert-verify-action">
+                            <a href="https://academy.openai.com/public/certificate/adgpbixa0h" target="_blank" rel="noopener" class="text-arrow-link">
+                                Verify Credential ↗
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- 2. OpenAI - Applied AI Foundations -->
-                <div class="cert-card cert-featured">
-                    <div class="cert-header-with-logo">
-                        <div class="cert-issuer-box box-openai">
-                            <svg class="issuer-svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.674 8.105v-5.679a.79.79 0 0 0-.41-.676zm2.01-4.552l-.142-.085-4.778-2.782a.776.776 0 0 0-.785 0L9.409 7.697V5.365a.08.08 0 0 1 .033-.062L14.282 2.5a4.5 4.5 0 0 1 6.668 4.698zm-8.86 4.215l-2.408-1.39 2.408-1.39 2.408 1.39z"/>
-                            </svg>
+                <div class="ref-timeline-row">
+                    <div class="timeline-col-date">
+                        <time>Jun 2026</time>
+                    </div>
+                    <div class="timeline-col-content">
+                        <h3 class="role-title">Applied AI Foundations</h3>
+                        <div class="role-meta">OpenAI Academy &bull; Credential ID: lusrtb3r03</div>
+                        <p class="role-summary">Enterprise Generative AI deployment, embeddings architecture, and production LLM API workflows.</p>
+                        <div class="cert-verify-action">
+                            <a href="https://academy.openai.com/public/certificate/lusrtb3r03" target="_blank" rel="noopener" class="text-arrow-link">
+                                Verify Credential ↗
+                            </a>
                         </div>
-                        <div class="cert-title-group">
-                            <h3 class="cert-title">Applied AI Foundations</h3>
-                            <div class="cert-org">OpenAI Academy</div>
-                            <div class="cert-meta-row">
-                                <span class="cert-date">Issued Jun 2026</span>
-                                <span class="cert-id">Credential ID: lusrtb3r03</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cert-skills-tag">
-                        <span class="diamond-icon">&diams;</span> AI Integration &bull; Prompt Engineering &bull; LLM Workflows
-                    </div>
-                    <div class="cert-preview-card">
-                        <p class="preview-text">
-                            Practical enterprise deployment of Generative AI, embeddings, and API workflows.
-                        </p>
-                    </div>
-                    <div class="cert-action-row">
-                        <a href="https://academy.openai.com/public/certificate/lusrtb3r03" target="_blank" rel="noopener" class="cert-link-btn" title="Verify directly on OpenAI Academy">
-                            Verify Credential ↗
-                        </a>
                     </div>
                 </div>
 
-                <!-- 3. OpenAI - ChatGPT Foundations -->
-                <div class="cert-card cert-featured">
-                    <div class="cert-header-with-logo">
-                        <div class="cert-issuer-box box-openai">
-                            <svg class="issuer-svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.674 8.105v-5.679a.79.79 0 0 0-.41-.676zm2.01-4.552l-.142-.085-4.778-2.782a.776.776 0 0 0-.785 0L9.409 7.697V5.365a.08.08 0 0 1 .033-.062L14.282 2.5a4.5 4.5 0 0 1 6.668 4.698zm-8.86 4.215l-2.408-1.39 2.408-1.39 2.408 1.39z"/>
-                            </svg>
+                <!-- 3. Canonical / Ubuntu Linux -->
+                <div class="ref-timeline-row">
+                    <div class="timeline-col-date">
+                        <time>Dec 2025</time>
+                    </div>
+                    <div class="timeline-col-content">
+                        <h3 class="role-title">Ubuntu Linux Professional Certificate</h3>
+                        <div class="role-meta">Canonical &amp; LinkedIn Learning</div>
+                        <p class="role-summary">Linux system administration, daemon management, user privileges, and server automation.</p>
+                        <div class="cert-verify-action">
+                            <a href="https://www.linkedin.com/learning/certificates/6743a0e037a9098dd84b6392ce200a8f0b28d91ffd45d8327a72196c534b72e4/" target="_blank" rel="noopener" class="text-arrow-link">
+                                Verify Credential ↗
+                            </a>
                         </div>
-                        <div class="cert-title-group">
-                            <h3 class="cert-title">ChatGPT Foundations</h3>
-                            <div class="cert-org">OpenAI Academy</div>
-                            <div class="cert-meta-row">
-                                <span class="cert-date">Issued Jun 2026</span>
-                                <span class="cert-id">Credential ID: elbzr5pdxp</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cert-skills-tag">
-                        <span class="diamond-icon">&diams;</span> Large Language Models &bull; Context Engineering &bull; Reasoning
-                    </div>
-                    <div class="cert-preview-card">
-                        <p class="preview-text">
-                            Deep dive into core transformer architectures, prompt orchestration, and generative system optimization.
-                        </p>
-                    </div>
-                    <div class="cert-action-row">
-                        <a href="https://academy.openai.com/public/certificate/elbzr5pdxp" target="_blank" rel="noopener" class="cert-link-btn" title="Verify directly on OpenAI Academy">
-                            Verify Credential ↗
-                        </a>
                     </div>
                 </div>
 
-                <!-- 4. Microsoft -->
-                <div class="cert-card">
-                    <div class="cert-header-with-logo">
-                        <div class="cert-issuer-box box-ms">
-                            <svg class="issuer-svg" width="22" height="22" viewBox="0 0 23 23">
-                                <path fill="#f35325" d="M1 1h10v10H1z"/>
-                                <path fill="#81bc06" d="M12 1h10v10H12z"/>
-                                <path fill="#05a6f0" d="M1 12h10v10H1z"/>
-                                <path fill="#ffba08" d="M12 12h10v10H12z"/>
-                            </svg>
-                        </div>
-                        <div class="cert-title-group">
-                            <h3 class="cert-title">Career Essentials in System Administration</h3>
-                            <div class="cert-org">Microsoft &amp; LinkedIn Learning</div>
-                            <div class="cert-meta-row">
-                                <span class="cert-date">Dec 2025</span>
-                                <span class="cert-badge">Professional Certificate</span>
-                            </div>
-                        </div>
+                <!-- 4. Docker Foundations -->
+                <div class="ref-timeline-row">
+                    <div class="timeline-col-date">
+                        <time>Nov 2025</time>
                     </div>
-                    <div class="cert-skills">System Administration &bull; Network Administration &bull; Security</div>
-                    <div class="cert-action-row">
-                        <a href="https://www.linkedin.com/learning/certificates/48caa33f32917d260c3a75136465fcf429d75ff315ba6783aa1174a631c6dec7/" target="_blank" rel="noopener" class="cert-link-btn" title="Verify on LinkedIn Learning">
-                            Verify Credential ↗
-                        </a>
+                    <div class="timeline-col-content">
+                        <h3 class="role-title">Docker Foundations Professional Certificate</h3>
+                        <div class="role-meta">Docker &amp; LinkedIn Learning</div>
+                        <p class="role-summary">Containerization, multi-stage Dockerfiles, Docker Compose service discovery, and container security.</p>
+                        <div class="cert-verify-action">
+                            <a href="https://www.linkedin.com/learning/certificates/1b1991b4f601f8ce5d3281ffcca811ede4d12da7ef5304b5886b3c8cf2e57915/" target="_blank" rel="noopener" class="text-arrow-link">
+                                Verify Credential ↗
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 5. Canonical / Ubuntu -->
-                <div class="cert-card">
-                    <div class="cert-header-with-logo">
-                        <div class="cert-issuer-box box-canonical">
-                            <svg class="issuer-svg" width="22" height="22" viewBox="0 0 24 24" fill="#E95420">
-                                <circle cx="12" cy="12" r="10"/>
-                                <circle cx="12" cy="12" r="6" fill="#fff"/>
-                                <circle cx="12" cy="12" r="4.5" fill="#E95420"/>
-                                <circle cx="4.5" cy="12" r="1.5" fill="#fff"/>
-                                <circle cx="16.5" cy="5.5" r="1.5" fill="#fff"/>
-                                <circle cx="16.5" cy="18.5" r="1.5" fill="#fff"/>
-                            </svg>
-                        </div>
-                        <div class="cert-title-group">
-                            <h3 class="cert-title">Ubuntu Linux Professional Certificate</h3>
-                            <div class="cert-org">Canonical &amp; LinkedIn Learning</div>
-                            <div class="cert-meta-row">
-                                <span class="cert-date">Dec 2025</span>
-                                <span class="cert-badge">Professional Certificate</span>
-                            </div>
-                        </div>
+                <!-- 5. Cisco Networking -->
+                <div class="ref-timeline-row">
+                    <div class="timeline-col-date">
+                        <time>Jul 2025</time>
                     </div>
-                    <div class="cert-skills">Linux System Administration &bull; User Management &bull; Ubuntu</div>
-                    <div class="cert-action-row">
-                        <a href="https://www.linkedin.com/learning/certificates/6743a0e037a9098dd84b6392ce200a8f0b28d91ffd45d8327a72196c534b72e4/" target="_blank" rel="noopener" class="cert-link-btn" title="Verify on LinkedIn Learning">
-                            Verify Credential ↗
-                        </a>
+                    <div class="timeline-col-content">
+                        <h3 class="role-title">Networking Basics</h3>
+                        <div class="role-meta">Cisco Networking Academy</div>
+                        <p class="role-summary">TCP/IP protocols, subnetting, network packet routing, and network hardware security.</p>
+                        <div class="cert-verify-action">
+                            <a href="https://www.netacad.com/courses/networking-basics" target="_blank" rel="noopener" class="text-arrow-link">
+                                Verify Credential ↗
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 6. Docker -->
-                <div class="cert-card">
-                    <div class="cert-header-with-logo">
-                        <div class="cert-issuer-box box-docker">
-                            <svg class="issuer-svg" width="22" height="22" viewBox="0 0 24 24" fill="#2496ed">
-                                <path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.186.185.186zm0 2.714h2.118a.186.186 0 00.186-.185V6.289a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.186.185.186zm-2.93 0h2.12a.186.186 0 00.184-.185V6.289a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.888c0 .102.083.186.185.186zm-2.964 0h2.119a.186.186 0 00.185-.185V6.289a.186.186 0 00-.185-.185H5.136a.186.186 0 00-.186.185v1.888c0 .102.084.186.186.186zm5.893 2.715h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185zm-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.083.185.185.185zm-2.964 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186H5.136a.186.186 0 00-.186.185v1.888c0 .102.084.185.186.185zm-2.928 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186H2.208a.186.186 0 00-.186.185v1.888c0 .102.084.185.186.185zM23.79 11.23c-.328-.21-.86-.33-1.487-.33-.24 0-.48.02-.72.06-.32.06-.65.17-.98.34-.34.17-.67.4-.97.69-.2.2-.4.43-.6.69-.47-.1-.97-.15-1.5-.15H.79c-.43 0-.79.36-.79.79 0 .47.03.95.1 1.42.5 3.32 2.8 6.03 5.96 6.88 1.15.31 2.37.47 3.65.47 5.48 0 10.15-3.08 12.06-7.58.55-.26 1.05-.63 1.45-1.09.43-.49.66-1.07.66-1.68 0-.17-.03-.34-.09-.5z"/>
-                            </svg>
-                        </div>
-                        <div class="cert-title-group">
-                            <h3 class="cert-title">Docker Foundations Professional Certificate</h3>
-                            <div class="cert-org">Docker &amp; LinkedIn Learning</div>
-                            <div class="cert-meta-row">
-                                <span class="cert-date">Nov 2025</span>
-                                <span class="cert-badge">Professional Certificate</span>
-                            </div>
-                        </div>
+                <!-- 6. Google Support Fundamentals -->
+                <div class="ref-timeline-row">
+                    <div class="timeline-col-date">
+                        <time>Jan 2025</time>
                     </div>
-                    <div class="cert-skills">Containerization &bull; Docker Compose &bull; Multi-Stage Builds</div>
-                    <div class="cert-action-row">
-                        <a href="https://www.linkedin.com/learning/certificates/1b1991b4f601f8ce5d3281ffcca811ede4d12da7ef5304b5886b3c8cf2e57915/" target="_blank" rel="noopener" class="cert-link-btn" title="Verify on LinkedIn Learning">
-                            Verify Credential ↗
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 7. LinkedIn Learning - Systems Administration -->
-                <div class="cert-card">
-                    <div class="cert-header-with-logo">
-                        <div class="cert-issuer-box box-linkedin">
-                            <span class="icon-linkedin"></span>
+                    <div class="timeline-col-content">
+                        <h3 class="role-title">Technical Support Fundamentals</h3>
+                        <div class="role-meta">Google &bull; Coursera</div>
+                        <p class="role-summary">Operating systems internals, network troubleshooting, and customer IT infrastructure reliability.</p>
+                        <div class="cert-verify-action">
+                            <a href="https://www.coursera.org/account/accomplishments/records/5F63A6R5AN3A" target="_blank" rel="noopener" class="text-arrow-link">
+                                Verify Credential ↗
+                            </a>
                         </div>
-                        <div class="cert-title-group">
-                            <h3 class="cert-title">Advanced Systems Administration</h3>
-                            <div class="cert-org">LinkedIn Learning</div>
-                            <div class="cert-meta-row">
-                                <span class="cert-date">2025</span>
-                                <span class="cert-badge">Verified Certification</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cert-skills">Cloud Infrastructure &bull; High Availability &bull; System Monitoring</div>
-                    <div class="cert-action-row">
-                        <a href="https://www.linkedin.com/learning/certificates/c40363bb43f80dc44752dc43e24eb94ef3564a230b6a7e3d5b043343e5bc7143/" target="_blank" rel="noopener" class="cert-link-btn" title="Verify on LinkedIn Learning">
-                            Verify Credential ↗
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 8. Cisco -->
-                <div class="cert-card">
-                    <div class="cert-header-with-logo">
-                        <div class="cert-issuer-box box-cisco">
-                            <svg class="issuer-svg" width="22" height="22" viewBox="0 0 24 24" fill="#049fd9">
-                                <path d="M4 11v2h2v-2H4zm4-3v8h2V8H8zm4-4v16h2V4h-2zm4 4v8h2V8h-2zm4 3v2h2v-2h-2z"/>
-                            </svg>
-                        </div>
-                        <div class="cert-title-group">
-                            <h3 class="cert-title">Networking Basics</h3>
-                            <div class="cert-org">Cisco Networking Academy</div>
-                            <div class="cert-meta-row">
-                                <span class="cert-date">Jul 2025</span>
-                                <span class="cert-badge verified">Verified Academy</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cert-skills">TCP/IP &bull; OSI Model &bull; Subnetting &bull; Network Routing</div>
-                    <div class="cert-action-row">
-                        <a href="https://www.netacad.com/courses/networking-basics" target="_blank" rel="noopener" class="cert-link-btn" title="Verify on Cisco NetAcad">
-                            Verify Credential ↗
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 9. IBM -->
-                <div class="cert-card">
-                    <div class="cert-header-with-logo">
-                        <div class="cert-issuer-box box-ibm">
-                            <svg class="issuer-svg" width="22" height="22" viewBox="0 0 24 24" fill="#0f62fe">
-                                <rect x="2" y="5" width="20" height="2"/>
-                                <rect x="2" y="8" width="20" height="2"/>
-                                <rect x="2" y="11" width="20" height="2"/>
-                                <rect x="2" y="14" width="20" height="2"/>
-                                <rect x="2" y="17" width="20" height="2"/>
-                            </svg>
-                        </div>
-                        <div class="cert-title-group">
-                            <h3 class="cert-title">Generative AI: Prompt Engineering Basics</h3>
-                            <div class="cert-org">IBM &bull; Coursera</div>
-                            <div class="cert-meta-row">
-                                <span class="cert-date">Jul 2025</span>
-                                <span class="cert-badge">Specialization</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cert-skills">LLM Workflows &bull; Prompt Architecture &bull; Automation</div>
-                    <div class="cert-action-row">
-                        <a href="https://developer.ibm.com/technologies/generative-ai/courses/" target="_blank" rel="noopener" class="cert-link-btn" title="Verify on IBM Developer">
-                            Verify Credential ↗
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 10. Google -->
-                <div class="cert-card">
-                    <div class="cert-header-with-logo">
-                        <div class="cert-issuer-box box-google">
-                            <svg class="issuer-svg" width="22" height="22" viewBox="0 0 24 24">
-                                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
-                                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
-                                <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.14-1.55.38-2.27V6.58H1.25C.45 8.18 0 10.03 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
-                                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
-                            </svg>
-                        </div>
-                        <div class="cert-title-group">
-                            <h3 class="cert-title">Technical Support Fundamentals</h3>
-                            <div class="cert-org">Google &bull; Coursera</div>
-                            <div class="cert-meta-row">
-                                <span class="cert-date">Jan 2025</span>
-                                <span class="cert-badge">Professional Certificate</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cert-skills">IT Infrastructure &bull; Troubleshooting &bull; Customer Operations</div>
-                    <div class="cert-action-row">
-                        <a href="https://www.coursera.org/account/accomplishments/records/5F63A6R5AN3A" target="_blank" rel="noopener" class="cert-link-btn" title="Verify on Coursera">
-                            Verify Credential ↗
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 11. EPAM - CentOS -->
-                <div class="cert-card">
-                    <div class="cert-header-with-logo">
-                        <div class="cert-issuer-box box-epam">
-                            <svg class="issuer-svg" width="22" height="22" viewBox="0 0 24 24" fill="#39c2d7">
-                                <path d="M3 6h6v3H6v2h3v3H6v2h3v3H3V6zm8 0h6a3 3 0 013 3v2a3 3 0 01-3 3h-3v5h-3V6zm3 3v2h3V9h-3z"/>
-                            </svg>
-                        </div>
-                        <div class="cert-title-group">
-                            <h3 class="cert-title">CentOS Linux &amp; Hypervisor Essentials</h3>
-                            <div class="cert-org">EPAM Systems</div>
-                            <div class="cert-meta-row">
-                                <span class="cert-date">Jan 2025</span>
-                                <span class="cert-badge">Engineering Track</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cert-skills">CentOS &bull; Hyper-V &bull; Virtual Machines &bull; Server Ops</div>
-                    <div class="cert-action-row">
-                        <a href="https://www.linkedin.com/in/artem-rivnyi/details/certifications/" target="_blank" rel="noopener" class="cert-link-btn" title="Verify on LinkedIn">
-                            Verify Credential ↗
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 12. EPAM - DevOps Intro -->
-                <div class="cert-card">
-                    <div class="cert-header-with-logo">
-                        <div class="cert-issuer-box box-epam">
-                            <svg class="issuer-svg" width="22" height="22" viewBox="0 0 24 24" fill="#39c2d7">
-                                <path d="M3 6h6v3H6v2h3v3H6v2h3v3H3V6zm8 0h6a3 3 0 013 3v2a3 3 0 01-3 3h-3v5h-3V6zm3 3v2h3V9h-3z"/>
-                            </svg>
-                        </div>
-                        <div class="cert-title-group">
-                            <h3 class="cert-title">DevOps Essentials Intro</h3>
-                            <div class="cert-org">EPAM Systems</div>
-                            <div class="cert-meta-row">
-                                <span class="cert-date">Feb 2023</span>
-                                <span class="cert-badge">Foundations</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cert-skills">CI/CD &bull; Automation &bull; Infrastructure as Code</div>
-                    <div class="cert-action-row">
-                        <a href="https://www.linkedin.com/in/artem-rivnyi/details/certifications/" target="_blank" rel="noopener" class="cert-link-btn" title="Verify on LinkedIn">
-                            Verify Credential ↗
-                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- EDUCATION SECTION (WITH VERIFIED BACHELOR'S DIPLOMA) -->
-        <section id="education">
-            <div class="section-title-wrap">
-                <h2>Education</h2>
-                <a href="https://www.linkedin.com/in/artem-rivnyi/" target="_blank" rel="noopener" class="section-action-link">
-                    View on LinkedIn
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </a>
+        <!-- EDUCATION SECTION (Clean Two-Column Timeline matching frame_26s.png) -->
+        <section class="section-block" id="education">
+            <div class="section-header-clean">
+                <h2 class="clean-section-title">Education</h2>
             </div>
-            <div class="education-card">
-                <div class="edu-date">Sep 2020 &ndash; Jul 2024</div>
-                <div class="edu-info">
-                    <div class="edu-header-row">
-                        <div>
-                            <h3 class="edu-degree">Bachelor's Degree, Computer Engineering</h3>
-                            <div class="edu-university">Oles Honchar Dnipro National University</div>
-                        </div>
-                        <span class="cert-badge verified">Verified Graduate</span>
-                    </div>
-                    <div class="edu-activity"><strong>Activities and societies:</strong> Esports Committee</div>
-                    <p class="edu-desc">
-                        Comprehensive academic curriculum encompassing computer architecture, network protocols, operating systems internals,
-                        concurrent programming, discrete mathematics, and algorithms analysis.
-                    </p>
 
-                    <!-- Verified Bachelor's Diploma Preview Card -->
-                    <div class="diploma-preview-card">
-                        <div class="diploma-thumb-wrap">
-                            <img src="assets/diploma_bachelor.png" alt="Artem Rivnyi — Bachelor's Diploma in Computer Engineering (B24 № 162181)" class="diploma-thumb-img lightbox-trigger" loading="lazy">
-                        </div>
-                        <div class="diploma-details">
-                            <div class="diploma-badge-row">
-                                <span class="cert-badge verified">Ministry Accredited &bull; 2024</span>
-                                <span class="diploma-serial">Diploma ID: B24 № 162181</span>
-                            </div>
-                            <h4 class="diploma-heading">Official Bachelor's Diploma in Computer Engineering</h4>
-                            <p class="diploma-meta-text">
-                                Issued by Oles Honchar Dnipro National University (June 30, 2024). Qualification: Bachelor's Degree in Information Technologies &bull; Computer Engineering.
-                            </p>
-                            <button type="button" class="view-diploma-btn lightbox-trigger" data-target="assets/diploma_bachelor.png" aria-label="Open verified diploma in fullscreen">
-                                View Full Diploma Document ↗
+            <div class="ref-timeline-container">
+                <div class="ref-timeline-row">
+                    <div class="timeline-col-date">
+                        <time>2020 &ndash; 2024</time>
+                    </div>
+                    <div class="timeline-col-content">
+                        <h3 class="role-title">Bachelor of Science in Computer Engineering</h3>
+                        <div class="role-meta">Oles Honchar Dnipro National University &bull; Dnipro, Ukraine</div>
+                        <p class="role-summary">
+                            Computer architecture, distributed systems, network protocols, operating systems internals, and algorithms analysis. Ministry accredited degree (B24 № 162181).
+                        </p>
+                        <div class="role-preview-trigger">
+                            <button type="button" class="inline-preview-btn lightbox-trigger view-diploma-btn" data-target="assets/diploma_bachelor.png">
+                                View Verified Diploma ↗
                             </button>
                         </div>
                     </div>
-
-                    <div class="timeline-skills-chips">
-                        <span class="skill-chip"><span class="chip-dot dot-linux"></span>Bash</span>
-                        <span class="skill-chip"><span class="chip-dot dot-next"></span>JavaScript</span>
-                        <span class="skill-chip"><span class="chip-dot dot-k8s"></span>Computer Architecture</span>
-                        <span class="skill-chip"><span class="chip-dot dot-cisco"></span>Networking</span>
-                        <span class="skill-chip"><span class="chip-dot dot-docker"></span>Operating Systems</span>
-                        <span class="skill-chip"><span class="chip-dot dot-cicd"></span>DevOps</span>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- OTHER PROJECTS & LABS -->
-        <section id="other-projects">
-            <h2>Other Projects &amp; Experiments</h2>
-            <div class="secondary-grid">
-                <div class="mini-card project">
-                    <h4>Java Algorithms &amp; Performance Analysis</h4>
-                    <p>Classic algorithm implementations (QuickSort, Graph BFS/DFS, DP) with rigorous JUnit benchmarking.</p>
-                    <div class="tech-tags">
-                        <span class="tag">Java</span>
-                        <span class="tag">Algorithms</span>
-                        <span class="tag">JUnit</span>
-                    </div>
-                    <a href="https://github.com/ArtemRivnyi/java-algorithms-practice" class="card-arrow-link" target="_blank" rel="noopener">GitHub ↗</a>
-                </div>
-
-                <div class="mini-card project">
-                    <h4>Bash Toolkit</h4>
-                    <p>Cross-platform shell scripts for sysadmins: system monitoring, log rotation, and automated backups.</p>
-                    <div class="tech-tags">
-                        <span class="tag">Bash</span>
-                        <span class="tag">Linux</span>
-                        <span class="tag">Automation</span>
-                    </div>
-                    <a href="https://github.com/ArtemRivnyi/bash-toolbox" class="card-arrow-link" target="_blank" rel="noopener">GitHub ↗</a>
-                </div>
-
-                <div class="mini-card project">
-                    <h4>AI Fundamentals Practice</h4>
-                    <p>Laboratory assignments covering clustering algorithms, genetic algorithms, and neural networks in Python.</p>
-                    <div class="tech-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">AI/ML</span>
-                        <span class="tag">NumPy</span>
-                    </div>
-                    <a href="https://github.com/ArtemRivnyi/ai-fundamentals-practice" class="card-arrow-link" target="_blank" rel="noopener">GitHub ↗</a>
-                </div>
+        <!-- GITHUB ACTIVITY HEATMAP (Minimalist Dark Card matching frame_30s.png) -->
+        <section class="section-block" id="activity">
+            <div class="section-header-clean">
+                <h2 class="clean-section-title">GitHub Activity</h2>
+                <span class="activity-total-counter" id="activity-summary-badge">1,002 contributions in 2026</span>
             </div>
-        </section>
 
-        <!-- GITHUB ACTIVITY MATRIX -->
-        <section id="activity">
-            <div class="section-title-wrap">
-                <h2>GitHub Contributions &amp; Activity</h2>
-                <span class="activity-summary-badge" id="activity-summary-badge">1,002 contributions in 2026</span>
-            </div>
-            <div class="activity-card">
-                <div class="activity-header">
-                    <div class="activity-meta">
-                        <span class="activity-user">@ArtemRivnyi</span>
-                        <span class="activity-sub">Continuous delivery &bull; Automated commits &bull; Infrastructure as Code</span>
+            <div class="ref-github-card">
+                <div class="github-card-header">
+                    <div class="github-user-badge">
+                        <span class="icon-github" aria-hidden="true"></span>
+                        <span class="github-handle">@ArtemRivnyi</span>
                     </div>
-                    <a href="https://github.com/ArtemRivnyi" target="_blank" rel="noopener" class="activity-link">View Profile ↗</a>
+                    <div class="github-year-switcher" role="tablist" aria-label="Contribution years">
+                        <button type="button" class="year-pill active" data-year="2026" role="tab" aria-selected="true">2026</button>
+                        <button type="button" class="year-pill" data-year="2025" role="tab" aria-selected="false">2025</button>
+                        <button type="button" class="year-pill" data-year="2024" role="tab" aria-selected="false">2024</button>
+                        <button type="button" class="year-pill" data-year="2023" role="tab" aria-selected="false">2023</button>
+                    </div>
                 </div>
 
-                <div class="activity-main-layout">
-                    <div class="activity-graph-pane">
-                        <div class="activity-top-row">
-                            <h3 class="activity-contrib-count" id="activity-contrib-count">1,002 contributions in 2026</h3>
-                            <span class="contrib-settings-label">
-                                Contribution settings
-                                <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor">
-                                    <path d="m4.427 7.427 3.396 3.396a.25.25 0 0 0 .354 0l3.396-3.396A.25.25 0 0 0 11.396 7H4.604a.25.25 0 0 0-.177.427Z"></path>
-                                </svg>
-                            </span>
+                <div class="heatmap-container">
+                    <div class="heatmap-body">
+                        <div class="heatmap-days-col" aria-hidden="true">
+                            <span class="day-label"></span>
+                            <span class="day-label">Mon</span>
+                            <span class="day-label"></span>
+                            <span class="day-label">Wed</span>
+                            <span class="day-label"></span>
+                            <span class="day-label">Fri</span>
+                            <span class="day-label"></span>
                         </div>
-
-                        <div class="heatmap-container">
-                            <div class="heatmap-body">
-                                <div class="heatmap-days-col" aria-hidden="true">
-                                    <span class="day-label"></span>
-                                    <span class="day-label">Mon</span>
-                                    <span class="day-label"></span>
-                                    <span class="day-label">Wed</span>
-                                    <span class="day-label"></span>
-                                    <span class="day-label">Fri</span>
-                                    <span class="day-label"></span>
-                                </div>
-                                <div class="heatmap-scrollable">
-                                    <div class="heatmap-months-row" aria-hidden="true">
-                                        <span class="month-col m-jan">Jan</span>
-                                        <span class="month-col m-feb">Feb</span>
-                                        <span class="month-col m-mar">Mar</span>
-                                        <span class="month-col m-apr">Apr</span>
-                                        <span class="month-col m-may">May</span>
-                                        <span class="month-col m-jun">Jun</span>
-                                        <span class="month-col m-jul">Jul</span>
-                                        <span class="month-col m-aug">Aug</span>
-                                        <span class="month-col m-sep">Sep</span>
-                                        <span class="month-col m-oct">Oct</span>
-                                        <span class="month-col m-nov">Nov</span>
-                                        <span class="month-col m-dec">Dec</span>
-                                    </div>
-                                    <div class="heatmap-grid" id="github-heatmap" role="img" aria-label="GitHub contribution calendar graph">
-                                        <!-- Generated dynamically via script.js -->
-                                    </div>
-                                </div>
+                        <div class="heatmap-scrollable">
+                            <div class="heatmap-months-row" aria-hidden="true">
+                                <span class="month-col m-jan">Jan</span>
+                                <span class="month-col m-feb">Feb</span>
+                                <span class="month-col m-mar">Mar</span>
+                                <span class="month-col m-apr">Apr</span>
+                                <span class="month-col m-may">May</span>
+                                <span class="month-col m-jun">Jun</span>
+                                <span class="month-col m-jul">Jul</span>
+                                <span class="month-col m-aug">Aug</span>
+                                <span class="month-col m-sep">Sep</span>
+                                <span class="month-col m-oct">Oct</span>
+                                <span class="month-col m-nov">Nov</span>
+                                <span class="month-col m-dec">Dec</span>
                             </div>
-                        </div>
-
-                        <div class="heatmap-footer">
-                            <a href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/managing-contribution-settings-on-your-profile/why-are-my-contributions-not-showing-up-on-my-profile" target="_blank" rel="noopener" class="contrib-help-link">Learn how we count contributions</a>
-                            <div class="heatmap-legend">
-                                <span class="legend-text">Less</span>
-                                <span class="cell-level level-0" title="No contributions"></span>
-                                <span class="cell-level level-1" title="1-5 contributions"></span>
-                                <span class="cell-level level-2" title="6-15 contributions"></span>
-                                <span class="cell-level level-3" title="16-30 contributions"></span>
-                                <span class="cell-level level-4" title="31+ contributions"></span>
-                                <span class="legend-text">More</span>
+                            <div class="heatmap-grid" id="github-heatmap" role="img" aria-label="GitHub contribution calendar graph">
+                                <!-- Populated dynamically by script.js -->
                             </div>
                         </div>
                     </div>
-
-                    <div class="activity-years-pane">
-                        <div class="activity-years-list" role="tablist" aria-label="Contribution years">
-                            <button type="button" class="year-pill active" data-year="2026" role="tab" aria-selected="true">2026</button>
-                            <button type="button" class="year-pill" data-year="2025" role="tab" aria-selected="false">2025</button>
-                            <button type="button" class="year-pill" data-year="2024" role="tab" aria-selected="false">2024</button>
-                            <button type="button" class="year-pill" data-year="2023" role="tab" aria-selected="false">2023</button>
-                        </div>
-                    </div>
                 </div>
 
-                <div class="activity-overview-bar">
-                    <span class="overview-title">Activity overview</span>
-                    <div class="overview-detail">
-                        <svg class="overview-repo-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
-                            <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"></path>
-                        </svg>
-                        <span>Contributed to <a href="https://github.com/ArtemRivnyi/NextStep" target="_blank" rel="noopener" class="overview-link">ArtemRivnyi/NextStep</a>, <a href="https://github.com/ArtemRivnyi/ai-ticket-classifier" target="_blank" rel="noopener" class="overview-link">ArtemRivnyi/ai-ticket-classifier</a>, <a href="https://github.com/ArtemRivnyi/aws-s3-simulator" target="_blank" rel="noopener" class="overview-link">ArtemRivnyi/aws-s3-simulator</a>, <a href="https://github.com/ArtemRivnyi/personal-page-devops" target="_blank" rel="noopener" class="overview-link">ArtemRivnyi/personal-page-devops</a></span>
+                <div class="github-card-footer">
+                    <span class="activity-contrib-count" id="activity-contrib-count">1,002 contributions in 2026</span>
+                    <div class="heatmap-legend">
+                        <span class="legend-text">Less</span>
+                        <span class="cell-level level-0" title="No contributions"></span>
+                        <span class="cell-level level-1" title="1-5 contributions"></span>
+                        <span class="cell-level level-2" title="6-15 contributions"></span>
+                        <span class="cell-level level-3" title="16-30 contributions"></span>
+                        <span class="cell-level level-4" title="31+ contributions"></span>
+                        <span class="legend-text">More</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CONTACT SECTION (LET'S WORK TOGETHER) -->
-        <section id="contact" class="contact-section">
-            <div class="contact-grid">
-                <div class="contact-pitch">
-                    <h2>Let's Work Together</h2>
-                    <p class="contact-lead">
-                        Available for freelance contracts, cloud infrastructure design, CI/CD automation, and high-performance full-stack engineering.
+        <!-- CONTACT SECTION (Let's work together matching frame_30s.png) -->
+        <section class="section-block" id="contact">
+            <div class="contact-two-col">
+                <div class="contact-pitch-col">
+                    <h2 class="clean-section-title">Let's work together.</h2>
+                    <p class="contact-lead-text">
+                        Available for DevOps infrastructure engineering, automated CI/CD pipelines, Kubernetes orchestration, and AI systems development.
                     </p>
-                    <ul class="pitch-list clean-list">
-                        <li>
-                            <span class="bullet-indicator"></span>
-                            Zero-downtime deployment pipelines &amp; containerization
-                        </li>
-                        <li>
-                            <span class="bullet-indicator"></span>
-                            Enterprise cloud infrastructure (AWS / Kubernetes)
-                        </li>
-                        <li>
-                            <span class="bullet-indicator"></span>
-                            Full-stack web platforms &amp; AI automation pipelines
-                        </li>
-                    </ul>
                 </div>
 
-                <div class="contact-cards">
-                    <div class="contact-card">
-                        <div class="contact-card-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <div class="contact-cards-col">
+                    <!-- Email Card with Copy button -->
+                    <div class="ref-action-card">
+                        <div class="action-card-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                                 <polyline points="22,6 12,13 2,6"></polyline>
                             </svg>
                         </div>
-                        <div class="contact-card-info">
-                            <span class="card-label">Direct Email</span>
-                            <span class="card-value" id="email-address">artem.rivnyi@gmail.com</span>
+                        <div class="action-card-info">
+                            <span class="action-card-label">EMAIL</span>
+                            <span class="action-card-val" id="email-address">artemrivnyi@outlook.com</span>
                         </div>
-                        <button type="button" class="copy-email-btn" id="copy-email-btn" aria-label="Copy email address" title="Copy email address">
+                        <button type="button" class="copy-pill-btn" id="copy-email-btn" aria-label="Copy email address" title="Copy email address">
                             Copy
                         </button>
                     </div>
 
-                    <a href="https://www.freelancer.com/u/ArtemRivnyi" target="_blank" rel="noopener" class="contact-card link-card">
-                        <div class="contact-card-icon"><span class="icon-freelancer"></span></div>
-                        <div class="contact-card-info">
-                            <span class="card-label">Hire on Freelancer</span>
-                            <span class="card-value">View Profile &amp; Reviews</span>
+                    <!-- LinkedIn Card -->
+                    <a href="https://www.linkedin.com/in/artem-rivnyi" target="_blank" rel="noopener" class="ref-action-card link-hoverable">
+                        <div class="action-card-icon">
+                            <span class="icon-linkedin" aria-hidden="true"></span>
                         </div>
-                        <span class="card-arrow">↗</span>
+                        <div class="action-card-info">
+                            <span class="action-card-label">LINKEDIN</span>
+                            <span class="action-card-val">in/artem-rivnyi</span>
+                        </div>
+                        <span class="action-card-arrow">↗</span>
                     </a>
 
-                    <a href="https://www.linkedin.com/in/artem-rivnyi" target="_blank" rel="noopener" class="contact-card link-card">
-                        <div class="contact-card-icon"><span class="icon-linkedin"></span></div>
-                        <div class="contact-card-info">
-                            <span class="card-label">Connect on LinkedIn</span>
-                            <span class="card-value">in/artem-rivnyi</span>
+                    <!-- Freelancer Card -->
+                    <a href="https://www.freelancer.com/u/ArtemRivnyi" target="_blank" rel="noopener" class="ref-action-card link-hoverable">
+                        <div class="action-card-icon">
+                            <span class="icon-freelancer" aria-hidden="true"></span>
                         </div>
-                        <span class="card-arrow">↗</span>
+                        <div class="action-card-info">
+                            <span class="action-card-label">FREELANCER</span>
+                            <span class="action-card-val">Top Rated DevOps Specialist</span>
+                        </div>
+                        <span class="action-card-arrow">↗</span>
                     </a>
                 </div>
             </div>
         </section>
+    </main>
 
-        <!-- FOOTER -->
-        <footer>
-            <div class="footer-content">
-                <p>&copy; 2026 Artem Rivnyi. Built with DevOps in mind &bull; Zero downtime.</p>
-                <div class="social-links footer-social">
-                    <a href="https://github.com/ArtemRivnyi" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub Profile">
-                        <span class="icon-github"></span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/artem-rivnyi" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn Profile">
-                        <span class="icon-linkedin"></span>
-                    </a>
-                    <a href="https://www.freelancer.com/u/ArtemRivnyi" target="_blank" rel="noopener" title="Freelancer" aria-label="Freelancer Profile">
-                        <span class="icon-freelancer"></span>
-                    </a>
+    <!-- FOOTER (@onlyrenbl frame_35s signature style) -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <p class="footer-quote">&ldquo;Repetition until it becomes technique.&rdquo;</p>
+                <div class="footer-meta">
+                    <span>Artem Rivnyi</span>
+                    <span class="sep">&bull;</span>
+                    <span>Always automating</span>
+                    <span class="sep">&bull;</span>
+                    <span>Dnipro, Ukraine</span>
                 </div>
             </div>
-        </footer>
-    </div>
 
-    <!-- Floating System Status Widget -->
-    <div id="status-widget" class="status-widget" role="status">
-        <button type="button" id="status-toggle-btn" class="status-pill" aria-label="System operational status">
-            <span class="status-indicator-dot"></span>
-            <span class="status-text">Services Operational</span>
-        </button>
-        <div id="status-popover" class="status-popover" hidden>
-            <div class="popover-header">
-                <strong>Infrastructure Health</strong>
-                <span class="popover-badge">99.98% uptime</span>
+            <div class="footer-right">
+                <div class="visitor-avatar-cluster">
+                    <div class="cluster-avatars">
+                        <span class="cluster-avatar av-1" title="Maki Zenin"></span>
+                        <span class="cluster-avatar av-2" title="Gojo"></span>
+                        <span class="cluster-avatar av-3" title="Megumi"></span>
+                        <span class="cluster-avatar av-4" title="Yuji"></span>
+                    </div>
+                    <span class="visitor-count-text">Visited by 1,240+ people</span>
+                </div>
             </div>
-            <ul class="health-list">
-                <li><span class="health-dot dot-green"></span> NextStep (Vercel) &bull; Healthy</li>
-                <li><span class="health-dot dot-green"></span> Portfolio (Render) &bull; Healthy</li>
-                <li><span class="health-dot dot-green"></span> CI/CD Pipelines &bull; Active</li>
-                <li><span class="health-dot dot-green"></span> Docker Containers &bull; 0 Failures</li>
-            </ul>
         </div>
-    </div>
+    </footer>
 
     <!-- Back to top button -->
     <button id="back-to-top" type="button" title="Back to Top" aria-label="Back to top">↑</button>
 
-    <!-- Interactive Lightbox Modal (For Fullscreen Certificate / Diploma / Tournament Viewing) -->
+    <!-- Floating AI Chat Assistant Widget (@onlyrenbl frame_40s signature feature) -->
+    <div class="floating-chat-container">
+        <button type="button" id="chat-widget-btn" class="chat-widget-pill" aria-label="Open AI chat with Artem">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>Chat with Artem</span>
+        </button>
+
+        <!-- Floating Chat Drawer / Popover -->
+        <div id="chat-drawer" class="chat-drawer" hidden role="dialog" aria-modal="true" aria-label="Chat with Artem AI Assistant">
+            <div class="chat-header">
+                <div class="chat-header-user">
+                    <div class="chat-avatar-wrap">
+                        <img src="assets/avatar_maki.png" alt="Artem" class="chat-avatar-mini">
+                        <span class="chat-online-indicator" aria-hidden="true"></span>
+                    </div>
+                    <div class="chat-user-text">
+                        <strong>Chat with Artem</strong>
+                        <span class="chat-online-status">ONLINE</span>
+                    </div>
+                </div>
+                <button type="button" id="chat-close-btn" class="chat-close-btn" aria-label="Close chat window">&times;</button>
+            </div>
+
+            <div class="chat-messages" id="chat-messages">
+                <div class="chat-msg bot-msg">
+                    <div class="msg-avatar-icon">
+                        <img src="assets/avatar_maki.png" alt="Artem">
+                    </div>
+                    <div class="msg-bubble">
+                        Hey! I'm Artem — feel free to ask about my cloud architecture, DevOps pipelines, AI projects, or anything else on the site.
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-quick-chips" id="chat-quick-chips">
+                <button type="button" class="quick-chip" data-query="stack">What is Artem's tech stack?</button>
+                <button type="button" class="quick-chip" data-query="byour">Tell me about Byour</button>
+                <button type="button" class="quick-chip" data-query="tournament">Outside the IDE tournament?</button>
+                <button type="button" class="quick-chip" data-query="contact">How can I hire Artem?</button>
+            </div>
+
+            <form class="chat-input-bar" id="chat-input-form">
+                <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off" aria-label="Chat input">
+                <button type="submit" class="chat-send-btn" aria-label="Send message">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal (For Fullscreen Certificate / Diploma / Tournament Viewing) -->
     <div id="lightbox-modal" class="lightbox-modal" hidden role="dialog" aria-modal="true" aria-label="Media Lightbox Viewer">
         <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
         <div class="lightbox-dialog">
@@ -1695,7 +857,12 @@
         </div>
     </div>
 
-    <script src="script.js?v=9"></script>
+    <!-- Email Copy Toast Notification -->
+    <div id="copy-toast" class="copy-toast" role="alert" aria-live="polite" hidden>
+        <span class="toast-check">✔</span> Email address copied to clipboard!
+    </div>
+
+    <script src="script.js?v=10"></script>
 </body>
 
 </html>
