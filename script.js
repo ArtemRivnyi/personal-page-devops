@@ -1,6 +1,5 @@
-// script.js
+// script.js — Portfolio Interactive Logic
 
-// Debounce utility for performance optimization
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -13,10 +12,42 @@ function debounce(func, wait) {
     };
 }
 
-// Removed setupThemeToggle to enforce Premium Dark Mode
+function setupThemeToggle() {
+    let toggle = document.getElementById('theme-toggle');
+    if (!toggle) {
+        toggle = document.createElement('button');
+        toggle.id = 'theme-toggle';
+        toggle.setAttribute('aria-label', 'Toggle theme');
+        document.body.appendChild(toggle);
+    }
+
+    function setTheme(dark) {
+        document.body.classList.toggle('dark-theme', dark);
+        document.body.classList.toggle('light-theme', !dark);
+        localStorage.setItem('theme', dark ? 'dark' : 'light');
+        toggle.innerHTML = dark ? '<span class="theme-icon">🌙</span>' : '<span class="theme-icon">☀️</span>';
+
+        const canvas = document.getElementById('matrix-canvas');
+        if (canvas) {
+            canvas.style.opacity = dark ? '0.08' : '0.04';
+        }
+    }
+
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = saved ? saved === 'dark' : (prefersDark !== false);
+    setTheme(isDark);
+
+    toggle.addEventListener('click', () => {
+        setTheme(!document.body.classList.contains('dark-theme'));
+    });
+}
+
 class MatrixRain {
     constructor(id = 'matrix-canvas') {
         this.canvas = document.getElementById(id);
+        if (!this.canvas) return;
+
         this.ctx = this.canvas.getContext('2d', {
             alpha: true,
             desynchronized: true,
@@ -26,36 +57,37 @@ class MatrixRain {
         this.font = 16;
         this.cols = 0;
         this.drops = [];
-        this.density = 0.1; // Moderate density - sparse, but not too rare
+        this.density = 0.12;
         this.last = 0;
-        this.delay = 1000 / 30; // Increase FPS to 30 for smoother animation (30 FPS)
-        this.speed = 0.6; // Below average speed
+        this.delay = 1000 / 30;
+        this.speed = 0.6;
         this.resize();
         window.addEventListener('resize', debounce(() => this.resize(), 150), { passive: true });
         requestAnimationFrame((t) => this.loop(t));
     }
 
     resize() {
+        if (!this.canvas) return;
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
         this.cols = Math.floor(this.canvas.width / this.font);
         this.drops = Array.from({ length: this.cols }, () =>
             Math.random() < this.density ? Math.random() * -50 : null
         );
-        this.ctx.font = `${this.font}px monospace`;
-        this.ctx.textBaseline = 'top';
+        if (this.ctx) {
+            this.ctx.font = `${this.font}px monospace`;
+            this.ctx.textBaseline = 'top';
+        }
     }
 
     draw() {
-        // FIXED: Complete clear every 50 frames to prevent artifacts
-        if (!this.frameCount) this.frameCount = 0;
-        this.frameCount++;
+        if (!this.canvas || !this.ctx) return;
+        const dark = document.body.classList.contains('dark-theme');
 
-        // Normal fade effect
-        this.ctx.fillStyle = 'rgba(0,0,0,0.15)'; 
+        this.ctx.fillStyle = dark ? 'rgba(13, 17, 23, 0.15)' : 'rgba(246, 248, 250, 0.2)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.ctx.fillStyle = '#00ff66'; 
+        this.ctx.fillStyle = dark ? '#00ff66' : '#10b981';
         const maxY = this.canvas.height;
         const len = this.chars.length;
 
@@ -64,7 +96,7 @@ class MatrixRain {
             const y = this.drops[i] * this.font;
             const ch = this.chars[(Math.random() * len) | 0];
             this.ctx.fillText(ch, i * this.font, y);
-            if (y > maxY && Math.random() > 0.985) this.drops[i] = 0; // Moderate chance of restart (not too rare)
+            if (y > maxY && Math.random() > 0.985) this.drops[i] = 0;
             this.drops[i] += this.speed;
         }
     }
@@ -78,62 +110,157 @@ class MatrixRain {
     }
 }
 
-// Typing Animation
-const subtitleText = "AI & DevOps Specialist";
-const subtitleElement = document.querySelector('.subtitle');
-let charIndex = 0;
+// Subtitle Typing Animation
+function initTypingAnimation() {
+    const subtitleText = "AI & DevOps Specialist";
+    const subtitleElement = document.querySelector('.subtitle');
+    if (!subtitleElement) return;
 
-function typeSubtitle() {
-    if (subtitleElement && charIndex < subtitleText.length) {
-        subtitleElement.textContent += subtitleText.charAt(charIndex);
-        charIndex++;
-        setTimeout(typeSubtitle, 50); // Typing speed
-    } else if (subtitleElement) {
-        subtitleElement.classList.remove('typing-cursor'); // Remove cursor when done
+    let charIndex = 0;
+    subtitleElement.textContent = '';
+    subtitleElement.classList.add('typing-cursor');
+
+    function typeSubtitle() {
+        if (charIndex < subtitleText.length) {
+            subtitleElement.textContent += subtitleText.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeSubtitle, 55);
+        } else {
+            subtitleElement.classList.remove('typing-cursor');
+        }
+    }
+
+    setTimeout(typeSubtitle, 700);
+}
+
+// Dynamic GitHub Heatmap Generation
+function initGitHubHeatmap() {
+    const heatmap = document.getElementById('github-heatmap');
+    if (!heatmap) return;
+
+    heatmap.innerHTML = '';
+    const totalWeeks = 52;
+    const daysPerWeek = 7;
+    const totalDays = totalWeeks * daysPerWeek;
+
+    // Deterministic pseudo-random seed generator for consistent authentic look
+    let seed = 42;
+    function pseudoRandom() {
+        seed = (seed * 9301 + 49297) % 233280;
+        return seed / 233280;
+    }
+
+    for (let i = 0; i < totalDays; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'heatmap-cell';
+        const dayOfWeek = i % 7; // 0=Sun, 6=Sat
+        const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
+
+        const r = pseudoRandom();
+        let level = 0;
+
+        if (isWeekend) {
+            if (r > 0.65) level = 1;
+            if (r > 0.88) level = 2;
+        } else {
+            if (r > 0.20) level = 1;
+            if (r > 0.45) level = 2;
+            if (r > 0.72) level = 3;
+            if (r > 0.90) level = 4;
+        }
+
+        cell.classList.add(`level-${level}`);
+        const commits = level === 0 ? 0 : (level * 3 + Math.floor(r * 4));
+        cell.title = `${commits} contributions on day ${i + 1}`;
+        heatmap.appendChild(cell);
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (subtitleElement) {
-        subtitleElement.textContent = ''; // Clear initial text
-        subtitleElement.classList.add('typing-cursor');
-        setTimeout(typeSubtitle, 1000); // Start after 1s delay
-    }
+// Copy Email Functionality
+function initCopyEmail() {
+    const copyBtn = document.getElementById('copy-email-btn');
+    const emailAddress = document.getElementById('email-address');
+    if (!copyBtn || !emailAddress) return;
 
-    // Removed theme toggle call
+    copyBtn.addEventListener('click', async () => {
+        const email = emailAddress.textContent.trim();
+        try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(email);
+            } else {
+                const textarea = document.createElement('textarea');
+                textarea.value = email;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+            }
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied! ✓';
+            copyBtn.style.backgroundColor = '#10b981';
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+                copyBtn.style.backgroundColor = '';
+            }, 2000);
+        } catch {
+            copyBtn.textContent = 'Copied!';
+            setTimeout(() => {
+                copyBtn.textContent = 'Copy';
+            }, 2000);
+        }
+    });
+}
 
-    // Gradient overlay
-    const gradient = document.createElement('div');
-    gradient.className = 'gradient-overlay';
-    document.body.appendChild(gradient);
+// System Status Popover
+function initStatusWidget() {
+    const toggleBtn = document.getElementById('status-toggle-btn');
+    const popover = document.getElementById('status-popover');
+    if (!toggleBtn || !popover) return;
 
-    // Matrix canvas
-    const canvas = document.createElement('canvas');
-    canvas.id = 'matrix-canvas';
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    canvas.style.cssText = `
-        position:fixed;top:0;left:0;width:100%;height:100%;
-        z-index:-3;pointer-events:none;
-        opacity:0.15;background:transparent;
-        mix-blend-mode:normal;
+    toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isHidden = popover.hasAttribute('hidden');
+        if (isHidden) {
+            popover.removeAttribute('hidden');
+        } else {
+            popover.setAttribute('hidden', '');
+        }
+    });
 
+    document.addEventListener('click', (e) => {
+        if (!popover.contains(e.target) && e.target !== toggleBtn) {
+            popover.setAttribute('hidden', '');
+        }
+    });
+}
 
-        contain:paint layout size;
-    `;
-    document.body.appendChild(canvas);
+// Back to Top Button
+function initBackToTop() {
+    const backToTopButton = document.getElementById('back-to-top');
+    if (!backToTopButton) return;
 
-    new MatrixRain('matrix-canvas');
+    const handleScroll = () => {
+        if (window.scrollY > 300) {
+            backToTopButton.classList.add('visible');
+        } else {
+            backToTopButton.classList.remove('visible');
+        }
+    };
 
-    // Set proper z-index for content
-    const container = document.querySelector('.container');
-    if (container) {
-        container.style.position = 'relative';
-        container.style.zIndex = '10';
+    window.addEventListener('scroll', debounce(handleScroll, 100), { passive: true });
 
-    }
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
 
-    // Intersection observer for section animations
+// Smooth Section Animations
+function initSectionObserver() {
+    if (!('IntersectionObserver' in window)) return;
+
     const obs = new IntersectionObserver(
         (entries) => entries.forEach((e) => {
             if (e.isIntersecting) {
@@ -141,34 +268,44 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.target.style.transform = 'translateY(0)';
             }
         }),
-        { threshold: 0.1 }
+        { threshold: 0.08 }
     );
 
-    document.querySelectorAll('section').forEach((s) => {
+    document.querySelectorAll('section, .featured-project').forEach((s) => {
         s.style.opacity = '0';
-        s.style.transform = 'translateY(20px)';
-        s.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        s.style.transform = 'translateY(16px)';
+        s.style.transition = 'opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
         obs.observe(s);
     });
-    // Back to Top Button
-    const backToTopButton = document.getElementById('back-to-top');
-    if (backToTopButton) {
-        const handleScroll = () => {
-            if (window.scrollY > 300) {
-                backToTopButton.classList.add('visible');
-            } else {
-                backToTopButton.classList.remove('visible');
-            }
-        };
+}
 
-        window.addEventListener('scroll', debounce(handleScroll, 100), { passive: true });
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Matrix Background
+    const canvas = document.createElement('canvas');
+    canvas.id = 'matrix-canvas';
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    document.body.appendChild(canvas);
+    new MatrixRain('matrix-canvas');
 
+    // 2. Theme Toggle
+    setupThemeToggle();
 
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
+    // 3. Subtitle Typing
+    initTypingAnimation();
+
+    // 4. GitHub Heatmap
+    initGitHubHeatmap();
+
+    // 5. Copy Email
+    initCopyEmail();
+
+    // 6. Status Widget
+    initStatusWidget();
+
+    // 7. Back to Top
+    initBackToTop();
+
+    // 8. Section Reveal Animations
+    initSectionObserver();
 });

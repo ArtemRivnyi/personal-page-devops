@@ -1,6 +1,5 @@
-// script.exports.js - Only for testing purposes
+// script.exports.js - Testing exports
 
-// Debounce utility function
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -14,45 +13,46 @@ function debounce(func, wait) {
 }
 
 function setupThemeToggle() {
-    const toggle = document.createElement('button');
-    toggle.id = 'theme-toggle';
+    let toggle = document.getElementById('theme-toggle');
+    if (!toggle) {
+        toggle = document.createElement('button');
+        toggle.id = 'theme-toggle';
+        document.body.appendChild(toggle);
+    }
     toggle.setAttribute('aria-label', 'Toggle theme');
-    document.body.appendChild(toggle);
 
     function setTheme(dark) {
         document.body.classList.toggle('dark-theme', dark);
+        document.body.classList.toggle('light-theme', !dark);
         localStorage.setItem('theme', dark ? 'dark' : 'light');
-        toggle.innerHTML = dark ? '🌙' : '☀️';
+        toggle.innerHTML = dark ? '<span class="theme-icon">🌙</span>' : '<span class="theme-icon">☀️</span>';
 
         const canvas = document.getElementById('matrix-canvas');
         if (canvas) {
-            if (dark) {
-                canvas.style.opacity = '0.25';
-                canvas.style.mixBlendMode = 'screen';
-            } else {
-                canvas.style.opacity = '0.15';
-                canvas.style.mixBlendMode = 'multiply';
-            }
+            canvas.style.opacity = dark ? '0.08' : '0.04';
         }
     }
 
     const saved = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setTheme(saved === 'dark' || (!saved && prefersDark));
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = saved ? saved === 'dark' : (prefersDark !== false);
+    setTheme(isDark);
 
-    toggle.addEventListener('click', () =>
-        setTheme(!document.body.classList.contains('dark-theme'))
-    );
+    toggle.addEventListener('click', () => {
+        setTheme(!document.body.classList.contains('dark-theme'));
+    });
 }
 
 class MatrixRain {
     constructor(id = 'matrix-canvas') {
         this.canvas = document.getElementById(id);
-        this.ctx = this.canvas.getContext('2d', {
-            alpha: true,
-            desynchronized: true,
-            willReadFrequently: false
-        });
+        if (this.canvas) {
+            this.ctx = this.canvas.getContext('2d', {
+                alpha: true,
+                desynchronized: true,
+                willReadFrequently: false
+            });
+        }
         this.chars = 'ABVGDEZHZKLMNOPRSTFKHCHTSCH0123456789';
         this.font = 16;
         this.cols = 0;
@@ -61,30 +61,34 @@ class MatrixRain {
         this.last = 0;
         this.delay = 1000 / 20;
         this.speed = 0.6;
-        this.resize();
-        window.addEventListener('resize', () => this.resize(), { passive: true });
-        requestAnimationFrame((t) => this.loop(t));
+        if (this.canvas) {
+            this.resize();
+            window.addEventListener('resize', debounce(() => this.resize(), 150), { passive: true });
+            requestAnimationFrame((t) => this.loop(t));
+        }
     }
 
     resize() {
+        if (!this.canvas) return;
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
         this.cols = Math.floor(this.canvas.width / this.font);
         this.drops = Array.from({ length: this.cols }, () =>
             Math.random() < this.density ? Math.random() * -50 : null
         );
-        this.ctx.font = `${this.font}px monospace`;
-        this.ctx.textBaseline = 'top';
+        if (this.ctx) {
+            this.ctx.font = `${this.font}px monospace`;
+            this.ctx.textBaseline = 'top';
+        }
     }
 
     draw() {
+        if (!this.canvas || !this.ctx) return;
         const dark = document.body.classList.contains('dark-theme');
-
-        // Gentler cleaning to avoid artefacts
-        this.ctx.fillStyle = dark ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.15)';
+        this.ctx.fillStyle = dark ? 'rgba(13, 17, 23, 0.15)' : 'rgba(246, 248, 250, 0.2)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.ctx.fillStyle = dark ? '#00ff66' : '#004400';
+        this.ctx.fillStyle = dark ? '#00ff66' : '#006622';
         const maxY = this.canvas.height;
         const len = this.chars.length;
 
@@ -93,7 +97,7 @@ class MatrixRain {
             const y = this.drops[i] * this.font;
             const ch = this.chars[(Math.random() * len) | 0];
             this.ctx.fillText(ch, i * this.font, y);
-            if (y > maxY && Math.random() > 0.975) this.drops[i] = 0;
+            if (y > maxY && Math.random() > 0.98) this.drops[i] = 0;
             this.drops[i] += this.speed;
         }
     }

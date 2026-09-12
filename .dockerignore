@@ -46,3 +46,7 @@ OLD VERSIONS I/
 *.tmp
 *.temp
 .cache/
+
+# Reference media
+tips/
+*.mp4

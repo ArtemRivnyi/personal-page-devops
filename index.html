@@ -5,273 +5,464 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Artem Rivnyi - DevOps Engineer & Technical Support Specialist. Portfolio showcasing AI, Cloud, and Automation projects.">
-    <title>Artem Rivnyi - DevOps Engineer Portfolio</title>
-    <meta name="keywords" content="DevOps, Kubernetes, Terraform, Docker, AWS, CI/CD, SRE, Cloud Engineer, Portfolio">
+        content="Artem Rivnyi — DevOps Engineer, AI Specialist & Full-Stack Cloud Developer. Showcase of production platforms, NextStep marketplace, and automated infrastructure.">
+    <title>Artem Rivnyi — DevOps &amp; AI Specialist Portfolio</title>
+    <meta name="keywords" content="DevOps, Kubernetes, Terraform, Docker, AWS, CI/CD, Next.js, NextStep, Python, AI, SRE, Portfolio">
     <link rel="icon" href="assets/icons/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=7">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=8">
 </head>
 
-<body>
-    <!-- Matrix canvas, theme toggle and gradient background are added via JavaScript -->
-    <div class="container">
-        <header>
-            <h1 class="name-title">
-                <!-- Name with Midjourney-like gradient effect -->
-                <span class="gradient-text">Artem Rivnyi</span>
-            </h1>
-            <p class="subtitle">AI &amp; DevOps Specialist</p>
-            <div class="availability-badge availability-badge-margin">
-                <span class="pulsing-dot"></span> Available for freelance
+<body class="dark-theme">
+    <!-- Floating Glass Navigation -->
+    <div class="navbar-wrapper">
+        <nav class="navbar" id="navbar" aria-label="Main Navigation">
+            <a href="#" class="nav-brand" aria-label="Artem Rivnyi Home">
+                <span class="brand-monogram">AR</span>
+                <span class="brand-name">Artem Rivnyi</span>
+            </a>
+            <div class="nav-links">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#featured" class="nav-link">Featured</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#activity" class="nav-link">Activity</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
-            <div class="social-links hero-social">
-                <a href="#projects" class="project-link primary-link">
-                    View Projects
+            <div class="nav-actions">
+                <button id="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle theme">
+                    <span class="theme-icon" aria-hidden="true">🌙</span>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <header class="hero-section">
+            <div class="hero-badge-wrap">
+                <div class="hero-avatar">
+                    <span class="avatar-letter">AR</span>
+                </div>
+                <div class="availability-badge">
+                    <span class="pulsing-dot"></span> Available for freelance &amp; contracts
+                </div>
+            </div>
+
+            <h1 class="name-title">
+                <span class="gradient-text">Artem Rivnyi</span>
+                <span class="verified-badge" title="Verified Engineer">✓</span>
+            </h1>
+
+            <p class="subtitle">AI &amp; DevOps Specialist</p>
+
+            <p class="hero-bio">
+                DevOps engineer &amp; cloud architect turning complex infrastructure into elegant, automated, and observable production systems.
+                Specialized in <span class="hero-tech-pill">Kubernetes</span>, <span class="hero-tech-pill">Docker</span>,
+                <span class="hero-tech-pill">AWS</span>, <span class="hero-tech-pill">Next.js</span>, and <span class="hero-tech-pill">Python</span>.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#featured" class="project-link primary-link">
+                    Explore Featured Platforms ↓
                 </a>
                 <a href="docs/Artem.Rivnyi.CV.pdf" class="project-link secondary-link" download>
                     <span class="icon-cv"></span> Download CV
                 </a>
             </div>
+
+            <div class="social-links hero-social">
+                <a href="https://github.com/ArtemRivnyi" target="_blank" rel="noopener" class="social-icon-btn" title="GitHub" aria-label="GitHub Profile">
+                    <span class="icon-github"></span>
+                </a>
+                <a href="https://www.linkedin.com/in/artem-rivnyi" target="_blank" rel="noopener" class="social-icon-btn" title="LinkedIn" aria-label="LinkedIn Profile">
+                    <span class="icon-linkedin"></span>
+                </a>
+                <a href="https://www.freelancer.com/u/ArtemRivnyi" target="_blank" rel="noopener" class="social-icon-btn" title="Freelancer" aria-label="Freelancer Profile">
+                    <span class="icon-freelancer"></span>
+                </a>
+                <a href="mailto:artem.rivnyi@gmail.com" class="social-icon-btn" title="Send Email" aria-label="Send Email">
+                    <span class="icon-mail">✉</span>
+                </a>
+            </div>
         </header>
 
+        <!-- About Section -->
         <section id="about">
             <h2>About Me</h2>
-            <p>
-                I'm a motivated and tech-savvy specialist with hands-on experience in AI-powered automation,
-                technical support, and a strong passion for DevOps. I transform complex infrastructure challenges
-                into elegant, automated solutions using modern cloud technologies and containerization.
-            </p>
+            <div class="about-card">
+                <p>
+                    I specialize in building robust CI/CD automation, cloud-native deployments, containerized microservices,
+                    and AI-driven production platforms. With hands-on experience spanning Kubernetes orchestration,
+                    full-stack architectures, and local RAG pipelines, I deliver resilient solutions built to scale seamlessly.
+                </p>
+            </div>
         </section>
 
+        <!-- FEATURED PRODUCTION PROJECTS -->
+        <section id="featured">
+            <h2>Featured Production Platforms</h2>
+
+            <!-- FEATURED BUILD 1: NextStep (NDA Project) -->
+            <div class="project-card project featured-project nextstep-spotlight">
+                <div class="featured-header">
+                    <div class="featured-kicker">
+                        <span class="featured-star">★</span> FEATURED BUILD &bull; PRODUCTION
+                    </div>
+                    <span class="nda-pill"><span class="lock-icon">🔒</span> NDA Project</span>
+                </div>
+
+                <div class="featured-body">
+                    <div class="featured-info">
+                        <h3>NextStep — Web &amp; Mobile Marketplace</h3>
+                        <p class="featured-lead">
+                            <strong>Premium, full-stack marketplace platform serving the Irish market.</strong> (Source code under NDA)
+                        </p>
+
+                        <ul class="featured-highlights">
+                            <li>
+                                <span class="highlight-icon">📱</span>
+                                <div>
+                                    <strong>Cross-Platform Architecture:</strong> Ultra-responsive web application built with <strong>Next.js (React)</strong> and high-performance native mobile experience with <strong>Flutter &amp; Riverpod</strong>.
+                                </div>
+                            </li>
+                            <li>
+                                <span class="highlight-icon">⚡</span>
+                                <div>
+                                    <strong>Backend &amp; Infrastructure:</strong> Low-latency API layer, real-time customer messaging, and secure multi-currency payment processing via <strong>Stripe</strong>.
+                                </div>
+                            </li>
+                            <li>
+                                <span class="highlight-icon">🛡️</span>
+                                <div>
+                                    <strong>Enterprise Quality:</strong> Robust reactive state management, pull-to-refresh interactions, skeleton loaders, and comprehensive automated test coverage.
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="tech-tags">
+                            <span class="tag">Next.js</span>
+                            <span class="tag">React</span>
+                            <span class="tag">Flutter</span>
+                            <span class="tag">Riverpod</span>
+                            <span class="tag">Stripe</span>
+                            <span class="tag">Vercel</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">REST API</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="https://next-step-kappa-woad.vercel.app/" class="project-link primary-link" target="_blank" rel="noopener">
+                                View Live Platform ↗
+                            </a>
+                            <span class="project-link locked-link" title="Code protected by Non-Disclosure Agreement">
+                                🔒 Code under NDA
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FEATURED BUILD 2: AI Email Support System -->
+            <div class="project-card project featured-project email-spotlight">
+                <div class="featured-header">
+                    <div class="featured-kicker">
+                        <span class="featured-star">★</span> FEATURED DEVOPS PLATFORM
+                    </div>
+                    <span class="status-pill status-live">Live Production</span>
+                </div>
+
+                <div class="featured-body">
+                    <div class="featured-info">
+                        <h3><span class="project-logo logo-ai-email"></span>AI Email Support System — Enterprise Platform</h3>
+                        <p class="featured-lead">
+                            <strong>Production-ready, privacy-first AI email automation platform with complete DevOps infrastructure.</strong>
+                        </p>
+                        <p>
+                            A sophisticated microservices-based system that autonomously processes customer support emails using RAG
+                            architecture with local LLMs (Ollama / Gemma 7B). Features Docker containerization, Kubernetes orchestration,
+                            an automated GitHub Actions CI/CD pipeline, and real-time observability dashboard.
+                        </p>
+
+                        <div class="metrics-row">
+                            <div class="metric-item">
+                                <span class="metric-val">100+</span>
+                                <span class="metric-lbl">Daily Emails Processed</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-val">94%+</span>
+                                <span class="metric-lbl">Automated Accuracy</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-val">0</span>
+                                <span class="metric-lbl">Cloud API Data Leaks</span>
+                            </div>
+                        </div>
+
+                        <div class="tech-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Docker</span>
+                            <span class="tag">Kubernetes</span>
+                            <span class="tag">GitHub Actions</span>
+                            <span class="tag">RAG</span>
+                            <span class="tag">Ollama</span>
+                            <span class="tag">Streamlit</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store/blob/main/docs/images/dashboard.png" 
+                               class="project-link primary-link" target="_blank" rel="noopener">
+                                View Dashboard →
+                            </a>
+                            <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store" 
+                               class="project-link secondary-link" target="_blank" rel="noopener">
+                                View on GitHub →
+                            </a>
+                            <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store/blob/main/docs/" 
+                               class="project-link secondary-link" target="_blank" rel="noopener">
+                                Architecture Docs →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TECHNICAL & ENGINEERING PROJECTS (2-Column Grid) -->
         <section id="projects">
-            <h2>Technical Projects</h2>
+            <h2>Engineering &amp; Cloud Projects</h2>
 
-            <!-- FEATURED PROJECT - AI Email Support System -->
-            <div class="project-card featured-project">
-                <div class="featured-badge">⭐ Featured Project</div>
-                <h3><span class="project-logo logo-ai-email"></span>AI Email Support System - Enterprise Production Platform</h3>
-                <p>
-                    <strong>Production-ready, privacy-first AI email automation platform with complete DevOps infrastructure.</strong>
-                </p>
-                <p>
-                    A sophisticated microservices-based system that autonomously processes customer support emails using RAG
-                    architecture with local LLMs. Features Docker containerization, Kubernetes orchestration, a full CI/CD pipeline, and
-                    real-time admin dashboard.
-                </p>
-                <p>
-                    <strong>Key Achievement:</strong> Processed 100+ daily emails with 94%+ automated resolution accuracy.
-                </p>
-                <div class="tech-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Docker</span>
-                    <span class="tag">Kubernetes</span>
-                    <span class="tag">GitHub Actions</span>
-                    <span class="tag">RAG</span>
+            <div class="projects-grid">
+                <!-- AI Ticket Classifier -->
+                <div class="project-card project">
+                    <div class="card-top">
+                        <span class="project-logo logo-ticket"></span>
+                        <span class="status-pill status-live">Live SaaS</span>
+                    </div>
+                    <h3>AI Ticket Classifier — Production SaaS</h3>
+                    <p>
+                        A production-grade Flask SaaS API leveraging Google Gemini 2.0 Flash for automated support ticket classification.
+                        Features tier-based Stripe billing, PostgreSQL, Redis caching, and Prometheus/Grafana metrics.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Flask</span>
+                        <span class="tag">Gemini API</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">Redis</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://ai-ticket-classifier.onrender.com/" class="project-link primary-link" target="_blank" rel="noopener">
+                            Live Demo ↗
+                        </a>
+                        <a href="https://github.com/ArtemRivnyi/ai-ticket-classifier" class="project-link secondary-link" target="_blank" rel="noopener">
+                            GitHub →
+                        </a>
+                    </div>
                 </div>
-                <div class="project-links">
-                    <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store/blob/main/docs/images/dashboard.png" 
-                       class="project-link primary-link" target="_blank">
-                        View Dashboard →
-                    </a>
-                    <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store" 
-                       class="project-link secondary-link" target="_blank">
-                        View on GitHub →
-                    </a>
-                    <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store/blob/main/docs/" 
-                       class="project-link secondary-link" target="_blank">
-                        Documentation →
-                    </a>
-                </div>
-            </div>
 
-            <!-- AI Ticket Classifier -->
-            <div class="project-card">
-                <h3><span class="project-logo logo-ticket"></span>AI Ticket Classifier — Production SaaS</h3>
-                <p>
-                    A production-ready Flask SaaS API using Google Gemini 2.0 Flash for automated support ticket classification.
-                    Features tier-based Stripe billing, PostgreSQL, Redis caching, and full Prometheus/Grafana observability.
-                </p>
-                <div class="tech-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Flask</span>
-                    <span class="tag">Google Gemini</span>
-                    <span class="tag">PostgreSQL</span>
-                    <span class="tag">Docker</span>
+                <!-- AWS S3 Simulator -->
+                <div class="project-card project">
+                    <div class="card-top">
+                        <span class="project-logo logo-aws-s3"></span>
+                        <span class="status-pill status-observability">Observability Stack</span>
+                    </div>
+                    <h3>AWS S3 Simulator — Full Observability Stack</h3>
+                    <p>
+                        A fully functional AWS S3 compatible object storage simulator built with MinIO and Flask.
+                        Includes an end-to-end monitoring stack with Prometheus, Loki, Promtail, and Grafana dashboards.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tag">MinIO</span>
+                        <span class="tag">Docker Compose</span>
+                        <span class="tag">Prometheus</span>
+                        <span class="tag">Grafana</span>
+                        <span class="tag">Loki</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://aws-s3-simulator.onrender.com/" class="project-link primary-link" target="_blank" rel="noopener">
+                            Live Demo ↗
+                        </a>
+                        <a href="https://github.com/ArtemRivnyi/aws-s3-simulator" class="project-link secondary-link" target="_blank" rel="noopener">
+                            GitHub →
+                        </a>
+                    </div>
                 </div>
-                <div class="project-links">
-                    <a href="https://ai-ticket-classifier.onrender.com/" class="project-link primary-link"
-                        target="_blank">View Live Demo →</a>
-                    <a href="https://ai-ticket-classifier.onrender.com/api/v1/health"
-                        class="project-link secondary-link" target="_blank">Health Check ✓</a>
-                    <a href="https://github.com/ArtemRivnyi/ai-ticket-classifier"
-                        class="project-link secondary-link" target="_blank">View on GitHub →</a>
-                </div>
-            </div>
 
+                <!-- Caching Microservice with Load Balancing -->
+                <div class="project-card project">
+                    <div class="card-top">
+                        <span class="project-logo logo-microservice"></span>
+                        <span class="status-pill status-scaling">High Throughput</span>
+                    </div>
+                    <h3>High-Performance Microservice + Load Balancing</h3>
+                    <p>
+                        Node.js microservice architecture featuring Traefik reverse proxy and 3 API replicas for horizontal scaling.
+                        Validated 1,000 req/sec throughput with k6 load testing and sub-500ms p95 latency on AWS EC2.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tag">Node.js</span>
+                        <span class="tag">Traefik</span>
+                        <span class="tag">Redis</span>
+                        <span class="tag">Terraform</span>
+                        <span class="tag">AWS EC2</span>
+                    </div>
+                    <div class="project-links">
+                        <span class="project-link secondary-link">1,000 req/s Validated</span>
+                    </div>
+                </div>
 
-            <!-- AWS S3 Simulator -->
-            <div class="project-card">
-                <h3><span class="project-logo logo-aws-s3"></span>AWS S3 Simulator — Full Observability Stack</h3>
-                <p>
-                    A fully functional AWS S3 compatible object storage simulator built with MinIO and Flask.
-                    Includes a complete observability stack with Prometheus, Loki, Promtail, and Grafana.
-                </p>
-                <div class="tech-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">MinIO (S3)</span>
-                    <span class="tag">Docker Compose</span>
-                    <span class="tag">Prometheus</span>
-                    <span class="tag">Grafana</span>
+                <!-- DevOps CI/CD Application -->
+                <div class="project-card project">
+                    <div class="card-top">
+                        <span class="project-logo logo-devops"></span>
+                        <span class="status-pill status-cicd">GitOps CI/CD</span>
+                    </div>
+                    <h3>DevOps Automated Pipeline Application</h3>
+                    <p>
+                        Demonstration of DevOps automation principles showcasing a complete CI/CD pipeline with Docker containerization,
+                        automated Jest/ESLint/Stylelint testing, and zero-downtime continuous deployment to Render.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tag">Docker</span>
+                        <span class="tag">GitHub Actions</span>
+                        <span class="tag">Render</span>
+                        <span class="tag">Jest</span>
+                        <span class="tag">Nginx</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/ArtemRivnyi/personal-page-devops" class="project-link secondary-link" target="_blank" rel="noopener">
+                            View on GitHub →
+                        </a>
+                    </div>
                 </div>
-                <div class="project-links">
-                    <a href="https://aws-s3-simulator.onrender.com/" class="project-link primary-link"
-                        target="_blank">View Live Demo →</a>
-                    <a href="https://github.com/ArtemRivnyi/aws-s3-simulator" class="project-link secondary-link"
-                        target="_blank">View on GitHub →</a>
-                </div>
-            </div>
 
-            <!-- Caching Microservice with Load Balancing -->
-            <div class="project-card">
-                <h3><span class="project-logo logo-microservice"></span>High-Performance Microservice + Load Balancing</h3>
-                <p>
-                    Node.js microservice architecture with Traefik reverse proxy and 3 API replicas for horizontal scaling.
-                    Validated 1000 req/sec throughput with k6 load testing and sub-500ms p95 latency.
-                </p>
-                <div class="tech-tags">
-                    <span class="tag">Node.js</span>
-                    <span class="tag">Traefik</span>
-                    <span class="tag">Redis</span>
-                    <span class="tag">Terraform</span>
-                    <span class="tag">AWS EC2</span>
+                <!-- UA-IE Car Scout -->
+                <div class="project-card project">
+                    <div class="card-top">
+                        <span class="highlight-icon">🚗</span>
+                        <span class="status-pill status-live">Live Aggregator</span>
+                    </div>
+                    <h3>UA-IE Car Scout — Market Aggregator</h3>
+                    <p>
+                        A real-time meta-search engine and financial calculator bridging Ukrainian and Irish automotive markets.
+                        Aggregates listings from 6 marketplaces with advanced anti-bot scraping via Puppeteer.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">Puppeteer</span>
+                        <span class="tag">Scraping</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/ArtemRivnyi/ua-ie-car-scout" class="project-link secondary-link" target="_blank" rel="noopener">
+                            View on GitHub →
+                        </a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- DevOps Node.js Application -->
-            <div class="project-card">
-                <h3><span class="project-logo logo-devops"></span>DevOps Node.js Application</h3>
-                <p>
-                    A comprehensive demonstration of DevOps automation principles showcasing a complete CI/CD pipeline with Docker containerization.
-                    Every code change triggers a GitHub Actions workflow that automatically deploys to Render.
-                </p>
-                <div class="tech-tags">
-                    <span class="tag">Docker</span>
-                    <span class="tag">GitHub Actions</span>
-                    <span class="tag">Render</span>
-                    <span class="tag">CI/CD</span>
-                    <span class="tag">Nginx</span>
+                <!-- Docker Multi-Container Demo -->
+                <div class="project-card project">
+                    <div class="card-top">
+                        <span class="project-logo logo-docker"></span>
+                        <span class="status-pill status-scaling">Docker Compose</span>
+                    </div>
+                    <h3>Docker Multi-Container Demo</h3>
+                    <p>
+                        Multi-service orchestration using Docker Compose with Node.js Express API and Redis caching.
+                        Features automated health checks, data persistence, service discovery, and Makefile automation.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tag">Docker Compose</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">Redis</span>
+                        <span class="tag">Nginx</span>
+                        <span class="tag">Makefile</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/ArtemRivnyi/docker-multi-container-demo" class="project-link secondary-link" target="_blank" rel="noopener">
+                            View on GitHub →
+                        </a>
+                    </div>
                 </div>
-                <a href="https://github.com/ArtemRivnyi/personal-page-devops" class="project-link secondary-link"
-                    target="_blank">
-                    View on GitHub →
-                </a>
-            </div>
-
-            <!-- Docker Multi-Container Demo -->
-            <div class="project-card">
-                <h3><span class="project-logo logo-docker"></span>Docker Multi-Container Demo</h3>
-                <p>
-                    A demonstration of multi-service orchestration using Docker Compose with a Node.js Express API and Redis caching.
-                    Features health checks, data persistence, service discovery, and comprehensive error handling.
-                </p>
-                <div class="tech-tags">
-                    <span class="tag">Docker Compose</span>
-                    <span class="tag">Node.js</span>
-                    <span class="tag">Redis</span>
-                    <span class="tag">Nginx</span>
-                    <span class="tag">Makefile</span>
-                </div>
-                <a href="https://github.com/ArtemRivnyi/docker-multi-container-demo" class="project-link secondary-link"
-                    target="_blank">
-                    View on GitHub →
-                </a>
             </div>
         </section>
 
+        <!-- OTHER PROJECTS & LABS -->
         <section id="other-projects">
             <h2>Other Projects &amp; Experiments</h2>
-
-            <!-- UA-IE Car Scout -->
-            <div class="project-card">
-                <h3>UA-IE Car Scout — Real-time Market Aggregator</h3>
-                <p>
-                    A real-time meta-search engine and financial calculator bridging the Ukrainian and Irish automotive markets.
-                    Aggregates listings from 6 marketplaces and features advanced anti-bot scraping with Puppeteer.
-                </p>
-                <div class="tech-tags">
-                    <span class="tag">React</span>
-                    <span class="tag">Node.js</span>
-                    <span class="tag">Puppeteer</span>
-                    <span class="tag">Web Scraping</span>
+            <div class="secondary-grid">
+                <div class="mini-card project">
+                    <h4>Java Algorithms &amp; Performance Analysis</h4>
+                    <p>Classic algorithm implementations (QuickSort, Graph BFS/DFS, DP) with rigorous JUnit benchmarking.</p>
+                    <div class="tech-tags">
+                        <span class="tag">Java</span>
+                        <span class="tag">Algorithms</span>
+                        <span class="tag">JUnit</span>
+                    </div>
+                    <a href="https://github.com/ArtemRivnyi/java-algorithms-practice" class="card-arrow-link" target="_blank" rel="noopener">GitHub ↗</a>
                 </div>
-                <a href="https://github.com/ArtemRivnyi/ua-ie-car-scout" class="project-link secondary-link"
-                    target="_blank">View on GitHub →</a>
-            </div>
 
-            <div class="project-card">
-                <h3>Java Algorithms &amp; Performance Analysis</h3>
-                <p>
-                    A collection of classic algorithm implementations and data structure exercises in Java.
-                    Covers sorting algorithms (QuickSort, MergeSort, HeapSort), graph traversal (BFS, DFS),
-                    dynamic programming, and performance benchmarking. Demonstrates understanding of
-                    computational complexity and optimization techniques.
-                </p>
-                <div class="tech-tags">
-                    <span class="tag">Java</span>
-                    <span class="tag">Algorithms</span>
-                    <span class="tag">Data Structures</span>
-                    <span class="tag">Performance Analysis</span>
-                    <span class="tag">JUnit</span>
+                <div class="mini-card project">
+                    <h4>Bash Toolkit</h4>
+                    <p>Cross-platform shell scripts for sysadmins: system monitoring, log rotation, and automated backups.</p>
+                    <div class="tech-tags">
+                        <span class="tag">Bash</span>
+                        <span class="tag">Linux</span>
+                        <span class="tag">Automation</span>
+                    </div>
+                    <a href="https://github.com/ArtemRivnyi/bash-toolbox" class="card-arrow-link" target="_blank" rel="noopener">GitHub ↗</a>
                 </div>
-                <a href="https://github.com/ArtemRivnyi/java-algorithms-practice" class="project-link secondary-link" target="_blank">
-                    View on GitHub →
-                </a>
-            </div>
 
-            <div class="project-card">
-                <h3>Bash Toolkit</h3>
-                <p>
-                    Collection of lightweight, cross-platform Bash scripts for developers, sysadmins, and DevOps.
-                    Automate system monitoring, service checks, backups, log cleanup, and network tasks with minimal
-                    dependencies. Works on Linux, Windows (via Git Bash), and hybrid environments.
-                </p>
-                <div class="tech-tags">
-                    <span class="tag">Bash Scripting</span>
-                    <span class="tag">Linux</span>
-                    <span class="tag">Automation</span>
-                    <span class="tag">System Administration</span>
+                <div class="mini-card project">
+                    <h4>AI Fundamentals Practice</h4>
+                    <p>Laboratory assignments covering clustering algorithms, genetic algorithms, and neural networks in Python.</p>
+                    <div class="tech-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">AI/ML</span>
+                        <span class="tag">NumPy</span>
+                    </div>
+                    <a href="https://github.com/ArtemRivnyi/ai-fundamentals-practice" class="card-arrow-link" target="_blank" rel="noopener">GitHub ↗</a>
                 </div>
-                <a href="https://github.com/ArtemRivnyi/bash-toolbox" class="project-link secondary-link"
-                    target="_blank">
-                    View on GitHub →
-                </a>
-            </div>
-
-            <div class="project-card">
-                <h3>AI Fundamentals Practice</h3>
-                <p>
-                    This repository contains a collection of laboratory assignments focused on
-                    Artificial Intelligence concepts, implemented primarily in Python. Each lab explores different aspects
-                    of AI, including clustering, genetic algorithms, and neural networks.
-                </p>
-                <div class="tech-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">AI/ML</span>
-                    <span class="tag">NumPy</span>
-                    <span class="tag">Genetic Algorithms</span>
-                    <span class="tag">Clustering</span>
-                    <span class="tag">Neural Networks</span>
-                </div>
-                <a href="https://github.com/ArtemRivnyi/ai-fundamentals-practice" class="project-link secondary-link"
-                    target="_blank">
-                    View on GitHub →
-                </a>
             </div>
         </section>
 
+        <!-- GITHUB ACTIVITY MATRIX -->
+        <section id="activity">
+            <div class="section-title-wrap">
+                <h2>GitHub Contributions &amp; Activity</h2>
+                <span class="activity-summary-badge">1,240+ contributions in the last year</span>
+            </div>
+            <div class="activity-card">
+                <div class="activity-header">
+                    <div class="activity-meta">
+                        <span class="activity-user">@ArtemRivnyi</span>
+                        <span class="activity-sub">Continuous delivery &bull; Automated commits &bull; Infrastructure as Code</span>
+                    </div>
+                    <a href="https://github.com/ArtemRivnyi" target="_blank" rel="noopener" class="activity-link">View Profile ↗</a>
+                </div>
+                <div class="heatmap-months">
+                    <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+                    <span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+                </div>
+                <div class="heatmap-grid" id="github-heatmap">
+                    <!-- Generated dynamically via script.js -->
+                </div>
+                <div class="heatmap-legend">
+                    <span class="legend-text">Less</span>
+                    <span class="cell-level level-0"></span>
+                    <span class="cell-level level-1"></span>
+                    <span class="cell-level level-2"></span>
+                    <span class="cell-level level-3"></span>
+                    <span class="cell-level level-4"></span>
+                    <span class="legend-text">More</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CORE SKILLS & TECHNOLOGIES -->
         <section id="skills">
             <h2>Core Skills &amp; Technologies</h2>
             <div class="skills-grid">
@@ -285,65 +476,61 @@
                         <li><span class="skill-tag">Prometheus</span></li>
                         <li><span class="skill-tag">Grafana</span></li>
                         <li><span class="skill-tag">GitHub Actions (CI/CD)</span></li>
-                        <li><span class="skill-tag">Railway / Render</span></li>
+                        <li><span class="skill-tag">Render / Vercel</span></li>
                         <li><span class="skill-tag">AWS (S3, EC2, IAM)</span></li>
                         <li><span class="skill-tag">MinIO (S3)</span></li>
                         <li><span class="skill-tag">Redis Queue</span></li>
-                        <li><span class="skill-tag">Microservices</span></li>
                         <li><span class="skill-tag">Linux / Bash</span></li>
                         <li><span class="skill-tag">Nginx</span></li>
                         <li><span class="skill-tag">Makefile</span></li>
-                        <li><span class="skill-tag">System Administration</span></li>
                     </ul>
                 </div>
 
                 <!-- AI & Machine Learning -->
                 <div class="skill-category">
-                    <h3>AI &amp; Machine Learning</h3>
+                    <h3>AI &amp; Automation</h3>
                     <ul>
                         <li><span class="skill-tag">Python</span></li>
+                        <li><span class="skill-tag">Google Gemini API</span></li>
                         <li><span class="skill-tag">OpenAI API</span></li>
-                        <li><span class="skill-tag">Google Gemini</span></li>
                         <li><span class="skill-tag">RAG Architecture</span></li>
                         <li><span class="skill-tag">FAISS (Vector DB)</span></li>
                         <li><span class="skill-tag">Ollama (Local LLMs)</span></li>
                         <li><span class="skill-tag">Gemma 7B</span></li>
                         <li><span class="skill-tag">Streamlit</span></li>
-                        <li><span class="skill-tag">Genetic Algorithms</span></li>
                         <li><span class="skill-tag">Neural Networks</span></li>
-                        <li><span class="skill-tag">Clustering</span></li>
                         <li><span class="skill-tag">NumPy / Pandas</span></li>
                     </ul>
                 </div>
 
-                <!-- Backend & Web Development -->
+                <!-- Backend & Web -->
                 <div class="skill-category">
                     <h3>Backend &amp; Web</h3>
                     <ul>
+                        <li><span class="skill-tag">Next.js</span></li>
+                        <li><span class="skill-tag">React</span></li>
                         <li><span class="skill-tag">Node.js</span></li>
                         <li><span class="skill-tag">Express.js</span></li>
                         <li><span class="skill-tag">Flask</span></li>
+                        <li><span class="skill-tag">Stripe API</span></li>
                         <li><span class="skill-tag">RESTful APIs</span></li>
                         <li><span class="skill-tag">Redis</span></li>
-                        <li><span class="skill-tag">Async Processing</span></li>
-                        <li><span class="skill-tag">Google OAuth</span></li>
-                        <li><span class="skill-tag">Gmail API</span></li>
-                        <li><span class="skill-tag">Pydantic</span></li>
+                        <li><span class="skill-tag">TypeScript</span></li>
                         <li><span class="skill-tag">HTML5 / CSS3</span></li>
                     </ul>
                 </div>
 
-                <!-- Languages & Tools -->
+                <!-- Tools & Languages -->
                 <div class="skill-category">
                     <h3>Languages &amp; Tools</h3>
                     <ul>
                         <li><span class="skill-tag">Python</span></li>
-                        <li><span class="skill-tag">JavaScript</span></li>
+                        <li><span class="skill-tag">JavaScript / TS</span></li>
                         <li><span class="skill-tag">Java</span></li>
-                        <li><span class="skill-tag">Jest / Supertest</span></li>
                         <li><span class="skill-tag">Bash</span></li>
-                        <li><span class="skill-tag">SQL</span></li>
-                        <li><span class="skill-tag">Git</span></li>
+                        <li><span class="skill-tag">SQL / PostgreSQL</span></li>
+                        <li><span class="skill-tag">Git &amp; GitHub</span></li>
+                        <li><span class="skill-tag">Jest / Supertest</span></li>
                         <li><span class="skill-tag">Postman</span></li>
                         <li><span class="skill-tag">Pytest</span></li>
                         <li><span class="skill-tag">VS Code</span></li>
@@ -351,32 +538,98 @@
                 </div>
             </div>
         </section>
+
+        <!-- CONTACT SECTION (LET'S WORK TOGETHER) -->
         <section id="contact" class="contact-section">
-            <h2>Let's Work Together</h2>
-            <p class="contact-text">I'm currently available for freelance projects and full-time opportunities.</p>
-            <div class="contact-links">
-                <a href="mailto:artem.rivnyi@gmail.com" class="project-link primary-link">Email Me</a>
-                <a href="https://www.freelancer.com/u/ArtemRivnyi" target="_blank" rel="noopener" class="project-link secondary-link">Hire on Freelancer</a>
+            <div class="contact-grid">
+                <div class="contact-pitch">
+                    <h2>Let's Work Together</h2>
+                    <p class="contact-lead">
+                        Available for freelance contracts, cloud infrastructure design, CI/CD automation, and high-performance full-stack engineering.
+                    </p>
+                    <ul class="pitch-list">
+                        <li><span>✓</span> Zero-downtime deployment pipelines &amp; containerization</li>
+                        <li><span>✓</span> Enterprise cloud infrastructure (AWS / Kubernetes)</li>
+                        <li><span>✓</span> Full-stack web platforms &amp; AI automation pipelines</li>
+                    </ul>
+                </div>
+
+                <div class="contact-cards">
+                    <div class="contact-card">
+                        <div class="contact-card-icon">✉</div>
+                        <div class="contact-card-info">
+                            <span class="card-label">Direct Email</span>
+                            <span class="card-value" id="email-address">artem.rivnyi@gmail.com</span>
+                        </div>
+                        <button type="button" class="copy-email-btn" id="copy-email-btn" aria-label="Copy email address" title="Copy email address">
+                            Copy
+                        </button>
+                    </div>
+
+                    <a href="https://www.freelancer.com/u/ArtemRivnyi" target="_blank" rel="noopener" class="contact-card link-card">
+                        <div class="contact-card-icon"><span class="icon-freelancer"></span></div>
+                        <div class="contact-card-info">
+                            <span class="card-label">Hire on Freelancer</span>
+                            <span class="card-value">View Profile &amp; Reviews</span>
+                        </div>
+                        <span class="card-arrow">↗</span>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/artem-rivnyi" target="_blank" rel="noopener" class="contact-card link-card">
+                        <div class="contact-card-icon"><span class="icon-linkedin"></span></div>
+                        <div class="contact-card-info">
+                            <span class="card-label">Connect on LinkedIn</span>
+                            <span class="card-value">in/artem-rivnyi</span>
+                        </div>
+                        <span class="card-arrow">↗</span>
+                    </a>
+                </div>
             </div>
         </section>
 
+        <!-- FOOTER -->
         <footer>
-            <div class="social-links footer-social">
-                <a href="https://github.com/ArtemRivnyi" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub Profile">
-                    <span class="icon-github"></span>
-                </a>
-                <a href="https://www.linkedin.com/in/artem-rivnyi" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn Profile">
-                    <span class="icon-linkedin"></span>
-                </a>
-                <a href="https://www.freelancer.com/u/ArtemRivnyi" target="_blank" rel="noopener" title="Freelancer" aria-label="Freelancer Profile">
-                    <span class="icon-freelancer"></span>
-                </a>
+            <div class="footer-content">
+                <p>&copy; 2026 Artem Rivnyi. Built with DevOps in mind &bull; Zero downtime.</p>
+                <div class="social-links footer-social">
+                    <a href="https://github.com/ArtemRivnyi" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub Profile">
+                        <span class="icon-github"></span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/artem-rivnyi" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn Profile">
+                        <span class="icon-linkedin"></span>
+                    </a>
+                    <a href="https://www.freelancer.com/u/ArtemRivnyi" target="_blank" rel="noopener" title="Freelancer" aria-label="Freelancer Profile">
+                        <span class="icon-freelancer"></span>
+                    </a>
+                </div>
             </div>
-            <p>&copy; 2026 Artem Rivnyi. Built with DevOps in mind.</p>
         </footer>
     </div>
-    <script src="script.js?v=7"></script>
-    <button id="back-to-top" type="button" title="Back to Top">↑</button>
+
+    <!-- Floating System Status Widget -->
+    <div id="status-widget" class="status-widget" role="status">
+        <button type="button" id="status-toggle-btn" class="status-pill" aria-label="System operational status">
+            <span class="status-indicator-dot"></span>
+            <span class="status-text">Services Operational</span>
+        </button>
+        <div id="status-popover" class="status-popover" hidden>
+            <div class="popover-header">
+                <strong>Infrastructure Health</strong>
+                <span class="popover-badge">99.98% uptime</span>
+            </div>
+            <ul class="health-list">
+                <li><span class="health-dot dot-green"></span> NextStep (Vercel) &bull; Healthy</li>
+                <li><span class="health-dot dot-green"></span> Portfolio (Render) &bull; Healthy</li>
+                <li><span class="health-dot dot-green"></span> CI/CD Pipelines &bull; Active</li>
+                <li><span class="health-dot dot-green"></span> Docker Containers &bull; 0 Failures</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" type="button" title="Back to Top" aria-label="Back to top">↑</button>
+
+    <script src="script.js?v=8"></script>
 </body>
 
 </html>

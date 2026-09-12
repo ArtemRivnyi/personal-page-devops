@@ -1,19 +1,19 @@
 # Personal Portfolio with Automated CI/CD Pipeline
 
-[![CI/CD Pipeline](https://github.com/ArtemRivnyi/personal-page-devops/actions/workflows/cicd.yml/badge.svg )](https://github.com/ArtemRivnyi/personal-page-devops/actions )
-![Live Demo](https://img.shields.io/badge/Live%20Demo-Online-28A745?style=flat-square )
-![Code Quality](https://img.shields.io/badge/Code%20Quality-High-4CAF50?style=flat-square )
+[![CI/CD Pipeline](https://github.com/ArtemRivnyi/personal-page-devops/actions/workflows/cicd.yml/badge.svg)](https://github.com/ArtemRivnyi/personal-page-devops/actions)
+![Live Demo](https://img.shields.io/badge/Live%20Demo-Online-28A745?style=flat-square)
+![Code Quality](https://img.shields.io/badge/Code%20Quality-High-4CAF50?style=flat-square)
 
-![Docker](https://img.shields.io/badge/Containerization-Docker-2496ED?style=flat-square&logo=docker&logoColor=white )
-![GitHub Actions](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white )
-![Render](https://img.shields.io/badge/Deployment-Render-46E3B7?style=flat-square&logo=render )
-![HTML5](https://img.shields.io/badge/Frontend-HTML5-E34F26?style=flat-square&logo=html5&logoColor=white )
-![CSS3](https://img.shields.io/badge/Styling-CSS3-1572B6?style=flat-square&logo=css3&logoColor=white )
-![JavaScript](https://img.shields.io/badge/Language-JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black )
+![Docker](https://img.shields.io/badge/Containerization-Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
+![Render](https://img.shields.io/badge/Deployment-Render-46E3B7?style=flat-square&logo=render)
+![HTML5](https://img.shields.io/badge/Frontend-HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/Styling-CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/Language-JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
 
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg )](https://opensource.org/licenses/MIT )
-[![Last Commit](https://img.shields.io/github/last-commit/ArtemRivnyi/personal-page-devops?label=Last%20Update&style=flat-square )](https://github.com/ArtemRivnyi/personal-page-devops/commits/main )
-[![GitHub Stars](https://img.shields.io/github/stars/ArtemRivnyi/personal-page-devops?style=social )](https://github.com/ArtemRivnyi/personal-page-devops/stargazers )
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Last Commit](https://img.shields.io/github/last-commit/ArtemRivnyi/personal-page-devops?label=Last%20Update&style=flat-square)](https://github.com/ArtemRivnyi/personal-page-devops/commits/main)
+[![GitHub Stars](https://img.shields.io/github/stars/ArtemRivnyi/personal-page-devops?style=social)](https://github.com/ArtemRivnyi/personal-page-devops/stargazers)
 
 A modern, responsive **portfolio website** showcasing technical projects and skills, featuring a robust and fully automated **Continuous Integration/Continuous Deployment (CI/CD) pipeline**. This project serves as a practical demonstration of DevOps expertise, ensuring a consistent environment through Docker and seamless, zero-downtime deployment via Render.
 

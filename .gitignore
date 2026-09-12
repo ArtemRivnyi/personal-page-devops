@@ -41,3 +41,7 @@ Thumbs.db
 
 # Docker
 .dockerignore
+
+# Reference media
+tips/
+*.mp4
