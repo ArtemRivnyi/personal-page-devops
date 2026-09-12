@@ -1254,6 +1254,31 @@ body.light-theme .site-header {
     font-weight: 500;
 }
 
+/* OTHER PROJECTS MINI GRID */
+.mini-grid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.mini-project-card {
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    background: var(--card-bg);
+    padding: 0;
+}
+
+.mini-project-card .card-content-wrap {
+    padding: 20px;
+}
+
+.mini-project-card .project-heading {
+    font-size: 1rem;
+}
+
+.mini-project-card .project-summary {
+    font-size: 0.82rem;
+    -webkit-line-clamp: 3;
+}
+
 /* FLOATING CHAT WIDGET (@onlyrenbl frame_40s) */
 .floating-chat-container {
     position: fixed;
@@ -1383,11 +1408,14 @@ body.light-theme .site-header {
 .chat-close-btn {
     background: transparent;
     border: none;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     color: var(--text-muted);
     cursor: pointer;
     transition: color 0.15s;
     line-height: 1;
+    padding: 8px 12px;
+    z-index: 10;
+    position: relative;
 }
 
 .chat-close-btn:hover {
