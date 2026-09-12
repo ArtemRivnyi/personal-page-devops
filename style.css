@@ -1279,6 +1279,211 @@ body.light-theme .site-header {
     -webkit-line-clamp: 3;
 }
 
+/* NO-MEDIA PROJECT CARDS (text-only, no screenshot) */
+.no-media .card-content-wrap {
+    padding: 24px;
+}
+
+.card-badge-inline {
+    margin-bottom: 10px;
+}
+
+.card-badge-inline .card-status-badge {
+    position: static;
+    display: inline-block;
+}
+
+/* COMPANY LOGO IN EXPERIENCE */
+.company-logo-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+}
+
+.company-logo {
+    height: 32px;
+    max-width: 84px;
+    object-fit: contain;
+    background: #0d1117;
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 3px 8px;
+    flex-shrink: 0;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.company-logo:hover {
+    transform: scale(1.04);
+    border-color: var(--accent-cyan);
+}
+
+/* EDUCATION LOGO (DNU) */
+.edu-header-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+}
+
+.edu-univ-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #fff;
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 4px 14px rgb(0 0 0 / 30%);
+    flex-shrink: 0;
+    padding: 2px;
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.edu-univ-logo:hover {
+    transform: scale(1.06);
+    box-shadow: 0 6px 18px rgb(50 108 229 / 35%);
+}
+
+/* TECH PILL SVG ICONS */
+.pill-icon {
+    width: 15px;
+    height: 15px;
+    vertical-align: -2px;
+    margin-right: 6px;
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+.mini-tag .pill-icon {
+    width: 13px;
+    height: 13px;
+    vertical-align: -2px;
+    margin-right: 4px;
+}
+
+/* CERTIFICATIONS WITH LOGOS & THUMBNAILS */
+.cert-item-layout {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.cert-main-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.cert-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+}
+
+.cert-issuer-svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+.cert-actions-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.view-cert-btn {
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.view-cert-btn:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+}
+
+/* MINI CERTIFICATE PREVIEW THUMBNAIL */
+.cert-thumb-box {
+    position: relative;
+    width: 140px;
+    height: 96px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    background: #0d1117;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 35%);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s, box-shadow 0.25s;
+}
+
+.cert-thumb-box:hover {
+    transform: translateY(-3px) scale(1.03);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 8px 22px rgb(0 0 0 / 50%), 0 0 12px rgb(56 189 248 / 20%);
+}
+
+.cert-mini-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.cert-thumb-box:hover .cert-mini-photo {
+    transform: scale(1.05);
+}
+
+.cert-expand-badge {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    background: rgb(13 17 23 / 85%);
+    backdrop-filter: blur(4px);
+    color: #f0f6fc;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgb(255 255 255 / 15%);
+    pointer-events: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.cert-thumb-box:hover .cert-expand-badge {
+    background: var(--accent-cyan);
+    color: #000;
+}
+
+@media (width <= 640px) {
+    .cert-item-layout {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cert-thumb-box {
+        width: 100%;
+        max-width: 220px;
+        height: 120px;
+        margin-top: 12px;
+    }
+}
+
 /* FLOATING CHAT WIDGET (@onlyrenbl frame_40s) */
 .floating-chat-container {
     position: fixed;
