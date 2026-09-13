@@ -1302,20 +1302,35 @@ body.light-theme .site-header {
 }
 
 .company-logo {
-    height: 32px;
-    max-width: 84px;
+    flex-shrink: 0;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s, box-shadow 0.2s;
+}
+
+.company-wordmark {
+    height: 38px;
+    width: auto;
+    max-width: 110px;
     object-fit: contain;
     background: #0d1117;
     border: 1px solid var(--border-subtle);
     border-radius: 8px;
-    padding: 3px 8px;
-    flex-shrink: 0;
-    transition: transform 0.2s, border-color 0.2s;
+    padding: 4px 10px;
+}
+
+.company-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: #0d1117;
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 35%);
 }
 
 .company-logo:hover {
-    transform: scale(1.04);
-    border-color: var(--accent-cyan);
+    transform: scale(1.05);
+    border-color: var(--accent-blue);
+    box-shadow: 0 4px 14px rgb(56 189 248 / 25%);
 }
 
 /* EDUCATION LOGO (DNU) */
@@ -1329,19 +1344,20 @@ body.light-theme .site-header {
 .edu-univ-logo {
     width: 48px;
     height: 48px;
-    border-radius: 50%;
-    object-fit: cover;
+    border-radius: 10px;
+    object-fit: contain;
     background: #fff;
     border: 1px solid var(--border-subtle);
-    box-shadow: 0 4px 14px rgb(0 0 0 / 30%);
+    box-shadow: 0 2px 10px rgb(0 0 0 / 25%);
     flex-shrink: 0;
-    padding: 2px;
-    transition: transform 0.25s, box-shadow 0.25s;
+    padding: 3px;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s, border-color 0.25s;
 }
 
 .edu-univ-logo:hover {
     transform: scale(1.06);
-    box-shadow: 0 6px 18px rgb(50 108 229 / 35%);
+    border-color: var(--accent-blue);
+    box-shadow: 0 4px 14px rgb(56 189 248 / 30%);
 }
 
 /* TECH PILL SVG ICONS */
