@@ -544,7 +544,7 @@ function initGitHubHeatmap() {
             if (!activeBtn || activeBtn.dataset.year === '2026') {
                 renderYear('2026');
             }
-        } catch (_) {
+        } catch {
             // Graceful fallback to verified REAL_CONTRIBUTIONS_2026
         }
     }
