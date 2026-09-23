@@ -12,6 +12,41 @@ function debounce(func, wait) {
     };
 }
 
+function setupMobileMenu() {
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    if (!toggle || !navMenu) return;
+
+    function closeMenu() {
+        toggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    toggle.addEventListener('click', () => {
+        const isOpen = navMenu.classList.toggle('active');
+        toggle.classList.toggle('active', isOpen);
+        toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // Close menu when clicking a nav link
+    navMenu.querySelectorAll('.nav-item').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    // Close menu on resize above mobile breakpoint
+    window.addEventListener('resize', debounce(() => {
+        if (window.innerWidth > 768) closeMenu();
+    }, 100), { passive: true });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!toggle.contains(e.target) && !navMenu.contains(e.target)) {
+            closeMenu();
+        }
+    });
+}
+
 function setupThemeToggle() {
     let toggle = document.getElementById('theme-toggle');
     if (!toggle) {
@@ -734,6 +769,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Theme Toggle
     setupThemeToggle();
+
+    // 2.5. Mobile Menu
+    setupMobileMenu();
 
     // 3. Subtitle Typing
     initTypingAnimation();

@@ -1906,7 +1906,41 @@ body.light-theme .site-header {
     transform: translateY(-2px);
 }
 
+/* ── MOBILE MENU TOGGLE (Burger) ── */
+.mobile-menu-toggle {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 6px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.15s, color 0.15s;
+    z-index: 50;
+}
+
+.mobile-menu-toggle:hover {
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+}
+
+.mobile-menu-toggle .close-icon {
+    display: none;
+}
+
+.mobile-menu-toggle.active .burger-icon {
+    display: none;
+}
+
+.mobile-menu-toggle.active .close-icon {
+    display: block;
+}
+
 /* Responsive Media Queries */
+
+/* ── Tablet (≤820px) ── */
 @media (width <= 820px) {
     .featured-showcase-card {
         grid-template-columns: 1fr;
@@ -1929,8 +1963,62 @@ body.light-theme .site-header {
         flex-direction: column;
         align-items: flex-start;
     }
+
+    .mini-grid {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
+/* ── Mobile Nav (≤768px) ── */
+@media (width <= 768px) {
+    .mobile-menu-toggle {
+        display: inline-flex;
+    }
+
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 56px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: var(--bg-secondary);
+        border-bottom: 1px solid var(--border-subtle);
+        padding: 16px 24px;
+        gap: 0;
+        box-shadow: 0 8px 24px rgb(0 0 0 / 25%);
+        z-index: 99;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-menu .nav-item {
+        padding: 12px 0;
+        font-size: 1rem;
+        border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-menu .nav-item:last-of-type {
+        border-bottom: none;
+    }
+
+    .nav-menu .nav-divider {
+        display: none;
+    }
+
+    .nav-menu .theme-toggle-btn {
+        margin-top: 12px;
+        align-self: flex-start;
+    }
+
+    body.light-theme .nav-menu {
+        background: var(--bg-secondary);
+    }
+}
+
+/* ── Small Mobile (≤600px) ── */
 @media (width <= 600px) {
     .ref-timeline-row {
         grid-template-columns: 1fr;
@@ -1939,10 +2027,6 @@ body.light-theme .site-header {
 
     .header-inner {
         padding: 0 16px;
-    }
-
-    .nav-menu {
-        gap: 12px;
     }
 
     .main-wrapper {
@@ -1956,5 +2040,210 @@ body.light-theme .site-header {
     .chat-drawer {
         width: calc(100vw - 32px);
         right: -8px;
+    }
+
+    .mini-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .outside-ide-layout {
+        gap: 24px;
+    }
+}
+
+/* ── Narrow Phone (≤480px) ── */
+@media (width <= 480px) {
+    .hero-name {
+        font-size: 1.5rem;
+    }
+
+    .hero-headline {
+        font-size: 1.25rem;
+    }
+
+    .hero-bio-paragraph {
+        font-size: 0.95rem;
+    }
+
+    .hero-profile-row {
+        gap: 14px;
+    }
+
+    .avatar-ring {
+        width: 60px;
+        height: 60px;
+    }
+
+    .main-wrapper {
+        padding: 24px 14px 80px;
+    }
+
+    .section-title {
+        font-size: 1.15rem;
+    }
+
+    .featured-title {
+        font-size: 1.15rem;
+    }
+
+    .featured-showcase-card {
+        padding: 16px;
+    }
+
+    .ref-project-card .card-content-wrap {
+        padding: 14px;
+    }
+
+    .project-heading {
+        font-size: 0.95rem;
+    }
+
+    .cert-thumb-box {
+        max-width: 100%;
+    }
+
+    .floating-chat-container {
+        bottom: 16px;
+        right: 16px;
+    }
+
+    .chat-widget-pill {
+        padding: 8px 14px;
+        font-size: 0.82rem;
+    }
+
+    #back-to-top {
+        bottom: 70px;
+        right: 16px;
+        width: 36px;
+        height: 36px;
+    }
+
+    .heatmap-container {
+        margin: 0 -14px;
+        padding: 0 14px;
+    }
+
+    .ref-projects-grid {
+        gap: 16px;
+    }
+
+    .stacked-cards-wrapper {
+        width: 240px;
+        height: 190px;
+    }
+
+    .company-logo-row {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .clean-section-title {
+        font-size: 1.3rem;
+    }
+
+    .role-title {
+        font-size: 0.95rem;
+    }
+
+    .role-summary {
+        font-size: 0.85rem;
+    }
+
+    .inline-pill {
+        font-size: 0.8rem;
+        padding: 1px 7px;
+    }
+}
+
+/* ── Tiny Phone (≤375px) ── */
+@media (width <= 375px) {
+    .hero-name {
+        font-size: 1.3rem;
+    }
+
+    .hero-headline {
+        font-size: 1.1rem;
+    }
+
+    .hero-bio-paragraph {
+        font-size: 0.88rem;
+        line-height: 1.65;
+    }
+
+    .hero-social-row {
+        gap: 10px;
+    }
+
+    .hero-cta-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .hero-btn-primary {
+        font-size: 0.85rem;
+        padding: 9px 16px;
+    }
+
+    .availability-status-pill {
+        font-size: 0.8rem;
+    }
+
+    .main-wrapper {
+        padding: 20px 12px 72px;
+    }
+
+    .header-inner {
+        padding: 0 16px;
+    }
+
+    .avatar-ring {
+        width: 52px;
+        height: 52px;
+    }
+
+    .inline-pill {
+        font-size: 0.76rem;
+        padding: 0 6px;
+        gap: 4px;
+    }
+
+    .pill-dot {
+        width: 5px;
+        height: 5px;
+    }
+
+    .ref-github-card {
+        padding: 16px;
+    }
+
+    .tech-pill-item {
+        font-size: 0.78rem;
+        padding: 5px 10px;
+    }
+
+    .mini-tag {
+        font-size: 0.72rem;
+        padding: 2px 6px;
+    }
+
+    .stacked-cards-wrapper {
+        width: 220px;
+        height: 170px;
+    }
+
+    .outside-story {
+        font-size: 0.88rem;
+    }
+
+    .outside-pill {
+        font-size: 0.76rem;
+        padding: 3px 8px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 0.88rem;
     }
 }
