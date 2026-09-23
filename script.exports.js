@@ -393,7 +393,7 @@ const REAL_CONTRIBUTIONS_2026 = [
 ];
 
 const GITHUB_YEARS = {
-    '2026': { total: '1,002', countText: '1,002 contributions in 2026' },
+    '2026': { total: '1,034', countText: '1,034 contributions in 2026' },
     '2025': { total: '527', countText: '527 contributions in 2025' },
     '2024': { total: '0', countText: '0 contributions in 2024' },
     '2023': { total: '12', countText: '12 contributions in 2023' },
@@ -490,7 +490,7 @@ function initGitHubHeatmap() {
             }
         }
 
-        const yearInfo = GITHUB_YEARS[year] || { total: '1,002', countText: `${year} contributions` };
+        const yearInfo = GITHUB_YEARS[year] || { total: '1,034', countText: `${year} contributions` };
         if (countHeading) {
             countHeading.textContent = yearInfo.countText;
         }
@@ -511,6 +511,45 @@ function initGitHubHeatmap() {
     });
 
     renderYear('2026');
+
+    // Live Auto-Scan: Fetch real-time GitHub activity dynamically
+    async function syncLiveContributions() {
+        try {
+            if (typeof fetch === 'undefined') return;
+            const res = await fetch('https://github-contributions-api.jogruber.de/v4/ArtemRivnyi?y=2026');
+            if (!res.ok) return;
+            const data = await res.json();
+            if (!data || !data.contributions || !data.total) return;
+
+            const jan1 = new Date('2026-01-01T00:00:00Z');
+            const jan1Day = jan1.getUTCDay();
+
+            data.contributions.forEach((day) => {
+                if (day.count > 0) {
+                    const dt = new Date(`${day.date}T00:00:00Z`);
+                    const diffDays = Math.round((dt - jan1) / (1000 * 60 * 60 * 24));
+                    const w = Math.floor((diffDays + jan1Day) / 7);
+                    const d = dt.getUTCDay();
+                    const lvl = day.level > 0 ? day.level : (day.count >= 30 ? 4 : day.count >= 15 ? 3 : day.count >= 5 ? 2 : 1);
+                    const dateFormatted = dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+                    lookup2026.set(`${w}_${d}`, { w, d, lvl, c: day.count, date: dateFormatted });
+                }
+            });
+
+            const totalCount = data.total[2026] || 1034;
+            GITHUB_YEARS['2026'].total = totalCount.toLocaleString('en-US');
+            GITHUB_YEARS['2026'].countText = `${totalCount.toLocaleString('en-US')} contributions in 2026`;
+
+            const activeBtn = document.querySelector('.year-pill.active');
+            if (!activeBtn || activeBtn.dataset.year === '2026') {
+                renderYear('2026');
+            }
+        } catch (_) {
+            // Graceful fallback to verified REAL_CONTRIBUTIONS_2026
+        }
+    }
+
+    syncLiveContributions();
 }
 
 function initCopyEmail() {

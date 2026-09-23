@@ -1,0 +1,38 @@
+name: Daily GitHub Activity Heatmap Auto-Sync
+
+on:
+  schedule:
+    # Runs daily at 06:00 UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-activity:
+    name: Sync GitHub Heatmap & Counter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Run GitHub Activity Sync
+        run: node scripts/sync-github-activity.mjs
+
+      - name: Commit & Push If Changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html script.js script.exports.js
+          if git diff --staged --quiet; then
+            echo "No new contributions detected today."
+          else
+            git commit -m "chore(activity): auto-sync GitHub contributions $(date -u '+%Y-%m-%d')"
+            git push origin main || echo "Push skipped or no credentials"
+          fi

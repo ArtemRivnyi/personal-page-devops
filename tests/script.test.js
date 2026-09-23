@@ -500,8 +500,8 @@ describe('initGitHubHeatmap', () => {
 
     btn2026.click();
     expect(btn2026.classList.contains('active')).toBe(true);
-    expect(heading.textContent).toBe('1,002 contributions in 2026');
-    expect(badge.textContent).toBe('1,002 contributions in 2026');
+    expect(heading.textContent).toMatch(/(\d+,\d+|\d+) contributions in 2026/);
+    expect(badge.textContent).toMatch(/(\d+,\d+|\d+) contributions in 2026/);
   });
 });
 
