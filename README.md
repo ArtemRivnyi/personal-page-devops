@@ -169,15 +169,18 @@ The repository maintains a clean and focused structure, typical of a modern web 
     ├── tests/                 # Directory for Jest unit tests
     └── ... (config files)     # jest.config.js, eslint.config.mjs, etc.
 
-## 🤝 Contributing
+## 🤝 Contributing & Collaboration
 
-This is a personal portfolio project, but suggestions for improvements to the CI/CD pipeline, code structure, or documentation are welcome.
+This is a personal portfolio project showcasing production DevOps practices. Suggestions for improvements to the CI/CD pipeline, code structure, or documentation are always welcome.
+
+* **Core Maintainer & DevOps Lead:** [Artem Rivnyi (@ArtemRivnyi)](https://github.com/ArtemRivnyi)
+* **Automation & Quality Contributor:** [darklivegame-ai (@darklivegame-ai)](https://github.com/darklivegame-ai)
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🧰 Maintainer
+## 🧰 Contact & Links
 
 **Artem Rivnyi** — AI & DevOps Specialist
 
