@@ -13,6 +13,7 @@
 
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Last Commit](https://img.shields.io/github/last-commit/ArtemRivnyi/personal-page-devops?label=Last%20Update&style=flat-square)](https://github.com/ArtemRivnyi/personal-page-devops/commits/main)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/ArtemRivnyi/personal-page-devops/pulls)
 [![GitHub Stars](https://img.shields.io/github/stars/ArtemRivnyi/personal-page-devops?style=social)](https://github.com/ArtemRivnyi/personal-page-devops/stargazers)
 
 A modern, responsive **portfolio website** showcasing technical projects and skills, featuring a robust and fully automated **Continuous Integration/Continuous Deployment (CI/CD) pipeline**. This project serves as a practical demonstration of DevOps expertise, ensuring a consistent environment through Docker and seamless, zero-downtime deployment via Render.
