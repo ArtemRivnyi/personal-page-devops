@@ -92,6 +92,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
+    -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     background: rgb(13 17 23 / 80%);
     border-bottom: 1px solid var(--border-subtle);
@@ -147,6 +148,7 @@ body.light-theme .site-header {
 .nav-divider {
     color: var(--border-subtle);
     font-size: 0.85rem;
+    -webkit-user-select: none;
     user-select: none;
 }
 
@@ -1277,6 +1279,7 @@ body.light-theme .site-header {
 .mini-project-card .project-summary {
     font-size: 0.82rem;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
 }
 
 /* NO-MEDIA PROJECT CARDS (text-only, no screenshot) */
@@ -1470,6 +1473,7 @@ body.light-theme .site-header {
     bottom: 4px;
     right: 4px;
     background: rgb(13 17 23 / 85%);
+    -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
     color: #f0f6fc;
     font-size: 0.65rem;
@@ -1787,6 +1791,7 @@ body.light-theme .site-header {
     position: absolute;
     inset: 0;
     background: rgb(0 0 0 / 85%);
+    -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
 }
 
