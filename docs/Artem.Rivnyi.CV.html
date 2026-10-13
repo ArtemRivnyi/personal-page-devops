@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Artem Rivnyi — Cloud & DevOps Engineer CV</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    :root {
+      --primary: #0f172a;
+      --accent: #059669;
+      --accent-dark: #047857;
+      --accent-light: #ecfdf5;
+      --text: #1e293b;
+      --text-muted: #475569;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --tag-bg: #f1f5f9;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text);
+      background-color: #f1f5f9;
+      line-height: 1.45;
+      font-size: 9.2pt;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 20px auto;
+      background: #ffffff;
+      padding: 14mm 16mm;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      page-break-after: always;
+      position: relative;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+      .page {
+        margin: 0;
+        padding: 12mm 14mm;
+        box-shadow: none;
+        width: 100%;
+        min-height: 297mm;
+        border-radius: 0;
+        page-break-after: always;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+    }
+
+    /* Header */
+    .header {
+      border-bottom: 2.5px solid var(--accent);
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .header-left h1 {
+      font-size: 23pt;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--primary);
+      line-height: 1.05;
+      text-transform: uppercase;
+    }
+
+    .header-left .title {
+      font-size: 11pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 3px;
+      letter-spacing: -0.01em;
+    }
+
+    .header-right {
+      text-align: right;
+      font-size: 8.2pt;
+      color: var(--muted);
+      line-height: 1.42;
+    }
+
+    .header-right a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .header-right a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    /* Section Styling */
+    .section-title {
+      font-size: 10.2pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      border-bottom: 1.5px solid var(--border);
+      padding-bottom: 3px;
+      margin-bottom: 8px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-title:first-of-type {
+      margin-top: 0;
+    }
+
+    .summary-text {
+      font-size: 8.8pt;
+      color: #334155;
+      text-align: justify;
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+      margin-bottom: 10px;
+    }
+
+    .skill-block {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 10px;
+    }
+
+    .skill-block-title {
+      font-size: 8.2pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3.5px;
+    }
+
+    .tag {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      padding: 1.5px 5.5px;
+      border-radius: 4px;
+      font-size: 7.6pt;
+      font-weight: 500;
+      color: #334155;
+    }
+
+    .tag.highlight {
+      background: var(--accent-light);
+      border-color: #a7f3d0;
+      color: #065f46;
+      font-weight: 600;
+    }
+
+    /* Experience Items */
+    .exp-item {
+      margin-bottom: 11px;
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+
+    .exp-role {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .exp-company {
+      font-size: 9.2pt;
+      font-weight: 600;
+      color: var(--accent-dark);
+    }
+
+    .exp-badge {
+      display: inline-block;
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      color: #92400e;
+      font-size: 7.2pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 1px 5px;
+      border-radius: 3px;
+      margin-left: 4px;
+      letter-spacing: 0.03em;
+    }
+
+    .exp-badge.live {
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+      color: #065f46;
+    }
+
+    .exp-date {
+      font-size: 8.2pt;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .exp-bullets {
+      list-style-type: disc;
+      padding-left: 15px;
+      font-size: 8.5pt;
+      color: #334155;
+      line-height: 1.4;
+    }
+
+    .exp-bullets li {
+      margin-bottom: 2.5px;
+    }
+
+    .exp-bullets li strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Projects Detailed (Page 2) */
+    .proj-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 11px;
+      margin-bottom: 9px;
+    }
+
+    .proj-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 3px;
+    }
+
+    .proj-card-title {
+      font-size: 9.2pt;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .proj-card-links a {
+      color: var(--accent-dark);
+      text-decoration: none;
+      font-size: 8pt;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    .proj-card-desc {
+      font-size: 8.3pt;
+      color: #334155;
+      line-height: 1.38;
+      margin-bottom: 4px;
+    }
+
+    .proj-card-bullets {
+      list-style-type: disc;
+      padding-left: 14px;
+      font-size: 8pt;
+      color: #475569;
+      line-height: 1.35;
+    }
+
+    .proj-card-bullets li {
+      margin-bottom: 1.5px;
+    }
+
+    /* Certifications Grid (Page 2) */
+    .certs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+      margin-bottom: 10px;
+    }
+
+    .cert-group {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 7px 10px;
+    }
+
+    .cert-group-title {
+      font-size: 8.2pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--primary);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 3px;
+      margin-bottom: 5px;
+    }
+
+    .cert-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 8pt;
+      margin-bottom: 4px;
+    }
+
+    .cert-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .cert-title-text {
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .cert-issuer-text {
+      font-size: 7.4pt;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    /* Two-col layout on Page 2 for Education & Additional */
+    .split-col {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 16px;
+    }
+
+    .meta-box {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 12px;
+    }
+
+    .page-footer-note {
+      position: absolute;
+      bottom: 6mm;
+      left: 16mm;
+      right: 16mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.2pt;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= PAGE 1 ================= -->
+  <div class="page">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <h1>Artem Rivnyi</h1>
+        <div class="title">Cloud & DevOps Engineer | Platform & AI Automation</div>
+      </div>
+      <div class="header-right">
+        <div>📍 Co. Wicklow, Ireland (W91 WR44)</div>
+        <div>✉️ <a href="mailto:artemrivnyi@outlook.com">artemrivnyi@outlook.com</a> | 📞 +353-87-005-5579</div>
+        <div>💻 <a href="https://github.com/ArtemRivnyi" target="_blank">github.com/ArtemRivnyi</a> (1,700+ Contributions)</div>
+        <div>💼 <a href="https://linkedin.com/in/artem-rivnyi" target="_blank">linkedin.com/in/artem-rivnyi</a></div>
+        <div>🌐 <a href="https://personal-page-devops.onrender.com" target="_blank">personal-page-devops.onrender.com</a></div>
+      </div>
+    </header>
+
+    <!-- Professional Summary -->
+    <section>
+      <div class="section-title">Professional Summary</div>
+      <p class="summary-text">
+        Proactive Cloud & DevOps Engineer with hands-on production experience architecting resilient cloud infrastructure on AWS, automating multi-stage CI/CD pipelines, and shipping enterprise-grade cross-platform systems. Proven expertise operating under strict Non-Disclosure Agreements (NDA) on scalable AI platforms, designing modular Terraform/Terragrunt architectures, orchestrating containerized microservices, and leading full-cycle software delivery from system design to Google Play Store releases. Demonstrates unwavering momentum with 1,700+ GitHub contributions over the past year, backed by deep competence in SRE observability (Prometheus/Grafana), Docker, Linux administration, and autonomous AI workflows.
+      </p>
+    </section>
+
+    <!-- Technical Skills Matrix -->
+    <section>
+      <div class="section-title">Core Technical Competencies</div>
+      <div class="skills-grid">
+        <div class="skill-block">
+          <div class="skill-block-title">Cloud Infrastructure & IaC</div>
+          <div class="skill-tags">
+            <span class="tag highlight">AWS (EC2, S3, RDS, VPC)</span>
+            <span class="tag highlight">Terraform</span>
+            <span class="tag highlight">Terragrunt</span>
+            <span class="tag">Route53 Automated Failover</span>
+            <span class="tag">AWS Bedrock LLMs</span>
+            <span class="tag">IAM Security Policies</span>
+          </div>
+        </div>
+
+        <div class="skill-block">
+          <div class="skill-block-title">Containers & CI/CD Pipelines</div>
+          <div class="skill-tags">
+            <span class="tag highlight">Docker & Multi-Stage Builds</span>
+            <span class="tag highlight">Kubernetes & Helm</span>
+            <span class="tag">GitLab CI/CD</span>
+            <span class="tag">GitHub Actions</span>
+            <span class="tag">Traefik Reverse Proxy</span>
+            <span class="tag">Zero-Downtime Deploy</span>
+          </div>
+        </div>
+
+        <div class="skill-block">
+          <div class="skill-block-title">Observability, Monitoring & SRE</div>
+          <div class="skill-tags">
+            <span class="tag highlight">Prometheus</span>
+            <span class="tag highlight">Grafana Dashboards</span>
+            <span class="tag">Loki & Promtail Logging</span>
+            <span class="tag">CloudWatch Metrics</span>
+            <span class="tag">k6 Load Testing (1,000 req/s)</span>
+          </div>
+        </div>
+
+        <div class="skill-block">
+          <div class="skill-block-title">Full-Stack, Mobile & Data Architecture</div>
+          <div class="skill-tags">
+            <span class="tag highlight">Next.js 16 (React, SSR)</span>
+            <span class="tag highlight">Flutter & Dart (Native App)</span>
+            <span class="tag">TypeScript / Node.js</span>
+            <span class="tag">Python</span>
+            <span class="tag">PostgreSQL & PostGIS</span>
+            <span class="tag">Redis Caching</span>
+            <span class="tag">Stripe Escrow Safe-Pay</span>
+            <span class="tag">Neo4j (Cypher)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Production Experience -->
+    <section>
+      <div class="section-title">Production Experience</div>
+
+      <!-- Experience Item 1: BYOUR (Under NDA) -->
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <span class="exp-role">DevOps & Cloud Infrastructure Engineer</span> &middot; 
+            <span class="exp-company">BYOUR — Intelligent Hiring AI Platform</span>
+            <span class="exp-badge">Under Strict NDA</span>
+          </div>
+          <div class="exp-date">2026 – Present | Dublin, IE</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Architected and provisioned modular AWS cloud infrastructure using <strong>Terraform & Terragrunt</strong> powering the Minerva AI applicant scoring engine under a non-disclosure agreement.</li>
+          <li>Engineered automated <strong>GitLab CI/CD pipelines</strong> facilitating continuous automated testing, containerization, and zero-downtime microservice deployments.</li>
+          <li>Provisioned and secured <strong>AWS Bedrock LLM</strong> integrations, hardened isolated VPC subnets, and established comprehensive CloudWatch operational dashboards.</li>
+          <li>Configured high-availability multi-zone networking with <strong>Route53 automated DNS failover</strong> and RDS PostgreSQL read replicas to ensure high fault tolerance.</li>
+        </ul>
+      </div>
+
+      <!-- Experience Item 2: NextStep Marketplace -->
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <span class="exp-role">Lead Platform & Mobile Architect</span> &middot; 
+            <span class="exp-company">NextStep Marketplace [Working Title]</span>
+            <span class="exp-badge live">Production-Ready & Google Play Deployed</span>
+          </div>
+          <div class="exp-date">2026 – Present | Ireland</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Architected and delivered a production-ready, commercial marketplace platform (working title <em>NextStep</em>) tailored for the Irish automotive and classifieds market.</li>
+          <li>Engineered high-performance web frontend on <strong>Next.js 16 (App Router)</strong> featuring Leaflet/PostGIS spatial radius search, live car finance calculators, and An Post postal logistics.</li>
+          <li>Built native mobile application on <strong>Flutter & Dart</strong> (120 FPS, clean architecture), validated via 52 widget tests, and successfully <strong>deployed signed release APK to the <a href="https://play.google.com/store/apps/details?id=ie.nextstep.app" target="_blank" style="color: var(--accent-dark); text-decoration: underline;">Google Play Store ↗</a></strong>, ready for live dealer inventory onboarding.</li>
+          <li>Designed a robust 10-state <strong>Stripe Escrow Safe-Pay payment machine</strong> with direct dealer chat negotiation, live dispute arbitration, and nightly self-healing reconciliation cron jobs.</li>
+          <li>Maintained rigorous engineering standards with <strong>1,043 automated tests</strong> (Vitest, Playwright, Flutter), 0 TypeScript errors, Strix AI pentest security validation, and 100% bilingual parity (3,165 translation keys in English & Gaeilge).</li>
+        </ul>
+      </div>
+
+      <!-- Experience Item 3: AstroMind -->
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <span class="exp-role">Mobile QA & Technical Debugging Engineer</span> &middot; 
+            <span class="exp-company">AstroMind</span>
+          </div>
+          <div class="exp-date">2025 | Freelance</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Provided technical development assistance for a cross-platform mobile application (Cordova/Angular) with <strong>10,000+ active downloads</strong> on Google Play.</li>
+          <li>Analyzed mobile crash logs, managed Gradle/Android build dependencies, debugged payment workflows, and reduced bug recurrence rate by <strong>30%</strong>.</li>
+        </ul>
+      </div>
+
+      <!-- Experience Item 4: Synergy Community -->
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <span class="exp-role">Online Server Technical Support & SRE</span> &middot; 
+            <span class="exp-company">Synergy SNG Community</span>
+          </div>
+          <div class="exp-date">2024 | Volunteer</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Administered Linux game servers, resolved 150+ complex technical tickets, and performed low-latency network troubleshooting under active online load.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="page-footer-note">
+      <span>Artem Rivnyi &middot; Curriculum Vitae</span>
+      <span>Page 1 of 2</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 2 ================= -->
+  <div class="page">
+    <!-- Highlighted Production Systems -->
+    <section>
+      <div class="section-title">Highlighted Production Systems</div>
+
+      <div class="proj-card">
+        <div class="proj-card-header">
+          <span class="proj-card-title">AWS S3 Simulator & Centralized Observability Stack</span>
+          <div class="proj-card-links">
+            <a href="https://aws-s3-simulator.onrender.com" target="_blank">Live Demo ↗</a>
+            <a href="https://github.com/ArtemRivnyi/aws-s3-simulator" target="_blank">Source Code ↗</a>
+          </div>
+        </div>
+        <p class="proj-card-desc">
+          Production-grade S3-compatible object storage system built with MinIO and Flask, fully instrumented with enterprise SRE observability tools.
+        </p>
+        <ul class="proj-card-bullets">
+          <li>Metrics scraping via <strong>Prometheus</strong> with custom Grafana dashboards visualizing storage quotas, request latency, and HTTP status codes.</li>
+          <li>Centralized logging pipeline using <strong>Promtail</strong> and <strong>Loki</strong> for real-time log ingestion, search, and container health monitoring.</li>
+        </ul>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-card-header">
+          <span class="proj-card-title">Enterprise AI Support Ticket Classification SaaS</span>
+          <div class="proj-card-links">
+            <a href="https://ai-ticket-classifier.onrender.com" target="_blank">Live Demo ↗</a>
+            <a href="https://github.com/ArtemRivnyi/ai-ticket-classifier" target="_blank">Source Code ↗</a>
+          </div>
+        </div>
+        <p class="proj-card-desc">
+          Resilient AI microservice API automating support ticket triage with multimodal LLMs, Stripe billing, and Redis infrastructure.
+        </p>
+        <ul class="proj-card-bullets">
+          <li>Dual-engine pipeline utilizing <strong>Google Gemini 2.0 Flash</strong> as primary classifier with automated OpenAI fallback on API rate limits.</li>
+          <li>Redis-backed rate limiting, bulk CSV batch processing, integrated Stripe subscription billing, and automated Prometheus metrics.</li>
+        </ul>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-card-header">
+          <span class="proj-card-title">UA &rarr; IE Automotive Scout & VRT Import Tax Engine</span>
+          <div class="proj-card-links">
+            <a href="https://ua-ie-car-scout-web.onrender.com" target="_blank">Live Demo ↗</a>
+            <a href="https://github.com/ArtemRivnyi/ua-ie-car-scout" target="_blank">Source Code ↗</a>
+          </div>
+        </div>
+        <p class="proj-card-desc">
+          Automotive meta-search platform and financial calculator bridging Ukrainian and Irish car markets with automated tax computation.
+        </p>
+        <ul class="proj-card-bullets">
+          <li>Resilient parallel scrapers with <strong>Puppeteer stealth</strong> anti-bot bypass for DoneDeal, AutoRia, and RST.</li>
+          <li>Dynamic Irish tax engine calculating customs, VAT (23%), NOx levy, and CO₂-based VRT rates with live European Central Bank currency conversion.</li>
+        </ul>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-card-header">
+          <span class="proj-card-title">Privacy-First AI Email Automation Platform</span>
+          <div class="proj-card-links">
+            <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store" target="_blank">Source Code ↗</a>
+          </div>
+        </div>
+        <p class="proj-card-desc">
+          Enterprise privacy-compliant customer email triage system leveraging local open-source LLMs deployed on Kubernetes clusters.
+        </p>
+        <ul class="proj-card-bullets">
+          <li>RAG (Retrieval-Augmented Generation) pipeline running on self-hosted <strong>Ollama (Gemma 7B)</strong> without third-party data leakage.</li>
+          <li>Orchestrated via <strong>Kubernetes & Helm charts</strong> with automated GitHub Actions CI/CD pipelines and zero-downtime rolling updates.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Complete Certifications & Licenses -->
+    <section>
+      <div class="section-title">Certifications & Professional Credentials (Complete)</div>
+      <div class="certs-grid">
+        <!-- Category 1: AI & Graph Databases -->
+        <div class="cert-group">
+          <div class="cert-group-title">Artificial Intelligence & Graph Databases</div>
+          <div class="cert-row">
+            <span class="cert-title-text">Neo4j Certified Professional</span>
+            <span class="cert-issuer-text">Neo4j Graph Academy &middot; 2026</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-title-text">Autonomous Agents and Workflows</span>
+            <span class="cert-issuer-text">OpenAI Academy &middot; 2026</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-title-text">Applied AI Foundations (Enterprise GenAI)</span>
+            <span class="cert-issuer-text">OpenAI Academy &middot; 2026</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-title-text">AI Foundations (ML & Neural Networks)</span>
+            <span class="cert-issuer-text">OpenAI Academy &middot; 2026</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-title-text">Generative AI: Prompt Engineering Basics</span>
+            <span class="cert-issuer-text">IBM &middot; 2025</span>
+          </div>
+        </div>
+
+        <!-- Category 2: Cloud, DevOps & Linux -->
+        <div class="cert-group">
+          <div class="cert-group-title">Cloud, DevOps & Containers</div>
+          <div class="cert-row">
+            <span class="cert-title-text">Docker Foundations Professional Certificate</span>
+            <span class="cert-issuer-text">Docker Inc. &middot; 2025</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-title-text">Ubuntu Linux Professional Certificate</span>
+            <span class="cert-issuer-text">Canonical &middot; 2025</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-title-text">DevOps Professional Certificate</span>
+            <span class="cert-issuer-text">LinkedIn & PagerDuty &middot; 2025</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-title-text">CentOS Linux & Hypervisor Essentials</span>
+            <span class="cert-issuer-text">EPAM Systems &middot; 2025</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-title-text">DevOps Essentials Introduction</span>
+            <span class="cert-issuer-text">EPAM Systems &middot; 2023</span>
+          </div>
+        </div>
+
+        <!-- Category 3: Networking & SysAdmin -->
+        <div class="cert-group">
+          <div class="cert-group-title">Networking, Systems & Security</div>
+          <div class="cert-row">
+            <span class="cert-title-text">Networking Basics (TCP/IP, Routing)</span>
+            <span class="cert-issuer-text">Cisco Networking Academy &middot; 2025</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-title-text">Career Essentials in System Administration</span>
+            <span class="cert-issuer-text">Microsoft & LinkedIn &middot; 2025</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-title-text">Technical Support Fundamentals</span>
+            <span class="cert-issuer-text">Google &middot; 2025</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-title-text">IT Infrastructure & Customer Support Basics</span>
+            <span class="cert-issuer-text">Google &middot; 2025</span>
+          </div>
+        </div>
+
+        <!-- Category 4: Software Engineering Fundamentals -->
+        <div class="cert-group">
+          <div class="cert-group-title">Software Engineering & Architecture</div>
+          <div class="cert-row">
+            <span class="cert-title-text">Java Concurrency & Threads Architecture</span>
+            <span class="cert-issuer-text">EPAM Systems &middot; 2023</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-title-text">Java JDBC, I/O & Exception Handling</span>
+            <span class="cert-issuer-text">EPAM Systems &middot; 2023</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-title-text">Clean Code & Multithreading Systems</span>
+            <span class="cert-issuer-text">EPAM Systems &middot; 2023</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Split Bottom Section: Education & Community/Languages -->
+    <div class="split-col">
+      <div>
+        <div class="section-title">Education</div>
+        <div class="meta-box">
+          <div style="font-size: 9.2pt; font-weight: 700; color: var(--primary);">Bachelor of Computer Engineering</div>
+          <div style="font-size: 8.3pt; color: #334155; margin-top: 2px;">Faculty of Physics, Electronics and Computer Systems</div>
+          <div style="font-size: 8.3pt; color: #334155;">Oles Honchar Dnipro National University (2020 – 2024)</div>
+          <div style="font-size: 7.6pt; color: var(--muted); margin-top: 3px;">Ministry Accredited Degree (B24 № 162181) &middot; Computer Architecture, Distributed Systems, Operating Systems Internals</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-title">Leadership & Languages</div>
+        <div class="meta-box">
+          <div style="font-size: 8.2pt; font-weight: 700; color: var(--primary); margin-bottom: 2px;">Esports Event Operations & Infrastructure</div>
+          <div style="font-size: 7.8pt; color: #475569; margin-bottom: 6px;">
+            Windigo Arena x DNU (2021): Managed live arena logistics and fault-tolerant tournament network for 100+ competitors.
+          </div>
+          <div style="font-size: 8.2pt; font-weight: 700; color: var(--primary); margin-bottom: 2px;">Languages</div>
+          <div style="font-size: 7.8pt; color: #475569;">
+            <strong>English:</strong> Professional Working &middot; <strong>Ukrainian:</strong> Native &middot; <strong>Russian:</strong> Fluent
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer-note">
+      <span>Artem Rivnyi &middot; Curriculum Vitae</span>
+      <span>Page 2 of 2</span>
+    </div>
+  </div>
+
+</body>
+</html>
