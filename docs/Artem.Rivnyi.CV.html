@@ -208,6 +208,11 @@
       justify-content: space-between;
       align-items: baseline;
       margin-bottom: 2px;
+      gap: 10px;
+    }
+
+    .exp-title-group {
+      min-width: 0;
     }
 
     .exp-role {
@@ -234,6 +239,7 @@
       border-radius: 3px;
       margin-left: 4px;
       letter-spacing: 0.03em;
+      white-space: nowrap;
     }
 
     .exp-badge.live {
@@ -246,6 +252,9 @@
       font-size: 8pt;
       color: var(--muted);
       font-weight: 500;
+      white-space: nowrap;
+      flex-shrink: 0;
+      text-align: right;
     }
 
     .exp-bullets {
@@ -279,12 +288,18 @@
       justify-content: space-between;
       align-items: baseline;
       margin-bottom: 2px;
+      gap: 10px;
     }
 
     .proj-card-title {
       font-size: 9pt;
       font-weight: 700;
       color: var(--primary);
+    }
+
+    .proj-card-links {
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .proj-card-links a {
@@ -344,8 +359,9 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      font-size: 7.8pt;
+      font-size: 7.7pt;
       margin-bottom: 3px;
+      gap: 8px;
     }
 
     .cert-row:last-child {
@@ -355,12 +371,18 @@
     .cert-title-text {
       font-weight: 600;
       color: #1e293b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
     }
 
     .cert-issuer-text {
       font-size: 7.2pt;
       color: var(--muted);
       text-align: right;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     /* Two-col layout on Page 2 for Education & Additional */
@@ -480,9 +502,9 @@
       <!-- Experience Item 1: BYOUR (Under NDA) -->
       <div class="exp-item">
         <div class="exp-header">
-          <div>
-            <span class="exp-role">DevOps & Cloud Infrastructure Engineer</span> &middot; 
-            <span class="exp-company">BYOUR — Intelligent Hiring AI Platform</span>
+          <div class="exp-title-group">
+            <span class="exp-role">DevOps & Cloud Engineer</span> &middot; 
+            <span class="exp-company">BYOUR — Hiring AI Platform</span>
             <span class="exp-badge">Under Strict NDA</span>
           </div>
           <div class="exp-date">2026 – Present | Dublin, IE</div>
@@ -498,10 +520,10 @@
       <!-- Experience Item 2: NextStep Marketplace -->
       <div class="exp-item">
         <div class="exp-header">
-          <div>
+          <div class="exp-title-group">
             <span class="exp-role">Lead Platform & Mobile Architect</span> &middot; 
             <span class="exp-company">NextStep Marketplace [Working Title]</span>
-            <span class="exp-badge live">Production-Ready & Google Play Deployed</span>
+            <span class="exp-badge live">Google Play & Production</span>
           </div>
           <div class="exp-date">2026 – Present | Ireland</div>
         </div>
@@ -517,7 +539,7 @@
       <!-- Experience Item 3: AstroMind -->
       <div class="exp-item">
         <div class="exp-header">
-          <div>
+          <div class="exp-title-group">
             <span class="exp-role">Mobile QA & Technical Debugging Engineer</span> &middot; 
             <span class="exp-company">AstroMind</span>
           </div>
@@ -532,7 +554,7 @@
       <!-- Experience Item 4: Synergy Community -->
       <div class="exp-item">
         <div class="exp-header">
-          <div>
+          <div class="exp-title-group">
             <span class="exp-role">Online Server Technical Support & SRE</span> &middot; 
             <span class="exp-company">Synergy SNG Community</span>
           </div>
@@ -633,22 +655,22 @@
           <div class="cert-group-title">Artificial Intelligence & Graph Databases</div>
           <div class="cert-row">
             <span class="cert-title-text">Neo4j Certified Professional</span>
-            <span class="cert-issuer-text">Neo4j Graph Academy &middot; 2026</span>
+            <span class="cert-issuer-text">Neo4j &middot; 2026</span>
           </div>
           <div class="cert-row">
             <span class="cert-title-text">Autonomous Agents and Workflows</span>
-            <span class="cert-issuer-text">OpenAI Academy &middot; 2026</span>
+            <span class="cert-issuer-text">OpenAI &middot; 2026</span>
           </div>
           <div class="cert-row">
-            <span class="cert-title-text">Applied AI Foundations (Enterprise GenAI)</span>
-            <span class="cert-issuer-text">OpenAI Academy &middot; 2026</span>
+            <span class="cert-title-text">Applied AI Foundations (Enterprise)</span>
+            <span class="cert-issuer-text">OpenAI &middot; 2026</span>
           </div>
           <div class="cert-row">
-            <span class="cert-title-text">AI Foundations (ML & Neural Networks)</span>
-            <span class="cert-issuer-text">OpenAI Academy &middot; 2026</span>
+            <span class="cert-title-text">AI Foundations (Neural Networks)</span>
+            <span class="cert-issuer-text">OpenAI &middot; 2026</span>
           </div>
           <div class="cert-row">
-            <span class="cert-title-text">Generative AI: Prompt Engineering Basics</span>
+            <span class="cert-title-text">Generative AI: Prompt Engineering</span>
             <span class="cert-issuer-text">IBM &middot; 2025</span>
           </div>
         </div>
@@ -657,24 +679,24 @@
         <div class="cert-group">
           <div class="cert-group-title">Cloud, DevOps & Containers</div>
           <div class="cert-row">
-            <span class="cert-title-text">Docker Foundations Professional Certificate</span>
+            <span class="cert-title-text">Docker Foundations Professional</span>
             <span class="cert-issuer-text">Docker Inc. &middot; 2025</span>
           </div>
           <div class="cert-row">
-            <span class="cert-title-text">Ubuntu Linux Professional Certificate</span>
+            <span class="cert-title-text">Ubuntu Linux Professional</span>
             <span class="cert-issuer-text">Canonical &middot; 2025</span>
           </div>
           <div class="cert-row">
             <span class="cert-title-text">DevOps Professional Certificate</span>
-            <span class="cert-issuer-text">LinkedIn & PagerDuty &middot; 2025</span>
+            <span class="cert-issuer-text">PagerDuty &middot; 2025</span>
           </div>
           <div class="cert-row">
-            <span class="cert-title-text">CentOS Linux & Hypervisor Essentials</span>
-            <span class="cert-issuer-text">EPAM Systems &middot; 2025</span>
+            <span class="cert-title-text">CentOS Linux & Hypervisors</span>
+            <span class="cert-issuer-text">EPAM &middot; 2025</span>
           </div>
           <div class="cert-row">
             <span class="cert-title-text">DevOps Essentials Introduction</span>
-            <span class="cert-issuer-text">EPAM Systems &middot; 2023</span>
+            <span class="cert-issuer-text">EPAM &middot; 2023</span>
           </div>
         </div>
 
@@ -683,18 +705,18 @@
           <div class="cert-group-title">Networking, Systems & Security</div>
           <div class="cert-row">
             <span class="cert-title-text">Networking Basics (TCP/IP, Routing)</span>
-            <span class="cert-issuer-text">Cisco Networking Academy &middot; 2025</span>
+            <span class="cert-issuer-text">Cisco &middot; 2025</span>
           </div>
           <div class="cert-row">
-            <span class="cert-title-text">Career Essentials in System Administration</span>
-            <span class="cert-issuer-text">Microsoft & LinkedIn &middot; 2025</span>
+            <span class="cert-title-text">Career Essentials in System Admin</span>
+            <span class="cert-issuer-text">Microsoft &middot; 2025</span>
           </div>
           <div class="cert-row">
             <span class="cert-title-text">Technical Support Fundamentals</span>
             <span class="cert-issuer-text">Google &middot; 2025</span>
           </div>
           <div class="cert-row">
-            <span class="cert-title-text">IT Infrastructure & Customer Support Basics</span>
+            <span class="cert-title-text">IT Infrastructure & Support Basics</span>
             <span class="cert-issuer-text">Google &middot; 2025</span>
           </div>
         </div>
@@ -704,15 +726,15 @@
           <div class="cert-group-title">Software Engineering & Architecture</div>
           <div class="cert-row">
             <span class="cert-title-text">Java Concurrency & Threads Architecture</span>
-            <span class="cert-issuer-text">EPAM Systems &middot; 2023</span>
+            <span class="cert-issuer-text">EPAM &middot; 2023</span>
           </div>
           <div class="cert-row">
             <span class="cert-title-text">Java JDBC, I/O & Exception Handling</span>
-            <span class="cert-issuer-text">EPAM Systems &middot; 2023</span>
+            <span class="cert-issuer-text">EPAM &middot; 2023</span>
           </div>
           <div class="cert-row">
             <span class="cert-title-text">Clean Code & Multithreading Systems</span>
-            <span class="cert-issuer-text">EPAM Systems &middot; 2023</span>
+            <span class="cert-issuer-text">EPAM &middot; 2023</span>
           </div>
         </div>
       </div>
@@ -739,7 +761,7 @@
           </div>
           <div style="font-size: 8.2pt; font-weight: 700; color: var(--primary); margin-bottom: 2px;">Languages</div>
           <div style="font-size: 7.8pt; color: #475569;">
-            <strong>English:</strong> Professional Working &middot; <strong>Ukrainian:</strong> Native &middot; <strong>Russian:</strong> Fluent
+            <strong>English:</strong> Professional Working &middot; <strong>Ukrainian:</strong> Fluent &middot; <strong>Russian:</strong> Fluent
           </div>
         </div>
       </div>
