@@ -43,7 +43,13 @@
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
       border-radius: 4px;
       page-break-after: always;
+      break-after: always;
       position: relative;
+    }
+
+    .page:last-child {
+      page-break-after: avoid;
+      break-after: avoid;
     }
 
     @media print {
@@ -58,6 +64,11 @@
         min-height: 297mm;
         border-radius: 0;
         page-break-after: always;
+        break-after: always;
+      }
+      .page:last-child {
+        page-break-after: avoid;
+        break-after: avoid;
       }
       @page {
         size: A4 portrait;
