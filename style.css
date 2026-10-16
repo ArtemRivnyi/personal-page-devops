@@ -232,12 +232,6 @@ body.light-theme .site-header {
     gap: 6px;
 }
 
-.name-badge-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
 .hero-name {
     font-family: 'Space Grotesk', Inter, sans-serif;
     font-size: 1.85rem;
@@ -245,12 +239,6 @@ body.light-theme .site-header {
     color: var(--text-primary);
     letter-spacing: -0.02em;
     line-height: 1.1;
-}
-
-.verified-blue-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .hero-social-row {
