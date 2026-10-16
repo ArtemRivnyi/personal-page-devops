@@ -61,6 +61,9 @@ body.light-theme {
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 70px;
+    overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
 }
 
 body {
@@ -72,6 +75,9 @@ body {
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Background Matrix Canvas Ambient */
@@ -173,10 +179,12 @@ body.light-theme .site-header {
 /* Main Container Layout */
 .main-wrapper {
     max-width: 900px;
+    width: 100%;
     margin: 0 auto;
     padding: 52px 24px 90px;
     position: relative;
     z-index: 1;
+    overflow-x: clip;
 }
 
 /* Hero Section (@onlyrenbl signature layout) */
@@ -417,6 +425,8 @@ body.light-theme .site-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
     margin-bottom: 24px;
 }
 
@@ -932,12 +942,16 @@ body.light-theme .site-header {
     border: 1px solid var(--border-subtle);
     border-radius: 12px;
     padding: 24px;
+    overflow: hidden;
+    max-width: 100%;
 }
 
 .github-card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
     margin-bottom: 18px;
 }
 
@@ -953,6 +967,7 @@ body.light-theme .site-header {
 .github-year-switcher {
     display: flex;
     gap: 6px;
+    flex-wrap: wrap;
 }
 
 .year-pill {
@@ -2043,8 +2058,8 @@ body.light-theme .site-header {
     }
 
     .chat-drawer {
-        width: calc(100vw - 32px);
-        right: -8px;
+        width: min(360px, calc(100vw - 32px));
+        right: 0;
     }
 
     .mini-grid {
@@ -2053,6 +2068,32 @@ body.light-theme .site-header {
 
     .outside-ide-layout {
         gap: 24px;
+    }
+
+    .section-header-clean {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .github-card-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .github-year-switcher {
+        width: 100%;
+        display: flex;
+        gap: 6px;
+        justify-content: space-between;
+    }
+
+    .year-pill {
+        flex: 1;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 0.8rem;
     }
 }
 
@@ -2125,8 +2166,9 @@ body.light-theme .site-header {
     }
 
     .heatmap-container {
-        margin: 0 -14px;
-        padding: 0 14px;
+        max-width: 100%;
+        width: 100%;
+        padding-bottom: 8px;
     }
 
     .ref-projects-grid {
