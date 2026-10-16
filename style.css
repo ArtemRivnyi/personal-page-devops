@@ -538,16 +538,18 @@ body.light-theme .site-header {
 .featured-tech-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
+    margin-top: 2px;
 }
 
 .mini-tech-pill {
-    font-size: 0.78rem;
-    padding: 3px 8px;
-    border-radius: 6px;
-    background: var(--tag-bg);
-    color: var(--tag-color);
+    font-size: 0.75rem;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--text-muted);
     border: 1px solid var(--border-subtle);
+    font-weight: 500;
 }
 
 /* Ref Projects Grid (2-Column Minimalist Cards matching frame_15s.png) */
@@ -720,7 +722,7 @@ body.light-theme .site-header {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
 }
 
 .kpi-chip {
@@ -728,18 +730,27 @@ body.light-theme .site-header {
     align-items: center;
     gap: 6px;
     font-size: 0.72rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-    background: var(--tag-bg);
-    border: 1px solid var(--border-subtle);
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent-blue);
+    background: rgb(56 189 248 / 6%);
+    border: 1px solid rgb(56 189 248 / 20%);
     padding: 3px 8px;
     border-radius: 4px;
     line-height: 1.25;
+    letter-spacing: -0.01em;
+}
+
+body:not(.dark-theme) .kpi-chip,
+body.light-theme .kpi-chip {
+    color: #0369a1;
+    background: rgb(2 132 199 / 6%);
+    border-color: rgb(2 132 199 / 22%);
 }
 
 .kpi-dot {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
     background: var(--accent-blue);
     flex-shrink: 0;
@@ -2397,6 +2408,27 @@ body.light-theme .site-header {
     }
 
     .mini-tag {
+        font-size: 0.72rem;
+        padding: 2px 6px;
+    }
+
+    .project-kpi-row {
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+
+    .kpi-chip {
+        font-size: 0.69rem;
+        padding: 2.5px 6.5px;
+        gap: 4px;
+        letter-spacing: -0.015em;
+    }
+
+    .featured-tech-row {
+        gap: 5px;
+    }
+
+    .mini-tech-pill {
         font-size: 0.72rem;
         padding: 2px 6px;
     }
