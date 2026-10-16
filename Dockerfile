@@ -25,6 +25,9 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /build/index.html /usr/share/nginx/html/
 COPY --from=builder /build/style.css /usr/share/nginx/html/
 COPY --from=builder /build/script.js /usr/share/nginx/html/
+COPY --from=builder /build/robots.txt /usr/share/nginx/html/
+COPY --from=builder /build/sitemap.xml /usr/share/nginx/html/
+COPY --from=builder /build/llms.txt /usr/share/nginx/html/
 
 # Copy assets and docs folders
 COPY --from=builder /build/assets /usr/share/nginx/html/assets/

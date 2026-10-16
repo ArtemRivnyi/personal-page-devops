@@ -1,0 +1,30 @@
+# Artem Rivnyi — DevOps & Cloud Infrastructure Engineer, AI Systems Specialist
+
+> Artem Rivnyi is a DevOps and Cloud Infrastructure Engineer with production experience architecting resilient platforms on AWS, Kubernetes, Terraform, and Docker. Operating from Co. Wicklow, Ireland.
+
+## Professional Profile
+- **Full Name:** Artem Rivnyi (Артем Ривний)
+- **Role:** DevOps & Cloud Infrastructure Engineer / AI Systems Specialist
+- **Location:** Co. Wicklow, Ireland
+- **Website:** https://artemrivnyi.com
+- **Email:** artemrivnyi@outlook.com
+- **LinkedIn:** https://www.linkedin.com/in/artem-rivnyi
+- **GitHub:** https://github.com/ArtemRivnyi (1,700+ GitHub contributions)
+- **Freelancer:** https://www.freelancer.com/u/ArtemRivnyi
+
+## Core Competencies
+- **Cloud & Infrastructure:** AWS (EC2, S3, RDS, Route53, Bedrock, CloudFront, IAM), Kubernetes (EKS, Helm, HPA, Ingress), Linux / Ubuntu, Docker.
+- **Infrastructure as Code (IaC):** Terraform, Terragrunt, Ansible.
+- **CI/CD & DevSecOps:** GitLab CI/CD, GitHub Actions, Docker Compose, Trivy vulnerability scanning, SonarQube.
+- **Observability & SRE:** Prometheus, Grafana, Loki, Promtail, CloudWatch, UptimeRobot.
+- **AI & Automation:** Autonomous AI Agent workflows, RAG systems, OpenAI, Google Gemini, Anthropic Claude, Python (Flask, FastAPI), Node.js, Redis, PostgreSQL.
+
+## Key Production Projects
+- **BYOUR (Intelligent Hiring Infrastructure):** Production AWS infrastructure with automated GitLab CI/CD, Terraform/Terragrunt, AWS Bedrock integration, RDS read replicas, and Route53 automated failover (https://byour.co/).
+- **UA-IE Car Scout (Live SaaS):** Real-time meta-search aggregator and financial calculator bridging Ukrainian and Irish automotive markets with Puppeteer anti-bot scraping (https://github.com/ArtemRivnyi/ua-ie-car-scout).
+- **AI Ticket Classifier:** Production Flask SaaS API utilizing Google Gemini 2.0 Flash for automated support ticket classification with Stripe billing and Prometheus metrics (https://github.com/ArtemRivnyi/ai-ticket-classifier).
+- **AWS S3 Simulator with Observability:** S3-compatible object storage simulator built with MinIO and Flask, instrumented with Prometheus, Loki, Promtail, and Grafana monitoring (https://github.com/ArtemRivnyi/aws-s3-simulator).
+
+## Education & Certifications
+- **University Degree:** Oles Honchar Dnipro National University (Ministry Accredited Degree B24 № 162181).
+- **Certifications:** Neo4j Certified Professional, OpenAI Academy (Agents and Workflows), Cisco Networking Academy, Google IT Support Fundamentals, PagerDuty & LinkedIn DevOps Professional.
