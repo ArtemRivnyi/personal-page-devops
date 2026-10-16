@@ -34,7 +34,7 @@ A modern, responsive **portfolio website** showcasing technical projects and ski
 
 ## 🌐 Live Demo and Screenshot
 
-The live version of the portfolio is available here: [https://personal-page-devops.onrender.com/](https://personal-page-devops.onrender.com/)
+The live version of the portfolio is available here: [https://artemrivnyi.com/](https://artemrivnyi.com/)
 
 This is a snapshot of the main page, demonstrating the clean, responsive design and dark mode functionality.
 
@@ -183,5 +183,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 *   📧 [artemrivnyi@outlook.com](mailto:artemrivnyi@outlook.com)
 *   🔗 [LinkedIn](https://www.linkedin.com/in/artem-rivnyi/)
-*   🌐 [Personal Projects](https://personal-page-devops.onrender.com/)
+*   🌐 [Personal Projects](https://artemrivnyi.com/)
 *   💻 [GitHub](https://github.com/ArtemRivnyi)
