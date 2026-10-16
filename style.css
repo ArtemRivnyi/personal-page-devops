@@ -1228,47 +1228,43 @@ body.light-theme .site-header {
     gap: 8px;
 }
 
-.visitor-avatar-cluster {
-    display: flex;
+.footer-status-pill {
+    display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     background: var(--bg-secondary);
     border: 1px solid var(--border-subtle);
     border-radius: 9999px;
-    padding: 5px 14px 5px 8px;
-}
-
-.cluster-avatars {
-    display: flex;
-    align-items: center;
-}
-
-.cluster-avatar {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: 2px solid var(--bg-secondary);
-    margin-left: -6px;
-    display: inline-block;
-    background-size: cover;
-}
-
-.cluster-avatar:first-child {
-    margin-left: 0;
-}
-
-.av-1 { background-color: #38bdf8; }
-
-.av-2 { background-color: #a855f7; }
-
-.av-3 { background-color: #22c55e; }
-
-.av-4 { background-color: #f97316; }
-
-.visitor-count-text {
+    padding: 6px 14px;
     font-size: 0.8rem;
     color: var(--text-secondary);
     font-weight: 500;
+    transition: border-color 0.15s ease;
+}
+
+.footer-status-pill:hover {
+    border-color: var(--border-hover);
+}
+
+.status-pulse-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent-green);
+    box-shadow: 0 0 8px rgb(63 185 80 / 60%);
+    animation: status-pulse 2s infinite ease-in-out;
+}
+
+@keyframes status-pulse {
+    0%, 100% {
+        opacity: 100%;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 50%;
+        transform: scale(0.85);
+    }
 }
 
 /* OTHER PROJECTS MINI GRID */
