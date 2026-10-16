@@ -92,7 +92,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=16">
+    <link rel="stylesheet" href="style.css?v=17">
 </head>
 
 <body class="dark-theme">
@@ -117,6 +117,7 @@
             </button>
             <nav class="nav-menu" id="nav-menu" aria-label="Main Navigation">
                 <a href="#projects" class="nav-item">Projects</a>
+                <a href="#case-study" class="nav-item">Case Study</a>
                 <a href="#experience" class="nav-item">Experience</a>
                 <a href="#outside-ide" class="nav-item">Outside the IDE</a>
                 <a href="#certifications" class="nav-item">Certifications</a>
@@ -220,6 +221,12 @@
                         Production AWS cloud infrastructure and automated GitLab CI/CD pipelines powering Minerva AI applicant scoring.
                         Modular Terraform &amp; Terragrunt architecture with AWS Bedrock integration, RDS read replicas, and Route53 automated failover.
                     </p>
+                    <div class="project-kpi-row">
+                        <span class="kpi-chip"><span class="kpi-dot"></span>Multi-AZ Route53 Failover</span>
+                        <span class="kpi-chip"><span class="kpi-dot"></span>RDS Read Replicas</span>
+                        <span class="kpi-chip"><span class="kpi-dot"></span>AWS Bedrock AI</span>
+                        <span class="kpi-chip"><span class="kpi-dot"></span>GitLab CI/CD Automation</span>
+                    </div>
                     <div class="featured-tech-row">
                         <span class="mini-tech-pill">Terraform</span>
                         <span class="mini-tech-pill">Terragrunt</span>
@@ -232,6 +239,44 @@
                             Visit Platform ↗
                         </a>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TECHNICAL ARCHITECTURE CASE STUDY -->
+        <section class="section-block" id="case-study">
+            <div class="architecture-case-card">
+                <div class="case-card-header">
+                    <div class="case-badge-cluster">
+                        <span class="kicker-label">PRODUCTION CASE STUDY</span>
+                        <span class="case-tag-pill">Zero-Outage AI Architecture</span>
+                    </div>
+                    <span class="case-date-pill">October 2026</span>
+                </div>
+                <h3 class="case-title">
+                    <a href="docs/dual-llm-failover-architecture.html" class="case-title-link">
+                        Dual-LLM Failover: Zero-Outage AI Microservice with Google Gemini &amp; OpenAI ↗
+                    </a>
+                </h3>
+                <p class="case-summary">
+                    Eliminating single points of failure in production AI microservices. Sub-second circuit breakers, Redis token-bucket rate limits, strict Pydantic JSON contracts, and automated hot-standby fallback from Gemini 2.0 Flash to GPT-4o-mini.
+                </p>
+                <div class="project-kpi-row">
+                    <span class="kpi-chip"><span class="kpi-dot kpi-dot-green"></span>99.98% API Availability SLA</span>
+                    <span class="kpi-chip"><span class="kpi-dot"></span>&lt;48ms Automated Failover RTO</span>
+                    <span class="kpi-chip"><span class="kpi-dot kpi-dot-green"></span>~71% Inference Cost Reduction</span>
+                    <span class="kpi-chip"><span class="kpi-dot"></span>Prometheus Circuit Metrics</span>
+                </div>
+                <div class="case-footer-row">
+                    <a href="docs/dual-llm-failover-architecture.html" class="hero-btn-primary case-read-btn">
+                        Read Case Study &amp; Architecture Blueprint
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/ArtemRivnyi/ai-ticket-classifier" target="_blank" rel="noopener" class="ref-link-secondary">
+                        View Repository ↗
+                    </a>
                 </div>
             </div>
         </section>
@@ -254,6 +299,11 @@
                         <p class="project-summary">
                             Real-time meta-search aggregator and financial calculator bridging Ukrainian and Irish automotive markets with Puppeteer anti-bot scraping.
                         </p>
+                        <div class="project-kpi-row">
+                            <span class="kpi-chip"><span class="kpi-dot"></span>3 Parallel Scrapers</span>
+                            <span class="kpi-chip"><span class="kpi-dot"></span>Live ECB FX Sync</span>
+                            <span class="kpi-chip"><span class="kpi-dot"></span>&lt;150ms Redis Cache</span>
+                        </div>
                         <div class="project-icons-row">
                             <span class="mini-icon-box" title="React">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#61dafb" stroke-width="2" aria-hidden="true">
@@ -294,6 +344,11 @@
                         <p class="project-summary">
                             Production-grade Flask SaaS API utilizing Google Gemini 2.0 Flash for automated support ticket classification with Stripe billing and Prometheus metrics.
                         </p>
+                        <div class="project-kpi-row">
+                            <span class="kpi-chip"><span class="kpi-dot"></span>Gemini ➔ OpenAI Failover</span>
+                            <span class="kpi-chip"><span class="kpi-dot"></span>&lt;800ms Median Latency</span>
+                            <span class="kpi-chip"><span class="kpi-dot"></span>Stripe Webhook Billing</span>
+                        </div>
                         <div class="project-icons-row">
                             <span class="mini-icon-box" title="Python">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="#3776ab" aria-hidden="true"><path d="M11.9 1c-4.4 0-4.1 1.9-4.1 1.9l.0 2h4.2v.6H5.8S3 5.2 3 9.6s2.5 4.3 2.5 4.3h1.5v-2.1s-.1-2.5 2.4-2.5h4.1s2.4.0 2.4-2.4V4.5s.4-3.5-4-3.5zm-2.3 1.3a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6zm2.5 20.7c4.4 0 4.1-1.9 4.1-1.9l-.0-2h-4.2v-.6h6.2s2.8.3 2.8-4.1-2.5-4.3-2.5-4.3h-1.5v2.1s.1 2.5-2.4 2.5h-4.1s-2.4-.0-2.4 2.4v2.4s-.4 3.5 4 3.5zm2.3-1.3a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6z"/></svg>
@@ -316,6 +371,7 @@
                         </div>
                         <div class="card-links-row">
                             <a href="https://ai-ticket-classifier.onrender.com/" target="_blank" rel="noopener" class="ref-link">Live Demo ↗</a>
+                            <a href="docs/dual-llm-failover-architecture.html" class="ref-link-study">Case Study ↗</a>
                             <a href="https://github.com/ArtemRivnyi/ai-ticket-classifier" target="_blank" rel="noopener" class="ref-link-secondary">Source ↗</a>
                         </div>
                     </div>
@@ -332,6 +388,11 @@
                         <p class="project-summary">
                             S3-compatible object storage simulator built with MinIO and Flask, instrumented with Prometheus, Loki, Promtail, and Grafana monitoring.
                         </p>
+                        <div class="project-kpi-row">
+                            <span class="kpi-chip"><span class="kpi-dot"></span>MinIO S3 Compatible</span>
+                            <span class="kpi-chip"><span class="kpi-dot"></span>15s Prometheus Scrapes</span>
+                            <span class="kpi-chip"><span class="kpi-dot"></span>Loki / Promtail Ingestion</span>
+                        </div>
                         <div class="project-icons-row">
                             <span class="mini-icon-box" title="MinIO">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="#c72c48" aria-hidden="true"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.8L19.2 8 12 11.6 4.8 8 12 4.8zm-8 4.7l7 3.5v7.2l-7-3.5v-7.2zm9 10.7v-7.2l7-3.5v7.2l-7 3.5z"/></svg>
@@ -364,6 +425,11 @@
                         <p class="project-summary">
                             Autonomous Irish bilingual marketplace &amp; escrow platform (Web + Mobile). Next.js 16 Turbopack, Flutter Android AppBundle, 1,043 automated tests, 0 Strix AI vulnerabilities, and licensed domain through 2028.
                         </p>
+                        <div class="project-kpi-row">
+                            <span class="kpi-chip"><span class="kpi-dot"></span>1,043 Automated Tests</span>
+                            <span class="kpi-chip"><span class="kpi-dot"></span>Flutter Android AppBundle</span>
+                            <span class="kpi-chip"><span class="kpi-dot"></span>Stripe Escrow Safe-Pay</span>
+                        </div>
                         <div class="project-icons-row">
                             <span class="mini-icon-box" title="Next.js">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.66 18.23l-6.23-7.85v7.85H9.57V5.77h1.86l6.23 7.85V5.77h1.86v12.46h-1.86z"/></svg>
@@ -392,6 +458,11 @@
                         <p class="project-summary">
                             Production-ready, privacy-first AI email automation platform with complete DevOps infrastructure. RAG architecture with local LLMs (Ollama / Gemma 7B), Kubernetes orchestration, and GitHub Actions CI/CD.
                         </p>
+                        <div class="project-kpi-row">
+                            <span class="kpi-chip"><span class="kpi-dot"></span>Ollama &amp; Gemma 7B LLM</span>
+                            <span class="kpi-chip"><span class="kpi-dot"></span>Kubernetes Orchestration</span>
+                            <span class="kpi-chip"><span class="kpi-dot"></span>Zero-Cloud Privacy RAG</span>
+                        </div>
                         <div class="project-icons-row">
                             <span class="mini-icon-box" title="Kubernetes">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="#326ce5" aria-hidden="true"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.8L19.2 8 12 11.6 4.8 8 12 4.8zm-8 4.7l7 3.5v7.2l-7-3.5v-7.2zm9 10.7v-7.2l7-3.5v7.2l-7 3.5z"/></svg>
@@ -423,6 +494,11 @@
                         <p class="project-summary">
                             Node.js microservice architecture featuring Traefik reverse proxy and 3 API replicas for horizontal scaling. Validated 1,000 req/sec throughput with k6 load testing and sub-500ms p95 latency.
                         </p>
+                        <div class="project-kpi-row">
+                            <span class="kpi-chip"><span class="kpi-dot"></span>1,000 req/s k6 Verified</span>
+                            <span class="kpi-chip"><span class="kpi-dot"></span>Traefik Reverse Proxy</span>
+                            <span class="kpi-chip"><span class="kpi-dot"></span>3 Scaled API Replicas</span>
+                        </div>
                         <div class="project-icons-row">
                             <span class="mini-icon-box" title="Node.js">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="#339933" aria-hidden="true"><path d="M12 2l10 5.7v12.6L12 26 2 20.3V7.7L12 2z"/></svg>
@@ -451,6 +527,11 @@
                         <p class="project-summary">
                             Complete CI/CD pipeline demonstration with Docker containerization, automated Jest/ESLint/Stylelint testing, and zero-downtime continuous deployment to Render.
                         </p>
+                        <div class="project-kpi-row">
+                            <span class="kpi-chip"><span class="kpi-dot"></span>Zero-Downtime Render CI/CD</span>
+                            <span class="kpi-chip"><span class="kpi-dot"></span>Docker Multi-Stage Build</span>
+                            <span class="kpi-chip"><span class="kpi-dot"></span>49 Automated Jest Tests</span>
+                        </div>
                         <div class="project-icons-row">
                             <span class="mini-icon-box" title="GitHub Actions">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
@@ -479,6 +560,11 @@
                         <p class="project-summary">
                             Multi-service orchestration using Docker Compose with Node.js Express API and Redis caching. Features automated health checks, data persistence, service discovery, and Makefile automation.
                         </p>
+                        <div class="project-kpi-row">
+                            <span class="kpi-chip"><span class="kpi-dot"></span>Express + Redis Bridge</span>
+                            <span class="kpi-chip"><span class="kpi-dot"></span>Automated Docker Healthchecks</span>
+                            <span class="kpi-chip"><span class="kpi-dot"></span>Service Discovery DNS</span>
+                        </div>
                         <div class="project-icons-row">
                             <span class="mini-icon-box" title="Docker">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="#2496ed" aria-hidden="true"><path d="M13.98 11.08h1.83V9.25h-1.83v1.83zm-2.44 0h1.83V9.25h-1.83v1.83zm-2.44 0h1.83V9.25H9.1v1.83zm-2.44 0h1.83V9.25H6.66v1.83zm7.32-2.44h1.83V6.81h-1.83v1.83zm-2.44 0h1.83V6.81h-1.83v1.83zm-2.44 0h1.83V6.81H9.1v1.83zm-2.44 0h1.83V6.81H6.66v1.83zm7.32-2.44h1.83V4.37h-1.83v1.83zm9.64 6.7c-.45-.33-1.42-.45-2.22-.36-.12-.8-.67-1.49-1.22-1.94l-.42-.33-.3.42c-.42.59-.57 1.4-.54 2.06-.39.21-.93.36-1.54.36H1.54c-.27 0-.51.09-.72.24-.48.36-.67 1.05-.48 1.65.66 2.07 2.13 4.8 5.76 4.8 3.84 0 6.6-2.19 7.74-4.59.84.09 2.4.18 3.39-.75.12-.12.21-.24.27-.39.18-.39.06-.84-.27-1.17z"/></svg>

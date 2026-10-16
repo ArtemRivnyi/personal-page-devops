@@ -703,6 +703,136 @@ body.light-theme .site-header {
     color: var(--text-muted);
 }
 
+.ref-link-study {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.ref-link-study:hover {
+    color: var(--accent-hover);
+}
+
+/* Authentic Engineering KPI Badges */
+.project-kpi-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.kpi-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: var(--tag-bg);
+    border: 1px solid var(--border-subtle);
+    padding: 3px 8px;
+    border-radius: 4px;
+    line-height: 1.25;
+}
+
+.kpi-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    flex-shrink: 0;
+}
+
+.kpi-dot-green {
+    background: var(--accent-green);
+}
+
+/* Architecture Case Study Highlight Card */
+.architecture-case-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.architecture-case-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 8px 30px rgb(0 0 0 / 15%);
+}
+
+.case-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.case-badge-cluster {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.case-tag-pill {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    background: rgb(56 189 248 / 10%);
+    color: var(--accent-blue);
+    border: 1px solid rgb(56 189 248 / 25%);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.case-date-pill {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.case-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.case-title-link {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.case-title-link:hover {
+    color: var(--accent-blue);
+}
+
+.case-summary {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.case-footer-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-top: 8px;
+    flex-wrap: wrap;
+}
+
+.case-read-btn {
+    text-decoration: none;
+}
+
 /* Technologies Pill Badges (frame_22s) */
 .ref-tech-pills-wrap {
     display: flex;
