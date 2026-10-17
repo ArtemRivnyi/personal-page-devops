@@ -25,6 +25,7 @@
 - **AI Ticket Classifier:** Production Flask SaaS API utilizing Google Gemini 2.0 Flash for automated support ticket classification with Stripe billing and Prometheus metrics (https://github.com/ArtemRivnyi/ai-ticket-classifier).
 - **AWS S3 Simulator with Observability:** S3-compatible object storage simulator built with MinIO and Flask, instrumented with Prometheus, Loki, Promtail, and Grafana monitoring (https://github.com/ArtemRivnyi/aws-s3-simulator).
 - **DealShop (Irish Bilingual Marketplace & Escrow Platform):** Production Web & Mobile marketplace (dealshop.ie). Next.js 16 Turbopack, Flutter Android AppBundle, 1,043 automated tests, Stripe escrow payments.
+- **Bash Toolbox (SRE & DevOps Automation Suite):** 70+ modular, zero-dependency shell utilities for Kubernetes, Docker, and Linux diagnostics with automated Bats & ShellCheck CI (https://github.com/ArtemRivnyi/bash-toolbox).
 
 ## Technical Case Studies & Architecture Blueprints
 - **Dual-LLM Failover Architecture (Zero-Outage AI Microservices):** Production architectural blueprint on eliminating AI Single Points of Failure (SPOF) using Redis circuit breakers, Pydantic contracts, and automated hot-standby fallback from Google Gemini 2.0 Flash to OpenAI GPT-4o-mini. Measured 99.98% availability SLA, <48ms failover RTO, and ~71% inference cost reduction (https://artemrivnyi.com/docs/dual-llm-failover-architecture.html).
