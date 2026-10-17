@@ -107,26 +107,23 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      // Smart In-App Social Traffic Auto-Detection (Instagram & LinkedIn)
+      // Smart In-App & Organic Traffic Auto-Detection (Zero UTM needed)
       (function() {
         var ua = navigator.userAgent || '';
         var ref = document.referrer || '';
-        var isInstagram = ua.indexOf('Instagram') !== -1 || ref.indexOf('instagram.com') !== -1 || ref.indexOf('android-app://com.instagram.android') !== -1;
-        var isLinkedIn = ua.indexOf('LinkedInApp') !== -1 || ref.indexOf('linkedin.com') !== -1 || ref.indexOf('android-app://com.linkedin.android') !== -1;
         var hasUTM = window.location.search.indexOf('utm_source') !== -1;
 
-        if (!hasUTM && isInstagram) {
-          gtag('config', 'G-K6EZQYRLEL', {
-            campaign_source: 'instagram',
-            campaign_medium: 'bio',
-            campaign_name: 'instagram_profile'
-          });
-        } else if (!hasUTM && isLinkedIn) {
-          gtag('config', 'G-K6EZQYRLEL', {
-            campaign_source: 'linkedin',
-            campaign_medium: 'profile',
-            campaign_name: 'linkedin_profile'
-          });
+        if (hasUTM) {
+          gtag('config', 'G-K6EZQYRLEL');
+          return;
+        }
+
+        if (ua.indexOf('Instagram') !== -1 || ref.indexOf('instagram.com') !== -1 || ref.indexOf('android-app://com.instagram.android') !== -1) {
+          gtag('config', 'G-K6EZQYRLEL', { campaign_source: 'instagram', campaign_medium: 'social' });
+        } else if (ua.indexOf('LinkedInApp') !== -1 || ref.indexOf('linkedin.com') !== -1 || ref.indexOf('lnkd.in') !== -1 || ref.indexOf('android-app://com.linkedin.android') !== -1) {
+          gtag('config', 'G-K6EZQYRLEL', { campaign_source: 'linkedin', campaign_medium: 'social' });
+        } else if (ua.indexOf('Telegram') !== -1 || ref.indexOf('t.me') !== -1 || ref.indexOf('telegram.org') !== -1 || ref.indexOf('android-app://org.telegram.messenger') !== -1) {
+          gtag('config', 'G-K6EZQYRLEL', { campaign_source: 'telegram', campaign_medium: 'messenger' });
         } else {
           gtag('config', 'G-K6EZQYRLEL');
         }
