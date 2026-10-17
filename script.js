@@ -446,6 +446,12 @@ function initCopyEmail() {
             const originalText = copyBtn.textContent;
             copyBtn.textContent = 'Copied!';
             showToast();
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'contact_copy_email', {
+                    event_category: 'engagement',
+                    event_label: 'email_copied'
+                });
+            }
             setTimeout(() => {
                 copyBtn.textContent = originalText;
             }, 2000);
