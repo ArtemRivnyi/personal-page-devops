@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Artem Rivnyi — Cloud & DevOps Engineer CV</title>
 
   <!-- Google Analytics 4 (GA4) -->
@@ -52,13 +53,11 @@
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
       border-radius: 4px;
       page-break-after: always;
-      break-after: always;
       position: relative;
     }
 
     .page:last-child {
       page-break-after: avoid;
-      break-after: avoid;
     }
 
     @media print {
@@ -75,11 +74,9 @@
         overflow: hidden;
         border-radius: 0;
         page-break-after: always;
-        break-after: always;
       }
       .page:last-child {
         page-break-after: avoid;
-        break-after: avoid;
       }
       @page {
         size: A4 portrait;
@@ -420,6 +417,52 @@
       border-top: 1px solid var(--border);
       padding-top: 3px;
     }
+
+    .cv-link {
+      color: var(--accent-dark);
+      text-decoration: underline;
+    }
+
+    .edu-title {
+      font-size: 9.2pt;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .edu-sub {
+      font-size: 8.3pt;
+      color: #334155;
+      margin-top: 2px;
+    }
+
+    .edu-inst {
+      font-size: 8.3pt;
+      color: #334155;
+    }
+
+    .edu-details {
+      font-size: 7.6pt;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .meta-heading {
+      font-size: 8.2pt;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .meta-desc {
+      font-size: 7.8pt;
+      color: #475569;
+      margin-bottom: 6px;
+    }
+
+    .meta-desc-last {
+      font-size: 7.8pt;
+      color: #475569;
+    }
   </style>
 </head>
 <body>
@@ -435,9 +478,9 @@
       <div class="header-right">
         <div>📍 Co. Wicklow, Ireland (W91 WR44)</div>
         <div>✉️ <a href="mailto:artemrivnyi@outlook.com">artemrivnyi@outlook.com</a> | 📞 +353-87-005-5579</div>
-        <div>💻 <a href="https://github.com/ArtemRivnyi" target="_blank">github.com/ArtemRivnyi</a> (1,700+ Contributions)</div>
-        <div>💼 <a href="https://linkedin.com/in/artem-rivnyi" target="_blank">linkedin.com/in/artem-rivnyi</a></div>
-        <div>🌐 <a href="https://artemrivnyi.com" target="_blank">artemrivnyi.com</a></div>
+        <div>💻 <a href="https://github.com/ArtemRivnyi" target="_blank" rel="noopener">github.com/ArtemRivnyi</a> (1,700+ Contributions)</div>
+        <div>💼 <a href="https://linkedin.com/in/artem-rivnyi" target="_blank" rel="noopener">linkedin.com/in/artem-rivnyi</a></div>
+        <div>🌐 <a href="https://artemrivnyi.com" target="_blank" rel="noopener">artemrivnyi.com</a></div>
       </div>
     </header>
 
@@ -537,9 +580,9 @@
           <div class="exp-date">2026 – Present | Ireland</div>
         </div>
         <ul class="exp-bullets">
-          <li>Architected and delivered a production-ready, commercial marketplace platform (<a href="https://dealshop.ie" target="_blank" style="color: var(--accent-dark); text-decoration: underline;"><strong>dealshop.ie</strong> ↗</a>, pre-seed, working title <em>NextStep</em>) tailored for the Irish automotive and classifieds market.</li>
+          <li>Architected and delivered a production-ready, commercial marketplace platform (<a href="https://dealshop.ie" target="_blank" rel="noopener" class="cv-link"><strong>dealshop.ie</strong> ↗</a>, pre-seed, working title <em>NextStep</em>) tailored for the Irish automotive and classifieds market.</li>
           <li>Engineered high-performance web frontend on <strong>Next.js 16 (App Router)</strong> featuring Leaflet/PostGIS spatial radius search, live car finance calculators, and An Post postal logistics.</li>
-          <li>Built native mobile application on <strong>Flutter & Dart</strong> (120 FPS, clean architecture), validated via 52 widget tests, and successfully <strong>deployed signed release APK to the <a href="https://play.google.com/store/apps/details?id=ie.nextstep.app" target="_blank" style="color: var(--accent-dark); text-decoration: underline;">Google Play Store ↗</a></strong>, ready for live dealer inventory onboarding.</li>
+          <li>Built native mobile application on <strong>Flutter & Dart</strong> (120 FPS, clean architecture), validated via 52 widget tests, and successfully <strong>deployed signed release APK to the <a href="https://play.google.com/store/apps/details?id=ie.nextstep.app" target="_blank" rel="noopener" class="cv-link">Google Play Store ↗</a></strong>, ready for live dealer inventory onboarding.</li>
           <li>Designed a robust 10-state <strong>Stripe Escrow Safe-Pay payment machine</strong> with direct dealer chat negotiation, live dispute arbitration, and nightly self-healing reconciliation cron jobs.</li>
           <li>Maintained rigorous engineering standards with <strong>1,043 automated tests</strong> (Vitest, Playwright, Flutter), 0 TypeScript errors, Strix AI pentest security validation, and 100% bilingual parity (3,165 translation keys in English & Gaeilge).</li>
         </ul>
@@ -591,8 +634,8 @@
         <div class="proj-card-header">
           <span class="proj-card-title">AWS S3 Simulator & Centralized Observability Stack</span>
           <div class="proj-card-links">
-            <a href="https://aws-s3-simulator.onrender.com" target="_blank">Live Demo ↗</a>
-            <a href="https://github.com/ArtemRivnyi/aws-s3-simulator" target="_blank">Source Code ↗</a>
+            <a href="https://aws-s3-simulator.onrender.com" target="_blank" rel="noopener">Live Demo ↗</a>
+            <a href="https://github.com/ArtemRivnyi/aws-s3-simulator" target="_blank" rel="noopener">Source Code ↗</a>
           </div>
         </div>
         <p class="proj-card-desc">
@@ -608,8 +651,8 @@
         <div class="proj-card-header">
           <span class="proj-card-title">Enterprise AI Support Ticket Classification SaaS</span>
           <div class="proj-card-links">
-            <a href="https://ai-ticket-classifier.onrender.com" target="_blank">Live Demo ↗</a>
-            <a href="https://github.com/ArtemRivnyi/ai-ticket-classifier" target="_blank">Source Code ↗</a>
+            <a href="https://ai-ticket-classifier.onrender.com" target="_blank" rel="noopener">Live Demo ↗</a>
+            <a href="https://github.com/ArtemRivnyi/ai-ticket-classifier" target="_blank" rel="noopener">Source Code ↗</a>
           </div>
         </div>
         <p class="proj-card-desc">
@@ -625,8 +668,8 @@
         <div class="proj-card-header">
           <span class="proj-card-title">UA &rarr; IE Automotive Scout & VRT Import Tax Engine</span>
           <div class="proj-card-links">
-            <a href="https://ua-ie-car-scout-web.onrender.com" target="_blank">Live Demo ↗</a>
-            <a href="https://github.com/ArtemRivnyi/ua-ie-car-scout" target="_blank">Source Code ↗</a>
+            <a href="https://ua-ie-car-scout-web.onrender.com" target="_blank" rel="noopener">Live Demo ↗</a>
+            <a href="https://github.com/ArtemRivnyi/ua-ie-car-scout" target="_blank" rel="noopener">Source Code ↗</a>
           </div>
         </div>
         <p class="proj-card-desc">
@@ -642,7 +685,7 @@
         <div class="proj-card-header">
           <span class="proj-card-title">Privacy-First AI Email Automation Platform</span>
           <div class="proj-card-links">
-            <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store" target="_blank">Source Code ↗</a>
+            <a href="https://github.com/ArtemRivnyi/ai-email-support-clothing-store" target="_blank" rel="noopener">Source Code ↗</a>
           </div>
         </div>
         <p class="proj-card-desc">
@@ -754,22 +797,22 @@
       <div>
         <div class="section-title">Education</div>
         <div class="meta-box">
-          <div style="font-size: 9.2pt; font-weight: 700; color: var(--primary);">Bachelor of Computer Engineering</div>
-          <div style="font-size: 8.3pt; color: #334155; margin-top: 2px;">Faculty of Physics, Electronics and Computer Systems</div>
-          <div style="font-size: 8.3pt; color: #334155;">Oles Honchar Dnipro National University (2020 – 2024)</div>
-          <div style="font-size: 7.6pt; color: var(--muted); margin-top: 3px;">Ministry Accredited Degree (B24 № 162181) &middot; Computer Architecture, Distributed Systems, Operating Systems Internals</div>
+          <div class="edu-title">Bachelor of Computer Engineering</div>
+          <div class="edu-sub">Faculty of Physics, Electronics and Computer Systems</div>
+          <div class="edu-inst">Oles Honchar Dnipro National University (2020 – 2024)</div>
+          <div class="edu-details">Ministry Accredited Degree (B24 № 162181) &middot; Computer Architecture, Distributed Systems, Operating Systems Internals</div>
         </div>
       </div>
 
       <div>
         <div class="section-title">Leadership & Languages</div>
         <div class="meta-box">
-          <div style="font-size: 8.2pt; font-weight: 700; color: var(--primary); margin-bottom: 2px;">Esports Event Operations & Infrastructure</div>
-          <div style="font-size: 7.8pt; color: #475569; margin-bottom: 6px;">
+          <div class="meta-heading">Esports Event Operations & Infrastructure</div>
+          <div class="meta-desc">
             Windigo Arena x DNU (2021): Managed live arena logistics and fault-tolerant tournament network for 100+ competitors.
           </div>
-          <div style="font-size: 8.2pt; font-weight: 700; color: var(--primary); margin-bottom: 2px;">Languages</div>
-          <div style="font-size: 7.8pt; color: #475569;">
+          <div class="meta-heading">Languages</div>
+          <div class="meta-desc-last">
             <strong>English:</strong> Professional Working &middot; <strong>Ukrainian:</strong> Fluent &middot; <strong>Russian:</strong> Fluent
           </div>
         </div>
