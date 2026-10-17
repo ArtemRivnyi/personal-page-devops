@@ -984,6 +984,7 @@ body.light-theme .kpi-chip {
     margin: 16px auto;
     cursor: pointer;
     perspective: 1000px;
+    touch-action: pan-y;
 }
 
 .stacked-card {
@@ -1044,13 +1045,111 @@ body.light-theme .kpi-chip {
     color: #fff;
     font-size: 0.74rem;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    pointer-events: auto;
+    transition: background 0.2s ease;
+}
+
+.caption-shuffle-tag {
+    font-size: 0.68rem;
+    color: var(--accent-cyan);
+    background: rgb(0 0 0 / 60%);
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid rgb(56 189 248 / 30%);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.stack-controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.stack-nav-btn {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.stack-nav-btn:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+    transform: scale(1.08);
+}
+
+.stack-shuffle-btn {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.stack-shuffle-btn:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 25%);
+}
+
+.stack-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.stack-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--border-subtle);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stack-dot.active {
+    background: var(--accent-cyan);
+    width: 18px;
+    border-radius: 4px;
 }
 
 .stack-hint {
     text-align: center;
     font-size: 0.76rem;
     color: var(--text-muted);
-    margin-top: 14px;
+    margin-top: 8px;
 }
 
 /* Visually Hidden Suite Container (Keeps 100% Jest compatibility without visual clutter) */

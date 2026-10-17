@@ -608,21 +608,101 @@ function initStackedCards() {
     const cards = Array.from(stack.querySelectorAll('.stacked-card'));
     if (!cards.length) return;
 
-    stack.addEventListener('click', (e) => {
-        if (e.target.tagName && e.target.tagName.toLowerCase() === 'img') return;
+    const prevBtn = document.getElementById('stack-prev-btn');
+    const nextBtn = document.getElementById('stack-next-btn');
+    const shuffleBtn = document.getElementById('stack-shuffle-btn');
+    const dots = document.querySelectorAll('.stack-dot');
 
-        const classes = ['card-pos-1', 'card-pos-2', 'card-pos-3', 'card-pos-4'];
+    const classes = ['card-pos-1', 'card-pos-2', 'card-pos-3', 'card-pos-4'];
+
+    function updateDots() {
+        if (!dots.length) return;
+        const topCard = cards.find((c) => c.classList.contains('card-pos-1'));
+        if (topCard && topCard.dataset.index !== undefined) {
+            const activeIdx = parseInt(topCard.dataset.index, 10);
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === activeIdx);
+            });
+        }
+    }
+
+    function cycleCards(step = 1) {
         cards.forEach((card) => {
             for (let i = 0; i < classes.length; i++) {
                 if (card.classList.contains(classes[i])) {
                     card.classList.remove(classes[i]);
-                    const nextClass = classes[(i + 1) % classes.length];
-                    card.classList.add(nextClass);
+                    const nextIdx = ((i + step) % classes.length + classes.length) % classes.length;
+                    card.classList.add(classes[nextIdx]);
                     break;
                 }
             }
         });
+        updateDots();
+    }
+
+    // 1. Stack / caption click (preserves test requirement: if img, return)
+    stack.addEventListener('click', (e) => {
+        if (e.target.tagName && e.target.tagName.toLowerCase() === 'img') return;
+        cycleCards(1);
     });
+
+    // 2. Direct button controls
+    if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            cycleCards(1);
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            cycleCards(-1);
+        });
+    }
+
+    if (shuffleBtn) {
+        shuffleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            cycleCards(1);
+        });
+    }
+
+    // 3. Dot indicator navigation
+    dots.forEach((dot) => {
+        dot.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const targetIdx = parseInt(dot.dataset.index || '0', 10);
+            const topCard = cards.find((c) => c.classList.contains('card-pos-1'));
+            if (!topCard) return;
+            const currentIdx = parseInt(topCard.dataset.index || '0', 10);
+            const diff = targetIdx - currentIdx;
+            if (diff !== 0) {
+                cycleCards(diff);
+            }
+        });
+    });
+
+    // 4. Touch swipe navigation for mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    stack.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches[0]) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }
+    }, { passive: true });
+
+    stack.addEventListener('touchend', (e) => {
+        if (e.changedTouches && e.changedTouches[0]) {
+            const diffX = e.changedTouches[0].clientX - touchStartX;
+            const diffY = e.changedTouches[0].clientY - touchStartY;
+            if (Math.abs(diffX) > 30 && Math.abs(diffX) > Math.abs(diffY)) {
+                cycleCards(diffX < 0 ? 1 : -1);
+            }
+        }
+    }, { passive: true });
 }
 
 function initChatWidget() {

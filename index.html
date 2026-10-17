@@ -908,6 +908,7 @@
                             <img src="assets/tournament/cups_trophies.jpg" alt="Official Tournament Trophies with Red Bull" class="stacked-card-img lightbox-trigger">
                             <div class="stacked-card-caption">
                                 <span>Official Trophies &bull; Red Bull &amp; Yalantis Sponsored</span>
+                                <span class="caption-shuffle-tag">🔀 Next</span>
                             </div>
                         </div>
                         <!-- Card 2: Windigo Arena Stage -->
@@ -915,6 +916,7 @@
                             <img src="assets/tournament/img_1.jpg" alt="Windigo Arena Stage &amp; Battlestations" class="stacked-card-img lightbox-trigger">
                             <div class="stacked-card-caption">
                                 <span>Windigo Arena Stage &bull; 100+ LAN Participants</span>
+                                <span class="caption-shuffle-tag">🔀 Next</span>
                             </div>
                         </div>
                         <!-- Card 3: Live Matches -->
@@ -922,6 +924,7 @@
                             <img src="assets/tournament/img_2.jpg" alt="Live Matches &amp; Red Bull Awards" class="stacked-card-img lightbox-trigger">
                             <div class="stacked-card-caption">
                                 <span>CS:GO &amp; Dota 2 Finals &bull; Live Broadcast</span>
+                                <span class="caption-shuffle-tag">🔀 Next</span>
                             </div>
                         </div>
                         <!-- Card 4: Winners & Awards -->
@@ -929,10 +932,25 @@
                             <img src="assets/tournament/img_7.jpg" alt="Awards Ceremony" class="stacked-card-img lightbox-trigger">
                             <div class="stacked-card-caption">
                                 <span>Awards Ceremony &bull; University Champions</span>
+                                <span class="caption-shuffle-tag">🔀 Next</span>
                             </div>
                         </div>
                     </div>
-                    <p class="stack-hint">Interactive stack &bull; Click to shuffle photo &bull; Click image to enlarge</p>
+                    <!-- Direct Controls for Frictionless Browsing on Mobile & PC -->
+                    <div class="stack-controls-row">
+                        <button type="button" class="stack-nav-btn" id="stack-prev-btn" aria-label="Previous photo">‹</button>
+                        <button type="button" class="stack-shuffle-btn" id="stack-shuffle-btn" aria-label="Shuffle tournament photos">
+                            <span class="shuffle-icon" aria-hidden="true">🔀</span> Next Photo
+                        </button>
+                        <button type="button" class="stack-nav-btn" id="stack-next-btn" aria-label="Next photo">›</button>
+                    </div>
+                    <div class="stack-dots" id="stack-dots">
+                        <button type="button" class="stack-dot active" data-index="0" aria-label="View photo 1"></button>
+                        <button type="button" class="stack-dot" data-index="1" aria-label="View photo 2"></button>
+                        <button type="button" class="stack-dot" data-index="2" aria-label="View photo 3"></button>
+                        <button type="button" class="stack-dot" data-index="3" aria-label="View photo 4"></button>
+                    </div>
+                    <p class="stack-hint">Swipe or click Next to shuffle &bull; Click image to enlarge</p>
                 </div>
             </div>
 
