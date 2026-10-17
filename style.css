@@ -897,6 +897,8 @@ body.light-theme .kpi-chip {
 .role-meta {
     font-size: 0.85rem;
     color: var(--text-secondary);
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .role-summary {
