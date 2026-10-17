@@ -1421,6 +1421,10 @@ body.light-theme .kpi-chip {
     line-clamp: 3;
 }
 
+.mini-project-card .project-kpi-row {
+    margin-bottom: 8px;
+}
+
 /* NO-MEDIA PROJECT CARDS (text-only, no screenshot) */
 .no-media .card-content-wrap {
     padding: 24px;
