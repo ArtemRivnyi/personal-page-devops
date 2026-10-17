@@ -11,6 +11,7 @@ permissions:
   contents: read
   security-events: write
   actions: read
+  deployments: write
 
 env:
   NODE_VERSION: '18'
@@ -93,75 +94,27 @@ jobs:
           sarif_file: 'trivy-results.sarif'
 
   deploy:
-    name: Deploy to AWS S3 & CloudFront
+    name: Verify Production Deployment
     runs-on: ubuntu-latest
     needs: [security-scan]
-    if: false # github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     environment:
       name: production
       url: https://artemrivnyi.com
     steps:
-      - name: Check for AWS credentials
-        id: check-secrets
+      - name: Verify Live Production Health
         run: |
-          if [ -z "${{ secrets.AWS_ACCESS_KEY_ID }}" ] || [ -z "${{ secrets.AWS_SECRET_ACCESS_KEY }}" ]; then
-            echo "has_credentials=false" >> $GITHUB_OUTPUT
-            echo "⚠️ AWS credentials not configured — skipping deployment."
-          else
-            echo "has_credentials=true" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Checkout code
-        if: steps.check-secrets.outputs.has_credentials == 'true'
-        uses: actions/checkout@v4
-
-      - name: Configure AWS Credentials
-        if: steps.check-secrets.outputs.has_credentials == 'true'
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-
-      - name: Setup Terraform
-        if: steps.check-secrets.outputs.has_credentials == 'true'
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_wrapper: false
-
-      # Note: We commented out the automatic Terraform apply for safety.
-      # - name: Deploy Infrastructure (Terraform Apply)
-      #   working-directory: ./terraform
-      #   run: |
-      #     terraform init
-      #     terraform apply -auto-approve
-
-      - name: Deploy Static Content to S3
-        if: steps.check-secrets.outputs.has_credentials == 'true'
-        run: |
-          # Sync all static files except hidden folders like .git or node_modules
-          aws s3 sync . s3://${{ secrets.AWS_S3_BUCKET_NAME }} \
-            --delete \
-            --exclude ".git/*" \
-            --exclude ".github/*" \
-            --exclude "node_modules/*" \
-            --exclude "terraform/*" \
-            --exclude "Readme.md"
-
-      - name: Invalidate CloudFront Cache
-        if: steps.check-secrets.outputs.has_credentials == 'true'
-        run: |
-          aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} \
-            --paths "/*"
-          
-      - name: Create deployment notification
-        if: success()
-        run: |
-          if [ "${{ steps.check-secrets.outputs.has_credentials }}" == "true" ]; then
-            echo "🎉 Successfully deployed static site to AWS S3 & CloudFront!"
-            echo "📊 Version: ${{ github.sha }}"
-            echo "🔗 URL: https://artemrivnyi.com"
-          else
-            echo "ℹ️ Deployment skipped — configure AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY secrets to enable."
-          fi
+          echo "Verifying live production availability at https://artemrivnyi.com..."
+          # Allow Render zero-downtime container to initialize
+          sleep 15
+          for i in {1..12}; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://artemrivnyi.com/)
+            if [ "$STATUS" -eq 200 ]; then
+              echo "✅ Production https://artemrivnyi.com is live and healthy (HTTP $STATUS)!"
+              exit 0
+            fi
+            echo "Waiting for live response... (Attempt $i/12, HTTP $STATUS)"
+            sleep 5
+          done
+          echo "❌ Production health check failed"
+          exit 1
