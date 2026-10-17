@@ -99,6 +99,39 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=19">
+
+    <!-- Google Analytics 4 (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K6EZQYRLEL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // Smart In-App Social Traffic Auto-Detection (Instagram & LinkedIn)
+      (function() {
+        var ua = navigator.userAgent || '';
+        var ref = document.referrer || '';
+        var isInstagram = ua.indexOf('Instagram') !== -1 || ref.indexOf('instagram.com') !== -1 || ref.indexOf('android-app://com.instagram.android') !== -1;
+        var isLinkedIn = ua.indexOf('LinkedInApp') !== -1 || ref.indexOf('linkedin.com') !== -1 || ref.indexOf('android-app://com.linkedin.android') !== -1;
+        var hasUTM = window.location.search.indexOf('utm_source') !== -1;
+
+        if (!hasUTM && isInstagram) {
+          gtag('config', 'G-K6EZQYRLEL', {
+            campaign_source: 'instagram',
+            campaign_medium: 'bio',
+            campaign_name: 'instagram_profile'
+          });
+        } else if (!hasUTM && isLinkedIn) {
+          gtag('config', 'G-K6EZQYRLEL', {
+            campaign_source: 'linkedin',
+            campaign_medium: 'profile',
+            campaign_name: 'linkedin_profile'
+          });
+        } else {
+          gtag('config', 'G-K6EZQYRLEL');
+        }
+      })();
+    </script>
 </head>
 
 <body class="dark-theme">
