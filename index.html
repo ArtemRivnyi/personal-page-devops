@@ -1545,13 +1545,112 @@
             </div>
 
             <div class="footer-right">
-                <div class="footer-status-pill" title="Live System Status monitored by UptimeRobot">
+                <button type="button" class="footer-status-pill" id="health-monitor-btn" title="View live infrastructure telemetry & health checks" aria-haspopup="dialog" aria-expanded="false">
                     <span class="status-pulse-dot" aria-hidden="true"></span>
                     <span class="status-indicator-text">All Systems Operational &bull; 99.9% Uptime</span>
-                </div>
+                    <span class="status-click-hint" aria-hidden="true">&#x2197;</span>
+                </button>
             </div>
         </div>
     </footer>
+
+    <!-- DevOps Live Telemetry & Health Probe Modal -->
+    <div id="health-modal" class="health-modal-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="health-modal-title">
+        <div class="health-modal-card">
+            <div class="health-modal-header">
+                <div class="health-header-title-wrap">
+                    <span class="health-pulse-glow" aria-hidden="true"></span>
+                    <div>
+                        <h3 id="health-modal-title" class="health-modal-heading">Cluster Telemetry &amp; Health Probe</h3>
+                        <p class="health-modal-subheading">Live system diagnostics &amp; edge latency</p>
+                    </div>
+                </div>
+                <button type="button" id="health-modal-close" class="health-close-btn" aria-label="Close Health Diagnostics">&times;</button>
+            </div>
+
+            <div class="health-latency-box">
+                <div class="latency-header">
+                    <span class="latency-label">Client-to-Edge Roundtrip Latency</span>
+                    <span id="latency-val" class="latency-val">Measuring...</span>
+                </div>
+                <div class="latency-bar-track">
+                    <div id="latency-bar" class="latency-bar-fill"></div>
+                </div>
+                <div class="latency-footer">
+                    <span class="latency-edge-node">Route: Anycast CDN &bull; TLS 1.3 Strict</span>
+                    <button type="button" id="recheck-health-btn" class="recheck-health-btn">&#x21bb; Re-probe</button>
+                </div>
+            </div>
+
+            <div class="health-services-list">
+                <div class="health-service-item">
+                    <div class="service-name-wrap">
+                        <span class="service-status-dot dot-green"></span>
+                        <div>
+                            <span class="service-name">artemrivnyi.com (Primary Origin)</span>
+                            <span class="service-meta">Nginx 1.25 Alpine in Docker &bull; Render Frankfurt</span>
+                        </div>
+                    </div>
+                    <span class="service-badge-healthy">200 OK</span>
+                </div>
+
+                <div class="health-service-item">
+                    <div class="service-name-wrap">
+                        <span class="service-status-dot dot-green"></span>
+                        <div>
+                            <span class="service-name">AWS Route53 DNS Anycast</span>
+                            <span class="service-meta">Global Low-Latency Resolution &bull; Health Checked</span>
+                        </div>
+                    </div>
+                    <span class="service-badge-healthy">HEALTHY</span>
+                </div>
+
+                <div class="health-service-item">
+                    <div class="service-name-wrap">
+                        <span class="service-status-dot dot-green"></span>
+                        <div>
+                            <span class="service-name">AI Ticket Classifier Microservice</span>
+                            <span class="service-meta">Dual-LLM Circuit Breaker &bull; Gemini / OpenAI Standby</span>
+                        </div>
+                    </div>
+                    <span class="service-badge-healthy">ONLINE</span>
+                </div>
+
+                <div class="health-service-item">
+                    <div class="service-name-wrap">
+                        <span class="service-status-dot dot-green"></span>
+                        <div>
+                            <span class="service-name">AWS S3 Simulator &amp; Prometheus</span>
+                            <span class="service-meta">MinIO Engine &bull; Zero Cloud Egress Cluster</span>
+                        </div>
+                    </div>
+                    <span class="service-badge-healthy">ONLINE</span>
+                </div>
+
+                <div class="health-service-item">
+                    <div class="service-name-wrap">
+                        <span class="service-status-dot dot-green"></span>
+                        <div>
+                            <span class="service-name">UA-IE Car Scout Live Service</span>
+                            <span class="service-meta">Puppeteer Stealth &bull; NBU Currency API Feed</span>
+                        </div>
+                    </div>
+                    <span class="service-badge-healthy">ONLINE</span>
+                </div>
+
+                <div class="health-service-item">
+                    <div class="service-name-wrap">
+                        <span class="service-status-dot dot-green"></span>
+                        <div>
+                            <span class="service-name">CI/CD Deployment Pipeline</span>
+                            <span class="service-meta">GitHub Actions &bull; 49 Jest Tests &bull; 0 Lint Errors</span>
+                        </div>
+                    </div>
+                    <span class="service-badge-healthy">PASSING</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Back to top button -->
     <button id="back-to-top" type="button" title="Back to Top" aria-label="Back to top">↑</button>

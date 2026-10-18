@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { debounce, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail } from '../script.exports.js';
+import { debounce, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initHealthMonitor } from '../script.exports.js';
 
 // Mock canvas getContext before any tests run (without jest.fn)
 beforeAll(() => {
@@ -671,5 +671,65 @@ describe('initCopyEmail', () => {
 
     await btn.click();
     expect(toast.hasAttribute('hidden')).toBe(false);
+  });
+});
+
+describe('initHealthMonitor', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <button type="button" id="health-monitor-btn" aria-expanded="false">99.9% Uptime</button>
+      <div id="health-modal" hidden>
+        <button type="button" id="health-modal-close">Close</button>
+        <span id="latency-val"></span>
+        <div id="latency-bar"></div>
+        <button type="button" id="recheck-health-btn">Re-check</button>
+      </div>
+    `;
+    global.fetch = () => Promise.resolve({ ok: true });
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  test('should handle missing elements gracefully', () => {
+    document.body.innerHTML = '';
+    expect(() => initHealthMonitor()).not.toThrow();
+  });
+
+  test('should open health modal on button click', () => {
+    initHealthMonitor();
+    const btn = document.getElementById('health-monitor-btn');
+    const modal = document.getElementById('health-modal');
+
+    btn.click();
+    expect(modal.hasAttribute('hidden')).toBe(false);
+    expect(btn.getAttribute('aria-expanded')).toBe('true');
+  });
+
+  test('should close health modal when close button clicked', () => {
+    initHealthMonitor();
+    const btn = document.getElementById('health-monitor-btn');
+    const modal = document.getElementById('health-modal');
+    const closeBtn = document.getElementById('health-modal-close');
+
+    btn.click();
+    expect(modal.hasAttribute('hidden')).toBe(false);
+
+    closeBtn.click();
+    expect(modal.hasAttribute('hidden')).toBe(true);
+    expect(btn.getAttribute('aria-expanded')).toBe('false');
+  });
+
+  test('should close modal on Escape keydown', () => {
+    initHealthMonitor();
+    const btn = document.getElementById('health-monitor-btn');
+    const modal = document.getElementById('health-modal');
+
+    btn.click();
+    expect(modal.hasAttribute('hidden')).toBe(false);
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    expect(modal.hasAttribute('hidden')).toBe(true);
   });
 });

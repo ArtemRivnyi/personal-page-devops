@@ -678,7 +678,8 @@ body.light-theme .site-header {
 .card-links-row {
     display: flex;
     align-items: center;
-    gap: 16px;
+    flex-wrap: wrap;
+    gap: 8px 16px;
     padding-top: 12px;
     border-top: 1px solid var(--border-subtle);
 }
@@ -745,6 +746,9 @@ body.light-theme .site-header {
     border-radius: 4px;
     line-height: 1.25;
     letter-spacing: -0.01em;
+    max-width: 100%;
+    word-break: break-word;
+    white-space: normal;
 }
 
 body:not(.dark-theme) .kpi-chip,
@@ -1489,11 +1493,30 @@ body.light-theme .kpi-chip {
     font-size: 0.8rem;
     color: var(--text-secondary);
     font-weight: 500;
-    transition: border-color 0.15s ease;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    max-width: 100%;
+    text-align: left;
 }
 
 .footer-status-pill:hover {
-    border-color: var(--border-hover);
+    border-color: var(--accent-green);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgb(63 185 80 / 15%);
+}
+
+.status-click-hint {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    transition: color 0.15s, transform 0.15s;
+}
+
+.footer-status-pill:hover .status-click-hint {
+    color: var(--accent-green);
+    transform: translate(2px, -2px);
 }
 
 .status-pulse-dot {
@@ -1515,6 +1538,262 @@ body.light-theme .kpi-chip {
         opacity: 50%;
         transform: scale(0.85);
     }
+}
+
+/* DevOps Live Telemetry & Health Probe Modal */
+.health-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgb(0 0 0 / 70%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    z-index: 1001;
+    animation: health-fade-in 0.2s ease-out;
+}
+
+.health-modal-overlay[hidden] {
+    display: none;
+}
+
+@keyframes health-fade-in {
+    from {
+        opacity: 0%;
+    }
+
+    to {
+        opacity: 100%;
+    }
+}
+
+.health-modal-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    width: min(520px, calc(100vw - 32px));
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding: 22px;
+    box-shadow: 0 20px 48px rgb(0 0 0 / 45%);
+    animation: health-slide-up 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes health-slide-up {
+    from {
+        opacity: 0%;
+        transform: translateY(16px) scale(0.98);
+    }
+
+    to {
+        opacity: 100%;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.health-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.health-header-title-wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.health-pulse-glow {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-green);
+    box-shadow: 0 0 12px var(--accent-green);
+    margin-top: 4px;
+    flex-shrink: 0;
+    animation: status-pulse 2s infinite ease-in-out;
+}
+
+.health-modal-heading {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 2px;
+    letter-spacing: -0.01em;
+}
+
+.health-modal-subheading {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.health-close-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 6px;
+    transition: color 0.15s, background 0.15s;
+}
+
+.health-close-btn:hover {
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+}
+
+.health-latency-box {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+}
+
+.latency-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.latency-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.latency-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent-green);
+}
+
+.latency-bar-track {
+    height: 6px;
+    background: var(--bg-secondary);
+    border-radius: 9999px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.latency-bar-fill {
+    height: 100%;
+    width: 25%;
+    background: var(--accent-green);
+    border-radius: 9999px;
+    transition: width 0.4s ease, background-color 0.4s ease;
+}
+
+.latency-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.latency-edge-node {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.recheck-health-btn {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    font-size: 0.74rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.recheck-health-btn:hover {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+}
+
+.health-services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.health-service-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px 12px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    transition: border-color 0.15s ease;
+}
+
+.health-service-item:hover {
+    border-color: var(--border-hover);
+}
+
+.service-name-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.service-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.service-status-dot.dot-green {
+    background: var(--accent-green);
+    box-shadow: 0 0 6px rgb(63 185 80 / 60%);
+}
+
+.service-name {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.service-meta {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.3;
+}
+
+.service-badge-healthy {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: rgb(63 185 80 / 12%);
+    color: var(--accent-green);
+    border: 1px solid rgb(63 185 80 / 25%);
+    flex-shrink: 0;
 }
 
 /* OTHER PROJECTS MINI GRID */
@@ -2481,10 +2760,12 @@ body.light-theme .kpi-chip {
     .hero-btn-primary {
         font-size: 0.85rem;
         padding: 9px 16px;
+        max-width: 100%;
     }
 
     .availability-status-pill {
-        font-size: 0.8rem;
+        font-size: 0.76rem;
+        max-width: 100%;
     }
 
     .main-wrapper {
@@ -2559,6 +2840,17 @@ body.light-theme .kpi-chip {
         font-size: 0.76rem;
         padding: 3px 8px;
     }
+
+    .footer-status-pill {
+        font-size: 0.72rem;
+        padding: 5px 10px;
+    }
+
+    .status-indicator-text {
+        font-size: 0.72rem;
+        line-height: 1.3;
+    }
+
 
     .contact-form input,
     .contact-form textarea {
