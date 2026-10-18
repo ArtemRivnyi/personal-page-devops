@@ -31,6 +31,9 @@
 
 ## Technical Case Studies & Architecture Blueprints
 - **Dual-LLM Failover Architecture (Zero-Outage AI Microservices):** Production architectural blueprint on eliminating AI Single Points of Failure (SPOF) using Redis circuit breakers, Pydantic contracts, Prometheus observability, and automated hot-standby fallback from Google Gemini 2.0 Flash to OpenAI GPT-4o-mini with ~71% inference cost reduction (https://artemrivnyi.com/docs/dual-llm-failover-architecture.html).
+- **UA-IE Car Scout Architecture (Market Intelligence & Tax Engine):** Real-time meta-search engine aggregating 6 automotive marketplaces across Ukraine and Ireland with dual-tier Cheerio/Puppeteer stealth scraping, live NBU central bank currency normalization, and Irish Revenue customs duty, VAT, and VRT statutory calculation engine with 172 automated tests (https://artemrivnyi.com/docs/ua-ie-car-scout-architecture.html).
+- **AI Email Support Platform (Privacy-First On-Prem AI):** Decoupled enterprise support automation architecture using containerized local LLMs (Ollama/Gemma:7b), FAISS semantic vector retrieval (RAG) to prevent hallucinations, and asynchronous Redis Queue (RQ) workers processing incoming emails without cloud PII data leakage (https://artemrivnyi.com/docs/ai-email-support-architecture.html).
+- **AWS S3 Simulator & Observability Architecture (Slashing Cloud Egress):** Self-contained, lightweight S3-compatible object storage emulator with MinIO core, eliminating cloud egress expenses in CI/CD by 100% and providing full-stack Prometheus + Loki + Promtail + Grafana dashboard observability (https://artemrivnyi.com/docs/aws-s3-simulator-architecture.html).
 
 ## Education & Certifications
 - **University Degree:** Oles Honchar Dnipro National University (Ministry Accredited Degree B24 № 162181).

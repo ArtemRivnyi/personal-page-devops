@@ -73,7 +73,14 @@ function setupThemeToggle() {
     setTheme(isDark);
 
     toggle.addEventListener('click', () => {
-        setTheme(!document.body.classList.contains('dark-theme'));
+        const nextDark = !document.body.classList.contains('dark-theme');
+        setTheme(nextDark);
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'theme_change', {
+                event_category: 'preference',
+                event_label: nextDark ? 'dark' : 'light'
+            });
+        }
     });
 }
 
@@ -601,6 +608,83 @@ function initCopyEmail() {
     });
 }
 
+// Global Analytics Telemetry (CV Downloads, Case Study Reads, Outbound Demos)
+function initAnalyticsTracking() {
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (!link) return;
+        const href = link.getAttribute('href') || '';
+
+        // 1. CV Download / View Tracking
+        if (href.includes('Artem.Rivnyi.CV.pdf') || href.includes('Artem.Rivnyi.CV.html') || (link.classList.contains('hero-btn-primary') && href.includes('CV'))) {
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'cv_download', {
+                    event_category: 'recruitment',
+                    event_label: href.includes('.pdf') ? 'pdf_download' : 'html_view',
+                    link_url: href
+                });
+            }
+        }
+
+        // 2. Architecture Case Study Read Tracking
+        if (href.includes('-architecture.html') || link.classList.contains('ref-link-study') || link.classList.contains('case-read-btn')) {
+            const studyName = href.split('/').pop().replace('.html', '') || 'unknown';
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'case_study_read', {
+                    event_category: 'engagement',
+                    event_label: studyName,
+                    study_name: studyName,
+                    link_url: href
+                });
+            }
+        }
+
+        // 3. Outbound Link Tracking (GitHub, Live Demos, LinkedIn)
+        if (link.hostname && link.hostname !== window.location.hostname && (href.startsWith('http://') || href.startsWith('https://'))) {
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'outbound_click', {
+                    event_category: 'outbound',
+                    event_label: link.hostname,
+                    link_url: href
+                });
+            }
+        }
+    });
+
+    // 4. Scroll Depth Tracking (50% and 90%)
+    let tracked50 = false;
+    let tracked90 = false;
+    window.addEventListener('scroll', debounce(() => {
+        const h = document.documentElement;
+        const b = document.body;
+        const st = 'scrollTop';
+        const sh = 'scrollHeight';
+        const totalHeight = (h[sh] || b[sh]) - h.clientHeight;
+        if (totalHeight <= 0) return;
+        const percent = ((h[st] || b[st]) / totalHeight) * 100;
+        if (!tracked50 && percent >= 50) {
+            tracked50 = true;
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'scroll_depth', {
+                    event_category: 'engagement',
+                    event_label: '50_percent',
+                    depth: 50
+                });
+            }
+        }
+        if (!tracked90 && percent >= 90) {
+            tracked90 = true;
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'scroll_depth', {
+                    event_category: 'engagement',
+                    event_label: '90_percent',
+                    depth: 90
+                });
+            }
+        }
+    }, 200), { passive: true });
+}
+
 function initStackedCards() {
     const stack = document.getElementById('tournament-stack');
     if (!stack) return;
@@ -777,6 +861,13 @@ function initChatWidget() {
             const query = chip.dataset.query;
             const question = chip.textContent.trim();
             addMessage(question, true);
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'chat_interaction', {
+                    event_category: 'engagement',
+                    event_label: query || 'quick_chip',
+                    chat_type: 'quick_chip'
+                });
+            }
 
             setTimeout(() => {
                 const answer = answers[query] || "Thanks for your question! Feel free to email artemrivnyi@outlook.com for detailed inquiries.";
@@ -793,6 +884,13 @@ function initChatWidget() {
 
             addMessage(text, true);
             input.value = '';
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'chat_interaction', {
+                    event_category: 'engagement',
+                    event_label: 'custom_query',
+                    chat_type: 'custom_input'
+                });
+            }
 
             const lower = text.toLowerCase();
             setTimeout(() => {
@@ -812,4 +910,4 @@ function initChatWidget() {
     }
 }
 
-export { debounce, setupMobileMenu, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail };
+export { debounce, setupMobileMenu, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initAnalyticsTracking };

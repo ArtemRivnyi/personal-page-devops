@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UA-IE Car Scout Architecture — Artem Rivnyi</title>
+    <meta name="description" content="Technical Case Study: Building a Cross-Border Market Intelligence & Real-Time Tax Clearance Engine with Node.js, Puppeteer Stealth, and Redis by Artem Rivnyi.">
+    <link rel="canonical" href="https://artemrivnyi.com/docs/ua-ie-car-scout-architecture.html">
+    <link rel="icon" href="../assets/icons/favicon.png">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Artem Rivnyi">
+    <meta property="og:url" content="https://artemrivnyi.com/docs/ua-ie-car-scout-architecture.html">
+    <meta property="og:title" content="UA-IE Car Scout Architecture — Artem Rivnyi">
+    <meta property="og:description" content="Technical Case Study: Real-Time Automotive Market Scraping, Anti-Bot Evasion, and Irish Revenue Tax Calculations.">
+    <meta property="og:image" content="https://artemrivnyi.com/assets/carscout_demo.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="UA-IE Car Scout Architecture — Artem Rivnyi">
+    <meta name="twitter:description" content="Cross-border market intelligence engine aggregating 6 automotive marketplaces with sub-second Redis caching.">
+    <meta name="twitter:image" content="https://artemrivnyi.com/assets/carscout_demo.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="case-study.css">
+
+    <!-- Google Analytics 4 (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K6EZQYRLEL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      (function() {
+        var ua = navigator.userAgent || '';
+        var ref = document.referrer || '';
+        var hasUTM = window.location.search.indexOf('utm_source') !== -1;
+
+        if (hasUTM) {
+          gtag('config', 'G-K6EZQYRLEL');
+        } else if (ua.indexOf('LinkedInApp') !== -1 || ref.indexOf('linkedin.com') !== -1 || ref.indexOf('lnkd.in') !== -1) {
+          gtag('config', 'G-K6EZQYRLEL', { campaign_source: 'linkedin', campaign_medium: 'social' });
+        } else if (ua.indexOf('Telegram') !== -1 || ref.indexOf('t.me') !== -1 || ref.indexOf('telegram.org') !== -1) {
+          gtag('config', 'G-K6EZQYRLEL', { campaign_source: 'telegram', campaign_medium: 'messenger' });
+        } else {
+          gtag('config', 'G-K6EZQYRLEL');
+        }
+
+        gtag('event', 'case_study_view', {
+          event_category: 'engagement',
+          event_label: 'ua_ie_car_scout',
+          study_name: 'ua_ie_car_scout'
+        });
+      })();
+    </script>
+</head>
+<body>
+    <div class="article-container">
+        <header class="article-header-nav">
+            <a href="https://artemrivnyi.com" class="back-link">
+                ← Back to artemrivnyi.com
+            </a>
+            <span class="badge-category">Production Case Study</span>
+        </header>
+
+        <article>
+            <h1>UA-IE Car Scout: Cross-Border Market Intelligence &amp; Real-Time Tax Clearance Engine</h1>
+
+            <div class="meta-line">
+                <span>By <strong><a href="https://artemrivnyi.com">Artem Rivnyi</a></strong></span>
+                <span>&bull;</span>
+                <span>Data Engineering &amp; SRE</span>
+                <span>&bull;</span>
+                <span>October 2026</span>
+                <span>&bull;</span>
+                <span>Reference: <a href="https://github.com/ArtemRivnyi/ua-ie-car-scout" target="_blank" rel="noopener">ua-ie-car-scout ↗</a></span>
+            </div>
+
+            <p>
+                Importing a motor vehicle across European borders requires evaluating intricate financial formulas: market price differences, currency exchange fluctuations, customs clearance duties, shipping logistics, and statutory registration taxes (such as Ireland's Vehicle Registration Tax &amp; VAT). 
+            </p>
+
+            <p>
+                Buyers and commercial dealerships typically lose days manually sifting through disjointed portals across different languages and currencies. <strong>UA-IE Car Scout</strong> was engineered to solve this through a distributed real-time meta-search engine and tax calculation engine, aggregating listings from 6 major automotive marketplaces across Ukraine and Ireland.
+            </p>
+
+            <h2>1. Architectural Blueprint</h2>
+            <p>The system is built as a modular monorepo combining a high-performance React frontend with an Express scraper service, resilient Redis cache, and live banking exchange rate sync:</p>
+
+            <div class="diagram-box">[ User Query: e.g. "Volkswagen Golf 2020" ]
+       │
+       ▼
+[ React 18 / Vite SPA Client ]
+       │
+       ▼ (REST API / JSON)
+[ Node.js &amp; Express Ingestion Service ] ──► [ Redis In-Memory Cache (TTL: 1h) ]
+       │                                           ▲
+       ├── (Cache Miss) ───────────────────────────┤
+       ▼
+[ Scraping Orchestrator &amp; Concurrency Limiter ]
+       │
+       ├──► [ Cheerio Fast HTTP Engine ] (Static HTML listings: RST.ua, CARS.ua)
+       │
+       ├──► [ Puppeteer Stealth Pool ] (Dynamic Cloudflare SPAs: DoneDeal, Auto.RIA)
+       │
+       ▼
+[ Data Normalizer &amp; Deduplication Engine ]
+       │
+       ├──► [ National Bank of Ukraine API ] (Live UAH/USD/EUR exchange rates)
+       │
+       ▼
+[ Irish Revenue Duty &amp; VRT Calculator ]
+       │ (Price + Shipping + 6.5% Customs Duty + 23% VAT)
+       ▼
+[ Unified JSON Response &amp; Client Stream ]</div>
+
+            <h2>2. Core Engineering Challenges &amp; Solutions</h2>
+
+            <h3>A. Bypassing Sophisticated Anti-Bot &amp; Cloudflare Defenses</h3>
+            <p>
+                Major classified platforms employ Cloudflare WAF, browser fingerprinting, and dynamic JavaScript hydration. Plain <code>curl</code> or standard Axios requests are blocked immediately with HTTP 403.
+            </p>
+            <p>
+                To resolve this without expensive commercial proxy services, the backend implements a <strong>Dual-Tier Scraping Architecture</strong>:
+            </p>
+            <ul>
+                <li><strong>Tier 1 (Fast HTTP):</strong> Cheerio extracts raw markup in &lt;150ms for low-defense portals.</li>
+                <li><strong>Tier 2 (Headless Fallback):</strong> <code>puppeteer-extra-plugin-stealth</code> launches with automated header rotation, viewport jitter, and randomized request delays to bypass bot verification on single-page apps.</li>
+                <li><strong>Circuit Breaker:</strong> If a target portal throttles requests, the orchestrator serves stale Redis cached records while logging an alert, avoiding client search timeouts.</li>
+            </ul>
+
+            <h3>B. Real-Time Financial &amp; Irish Revenue Tax Engine</h3>
+            <p>
+                Raw vehicle purchase price is misleading. The application calculates the true <strong>Total Landed Cost in Ireland</strong> via an automated statutory calculation pipeline:
+            </p>
+            <div class="diagram-box">Total Landed Cost = Base Vehicle Price (Normalized to EUR via Live FX)
+                   + International Freight Logistics (€1,400 flat benchmark)
+                   + EU External Customs Duty (6.5% applied to CIF value)
+                   + Statutory Irish VAT (23% applied to CIF + Customs)
+                   + Irish Vehicle Registration Tax (VRT estimation based on engine/CO2)</div>
+
+            <h3>C. Multi-Portal Listing Deduplication</h3>
+            <p>
+                Sellers frequently cross-post the identical automobile across both general classifieds (e.g. OLX.ua) and specialized automotive hubs (e.g. Auto.RIA). The ingest pipeline normalizes model names, years, mileage tolerances (&plusmn;3%), and VIN prefixes to consolidate duplicate items into a single high-confidence listing.
+            </p>
+
+            <h2>3. Architecture Comparison &amp; Benchmarks</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric / Parameter</th>
+                        <th>Manual Workflow</th>
+                        <th>Scout Engine (Uncached)</th>
+                        <th>Scout Engine (Redis Hit)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Query Time across 6 Sites</strong></td>
+                        <td>15 &ndash; 25 minutes</td>
+                        <td>4,800 ms</td>
+                        <td class="highlight-green">240 ms</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Currency Normalization</strong></td>
+                        <td>Manual conversion</td>
+                        <td class="highlight-green">Automatic (Live NBU)</td>
+                        <td class="highlight-green">Automatic (Live NBU)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Customs Duty &amp; VAT Calc</strong></td>
+                        <td>Spreadsheet estimation</td>
+                        <td class="highlight-green">Instant Exact Math</td>
+                        <td class="highlight-green">Instant Exact Math</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Automated Test Suite</strong></td>
+                        <td>None</td>
+                        <td class="highlight-green">172 Automated Tests</td>
+                        <td class="highlight-green">100% CI Pass Rate</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>4. Key Production Lessons</h2>
+            <ol>
+                <li><strong>Never Rely on Pure DOM Scraping in Isolation:</strong> Websites update selectors without warning. Decoupling parsing logic into dedicated scraper adapters covered by continuous integration tests guarantees that broken selectors are flagged before impacting users.</li>
+                <li><strong>Aggressive Caching for Volatile External Data:</strong> Caching normalized results in Redis with a 1-hour TTL reduced third-party HTTP requests by 74%, protecting the service from IP bans.</li>
+                <li><strong>Transparent Financial Explanations Build Trust:</strong> Showing the exact mathematical breakdown of customs, freight, and VAT converted passive viewers into high-intent vehicle importers.</li>
+            </ol>
+        </article>
+
+        <!-- Author Footer Card -->
+        <div class="author-card">
+            <div class="author-info">
+                <h4>Artem Rivnyi</h4>
+                <p>DevOps &amp; Cloud Infrastructure Engineer based in Co. Wicklow, Ireland. Proven production experience in AWS, Kubernetes, Terraform, and high-availability systems.</p>
+                <div class="author-links">
+                    <a href="https://artemrivnyi.com">Portfolio (artemrivnyi.com) ↗</a>
+                    <a href="https://github.com/ArtemRivnyi" target="_blank" rel="noopener">GitHub ↗</a>
+                    <a href="https://www.linkedin.com/in/artem-rivnyi" target="_blank" rel="noopener">LinkedIn ↗</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

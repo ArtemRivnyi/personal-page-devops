@@ -620,6 +620,25 @@ body.light-theme .site-header {
     border: 1px solid rgb(168 85 247 / 30%);
 }
 
+.badge-flagship {
+    background: linear-gradient(135deg, rgb(16 185 129 / 20%), rgb(56 189 248 / 20%));
+    color: #34d399;
+    border: 1px solid rgb(52 211 153 / 45%);
+    box-shadow: 0 0 10px rgb(16 185 129 / 20%);
+    letter-spacing: 0.05em;
+}
+
+.ref-project-card.flagship-project-card {
+    border-color: rgb(16 185 129 / 35%);
+    background: linear-gradient(180deg, rgb(16 185 129 / 3%), var(--bg-card) 45%);
+    box-shadow: 0 4px 20px rgb(0 0 0 / 25%), 0 0 18px rgb(16 185 129 / 8%);
+}
+
+.ref-project-card.flagship-project-card:hover {
+    border-color: rgb(52 211 153 / 65%);
+    box-shadow: 0 8px 30px rgb(0 0 0 / 30%), 0 0 24px rgb(16 185 129 / 18%);
+}
+
 .card-content-wrap {
     padding: 18px 20px;
     display: flex;
@@ -1086,6 +1105,7 @@ body.light-theme .kpi-chip {
     line-height: 1;
     cursor: pointer;
     transition: all 0.2s ease;
+    -webkit-user-select: none;
     user-select: none;
 }
 
@@ -1109,6 +1129,7 @@ body.light-theme .kpi-chip {
     align-items: center;
     gap: 6px;
     transition: all 0.2s ease;
+    -webkit-user-select: none;
     user-select: none;
 }
 

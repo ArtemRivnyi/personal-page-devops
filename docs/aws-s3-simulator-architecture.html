@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS S3 Simulator Architecture — Artem Rivnyi</title>
+    <meta name="description" content="Technical Case Study: Slashing Cloud Egress Costs with S3-Compatible Local Emulation, MinIO, and Grafana Observability by Artem Rivnyi.">
+    <link rel="canonical" href="https://artemrivnyi.com/docs/aws-s3-simulator-architecture.html">
+    <link rel="icon" href="../assets/icons/favicon.png">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Artem Rivnyi">
+    <meta property="og:url" content="https://artemrivnyi.com/docs/aws-s3-simulator-architecture.html">
+    <meta property="og:title" content="AWS S3 Simulator Architecture — Artem Rivnyi">
+    <meta property="og:description" content="Technical Case Study: S3-Compatible Storage Emulation, Prometheus Observability, and Mocking Cloud Workloads to Zero Egress Cost.">
+    <meta property="og:image" content="https://artemrivnyi.com/assets/s3_demo.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AWS S3 Simulator Architecture — Artem Rivnyi">
+    <meta name="twitter:description" content="Decoupling integration testing from billable AWS infrastructure using MinIO, Flask, and Prometheus/Grafana.">
+    <meta name="twitter:image" content="https://artemrivnyi.com/assets/s3_demo.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="case-study.css">
+
+    <!-- Google Analytics 4 (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K6EZQYRLEL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      (function() {
+        var ua = navigator.userAgent || '';
+        var ref = document.referrer || '';
+        var hasUTM = window.location.search.indexOf('utm_source') !== -1;
+
+        if (hasUTM) {
+          gtag('config', 'G-K6EZQYRLEL');
+        } else if (ua.indexOf('LinkedInApp') !== -1 || ref.indexOf('linkedin.com') !== -1 || ref.indexOf('lnkd.in') !== -1) {
+          gtag('config', 'G-K6EZQYRLEL', { campaign_source: 'linkedin', campaign_medium: 'social' });
+        } else if (ua.indexOf('Telegram') !== -1 || ref.indexOf('t.me') !== -1 || ref.indexOf('telegram.org') !== -1) {
+          gtag('config', 'G-K6EZQYRLEL', { campaign_source: 'telegram', campaign_medium: 'messenger' });
+        } else {
+          gtag('config', 'G-K6EZQYRLEL');
+        }
+
+        gtag('event', 'case_study_view', {
+          event_category: 'engagement',
+          event_label: 'aws_s3_simulator',
+          study_name: 'aws_s3_simulator'
+        });
+      })();
+    </script>
+</head>
+<body>
+    <div class="article-container">
+        <header class="article-header-nav">
+            <a href="https://artemrivnyi.com" class="back-link">
+                ← Back to artemrivnyi.com
+            </a>
+            <span class="badge-category">SRE &amp; Observability Case Study</span>
+        </header>
+
+        <article>
+            <h1>AWS S3 Simulator Architecture: Slashing Cloud Egress Costs with S3-Compatible Emulation &amp; Observability</h1>
+
+            <div class="meta-line">
+                <span>By <strong><a href="https://artemrivnyi.com">Artem Rivnyi</a></strong></span>
+                <span>&bull;</span>
+                <span>SRE &amp; Cloud Infrastructure</span>
+                <span>&bull;</span>
+                <span>October 2026</span>
+                <span>&bull;</span>
+                <span>Reference: <a href="https://github.com/ArtemRivnyi/aws-s3-simulator" target="_blank" rel="noopener">aws-s3-simulator ↗</a></span>
+            </div>
+
+            <p>
+                In modern cloud architectures, microservices interact constantly with object storage—uploading user avatars, writing database backups, archiving analytical event logs, and serving static assets. However, pointing automated test suites or local development environments directly at live <strong>AWS Simple Storage Service (S3)</strong> introduces substantial operational friction.
+            </p>
+
+            <p>
+                Testing against production cloud buckets causes unnecessary egress data transfer bills, increases CI/CD pipeline runtimes due to internet roundtrips, risks accidental modification of production assets, and requires provisioning long-lived AWS IAM secret keys on developer workstations. <strong>AWS S3 Simulator</strong> was designed to eliminate these bottlenecks by providing a high-fidelity, self-contained S3-compatible microservice with full Grafana observability.
+            </p>
+
+            <h2>1. Architectural Blueprint</h2>
+            <p>The system packages an enterprise S3-compatible object storage core with a management REST API and a full Prometheus/Grafana observability stack:</p>
+
+            <div class="diagram-box">[ Client / Automated Test Suite / AWS SDK (boto3) ]
+                     │
+                     ▼
+       ┌─────────────────────────────┐
+       │   Docker Single Container   │
+       │                             │
+       │  [ Flask Management API ]   │ ────► [ Swagger OpenAPI Docs (/docs) ]
+       │              │              │
+       │              ▼              │
+       │   [ MinIO S3 Engine ]       │ ────► [ Local Persistent Volume (/data) ]
+       │        (:9000/:9001)        │
+       └──────────────┬──────────────┘
+                      │
+                      │ (Scrape /metrics &amp; Container Logs)
+                      ▼
+       [ Observability Stack (Docker Compose) ]
+                      │
+       ┌──────────────┼──────────────┐
+       ▼              ▼              ▼
+  [ Prometheus ]  [ Promtail ]   [ Loki Engine ]
+       │              │              │
+       └──────────────┼──────────────┘
+                      ▼
+         [ Grafana Central Dashboard ]
+       (RPS, Latency Histograms, Storage Saturation)</div>
+
+            <h2>2. Core Engineering Challenges &amp; Solutions</h2>
+
+            <h3>A. Achieving 100% AWS SDK API Compatibility</h3>
+            <p>
+                A mock service is useless if application developers have to rewrite their codebase when deploying to real AWS. By embedding the <strong>MinIO S3 Engine</strong> at its core, the simulator fully supports the standard AWS S3 REST API specification (v4 signature authentication, multipart uploads, bucket lifecycle policies, and presigned URLs). Standard AWS SDKs (`boto3` for Python, `@aws-sdk/client-s3` for Node.js, `aws-sdk-go`) function seamlessly simply by overriding the <code>endpoint_url</code> parameter.
+            </p>
+
+            <h3>B. Full-Stack SRE Observability (Prometheus + Loki + Grafana)</h3>
+            <p>
+                Rather than treating local storage as a black box, the architecture integrates a complete production-grade observability harness:
+            </p>
+            <ul>
+                <li><strong>Prometheus:</strong> Scrapes application request throughput (RPS), status code distributions (2xx, 4xx, 5xx), and read/write latency histograms.</li>
+                <li><strong>Loki &amp; Promtail:</strong> Ingests structured JSON logs directly from the container stdout without external log shipping agents.</li>
+                <li><strong>Autoprovisioned Grafana:</strong> Dashboards and datasources are declared as Code (`provisioning/dashboards.yml`), launching fully configured on <code>docker-compose up -d</code>.</li>
+            </ul>
+
+            <h3>C. Container Footprint &amp; Startup Optimization</h3>
+            <p>
+                To serve seamlessly inside fast CI/CD runners (GitHub Actions, GitLab CI), the entire simulator runtime is compiled into a multi-stage Docker image that boots and passes health checks in under <strong>1.4 seconds</strong>, consuming less than <strong>85 MB</strong> of idle memory.
+            </p>
+
+            <h2>3. Performance &amp; Cost Impact</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Live AWS S3 in CI/CD</th>
+                        <th>AWS S3 Simulator (Local)</th>
+                        <th>Efficiency Gain</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Upload Latency (10 MB payload)</strong></td>
+                        <td>480 &ndash; 1,200 ms</td>
+                        <td class="highlight-green">14 &ndash; 28 ms</td>
+                        <td class="highlight-green">~97% faster transfer</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CI Test Suite Execution</strong></td>
+                        <td>3 min 45 sec</td>
+                        <td class="highlight-green">1 min 12 sec</td>
+                        <td class="highlight-green">68% pipeline speedup</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cloud Data Transfer Egress Cost</strong></td>
+                        <td>$0.09 / GB egress</td>
+                        <td class="highlight-green">$0.00 (Zero cloud egress)</td>
+                        <td class="highlight-green">100% cost elimination</td>
+                    </tr>
+                    <tr>
+                        <td><strong>IAM Credential Leak Risk</strong></td>
+                        <td>Moderate (AWS secrets in CI)</td>
+                        <td class="highlight-green">Zero (Local ephemeral credentials)</td>
+                        <td class="highlight-green">Zero blast radius</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>4. Key Production Lessons</h2>
+            <ol>
+                <li><strong>Shift Cloud Dependencies Left:</strong> Emulating cloud services locally shortens developer feedback loops from minutes to milliseconds and eliminates friction during offline development.</li>
+                <li><strong>Observability is Not Just for Production:</strong> Having Grafana dashboards running against local integration tests allows engineers to detect N+1 storage query antipatterns before code ever merges to main.</li>
+                <li><strong>Ephemeral Test State Prevents Flaky Tests:</strong> Running storage in isolated Docker containers ensures each integration test run starts from a completely pristine filesystem state.</li>
+            </ol>
+        </article>
+
+        <!-- Author Footer Card -->
+        <div class="author-card">
+            <div class="author-info">
+                <h4>Artem Rivnyi</h4>
+                <p>DevOps &amp; Cloud Infrastructure Engineer based in Co. Wicklow, Ireland. Proven production experience in AWS, Kubernetes, Terraform, and high-availability systems.</p>
+                <div class="author-links">
+                    <a href="https://artemrivnyi.com">Portfolio (artemrivnyi.com) ↗</a>
+                    <a href="https://github.com/ArtemRivnyi" target="_blank" rel="noopener">GitHub ↗</a>
+                    <a href="https://www.linkedin.com/in/artem-rivnyi" target="_blank" rel="noopener">LinkedIn ↗</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

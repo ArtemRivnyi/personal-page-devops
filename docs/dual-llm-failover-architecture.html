@@ -28,7 +28,28 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-K6EZQYRLEL');
+
+      (function() {
+        var ua = navigator.userAgent || '';
+        var ref = document.referrer || '';
+        var hasUTM = window.location.search.indexOf('utm_source') !== -1;
+
+        if (hasUTM) {
+          gtag('config', 'G-K6EZQYRLEL');
+        } else if (ua.indexOf('LinkedInApp') !== -1 || ref.indexOf('linkedin.com') !== -1 || ref.indexOf('lnkd.in') !== -1) {
+          gtag('config', 'G-K6EZQYRLEL', { campaign_source: 'linkedin', campaign_medium: 'social' });
+        } else if (ua.indexOf('Telegram') !== -1 || ref.indexOf('t.me') !== -1 || ref.indexOf('telegram.org') !== -1) {
+          gtag('config', 'G-K6EZQYRLEL', { campaign_source: 'telegram', campaign_medium: 'messenger' });
+        } else {
+          gtag('config', 'G-K6EZQYRLEL');
+        }
+
+        gtag('event', 'case_study_view', {
+          event_category: 'engagement',
+          event_label: 'dual_llm_failover',
+          study_name: 'dual_llm_failover'
+        });
+      })();
     </script>
 </head>
 <body>

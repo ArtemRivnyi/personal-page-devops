@@ -11,7 +11,27 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-K6EZQYRLEL');
+
+    (function() {
+      var ua = navigator.userAgent || '';
+      var ref = document.referrer || '';
+      var hasUTM = window.location.search.indexOf('utm_source') !== -1;
+
+      if (hasUTM) {
+        gtag('config', 'G-K6EZQYRLEL');
+      } else if (ua.indexOf('LinkedInApp') !== -1 || ref.indexOf('linkedin.com') !== -1 || ref.indexOf('lnkd.in') !== -1) {
+        gtag('config', 'G-K6EZQYRLEL', { campaign_source: 'linkedin', campaign_medium: 'social' });
+      } else if (ua.indexOf('Telegram') !== -1 || ref.indexOf('t.me') !== -1 || ref.indexOf('telegram.org') !== -1) {
+        gtag('config', 'G-K6EZQYRLEL', { campaign_source: 'telegram', campaign_medium: 'messenger' });
+      } else {
+        gtag('config', 'G-K6EZQYRLEL');
+      }
+
+      gtag('event', 'cv_view', {
+        event_category: 'recruitment',
+        event_label: 'cv_html_opened'
+      });
+    })();
   </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -607,13 +627,13 @@
       <div class="exp-item">
         <div class="exp-header">
           <div class="exp-title-group">
-            <span class="exp-role">Online Server Technical Support & SRE</span> &middot; 
-            <span class="exp-company">Synergy SNG Community</span>
+            <span class="exp-role">Linux Systems &amp; Network Support</span> &middot; 
+            <span class="exp-company">Synergy Infrastructure</span>
           </div>
           <div class="exp-date">2024 | Volunteer</div>
         </div>
         <ul class="exp-bullets">
-          <li>Administered Linux game servers, resolved 150+ complex technical tickets, and performed low-latency network troubleshooting under active online load.</li>
+          <li>Administered Linux host environments, investigated network latency bottlenecks, and resolved 150+ technical incident escalations under active distributed concurrency.</li>
         </ul>
       </div>
     </section>
