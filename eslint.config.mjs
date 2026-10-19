@@ -17,5 +17,15 @@ export default [
       ...js.configs.recommended.rules,
       "no-console": "warn"
     }
+  },
+  {
+    files: ["tests/**/*.js"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        ...globals.jest
+      }
+    }
   }
 ];

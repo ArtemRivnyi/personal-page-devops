@@ -197,8 +197,8 @@ body.light-theme .site-header {
     font-size: 0.76rem;
     line-height: 1;
     transition: all 0.15s ease;
-    user-select: none;
     -webkit-user-select: none;
+    user-select: none;
 }
 
 .cmd-k-trigger:hover,
@@ -590,8 +590,8 @@ body.light-theme .site-header {
     gap: 6px;
     font-family: inherit;
     transition: all 0.15s ease;
-    user-select: none;
     -webkit-user-select: none;
+    user-select: none;
 }
 
 .topology-tab:hover {
@@ -1761,8 +1761,8 @@ body.light-theme .kpi-chip {
     position: fixed;
     inset: 0;
     background: rgb(0 0 0 / 70%);
-    backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2653,8 +2653,8 @@ body.light-theme .kpi-chip {
     align-items: center;
     opacity: 75%;
     transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    user-select: none;
     -webkit-user-select: none;
+    user-select: none;
 }
 
 .section-nav-rail:hover,
@@ -2678,8 +2678,8 @@ body:has(#chat-drawer:not([hidden])) .section-nav-rail {
     border: 1px solid var(--border-subtle);
     border-radius: 9999px;
     box-shadow: 0 4px 24px rgb(0 0 0 / 35%);
-    backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
 }
 
 .nav-rail-item {
@@ -3234,8 +3234,8 @@ body:has(#chat-drawer:not([hidden])) .section-nav-rail {
     position: fixed;
     inset: 0;
     background: rgb(0 0 0 / 65%);
-    backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -3386,8 +3386,8 @@ body:has(#chat-drawer:not([hidden])) .section-nav-rail {
     position: fixed;
     inset: 0;
     background: rgb(0 0 0 / 75%);
-    backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3420,8 +3420,8 @@ body:has(#chat-drawer:not([hidden])) .section-nav-rail {
     padding: 10px 14px;
     background: #161b22;
     border-bottom: 1px solid #30363d;
-    user-select: none;
     -webkit-user-select: none;
+    user-select: none;
 }
 
 .cli-window-controls {
