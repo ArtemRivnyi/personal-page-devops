@@ -98,7 +98,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20">
+    <link rel="stylesheet" href="style.css?v=21">
 
     <!-- Google Analytics 4 (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-K6EZQYRLEL"></script>
@@ -138,32 +138,16 @@
     <!-- Minimal Header Navigation (@onlyrenbl style) -->
     <header class="site-header">
         <div class="header-inner">
-            <div class="brand-group">
-                <a href="#" class="brand-monogram" aria-label="Artem Rivnyi Home">AR.</a>
-                <a href="https://github.com/ArtemRivnyi/personal-page-devops/commits/main" target="_blank" rel="noopener" class="git-status-badge" title="Live Continuous Deployment • Branch main" aria-label="Git commit 24b6173 on branch main">
-                    <span class="git-pulse-dot" aria-hidden="true"></span>
-                    <span class="git-branch-text">main:</span><span class="git-hash-text">24b6173</span>
-                </a>
-            </div>
+            <a href="#" class="brand-monogram" aria-label="Artem Rivnyi Home">AR.</a>
 
-            <button id="mobile-menu-toggle" type="button" class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-                <svg class="burger-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-                <svg class="close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
             <nav class="nav-menu" id="nav-menu" aria-label="Main Navigation">
                 <a href="#projects" class="nav-item">Projects</a>
                 <a href="#case-study" class="nav-item">Case Study</a>
                 <a href="#experience" class="nav-item">Experience</a>
-                <a href="#outside-ide" class="nav-item">Outside the IDE</a>
-                <a href="#certifications" class="nav-item">Certifications</a>
                 <a href="#contact" class="nav-item">Contact</a>
+            </nav>
+
+            <div class="header-actions">
                 <button id="cmd-palette-btn" type="button" class="cmd-k-trigger" aria-label="Open command palette (Ctrl+K)" title="Command Palette (Ctrl+K)">
                     <kbd class="cmd-kbd">&#x2318;K</kbd>
                 </button>
@@ -177,7 +161,18 @@
                         </svg>
                     </span>
                 </button>
-            </nav>
+                <button id="mobile-menu-toggle" type="button" class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <svg class="burger-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <svg class="close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -242,6 +237,10 @@
                     <span class="pulsing-green-dot" aria-hidden="true"></span>
                     <span>Available for new opportunities</span>
                 </div>
+                <a href="https://github.com/ArtemRivnyi/personal-page-devops/commits/main" target="_blank" rel="noopener" class="git-status-badge" title="Live Continuous Deployment • Branch main" aria-label="Git commit 24b6173 on branch main">
+                    <span class="git-pulse-dot" aria-hidden="true"></span>
+                    <span class="git-branch-text">main:</span><span class="git-hash-text">24b6173</span>
+                </a>
             </div>
         </section>
 
@@ -1883,7 +1882,7 @@ Type <span class="cli-cmd-hint">'help'</span> to see available commands, or <spa
         </div>
     </div>
 
-    <script src="script.js?v=12"></script>
+    <script src="script.js?v=13"></script>
 </body>
 
 </html>

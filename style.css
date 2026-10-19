@@ -198,7 +198,7 @@ body.light-theme .site-header {
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 22px;
 }
 
 .nav-item {
@@ -206,11 +206,18 @@ body.light-theme .site-header {
     color: var(--text-secondary);
     text-decoration: none;
     font-weight: 500;
+    white-space: nowrap;
     transition: color 0.15s ease;
 }
 
 .nav-item:hover {
     color: var(--text-primary);
+}
+
+.header-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .nav-divider {
@@ -2811,11 +2818,6 @@ body.light-theme .kpi-chip {
 
     .nav-menu .nav-divider {
         display: none;
-    }
-
-    .nav-menu .theme-toggle-btn {
-        margin-top: 12px;
-        align-self: flex-start;
     }
 
     body.light-theme .nav-menu {
