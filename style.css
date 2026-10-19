@@ -2644,14 +2644,14 @@ body.light-theme .kpi-chip {
 /* ── FLOATING SECTION NAVIGATION RAIL (Side Quick Navigator) ── */
 .section-nav-rail {
     position: fixed;
-    right: max(16px, calc((100vw - 900px) / 2 - 58px));
+    right: max(12px, calc((100vw - 900px) / 2 - 48px));
     top: 50%;
     transform: translateY(-50%);
     z-index: 900;
     display: flex;
     flex-direction: column;
     align-items: center;
-    opacity: 38%;
+    opacity: 35%;
     transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     user-select: none;
     -webkit-user-select: none;
@@ -2769,9 +2769,35 @@ body:has(#chat-drawer:not([hidden])) .section-nav-rail {
     margin-right: 4px;
 }
 
-@media (width <= 1159px) {
+@media (width <= 768px) {
     .section-nav-rail {
-        display: none !important;
+        right: 4px;
+        opacity: 28%;
+    }
+
+    .nav-rail-track {
+        gap: 7px;
+        padding: 8px 3px;
+        background: rgb(15 23 42 / 65%);
+    }
+
+    .nav-rail-item {
+        width: 10px;
+        height: 10px;
+    }
+
+    .nav-rail-dot {
+        width: 3.5px;
+        height: 3.5px;
+    }
+
+    .nav-rail-item.active .nav-rail-dot {
+        width: 3.5px;
+        height: 12px;
+    }
+
+    .nav-rail-tooltip {
+        display: none;
     }
 }
 
