@@ -966,7 +966,7 @@ describe('initTopologySwitcher', () => {
       expect(desc.textContent).toContain('High-resiliency architecture engineered with active-passive RDS Aurora replicas');
       expect(kpi.innerHTML).toContain('Sub-Minute Failover RTO');
       done();
-    }, 150);
+    }, 220);
   });
 
   test('should switch to slo tab and update desc and KPIs', (done) => {
@@ -982,7 +982,7 @@ describe('initTopologySwitcher', () => {
       expect(desc.textContent).toContain('Production-grade performance and cost optimization');
       expect(kpi.innerHTML).toContain('99.98% SLA Guaranteed');
       done();
-    }, 150);
+    }, 220);
   });
 });
 

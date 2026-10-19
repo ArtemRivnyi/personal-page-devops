@@ -697,7 +697,22 @@ body.light-theme .site-header {
     font-size: 0.92rem;
     color: var(--text-secondary);
     line-height: 1.6;
+    min-height: 4.8em;
+    transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
 }
+
+.featured-details-side .project-kpi-row {
+    transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.featured-desc.topology-fade-out,
+.featured-details-side .project-kpi-row.topology-fade-out {
+    opacity: 0%;
+    transform: translateY(-4px);
+}
+
 
 .featured-tech-row {
     display: flex;

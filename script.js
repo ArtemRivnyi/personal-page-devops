@@ -1364,7 +1364,8 @@ function initDevOpsTerminal() {
 
 // 16. Architecture Topology Switcher on Featured Project (MotionSites style)
 function initTopologySwitcher() {
-    const tabs = document.querySelectorAll('.topology-tab');
+    const section = document.getElementById('featured');
+    const tabs = Array.from(document.querySelectorAll('.topology-tab'));
     const descEl = document.getElementById('featured-desc');
     const kpiEl = document.getElementById('featured-kpi-row');
 
@@ -1400,37 +1401,99 @@ function initTopologySwitcher() {
         }
     };
 
+    let currentIndex = 0;
+    let autoPlayTimer = null;
+    let isHovered = false;
+    let isVisible = true;
+    const tabKeys = ['topology', 'failover', 'slo'];
+
+    function switchTab(key, isManual = false) {
+        if (!views[key]) return;
+
+        const targetIdx = tabKeys.indexOf(key);
+        if (targetIdx !== -1) currentIndex = targetIdx;
+
+        tabs.forEach((t) => {
+            const matches = t.dataset.tab === key;
+            t.classList.toggle('active', matches);
+            t.setAttribute('aria-selected', String(matches));
+        });
+
+        descEl.classList.add('topology-fade-out');
+        kpiEl.classList.add('topology-fade-out');
+
+        setTimeout(() => {
+            descEl.textContent = views[key].desc;
+            kpiEl.innerHTML = views[key].kpis;
+            descEl.classList.remove('topology-fade-out');
+            kpiEl.classList.remove('topology-fade-out');
+        }, 180);
+
+        if (isManual && typeof window.gtag === 'function') {
+            window.gtag('event', 'topology_tab_switch', {
+                event_category: 'engagement',
+                tab_name: key
+            });
+        }
+    }
+
+    function advanceNext() {
+        if (isHovered || !isVisible) return;
+        const nextIdx = (currentIndex + 1) % tabKeys.length;
+        switchTab(tabKeys[nextIdx], false);
+    }
+
+    function startAutoPlay() {
+        if (autoPlayTimer) clearInterval(autoPlayTimer);
+        if (typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            return;
+        }
+        autoPlayTimer = setInterval(advanceNext, 5500);
+    }
+
+    function stopAutoPlay() {
+        if (autoPlayTimer) {
+            clearInterval(autoPlayTimer);
+            autoPlayTimer = null;
+        }
+    }
+
     tabs.forEach((tab) => {
         tab.addEventListener('click', () => {
             const key = tab.dataset.tab;
-            if (!views[key]) return;
-
-            tabs.forEach((t) => {
-                t.classList.remove('active');
-                t.setAttribute('aria-selected', 'false');
-            });
-
-            tab.classList.add('active');
-            tab.setAttribute('aria-selected', 'true');
-
-            descEl.style.opacity = '0';
-            kpiEl.style.opacity = '0';
-
-            setTimeout(() => {
-                descEl.textContent = views[key].desc;
-                kpiEl.innerHTML = views[key].kpis;
-                descEl.style.opacity = '1';
-                kpiEl.style.opacity = '1';
-            }, 120);
-
-            if (typeof window.gtag === 'function') {
-                window.gtag('event', 'topology_tab_switch', {
-                    event_category: 'engagement',
-                    tab_name: key
-                });
-            }
+            switchTab(key, true);
+            stopAutoPlay();
+            startAutoPlay();
         });
     });
+
+    if (section) {
+        section.addEventListener('mouseenter', () => {
+            isHovered = true;
+        });
+
+        section.addEventListener('mouseleave', () => {
+            isHovered = false;
+        });
+
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    isVisible = entry.isIntersecting;
+                    if (isVisible) {
+                        startAutoPlay();
+                    } else {
+                        stopAutoPlay();
+                    }
+                });
+            }, { threshold: 0.25 });
+            observer.observe(section);
+        } else {
+            startAutoPlay();
+        }
+    } else {
+        startAutoPlay();
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
