@@ -132,68 +132,6 @@ body.light-theme .site-header {
     opacity: 80%;
 }
 
-.brand-group {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.git-status-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 3px 8px;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-subtle);
-    border-radius: 6px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: all 0.15s ease;
-    user-select: none;
-    -webkit-user-select: none;
-}
-
-.git-status-badge:hover {
-    border-color: var(--accent-green);
-    color: var(--text-primary);
-    background: var(--bg-tertiary);
-}
-
-.git-pulse-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent-green);
-    box-shadow: 0 0 8px var(--accent-green);
-    display: inline-block;
-    animation: git-pulse 2s infinite ease-in-out;
-}
-
-@keyframes git-pulse {
-    0%,
-    100% {
-        opacity: 100%;
-        transform: scale(1);
-    }
-
-    50% {
-        opacity: 40%;
-        transform: scale(0.85);
-    }
-}
-
-.git-branch-text {
-    font-weight: 600;
-    color: var(--text-muted);
-}
-
-.git-hash-text {
-    color: var(--accent-green);
-    font-weight: 500;
-}
-
 
 .nav-menu {
     display: flex;
