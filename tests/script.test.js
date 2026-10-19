@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { debounce, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher } from '../script.exports.js';
+import { debounce, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher, initSectionNavRail } from '../script.exports.js';
 
 // Mock canvas getContext before any tests run (without jest.fn)
 beforeAll(() => {
@@ -983,6 +983,65 @@ describe('initTopologySwitcher', () => {
       expect(kpi.innerHTML).toContain('99.98% SLA Guaranteed');
       done();
     }, 220);
+  });
+});
+
+describe('initSectionNavRail', () => {
+  beforeEach(() => {
+    Element.prototype.scrollIntoView = function() {};
+    document.body.innerHTML = `
+      <section id="about"></section>
+      <section id="featured"></section>
+      <section id="contact"></section>
+      <nav class="section-nav-rail" id="section-nav-rail">
+        <div class="nav-rail-track">
+          <a href="#about" class="nav-rail-item active" data-section="about" aria-current="true">
+            <span class="nav-rail-dot"></span>
+            <span class="nav-rail-tooltip"><span class="nav-rail-num">01</span> Overview</span>
+          </a>
+          <a href="#featured" class="nav-rail-item" data-section="featured">
+            <span class="nav-rail-dot"></span>
+            <span class="nav-rail-tooltip"><span class="nav-rail-num">02</span> Featured</span>
+          </a>
+          <a href="#contact" class="nav-rail-item" data-section="contact">
+            <span class="nav-rail-dot"></span>
+            <span class="nav-rail-tooltip"><span class="nav-rail-num">03</span> Contact</span>
+          </a>
+        </div>
+      </nav>
+    `;
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  test('should handle missing rail gracefully', () => {
+    document.body.innerHTML = '';
+    expect(() => initSectionNavRail()).not.toThrow();
+  });
+
+  test('should switch active rail item and update aria-current on click', () => {
+    initSectionNavRail();
+    const items = document.querySelectorAll('.nav-rail-item');
+    expect(items[0].classList.contains('active')).toBe(true);
+
+    items[1].click();
+    expect(items[1].classList.contains('active')).toBe(true);
+    expect(items[1].getAttribute('aria-current')).toBe('true');
+    expect(items[0].classList.contains('active')).toBe(false);
+    expect(items[0].hasAttribute('aria-current')).toBe(false);
+  });
+
+  test('should handle scroll to top activating first item', () => {
+    initSectionNavRail();
+    const items = document.querySelectorAll('.nav-rail-item');
+    items[2].click();
+    expect(items[2].classList.contains('active')).toBe(true);
+
+    window.scrollY = 20;
+    window.dispatchEvent(new Event('scroll'));
+    expect(items[0].classList.contains('active')).toBe(true);
   });
 });
 

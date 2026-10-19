@@ -1417,5 +1417,97 @@ function initTopologySwitcher() {
     }
 }
 
-export { debounce, setupMobileMenu, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initAnalyticsTracking, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher };
+function initSectionNavRail() {
+    const rail = document.getElementById('section-nav-rail');
+    if (!rail) return;
+
+    const items = Array.from(rail.querySelectorAll('.nav-rail-item'));
+    if (!items.length) return;
+
+    function setActiveItem(targetItem) {
+        items.forEach((item) => {
+            const isMatch = item === targetItem;
+            item.classList.toggle('active', isMatch);
+            if (isMatch) {
+                item.setAttribute('aria-current', 'true');
+            } else {
+                item.removeAttribute('aria-current');
+            }
+        });
+    }
+
+    items.forEach((item) => {
+        item.addEventListener('click', (e) => {
+            const sectionId = item.dataset.section;
+            if (!sectionId) return;
+
+            const targetSection = document.getElementById(sectionId);
+            if (!targetSection) return;
+
+            e.preventDefault();
+            setActiveItem(item);
+
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            if (typeof history.pushState === 'function') {
+                history.pushState(null, '', `#${sectionId}`);
+            }
+
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'section_rail_nav', {
+                    event_category: 'navigation',
+                    section_id: sectionId
+                });
+            }
+        });
+    });
+
+    const sectionElements = [];
+    items.forEach((item) => {
+        const id = item.dataset.section;
+        if (!id) return;
+        const el = document.getElementById(id);
+        if (el) {
+            sectionElements.push({ id, el, item });
+        }
+    });
+
+    if ('IntersectionObserver' in window && sectionElements.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const match = sectionElements.find((s) => s.el === entry.target);
+                    if (match) {
+                        setActiveItem(match.item);
+                    }
+                }
+            });
+        }, {
+            rootMargin: '-20% 0px -55% 0px',
+            threshold: 0
+        });
+
+        sectionElements.forEach((s) => observer.observe(s.el));
+    }
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY < 80) {
+            const first = items[0];
+            if (first && !first.classList.contains('active')) {
+                setActiveItem(first);
+            }
+            return;
+        }
+
+        const atBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 60);
+        if (atBottom) {
+            const last = items[items.length - 1];
+            if (last && !last.classList.contains('active')) {
+                setActiveItem(last);
+            }
+        }
+    }, { passive: true });
+}
+
+export { debounce, setupMobileMenu, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initAnalyticsTracking, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher, initSectionNavRail };
 
