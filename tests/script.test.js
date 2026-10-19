@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { debounce, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initHealthMonitor } from '../script.exports.js';
+import { debounce, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher } from '../script.exports.js';
 
 // Mock canvas getContext before any tests run (without jest.fn)
 beforeAll(() => {
@@ -732,4 +732,258 @@ describe('initHealthMonitor', () => {
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
     expect(modal.hasAttribute('hidden')).toBe(true);
   });
-});
+});
+
+describe('initCommandPalette', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <button type="button" id="cmd-palette-btn">⌘K</button>
+      <div id="cmd-palette" hidden>
+        <input type="text" id="cmd-input">
+        <div id="cmd-results">
+          <button type="button" class="cmd-item" data-action="toggle-theme">Toggle Theme</button>
+          <button type="button" class="cmd-item" data-action="copy-email">Copy Email</button>
+        </div>
+      </div>
+      <button type="button" id="theme-toggle"></button>
+      <button type="button" id="copy-email-btn"></button>
+    `;
+    Element.prototype.scrollIntoView = () => {};
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  test('should handle missing elements gracefully', () => {
+    document.body.innerHTML = '';
+    expect(() => initCommandPalette()).not.toThrow();
+  });
+
+  test('should open palette on button click and close on Escape', () => {
+    initCommandPalette();
+    const btn = document.getElementById('cmd-palette-btn');
+    const modal = document.getElementById('cmd-palette');
+    const input = document.getElementById('cmd-input');
+
+    btn.click();
+    expect(modal.hasAttribute('hidden')).toBe(false);
+
+    input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    expect(modal.hasAttribute('hidden')).toBe(true);
+  });
+
+  test('should toggle palette with Ctrl+K shortcut', () => {
+    initCommandPalette();
+    const modal = document.getElementById('cmd-palette');
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }));
+    expect(modal.hasAttribute('hidden')).toBe(false);
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }));
+    expect(modal.hasAttribute('hidden')).toBe(true);
+  });
+
+  test('should filter items as user types', () => {
+    initCommandPalette();
+    const btn = document.getElementById('cmd-palette-btn');
+    const input = document.getElementById('cmd-input');
+    const items = document.querySelectorAll('.cmd-item');
+
+    btn.click();
+    input.value = 'email';
+    input.dispatchEvent(new Event('input'));
+
+    expect(items[0].style.display).toBe('none');
+    expect(items[1].style.display).toBe('');
+  });
+
+  test('should execute action when item clicked', () => {
+    initCommandPalette();
+    let themeClicked = false;
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      themeClicked = true;
+    });
+
+    const items = document.querySelectorAll('.cmd-item');
+    items[0].click();
+    expect(themeClicked).toBe(true);
+  });
+});
+
+describe('initSpotlightCards', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <div class="ref-project-card"></div>
+      <div class="featured-showcase-card"></div>
+    `;
+    window.matchMedia = () => ({ matches: false });
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  test('should update --mouse-x and --mouse-y properties on mousemove', () => {
+    initSpotlightCards();
+    const card = document.querySelector('.ref-project-card');
+    card.getBoundingClientRect = () => ({ left: 50, top: 50, width: 200, height: 200 });
+
+    card.dispatchEvent(new MouseEvent('mousemove', { clientX: 100, clientY: 120 }));
+    expect(card.style.getPropertyValue('--mouse-x')).toBe('50px');
+    expect(card.style.getPropertyValue('--mouse-y')).toBe('70px');
+  });
+});
+
+describe('initDevOpsTerminal', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <button type="button" id="terminal-trigger-btn">&gt;_</button>
+      <div id="cli-terminal-modal" hidden>
+        <button type="button" id="cli-close-btn"></button>
+        <div id="cli-output"></div>
+        <form id="cli-form">
+          <input type="text" id="cli-input">
+          <button type="submit">Run</button>
+        </form>
+      </div>
+    `;
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  test('should handle missing elements gracefully', () => {
+    document.body.innerHTML = '';
+    expect(() => initDevOpsTerminal()).not.toThrow();
+  });
+
+  test('should open terminal on button click and close on closeBtn', () => {
+    initDevOpsTerminal();
+    const btn = document.getElementById('terminal-trigger-btn');
+    const modal = document.getElementById('cli-terminal-modal');
+    const closeBtn = document.getElementById('cli-close-btn');
+
+    btn.click();
+    expect(modal.hasAttribute('hidden')).toBe(false);
+
+    closeBtn.click();
+    expect(modal.hasAttribute('hidden')).toBe(true);
+  });
+
+  test('should open and close terminal on backtick keydown', () => {
+    initDevOpsTerminal();
+    const modal = document.getElementById('cli-terminal-modal');
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: '`' }));
+    expect(modal.hasAttribute('hidden')).toBe(false);
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    expect(modal.hasAttribute('hidden')).toBe(true);
+  });
+
+  test('should run help command and output available commands', () => {
+    initDevOpsTerminal();
+    const form = document.getElementById('cli-form');
+    const input = document.getElementById('cli-input');
+    const output = document.getElementById('cli-output');
+
+    input.value = 'help';
+    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+
+    expect(output.textContent).toContain('Available commands:');
+    expect(output.textContent).toContain('docker ps');
+  });
+
+  test('should run status, docker ps, and clear commands', () => {
+    initDevOpsTerminal();
+    const form = document.getElementById('cli-form');
+    const input = document.getElementById('cli-input');
+    const output = document.getElementById('cli-output');
+
+    input.value = 'status';
+    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    expect(output.textContent).toContain('CLUSTER STATUS: ALL SYSTEMS OPERATIONAL');
+
+    input.value = 'docker ps';
+    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    expect(output.textContent).toContain('CONTAINER ID');
+
+    input.value = 'clear';
+    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    expect(output.textContent).toBe('');
+  });
+
+  test('should close terminal on exit command', () => {
+    initDevOpsTerminal();
+    const modal = document.getElementById('cli-terminal-modal');
+    const form = document.getElementById('cli-form');
+    const input = document.getElementById('cli-input');
+
+    modal.removeAttribute('hidden');
+    input.value = 'exit';
+    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+
+    expect(modal.hasAttribute('hidden')).toBe(true);
+  });
+});
+
+describe('initTopologySwitcher', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <div class="topology-switcher-bar">
+        <button type="button" class="topology-tab active" data-tab="topology" aria-selected="true">Topology</button>
+        <button type="button" class="topology-tab" data-tab="failover" aria-selected="false">Failover</button>
+        <button type="button" class="topology-tab" data-tab="slo" aria-selected="false">SLO</button>
+      </div>
+      <p id="featured-desc">Initial Desc</p>
+      <div id="featured-kpi-row"><span>Initial KPI</span></div>
+    `;
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  test('should handle missing elements gracefully', () => {
+    document.body.innerHTML = '';
+    expect(() => initTopologySwitcher()).not.toThrow();
+  });
+
+  test('should switch active tab and update desc and KPIs on click', (done) => {
+    initTopologySwitcher();
+    const tabs = document.querySelectorAll('.topology-tab');
+    const desc = document.getElementById('featured-desc');
+    const kpi = document.getElementById('featured-kpi-row');
+
+    tabs[1].click(); // click Failover
+    expect(tabs[1].classList.contains('active')).toBe(true);
+    expect(tabs[1].getAttribute('aria-selected')).toBe('true');
+    expect(tabs[0].classList.contains('active')).toBe(false);
+
+    setTimeout(() => {
+      expect(desc.textContent).toContain('High-resiliency architecture engineered with active-passive RDS Aurora replicas');
+      expect(kpi.innerHTML).toContain('Sub-Minute Failover RTO');
+      done();
+    }, 150);
+  });
+
+  test('should switch to slo tab and update desc and KPIs', (done) => {
+    initTopologySwitcher();
+    const tabs = document.querySelectorAll('.topology-tab');
+    const desc = document.getElementById('featured-desc');
+    const kpi = document.getElementById('featured-kpi-row');
+
+    tabs[2].click(); // click SLO
+    expect(tabs[2].classList.contains('active')).toBe(true);
+
+    setTimeout(() => {
+      expect(desc.textContent).toContain('Production-grade performance and cost optimization');
+      expect(kpi.innerHTML).toContain('99.98% SLA Guaranteed');
+      done();
+    }, 150);
+  });
+});
+
+

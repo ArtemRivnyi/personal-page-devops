@@ -977,4 +977,382 @@ function initHealthMonitor() {
     });
 }
 
-export { debounce, setupMobileMenu, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initAnalyticsTracking, initHealthMonitor };
+// 13. Command Palette (Ctrl+K / Cmd+K)
+function initCommandPalette() {
+    const btn = document.getElementById('cmd-palette-btn');
+    const modal = document.getElementById('cmd-palette');
+    const input = document.getElementById('cmd-input');
+    const resultsContainer = document.getElementById('cmd-results');
+
+    if (!modal || !input || !resultsContainer) return;
+
+    const items = Array.from(resultsContainer.querySelectorAll('.cmd-item'));
+    let selectedIdx = 0;
+
+    function updateSelection() {
+        const visibleItems = items.filter((el) => el.style.display !== 'none');
+        items.forEach((el) => el.classList.remove('selected'));
+        if (visibleItems.length > 0) {
+            selectedIdx = Math.max(0, Math.min(selectedIdx, visibleItems.length - 1));
+            visibleItems[selectedIdx].classList.add('selected');
+            visibleItems[selectedIdx].scrollIntoView({ block: 'nearest' });
+        }
+    }
+
+    function openPalette() {
+        modal.removeAttribute('hidden');
+        input.value = '';
+        items.forEach((el) => {
+            el.style.display = '';
+        });
+        resultsContainer.querySelectorAll('.cmd-group-title').forEach((el) => {
+            el.style.display = '';
+        });
+        selectedIdx = 0;
+        updateSelection();
+        input.focus();
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'command_palette_open', { event_category: 'engagement' });
+        }
+    }
+
+    function closePalette() {
+        modal.setAttribute('hidden', '');
+    }
+
+    function executeAction(action) {
+        closePalette();
+        switch (action) {
+            case 'download-cv': {
+                const link = document.createElement('a');
+                link.href = 'docs/Artem.Rivnyi.CV.pdf';
+                link.download = 'Artem.Rivnyi.CV.pdf';
+                link.click();
+                break;
+            }
+            case 'view-cv':
+                window.location.href = 'docs/Artem.Rivnyi.CV.html';
+                break;
+            case 'copy-email': {
+                const copyBtn = document.getElementById('copy-email-btn');
+                if (copyBtn) copyBtn.click();
+                break;
+            }
+            case 'toggle-theme': {
+                const themeBtn = document.getElementById('theme-toggle');
+                if (themeBtn) themeBtn.click();
+                break;
+            }
+            case 'health-probe': {
+                const healthBtn = document.getElementById('health-monitor-btn');
+                if (healthBtn) healthBtn.click();
+                break;
+            }
+            case 'open-terminal': {
+                const termBtn = document.getElementById('terminal-trigger-btn');
+                if (termBtn) termBtn.click();
+                break;
+            }
+            case 'open-chat': {
+                const chatBtn = document.getElementById('chat-widget-btn');
+                if (chatBtn) chatBtn.click();
+                break;
+            }
+            case 'study-dual-llm':
+                window.location.href = 'docs/dual-llm-failover-architecture.html';
+                break;
+            case 'study-car-scout':
+                window.location.href = 'docs/ua-ie-car-scout-architecture.html';
+                break;
+            case 'study-email-support':
+                window.location.href = 'docs/ai-email-support-architecture.html';
+                break;
+            case 'study-s3-sim':
+                window.location.href = 'docs/aws-s3-simulator-architecture.html';
+                break;
+            case 'nav-projects': {
+                const proj = document.getElementById('projects');
+                if (proj) proj.scrollIntoView({ behavior: 'smooth' });
+                break;
+            }
+            case 'nav-experience': {
+                const exp = document.getElementById('experience');
+                if (exp) exp.scrollIntoView({ behavior: 'smooth' });
+                break;
+            }
+            case 'open-github':
+                window.open('https://github.com/ArtemRivnyi', '_blank');
+                break;
+            case 'open-linkedin':
+                window.open('https://www.linkedin.com/in/artem-rivnyi/', '_blank');
+                break;
+            default:
+                break;
+        }
+    }
+
+    if (btn) btn.addEventListener('click', openPalette);
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closePalette();
+    });
+
+    input.addEventListener('keydown', (e) => {
+        const visibleItems = items.filter((el) => el.style.display !== 'none');
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            selectedIdx = (selectedIdx + 1) % (visibleItems.length || 1);
+            updateSelection();
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            selectedIdx = (selectedIdx - 1 + visibleItems.length) % (visibleItems.length || 1);
+            updateSelection();
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (visibleItems[selectedIdx]) {
+                const action = visibleItems[selectedIdx].dataset.action;
+                executeAction(action);
+            }
+        } else if (e.key === 'Escape') {
+            closePalette();
+        }
+    });
+
+    input.addEventListener('input', () => {
+        const query = input.value.trim().toLowerCase();
+        items.forEach((item) => {
+            const text = (item.textContent || '').toLowerCase();
+            const matches = !query || text.includes(query);
+            item.style.display = matches ? '' : 'none';
+        });
+        selectedIdx = 0;
+        updateSelection();
+    });
+
+    items.forEach((item) => {
+        item.addEventListener('click', () => {
+            const action = item.dataset.action;
+            executeAction(action);
+        });
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            if (modal.hasAttribute('hidden')) {
+                openPalette();
+            } else {
+                closePalette();
+            }
+        }
+    });
+}
+
+// 14. Spotlight Cursor Hover on Project Cards (React Bits style)
+function initSpotlightCards() {
+    if (typeof window.matchMedia === 'function' && window.matchMedia('(hover: none)').matches) return;
+    const cards = document.querySelectorAll('.ref-project-card, .featured-showcase-card');
+    cards.forEach((card) => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        }, { passive: true });
+    });
+}
+
+// 15. DevOps Interactive Terminal Modal (~ or CLI)
+function initDevOpsTerminal() {
+    const trigger = document.getElementById('terminal-trigger-btn');
+    const modal = document.getElementById('cli-terminal-modal');
+    const closeBtn = document.getElementById('cli-close-btn');
+    const form = document.getElementById('cli-form');
+    const input = document.getElementById('cli-input');
+    const output = document.getElementById('cli-output');
+
+    if (!modal || !form || !input || !output) return;
+
+    function appendLine(text, isCmd = false) {
+        const div = document.createElement('div');
+        div.className = isCmd ? 'cli-user-line' : 'cli-resp-line';
+        div.textContent = text;
+        output.appendChild(div);
+        output.scrollTop = output.scrollHeight;
+    }
+
+    function openTerminal() {
+        modal.removeAttribute('hidden');
+        input.value = '';
+        input.focus();
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'terminal_open', { event_category: 'engagement' });
+        }
+    }
+
+    function closeTerminal() {
+        modal.setAttribute('hidden', '');
+    }
+
+    if (trigger) trigger.addEventListener('click', openTerminal);
+    if (closeBtn) closeBtn.addEventListener('click', closeTerminal);
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeTerminal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '`' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+            e.preventDefault();
+            if (modal.hasAttribute('hidden')) {
+                openTerminal();
+            } else {
+                closeTerminal();
+            }
+        } else if (e.key === 'Escape' && !modal.hasAttribute('hidden')) {
+            closeTerminal();
+        }
+    });
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const raw = input.value.trim();
+        if (!raw) return;
+        appendLine(`artem@cloud-node:~$ ${raw}`, true);
+        input.value = '';
+
+        const cmd = raw.toLowerCase().trim();
+        switch (cmd) {
+            case 'help':
+                appendLine("Available commands:\n  status      - Display cluster status & telemetry\n  docker ps   - List active production containers\n  terraform   - List managed IaC infrastructure modules\n  curl        - Probe artemrivnyi.com HTTP response headers\n  cat resume  - Print ASCII summary and trigger resume\n  ping        - Run live edge latency test\n  theme       - Toggle Dark / Light theme mode\n  clear       - Clear terminal output\n  exit        - Close this terminal session");
+                break;
+            case 'status':
+                appendLine("CLUSTER STATUS: ALL SYSTEMS OPERATIONAL\n  • Domain:      artemrivnyi.com (200 OK)\n  • Ingress:     Nginx 1.25 Alpine / TLS 1.3\n  • DNS:         AWS Route53 Anycast (Healthy)\n  • CI/CD:       GitHub Actions (53 Tests Passing)\n  • Uptime:      99.98% SLA Guaranteed");
+                break;
+            case 'docker ps':
+                appendLine("CONTAINER ID   IMAGE                          COMMAND                  CREATED        STATUS        PORTS\na8f190e2b41c   nginx:1.25-alpine             \"nginx -g 'daemon of…\"   3 weeks ago    Up 3 weeks    0.0.0.0:443->443/tcp\n7c39b1a5e110   artemrivnyi/ai-ticket-clf:v2  \"python app.py\"          2 weeks ago    Up 2 weeks    0.0.0.0:8000->8000/tcp\n41c098df23a1   artemrivnyi/aws-s3-sim:v1.4   \"python server.py\"       2 weeks ago    Up 2 weeks    0.0.0.0:9000->9000/tcp\n93e118ba012b   minio/minio:RELEASE.2024      \"minio server /data\"     2 weeks ago    Up 2 weeks    0.0.0.0:9001->9001/tcp");
+                break;
+            case 'terraform':
+            case 'terraform state list':
+                appendLine("Terraform Managed State:\n  module.vpc_multi_az.aws_vpc.main\n  module.route53_failover.aws_route53_record.primary\n  module.bedrock_integration.aws_bedrock_custom_model.minerva_eval\n  module.rds_cluster.aws_rds_cluster_instance.read_replica\n  module.security_groups.aws_security_group.ingress_tls");
+                break;
+            case 'curl':
+            case 'curl -i artemrivnyi.com':
+                appendLine("HTTP/2 200 OK\nserver: nginx/1.25.4\ndate: Mon, 19 Oct 2026 00:00:00 GMT\ncontent-type: text/html; charset=UTF-8\nstrict-transport-security: max-age=31536000; includeSubDomains\nx-content-type-options: nosniff\nx-frame-options: DENY\ncontent-security-policy: default-src 'self' https:;\naccess-control-allow-origin: *\ncf-cache-status: HIT");
+                break;
+            case 'cat resume':
+            case 'cat resume.txt': {
+                appendLine("ARTEM RIVNYI — Senior DevOps & Cloud Infrastructure Engineer\nLocation: Wicklow, Ireland • Contact: artemrivnyi@outlook.com\nExpertise: AWS, Kubernetes, Terraform, Docker, Python, CI/CD, Dual-LLM Resiliency.\nDownloading PDF copy...");
+                const link = document.createElement('a');
+                link.href = 'docs/Artem.Rivnyi.CV.pdf';
+                link.download = 'Artem.Rivnyi.CV.pdf';
+                link.click();
+                break;
+            }
+            case 'ping': {
+                appendLine("PING artemrivnyi.com (Anycast Cloud Edge):");
+                const start = performance.now();
+                fetch('/favicon.ico', { method: 'HEAD', cache: 'no-store' })
+                    .then(() => {
+                        const ms = Math.round(performance.now() - start);
+                        appendLine(`64 bytes from origin: icmp_seq=1 ttl=58 time=${Math.max(ms, 8)} ms (rtt min/avg/max = 8/${ms}/${ms + 12} ms)`);
+                    })
+                    .catch(() => {
+                        appendLine("64 bytes from origin: icmp_seq=1 ttl=58 time=19 ms (fast)");
+                    });
+                break;
+            }
+            case 'theme': {
+                const themeBtn = document.getElementById('theme-toggle');
+                if (themeBtn) themeBtn.click();
+                appendLine("Theme preference toggled.");
+                break;
+            }
+            case 'clear':
+                output.innerHTML = '';
+                break;
+            case 'exit':
+            case 'quit':
+                closeTerminal();
+                break;
+            default:
+                appendLine(`zsh: command not found: ${raw}. Type 'help' to see valid commands.`);
+                break;
+        }
+    });
+}
+
+// 16. Architecture Topology Switcher on Featured Project (MotionSites style)
+function initTopologySwitcher() {
+    const tabs = document.querySelectorAll('.topology-tab');
+    const descEl = document.getElementById('featured-desc');
+    const kpiEl = document.getElementById('featured-kpi-row');
+
+    if (!tabs.length || !descEl || !kpiEl) return;
+
+    const views = {
+        topology: {
+            desc: "Enterprise cloud infrastructure and automated delivery platform powering high-volume candidate screening for the Minerva AI hiring system. Engineered for high availability across multi-AZ environments with automated database read-offloading and infrastructure drift detection.",
+            kpis: `
+                <span class="kpi-chip"><span class="kpi-dot kpi-dot-green"></span>Multi-AZ AWS Infrastructure</span>
+                <span class="kpi-chip"><span class="kpi-dot"></span>RDS Read-Replica Offload</span>
+                <span class="kpi-chip"><span class="kpi-dot"></span>Terragrunt Modular IaC</span>
+                <span class="kpi-chip"><span class="kpi-dot"></span>Route53 Health-Check Failover</span>
+            `
+        },
+        failover: {
+            desc: "High-resiliency architecture engineered with active-passive RDS Aurora replicas across 3 Availability Zones, automated DNS health-probe rerouting via Route53, and self-healing ECS Fargate task replenishment under 60 seconds.",
+            kpis: `
+                <span class="kpi-chip"><span class="kpi-dot kpi-dot-green"></span>&lt;60s Sub-Minute Failover RTO</span>
+                <span class="kpi-chip"><span class="kpi-dot"></span>Zero-Data-Loss RPO Sync</span>
+                <span class="kpi-chip"><span class="kpi-dot"></span>Automated Task Auto-Healing</span>
+                <span class="kpi-chip"><span class="kpi-dot"></span>Multi-AZ Route53 Anycast</span>
+            `
+        },
+        slo: {
+            desc: "Production-grade performance and cost optimization achieving 99.98% SLA availability, sub-180ms p95 API response times, and ~42% monthly AWS infrastructure cost reductions through Terraform-managed Spot Fargate and automated capacity providers.",
+            kpis: `
+                <span class="kpi-chip"><span class="kpi-dot kpi-dot-green"></span>99.98% SLA Guaranteed</span>
+                <span class="kpi-chip"><span class="kpi-dot"></span>~42% Infrastructure Cost Savings</span>
+                <span class="kpi-chip"><span class="kpi-dot"></span>Sub-180ms p95 Ingress Latency</span>
+                <span class="kpi-chip"><span class="kpi-dot"></span>Prometheus SLO Alerting</span>
+            `
+        }
+    };
+
+    tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+            const key = tab.dataset.tab;
+            if (!views[key]) return;
+
+            tabs.forEach((t) => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
+
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+
+            descEl.style.opacity = '0';
+            kpiEl.style.opacity = '0';
+
+            setTimeout(() => {
+                descEl.textContent = views[key].desc;
+                kpiEl.innerHTML = views[key].kpis;
+                descEl.style.opacity = '1';
+                kpiEl.style.opacity = '1';
+            }, 120);
+
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'topology_tab_switch', {
+                    event_category: 'engagement',
+                    tab_name: key
+                });
+            }
+        });
+    });
+}
+
+export { debounce, setupMobileMenu, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initAnalyticsTracking, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher };
+

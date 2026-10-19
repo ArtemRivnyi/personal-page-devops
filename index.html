@@ -98,7 +98,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=19">
+    <link rel="stylesheet" href="style.css?v=20">
 
     <!-- Google Analytics 4 (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-K6EZQYRLEL"></script>
@@ -138,7 +138,13 @@
     <!-- Minimal Header Navigation (@onlyrenbl style) -->
     <header class="site-header">
         <div class="header-inner">
-            <a href="#" class="brand-monogram" aria-label="Artem Rivnyi Home">AR.</a>
+            <div class="brand-group">
+                <a href="#" class="brand-monogram" aria-label="Artem Rivnyi Home">AR.</a>
+                <a href="https://github.com/ArtemRivnyi/personal-page-devops/commits/main" target="_blank" rel="noopener" class="git-status-badge" title="Live Continuous Deployment • Branch main" aria-label="Git commit efef1ae on branch main">
+                    <span class="git-pulse-dot" aria-hidden="true"></span>
+                    <span class="git-branch-text">main:</span><span class="git-hash-text">efef1ae</span>
+                </a>
+            </div>
 
             <button id="mobile-menu-toggle" type="button" class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                 <svg class="burger-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -158,7 +164,12 @@
                 <a href="#outside-ide" class="nav-item">Outside the IDE</a>
                 <a href="#certifications" class="nav-item">Certifications</a>
                 <a href="#contact" class="nav-item">Contact</a>
-                <span class="nav-divider" aria-hidden="true">|</span>
+                <button id="cmd-palette-btn" type="button" class="cmd-k-trigger" aria-label="Open command palette (Ctrl+K)" title="Command Palette (Ctrl+K)">
+                    <kbd class="cmd-kbd">&#x2318;K</kbd>
+                </button>
+                <button id="terminal-trigger-btn" type="button" class="terminal-trigger" aria-label="Open DevOps Terminal (~)" title="DevOps Terminal (~)">
+                    <span class="terminal-icon" aria-hidden="true">&gt;_</span>
+                </button>
                 <button id="theme-toggle" type="button" class="theme-toggle-btn" aria-label="Toggle theme" title="Toggle theme">
                     <span class="theme-icon" aria-hidden="true">
                         <svg class="svg-theme" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -246,10 +257,21 @@
                 <div class="featured-details-side">
                     <span class="kicker-label">FEATURED BUILD</span>
                     <h3 class="featured-title">BYOUR: Intelligent Hiring Infrastructure</h3>
-                    <p class="featured-desc">
+                    <div class="topology-switcher-bar" role="tablist" aria-label="Architecture View Selection">
+                        <button type="button" class="topology-tab active" role="tab" id="tab-topology" aria-selected="true" data-tab="topology">
+                            <span class="tab-dot" aria-hidden="true"></span> Topology Flow
+                        </button>
+                        <button type="button" class="topology-tab" role="tab" id="tab-failover" aria-selected="false" data-tab="failover">
+                            <span class="tab-dot" aria-hidden="true"></span> Failover Path
+                        </button>
+                        <button type="button" class="topology-tab" role="tab" id="tab-slo" aria-selected="false" data-tab="slo">
+                            <span class="tab-dot" aria-hidden="true"></span> Cost &amp; SLO
+                        </button>
+                    </div>
+                    <p class="featured-desc" id="featured-desc">
                         Enterprise cloud infrastructure and automated delivery platform powering high-volume candidate screening for the Minerva AI hiring system. Engineered for high availability across multi-AZ environments with automated database read-offloading and infrastructure drift detection.
                     </p>
-                    <div class="project-kpi-row">
+                    <div class="project-kpi-row" id="featured-kpi-row">
                         <span class="kpi-chip"><span class="kpi-dot kpi-dot-green"></span>Multi-AZ AWS Infrastructure</span>
                         <span class="kpi-chip"><span class="kpi-dot"></span>RDS Read-Replica Offload</span>
                         <span class="kpi-chip"><span class="kpi-dot"></span>Terragrunt Modular IaC</span>
@@ -318,8 +340,14 @@
             <div class="ref-projects-grid">
                 <!-- 1. DealShop (dealshop.ie) Marketplace & Fintech Platform -->
                 <div class="ref-project-card project flagship-project-card">
-                    <div class="card-media-wrap">
-                        <img src="assets/portfolio_collage.jpg" alt="DealShop Web &amp; Mobile Platform Architecture" class="card-screenshot lightbox-trigger" loading="lazy">
+                    <div class="card-media-wrap flagship-device-wrap">
+                        <div class="device-mockup-stage">
+                            <div class="phone-mockup">
+                                <div class="phone-dynamic-island" aria-hidden="true"></div>
+                                <img src="assets/portfolio_collage.jpg" alt="DealShop Web &amp; Mobile Platform Architecture" class="card-screenshot phone-screen lightbox-trigger" loading="lazy">
+                                <div class="phone-glare" aria-hidden="true"></div>
+                            </div>
+                        </div>
                         <span class="card-status-badge badge-flagship">FLAGSHIP &bull; PRE-SEED</span>
                     </div>
                     <div class="card-content-wrap">
@@ -1727,7 +1755,135 @@
         <span class="toast-check">✔</span> Email address copied to clipboard!
     </div>
 
-    <script src="script.js?v=11"></script>
+    <!-- Command Palette (Ctrl+K / Cmd+K) -->
+    <div id="cmd-palette" class="cmd-palette-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="cmd-input">
+        <div class="cmd-palette-card">
+            <div class="cmd-search-wrap">
+                <svg class="cmd-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input type="text" id="cmd-input" class="cmd-input" placeholder="Type a command or search (e.g. CV, case, health)..." autocomplete="off" spellcheck="false" aria-label="Search commands">
+                <kbd class="cmd-esc-hint">ESC</kbd>
+            </div>
+            <div id="cmd-results" class="cmd-results-list">
+                <!-- Group: Actions -->
+                <div class="cmd-group-title">Quick Actions</div>
+                <button type="button" class="cmd-item" data-action="download-cv">
+                    <span class="cmd-item-icon">📄</span>
+                    <span class="cmd-item-title">Download Resume (PDF)</span>
+                    <span class="cmd-item-tag">CV</span>
+                </button>
+                <button type="button" class="cmd-item" data-action="view-cv">
+                    <span class="cmd-item-icon">👁️</span>
+                    <span class="cmd-item-title">View HTML Resume</span>
+                    <span class="cmd-item-tag">Profile</span>
+                </button>
+                <button type="button" class="cmd-item" data-action="copy-email">
+                    <span class="cmd-item-icon">✉️</span>
+                    <span class="cmd-item-title">Copy Email (artemrivnyi@outlook.com)</span>
+                    <span class="cmd-item-tag">Contact</span>
+                </button>
+                <button type="button" class="cmd-item" data-action="toggle-theme">
+                    <span class="cmd-item-icon">🌓</span>
+                    <span class="cmd-item-title">Toggle Dark / Light Theme</span>
+                    <span class="cmd-item-tag">Preference</span>
+                </button>
+                <button type="button" class="cmd-item" data-action="health-probe">
+                    <span class="cmd-item-icon">⚡</span>
+                    <span class="cmd-item-title">Run Infrastructure Telemetry &amp; Health Probe</span>
+                    <span class="cmd-item-tag">SRE</span>
+                </button>
+                <button type="button" class="cmd-item" data-action="open-terminal">
+                    <span class="cmd-item-icon">💻</span>
+                    <span class="cmd-item-title">Open Interactive DevOps Terminal (~ or &gt;_)</span>
+                    <span class="cmd-item-tag">CLI</span>
+                </button>
+                <button type="button" class="cmd-item" data-action="open-chat">
+                    <span class="cmd-item-icon">🤖</span>
+                    <span class="cmd-item-title">Chat with Artem AI Assistant</span>
+                    <span class="cmd-item-tag">AI</span>
+                </button>
+
+                <!-- Group: Architecture Deep Dives -->
+                <div class="cmd-group-title">Architecture Case Studies</div>
+                <button type="button" class="cmd-item" data-action="study-dual-llm">
+                    <span class="cmd-item-icon">🛡️</span>
+                    <span class="cmd-item-title">AI Ticket Classifier — Dual-LLM Circuit Breaker</span>
+                    <span class="cmd-item-tag">Study</span>
+                </button>
+                <button type="button" class="cmd-item" data-action="study-car-scout">
+                    <span class="cmd-item-icon">🚗</span>
+                    <span class="cmd-item-title">UA-IE Car Scout — Market Scraper &amp; Irish Revenue VRT</span>
+                    <span class="cmd-item-tag">Study</span>
+                </button>
+                <button type="button" class="cmd-item" data-action="study-email-support">
+                    <span class="cmd-item-icon">🔒</span>
+                    <span class="cmd-item-title">AI Email Support — On-Prem Gemma:7b RAG Platform</span>
+                    <span class="cmd-item-tag">Study</span>
+                </button>
+                <button type="button" class="cmd-item" data-action="study-s3-sim">
+                    <span class="cmd-item-icon">📊</span>
+                    <span class="cmd-item-title">AWS S3 Simulator &amp; Prometheus/Grafana Observability</span>
+                    <span class="cmd-item-tag">Study</span>
+                </button>
+
+                <!-- Group: Navigation -->
+                <div class="cmd-group-title">Navigation &amp; Links</div>
+                <button type="button" class="cmd-item" data-action="nav-projects">
+                    <span class="cmd-item-icon">📁</span>
+                    <span class="cmd-item-title">Jump to Featured Projects</span>
+                    <span class="cmd-item-tag">Section</span>
+                </button>
+                <button type="button" class="cmd-item" data-action="nav-experience">
+                    <span class="cmd-item-icon">💼</span>
+                    <span class="cmd-item-title">Jump to Experience (BYOUR &amp; Synergy)</span>
+                    <span class="cmd-item-tag">Section</span>
+                </button>
+                <button type="button" class="cmd-item" data-action="open-github">
+                    <span class="cmd-item-icon">🐙</span>
+                    <span class="cmd-item-title">Open GitHub Profile (ArtemRivnyi)</span>
+                    <span class="cmd-item-tag">External</span>
+                </button>
+                <button type="button" class="cmd-item" data-action="open-linkedin">
+                    <span class="cmd-item-icon">🔗</span>
+                    <span class="cmd-item-title">Open LinkedIn Profile (artem-rivnyi)</span>
+                    <span class="cmd-item-tag">External</span>
+                </button>
+            </div>
+            <div class="cmd-footer-hints">
+                <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+                <span><kbd>↵</kbd> select</span>
+                <span><kbd>esc</kbd> close</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- DevOps Interactive Terminal Modal (~ or CLI) -->
+    <div id="cli-terminal-modal" class="cli-terminal-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="terminal-title">
+        <div class="cli-terminal-window">
+            <div class="cli-terminal-titlebar">
+                <div class="cli-window-controls">
+                    <button type="button" class="cli-win-btn cli-btn-close" id="cli-close-btn" aria-label="Close Terminal"></button>
+                    <span class="cli-win-btn cli-btn-min" aria-hidden="true"></span>
+                    <span class="cli-win-btn cli-btn-max" aria-hidden="true"></span>
+                </div>
+                <span id="terminal-title" class="cli-terminal-title">artem@cloud-node-01: ~ (zsh)</span>
+                <span class="cli-terminal-tag">SSH-2.0-OpenSSH_8.9</span>
+            </div>
+            <div class="cli-terminal-body" id="cli-output">
+                <div class="cli-welcome-banner">==================================================================
+  ☁️ ARTEM RIVNYI — CLOUD INFRASTRUCTURE &amp; DEVOPS TERMINAL v3.5
+  Node: artemrivnyi.com &bull; OS: Alpine Linux 3.19 &bull; Shell: zsh
+==================================================================
+Type <span class="cli-cmd-hint">'help'</span> to see available commands, or <span class="cli-cmd-hint">'exit'</span> to close.</div>
+            </div>
+            <form class="cli-input-line" id="cli-form">
+                <span class="cli-prompt"><span class="cli-user">artem</span>@<span class="cli-host">cloud-node</span>:<span class="cli-path">~</span>$</span>
+                <input type="text" id="cli-input" class="cli-input-field" autocomplete="off" spellcheck="false" aria-label="Terminal input" autofocus>
+                <button type="submit" class="visually-hidden">Execute Command</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js?v=12"></script>
 </body>
 
 </html>
