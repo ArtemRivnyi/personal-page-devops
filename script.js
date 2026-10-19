@@ -146,7 +146,7 @@ class MatrixRain {
     }
 
     loop(t) {
-        if (t - this.last > this.delay) {
+        if (!document.hidden && t - this.last > this.delay) {
             this.draw();
             this.last = t;
         }
