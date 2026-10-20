@@ -274,9 +274,11 @@ describe('initTournamentCarousel', () => {
         <div class="carousel-dots" id="carousel-dots"></div>
       </div>
     `;
+    sessionStorage.clear();
   });
 
   afterEach(() => {
+    sessionStorage.clear();
     document.body.innerHTML = '';
   });
 
@@ -459,9 +461,11 @@ describe('initGitHubHeatmap', () => {
       <button type="button" class="year-pill active" data-year="2026">2026</button>
       <button type="button" class="year-pill" data-year="2025">2025</button>
     `;
+    sessionStorage.clear();
   });
 
   afterEach(() => {
+    sessionStorage.clear();
     document.body.innerHTML = '';
   });
 
@@ -940,9 +944,11 @@ describe('initTopologySwitcher', () => {
       <p id="featured-desc">Initial Desc</p>
       <div id="featured-kpi-row"><span>Initial KPI</span></div>
     `;
+    sessionStorage.clear();
   });
 
   afterEach(() => {
+    sessionStorage.clear();
     document.body.innerHTML = '';
   });
 

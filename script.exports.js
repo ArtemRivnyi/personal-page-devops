@@ -168,7 +168,7 @@ function initTournamentCarousel() {
     let currentIndex = 0;
     const total = slides.length;
 
-    function showSlide(index) {
+    function showSlide(index, save = true) {
         currentIndex = ((index % total) + total) % total;
 
         slides.forEach((slide, idx) => {
@@ -184,6 +184,14 @@ function initTournamentCarousel() {
             dots.forEach((dot, idx) => {
                 dot.classList.toggle('active', idx === currentIndex);
             });
+        }
+
+        if (save) {
+            try {
+                sessionStorage.setItem('portfolio_carousel_idx', String(currentIndex));
+            } catch {
+                // ignore
+            }
         }
     }
 
@@ -232,7 +240,20 @@ function initTournamentCarousel() {
         }
     }, { passive: true });
 
-    showSlide(0);
+    let initialIndex = 0;
+    try {
+        const savedIdx = sessionStorage.getItem('portfolio_carousel_idx');
+        if (savedIdx !== null && !isNaN(Number(savedIdx))) {
+            const parsed = Number(savedIdx);
+            if (parsed >= 0 && parsed < total) {
+                initialIndex = parsed;
+            }
+        }
+    } catch {
+        // ignore
+    }
+
+    showSlide(initialIndex, false);
 }
 
 // Lightbox Modal
@@ -513,11 +534,30 @@ function initGitHubHeatmap() {
                 b.classList.toggle('active', b === btn);
                 b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
             });
+            try {
+                sessionStorage.setItem('portfolio_heatmap_year', year);
+            } catch {
+                // ignore
+            }
             renderYear(year);
         });
     });
 
-    renderYear('2026');
+    let initialYear = '2026';
+    try {
+        const savedYear = sessionStorage.getItem('portfolio_heatmap_year');
+        if (savedYear && (savedYear === '2026' || savedYear === '2025' || savedYear === '2024' || savedYear === '2023')) {
+            initialYear = savedYear;
+            yearButtons.forEach((b) => {
+                const isActive = (b.dataset.year || '2026') === initialYear;
+                b.classList.toggle('active', isActive);
+                b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+        }
+    } catch {
+        // ignore
+    }
+    renderYear(initialYear);
 
     // Live Auto-Scan: Fetch real-time GitHub activity dynamically
     async function syncLiveContributions() {
@@ -1346,11 +1386,18 @@ function initTopologySwitcher() {
             kpiEl.classList.remove('topology-fade-out');
         }, 200);
 
-        if (isManual && typeof window.gtag === 'function') {
-            window.gtag('event', 'topology_tab_switch', {
-                event_category: 'engagement',
-                tab_name: key
-            });
+        if (isManual) {
+            try {
+                sessionStorage.setItem('portfolio_topology_tab', key);
+            } catch {
+                // ignore
+            }
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'topology_tab_switch', {
+                    event_category: 'engagement',
+                    tab_name: key
+                });
+            }
         }
     }
 
@@ -1383,6 +1430,15 @@ function initTopologySwitcher() {
             startAutoPlay();
         });
     });
+
+    try {
+        const savedTab = sessionStorage.getItem('portfolio_topology_tab');
+        if (savedTab && views[savedTab] && savedTab !== 'topology') {
+            switchTab(savedTab, false);
+        }
+    } catch {
+        // ignore
+    }
 
     if (section) {
         section.addEventListener('mouseenter', () => {
