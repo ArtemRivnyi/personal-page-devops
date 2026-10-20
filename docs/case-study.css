@@ -378,11 +378,19 @@ pre code {
     line-height: 1.45;
 }
 
+.arch-formula-box {
+    display: block;
+    margin: 18px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--accent-blue);
+}
+
 /* Results Table & Responsive Container */
 .table-responsive {
     width: 100%;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
     margin: 24px 0;
     border: 1px solid var(--border);
     border-radius: 8px;
