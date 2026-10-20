@@ -2810,6 +2810,7 @@ body.light-theme .kpi-chip {
     opacity: 70%;
 }
 
+#rail-top-btn,
 .nav-rail-top-btn {
     position: relative;
     display: flex;
@@ -2825,6 +2826,7 @@ body.light-theme .kpi-chip {
     padding: 0;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     opacity: 55%;
+    box-shadow: none;
 }
 
 .nav-rail-top-btn:hover,

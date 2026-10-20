@@ -777,7 +777,7 @@ function initChatWidget() {
 
 // Back to Top Button
 function initBackToTop() {
-    const desktopBtn = document.getElementById('back-to-top');
+    const desktopBtn = document.getElementById('rail-top-btn') || document.getElementById('back-to-top');
     const mobileBtn = document.getElementById('mobile-back-to-top');
     const buttons = [desktopBtn, mobileBtn].filter(Boolean);
     if (!buttons.length) return;
