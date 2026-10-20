@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { debounce, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher, initSectionNavRail } from '../script.exports.js';
+import { debounce, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher, initSectionNavRail, initScrollRestoration } from '../script.exports.js';
 
 // Mock canvas getContext before any tests run (without jest.fn)
 beforeAll(() => {
@@ -1044,5 +1044,64 @@ describe('initSectionNavRail', () => {
     expect(items[0].classList.contains('active')).toBe(true);
   });
 });
+
+describe('initScrollRestoration', () => {
+  let scrollCalls = [];
+
+  beforeEach(() => {
+    sessionStorage.clear();
+    scrollCalls = [];
+    window.scrollTo = (options) => {
+      scrollCalls.push(options);
+    };
+    document.body.innerHTML = `
+      <a id="link-doc" href="docs/case-study.html">Case Study</a>
+      <a id="link-ext" href="https://example.com">External</a>
+      <a id="link-hash" href="#about">About</a>
+    `;
+  });
+
+  afterEach(() => {
+    sessionStorage.clear();
+    document.body.innerHTML = '';
+  });
+
+  test('should handle missing links gracefully and not throw', () => {
+    document.body.innerHTML = '';
+    expect(() => initScrollRestoration()).not.toThrow();
+  });
+
+  test('should save scroll position to sessionStorage on docs link click', () => {
+    initScrollRestoration();
+    window.scrollY = 850;
+    const docLink = document.getElementById('link-doc');
+    docLink.click();
+    expect(sessionStorage.getItem('portfolio_scroll_y')).toBe('850');
+  });
+
+  test('should save scroll position on beforeunload', () => {
+    initScrollRestoration();
+    window.scrollY = 1200;
+    window.dispatchEvent(new Event('beforeunload'));
+    expect(sessionStorage.getItem('portfolio_scroll_y')).toBe('1200');
+  });
+
+  test('should restore scroll position when returning with savedY > 60', (done) => {
+    window.location.hash = '';
+    sessionStorage.setItem('portfolio_scroll_y', '720');
+    initScrollRestoration();
+
+    setTimeout(() => {
+      expect(scrollCalls.length).toBe(1);
+      expect(scrollCalls[0]).toEqual({
+        top: 720,
+        behavior: 'instant'
+      });
+      done();
+    }, 50);
+  });
+});
+
+
 
 

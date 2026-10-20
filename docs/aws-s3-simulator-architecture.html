@@ -55,7 +55,7 @@
 <body>
     <div class="article-container">
         <header class="article-header-nav">
-            <a href="https://artemrivnyi.com" class="back-link">
+            <a href="../index.html#case-study" class="back-link">
                 ← Back to artemrivnyi.com
             </a>
             <span class="badge-category">SRE &amp; Observability Case Study</span>
@@ -85,31 +85,70 @@
             <h2>1. Architectural Blueprint</h2>
             <p>The system packages an enterprise S3-compatible object storage core with a management REST API and a full Prometheus/Grafana observability stack:</p>
 
-            <div class="diagram-box">[ Client / Automated Test Suite / AWS SDK (boto3) ]
-                     │
-                     ▼
-       ┌─────────────────────────────┐
-       │   Docker Single Container   │
-       │                             │
-       │  [ Flask Management API ]   │ ────► [ Swagger OpenAPI Docs (/docs) ]
-       │              │              │
-       │              ▼              │
-       │   [ MinIO S3 Engine ]       │ ────► [ Local Persistent Volume (/data) ]
-       │        (:9000/:9001)        │
-       └──────────────┬──────────────┘
-                      │
-                      │ (Scrape /metrics &amp; Container Logs)
-                      ▼
-       [ Observability Stack (Docker Compose) ]
-                      │
-       ┌──────────────┼──────────────┐
-       ▼              ▼              ▼
-  [ Prometheus ]  [ Promtail ]   [ Loki Engine ]
-       │              │              │
-       └──────────────┼──────────────┘
-                      ▼
-         [ Grafana Central Dashboard ]
-       (RPS, Latency Histograms, Storage Saturation)</div>
+            <div class="arch-flow-card">
+                <div class="arch-flow-header">
+                    <span class="arch-flow-title">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                        Isolated S3 Emulation &amp; Observability Harness
+                    </span>
+                    <span class="arch-flow-status"><span class="pulse-dot"></span> Sub-1.4s Cold Boot &bull; Zero Egress Cost</span>
+                </div>
+                <div class="arch-nodes-container">
+                    <div class="arch-node">
+                        <div class="arch-node-main">
+                            <span class="arch-node-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                            </span>
+                            <span class="arch-node-name">Client Test Suite / AWS SDK (boto3)</span>
+                        </div>
+                        <span class="arch-node-tag">S3 REST API v4</span>
+                    </div>
+
+                    <div class="arch-connector-down">↓ (Port 9000 / 5000)</div>
+
+                    <div class="arch-node">
+                        <div class="arch-node-main">
+                            <span class="arch-node-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                            </span>
+                            <span class="arch-node-name">MinIO S3 Engine &amp; Flask Management API</span>
+                        </div>
+                        <span class="arch-node-tag">Docker Single Container &bull; &lt;85MB RAM</span>
+                    </div>
+
+                    <div class="arch-connector-down">↓ (Scrapes /metrics &amp; Container Stdout)</div>
+
+                    <div class="arch-branches">
+                        <div class="arch-branch-card primary">
+                            <div class="arch-branch-header">
+                                <span class="arch-branch-title">Prometheus Metrics</span>
+                                <span class="arch-branch-badge primary">Telemetry</span>
+                            </div>
+                            <p class="arch-branch-desc">Captures throughput (RPS), status code splits (2xx/4xx/5xx), and millisecond latency histograms.</p>
+                        </div>
+
+                        <div class="arch-branch-card primary">
+                            <div class="arch-branch-header">
+                                <span class="arch-branch-title">Loki &amp; Promtail</span>
+                                <span class="arch-branch-badge primary">Structured Logs</span>
+                            </div>
+                            <p class="arch-branch-desc">Real-time log ingestion directly from container stream without third-party forwarders.</p>
+                        </div>
+                    </div>
+
+                    <div class="arch-connector-down">↓</div>
+
+                    <div class="arch-node">
+                        <div class="arch-node-main">
+                            <span class="arch-node-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                            </span>
+                            <span class="arch-node-name">Autoprovisioned Grafana Dashboard</span>
+                        </div>
+                        <span class="arch-node-tag">Dashboard as Code</span>
+                    </div>
+                </div>
+            </div>
 
             <h2>2. Core Engineering Challenges &amp; Solutions</h2>
 
@@ -135,42 +174,44 @@
 
             <h2>3. Performance &amp; Cost Impact</h2>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Metric</th>
-                        <th>Live AWS S3 in CI/CD</th>
-                        <th>AWS S3 Simulator (Local)</th>
-                        <th>Efficiency Gain</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Upload Latency (10 MB payload)</strong></td>
-                        <td>480 &ndash; 1,200 ms</td>
-                        <td class="highlight-green">14 &ndash; 28 ms</td>
-                        <td class="highlight-green">~97% faster transfer</td>
-                    </tr>
-                    <tr>
-                        <td><strong>CI Test Suite Execution</strong></td>
-                        <td>3 min 45 sec</td>
-                        <td class="highlight-green">1 min 12 sec</td>
-                        <td class="highlight-green">68% pipeline speedup</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Cloud Data Transfer Egress Cost</strong></td>
-                        <td>$0.09 / GB egress</td>
-                        <td class="highlight-green">$0.00 (Zero cloud egress)</td>
-                        <td class="highlight-green">100% cost elimination</td>
-                    </tr>
-                    <tr>
-                        <td><strong>IAM Credential Leak Risk</strong></td>
-                        <td>Moderate (AWS secrets in CI)</td>
-                        <td class="highlight-green">Zero (Local ephemeral credentials)</td>
-                        <td class="highlight-green">Zero blast radius</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Metric</th>
+                            <th scope="col">Live AWS S3 in CI/CD</th>
+                            <th scope="col">AWS S3 Simulator (Local)</th>
+                            <th scope="col">Efficiency Gain</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Upload Latency (10 MB payload)</strong></td>
+                            <td>480 &ndash; 1,200 ms</td>
+                            <td class="highlight-green">14 &ndash; 28 ms</td>
+                            <td class="highlight-green">~97% faster transfer</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CI Test Suite Execution</strong></td>
+                            <td>3 min 45 sec</td>
+                            <td class="highlight-green">1 min 12 sec</td>
+                            <td class="highlight-green">68% pipeline speedup</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cloud Data Transfer Egress Cost</strong></td>
+                            <td>$0.09 / GB egress</td>
+                            <td class="highlight-green">$0.00 (Zero cloud egress)</td>
+                            <td class="highlight-green">100% cost elimination</td>
+                        </tr>
+                        <tr>
+                            <td><strong>IAM Credential Leak Risk</strong></td>
+                            <td>Moderate (AWS secrets in CI)</td>
+                            <td class="highlight-green">Zero (Local ephemeral credentials)</td>
+                            <td class="highlight-green">Zero blast radius</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <h2>4. Key Production Lessons</h2>
             <ol>
@@ -193,5 +234,6 @@
             </div>
         </div>
     </div>
+    <script src="case-study.js"></script>
 </body>
 </html>

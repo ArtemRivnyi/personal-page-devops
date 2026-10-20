@@ -55,7 +55,7 @@
 <body>
     <div class="article-container">
         <header class="article-header-nav">
-            <a href="https://artemrivnyi.com" class="back-link">
+            <a href="../index.html#case-study" class="back-link">
                 ← Back to artemrivnyi.com
             </a>
             <span class="badge-category">Architecture Case Study</span>
@@ -85,29 +85,83 @@
             <h2>1. Architectural Blueprint</h2>
             <p>The system follows an asynchronous resilient proxy pattern backed by a distributed Redis rate-limiter and circuit breaker:</p>
 
-            <div class="diagram-box">[ Client Request ]
-       │
-       ▼
-[ Reverse Proxy / Nginx ]
-       │
-       ▼
-[ Python Inference Service ] ──────────► [ Redis Cache / Rate Limiter ]
-       │                                         ▲
-       ├─────────────────────────────────────────┤ (Check cache hit / token bucket)
-       ▼
-[ Circuit Breaker Controller ]
-       │
-       ├─── (Healthy) ──────────────► [ Primary: Google Gemini 2.0 Flash ]
-       │                                     │
-       │                              (Success / 200 OK)
-       │                                     ▼
-       │                              [ Response &amp; Prometheus Metric ]
-       │
-       └─── (Failure / Timeout / 429) ─► [ Fallback: OpenAI GPT-4o-mini ]
-                                             │
-                                      (Success / 200 OK)
-                                             ▼
-                                      [ Log Warning &amp; Increment Fallback Counter ]</div>
+            <div class="arch-flow-card">
+                <div class="arch-flow-header">
+                    <span class="arch-flow-title">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                        Dual-LLM Circuit Breaker &amp; Failover Topology
+                    </span>
+                    <span class="arch-flow-status"><span class="pulse-dot"></span> Active Circuit &bull; Zero Outage</span>
+                </div>
+                <div class="arch-nodes-container">
+                    <div class="arch-node">
+                        <div class="arch-node-main">
+                            <span class="arch-node-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            </span>
+                            <span class="arch-node-name">Client Ingress Request</span>
+                        </div>
+                        <span class="arch-node-tag">HTTPS / REST JSON</span>
+                    </div>
+
+                    <div class="arch-connector-down">↓</div>
+
+                    <div class="arch-node">
+                        <div class="arch-node-main">
+                            <span class="arch-node-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                            </span>
+                            <span class="arch-node-name">Nginx Ingress &amp; Redis Rate-Limiter</span>
+                        </div>
+                        <span class="arch-node-tag">Distributed Token Bucket</span>
+                    </div>
+
+                    <div class="arch-connector-down">↓</div>
+
+                    <div class="arch-node">
+                        <div class="arch-node-main">
+                            <span class="arch-node-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                            </span>
+                            <span class="arch-node-name">FastAPI Inference Service</span>
+                        </div>
+                        <span class="arch-node-tag">Pydantic Strict Contract</span>
+                    </div>
+
+                    <div class="arch-connector-down">↓ (Circuit Breaker Evaluation)</div>
+
+                    <!-- Dual Provider Routing Branches -->
+                    <div class="arch-branches">
+                        <div class="arch-branch-card primary">
+                            <div class="arch-branch-header">
+                                <span class="arch-branch-title">Google Gemini 2.0 Flash</span>
+                                <span class="arch-branch-badge primary">Primary (99.9%)</span>
+                            </div>
+                            <p class="arch-branch-desc">Sub-450ms p95 latency, cost-optimized at ~$0.075/1M tokens. Returns validated JSON with HTTP 200 OK.</p>
+                        </div>
+
+                        <div class="arch-branch-card fallback">
+                            <div class="arch-branch-header">
+                                <span class="arch-branch-title">OpenAI GPT-4o-mini</span>
+                                <span class="arch-branch-badge fallback">Hot Standby</span>
+                            </div>
+                            <p class="arch-branch-desc">Triggered automatically upon HTTP 429 quota exhaustion, 5xx server fault, or &gt;1,200ms timeout budget breach (&lt;48ms failover).</p>
+                        </div>
+                    </div>
+
+                    <div class="arch-connector-down">↓</div>
+
+                    <div class="arch-node">
+                        <div class="arch-node-main">
+                            <span class="arch-node-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                            </span>
+                            <span class="arch-node-name">Prometheus Observability &amp; Response Delivery</span>
+                        </div>
+                        <span class="arch-node-tag">Histogram Latency Metrics</span>
+                    </div>
+                </div>
+            </div>
 
             <h2>2. Core Engineering Challenges &amp; Solutions</h2>
 
@@ -181,42 +235,44 @@ class DualLLMPipeline:
 
             <h2>4. Measured Production Results</h2>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th scope="col">Metric</th>
-                        <th scope="col">Single Provider (Baseline)</th>
-                        <th scope="col">Dual-LLM Failover (Production)</th>
-                        <th scope="col">Improvement</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>API Availability SLA</strong></td>
-                        <td>98.7%</td>
-                        <td class="highlight-green">99.98%</td>
-                        <td class="highlight-green">+1.28% uptime</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Recovery Time (RTO)</strong></td>
-                        <td>~45,000 ms (outage duration)</td>
-                        <td class="highlight-green">&lt; 48 ms (automatic failover)</td>
-                        <td class="highlight-green">99.8% faster recovery</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Inference Cost / 10k req</strong></td>
-                        <td>$14.80 (pure GPT-4o)</td>
-                        <td class="highlight-green">$4.20 (Gemini 2.0 Flash primary)</td>
-                        <td class="highlight-green">~71% cost reduction</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Failed Client Requests</strong></td>
-                        <td>130 per 10,000 requests</td>
-                        <td class="highlight-green">&lt; 2 per 10,000 requests</td>
-                        <td class="highlight-green">98.5% fewer dropouts</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Metric</th>
+                            <th scope="col">Single Provider (Baseline)</th>
+                            <th scope="col">Dual-LLM Failover (Production)</th>
+                            <th scope="col">Improvement</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>API Availability SLA</strong></td>
+                            <td>98.7%</td>
+                            <td class="highlight-green">99.98%</td>
+                            <td class="highlight-green">+1.28% uptime</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Recovery Time (RTO)</strong></td>
+                            <td>~45,000 ms (outage duration)</td>
+                            <td class="highlight-green">&lt; 48 ms (automatic failover)</td>
+                            <td class="highlight-green">99.8% faster recovery</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Inference Cost / 10k req</strong></td>
+                            <td>$14.80 (pure GPT-4o)</td>
+                            <td class="highlight-green">$4.20 (Gemini 2.0 Flash primary)</td>
+                            <td class="highlight-green">~71% cost reduction</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Failed Client Requests</strong></td>
+                            <td>130 per 10,000 requests</td>
+                            <td class="highlight-green">&lt; 2 per 10,000 requests</td>
+                            <td class="highlight-green">98.5% fewer dropouts</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <h2>5. Production Key Takeaways</h2>
             <ol>
@@ -240,5 +296,6 @@ class DualLLMPipeline:
             </div>
         </div>
     </div>
+    <script src="case-study.js"></script>
 </body>
 </html>

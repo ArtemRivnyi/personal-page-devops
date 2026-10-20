@@ -1659,4 +1659,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 17. Floating Section Navigation Rail
     initSectionNavRail();
+
+    // 18. Scroll Position Preservation across Transitions
+    initScrollRestoration();
 });
+
+// 18. Scroll Position Preservation & Restoration across Transitions
+function initScrollRestoration() {
+    const savePos = () => {
+        try {
+            sessionStorage.setItem('portfolio_scroll_y', String(window.scrollY));
+        } catch {
+            // ignore
+        }
+    };
+
+    window.addEventListener('beforeunload', savePos, { passive: true });
+
+    document.querySelectorAll('a[href^="docs/"], a[href^="http"]').forEach((link) => {
+        link.addEventListener('click', savePos, { passive: true });
+    });
+
+    if (!window.location.hash) {
+        try {
+            const savedY = sessionStorage.getItem('portfolio_scroll_y');
+            if (savedY !== null && !isNaN(Number(savedY)) && Number(savedY) > 60) {
+                requestAnimationFrame(() => {
+                    window.scrollTo({
+                        top: Number(savedY),
+                        behavior: 'instant'
+                    });
+                });
+            }
+        } catch {
+            // ignore
+        }
+    }
+}

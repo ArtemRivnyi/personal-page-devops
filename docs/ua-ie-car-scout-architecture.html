@@ -55,7 +55,7 @@
 <body>
     <div class="article-container">
         <header class="article-header-nav">
-            <a href="https://artemrivnyi.com" class="back-link">
+            <a href="../index.html#case-study" class="back-link">
                 ← Back to artemrivnyi.com
             </a>
             <span class="badge-category">Production Case Study</span>
@@ -85,32 +85,70 @@
             <h2>1. Architectural Blueprint</h2>
             <p>The system is built as a modular monorepo combining a high-performance React frontend with an Express scraper service, resilient Redis cache, and live banking exchange rate sync:</p>
 
-            <div class="diagram-box">[ User Query: e.g. "Volkswagen Golf 2020" ]
-       │
-       ▼
-[ React 18 / Vite SPA Client ]
-       │
-       ▼ (REST API / JSON)
-[ Node.js &amp; Express Ingestion Service ] ──► [ Redis In-Memory Cache (TTL: 1h) ]
-       │                                           ▲
-       ├── (Cache Miss) ───────────────────────────┤
-       ▼
-[ Scraping Orchestrator &amp; Concurrency Limiter ]
-       │
-       ├──► [ Cheerio Fast HTTP Engine ] (Static HTML listings: RST.ua, CARS.ua)
-       │
-       ├──► [ Puppeteer Stealth Pool ] (Dynamic Cloudflare SPAs: DoneDeal, Auto.RIA)
-       │
-       ▼
-[ Data Normalizer &amp; Deduplication Engine ]
-       │
-       ├──► [ National Bank of Ukraine API ] (Live UAH/USD/EUR exchange rates)
-       │
-       ▼
-[ Irish Revenue Duty &amp; VRT Calculator ]
-       │ (Price + Shipping + 6.5% Customs Duty + 23% VAT)
-       ▼
-[ Unified JSON Response &amp; Client Stream ]</div>
+            <div class="arch-flow-card">
+                <div class="arch-flow-header">
+                    <span class="arch-flow-title">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                        Distributed Multi-Tier Meta-Search Pipeline
+                    </span>
+                    <span class="arch-flow-status"><span class="pulse-dot"></span> 6 Portals Synced</span>
+                </div>
+                <div class="arch-nodes-container">
+                    <div class="arch-node">
+                        <div class="arch-node-main">
+                            <span class="arch-node-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            </span>
+                            <span class="arch-node-name">React 18 / Vite SPA Client</span>
+                        </div>
+                        <span class="arch-node-tag">User Parameterized Query</span>
+                    </div>
+
+                    <div class="arch-connector-down">↓ (REST API / JSON)</div>
+
+                    <div class="arch-node">
+                        <div class="arch-node-main">
+                            <span class="arch-node-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                            </span>
+                            <span class="arch-node-name">Express Ingestion &amp; Redis Cache</span>
+                        </div>
+                        <span class="arch-node-tag">TTL: 1h &bull; &lt;240ms Cache Hit</span>
+                    </div>
+
+                    <div class="arch-connector-down">↓ (Cache Miss Orchestration)</div>
+
+                    <div class="arch-branches">
+                        <div class="arch-branch-card primary">
+                            <div class="arch-branch-header">
+                                <span class="arch-branch-title">Cheerio Fast HTTP</span>
+                                <span class="arch-branch-badge primary">Static Portals</span>
+                            </div>
+                            <p class="arch-branch-desc">Sub-150ms lightweight extraction for static classifieds (RST.ua, CARS.ua) without browser overhead.</p>
+                        </div>
+
+                        <div class="arch-branch-card fallback">
+                            <div class="arch-branch-header">
+                                <span class="arch-branch-title">Puppeteer Stealth Pool</span>
+                                <span class="arch-branch-badge fallback">Cloudflare Protected</span>
+                            </div>
+                            <p class="arch-branch-desc">Headless Chromium pool with fingerprint rotation and anti-bot evasions (DoneDeal, Auto.RIA).</p>
+                        </div>
+                    </div>
+
+                    <div class="arch-connector-down">↓</div>
+
+                    <div class="arch-node">
+                        <div class="arch-node-main">
+                            <span class="arch-node-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                            </span>
+                            <span class="arch-node-name">National Bank FX API &amp; Irish Revenue Tax Engine</span>
+                        </div>
+                        <span class="arch-node-tag">VRT + Customs 6.5% + VAT 23%</span>
+                    </div>
+                </div>
+            </div>
 
             <h2>2. Core Engineering Challenges &amp; Solutions</h2>
 
@@ -131,11 +169,13 @@
             <p>
                 Raw vehicle purchase price is misleading. The application calculates the true <strong>Total Landed Cost in Ireland</strong> via an automated statutory calculation pipeline:
             </p>
-            <div class="diagram-box">Total Landed Cost = Base Vehicle Price (Normalized to EUR via Live FX)
-                   + International Freight Logistics (€1,400 flat benchmark)
-                   + EU External Customs Duty (6.5% applied to CIF value)
-                   + Statutory Irish VAT (23% applied to CIF + Customs)
-                   + Irish Vehicle Registration Tax (VRT estimation based on engine/CO2)</div>
+            <div class="arch-node" style="margin: 18px 0; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.6; display: block; color: var(--accent-blue);">
+                <strong>Total Landed Cost</strong> = Base Vehicle Price (Live FX to EUR)<br>
+                + International Freight (€1,400 flat benchmark)<br>
+                + EU External Customs Duty (6.5% CIF value)<br>
+                + Statutory Irish VAT (23% CIF + Customs)<br>
+                + Irish Vehicle Registration Tax (CO2-based VRT)
+            </div>
 
             <h3>C. Multi-Portal Listing Deduplication</h3>
             <p>
@@ -144,42 +184,44 @@
 
             <h2>3. Architecture Comparison &amp; Benchmarks</h2>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Metric / Parameter</th>
-                        <th>Manual Workflow</th>
-                        <th>Scout Engine (Uncached)</th>
-                        <th>Scout Engine (Redis Hit)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Query Time across 6 Sites</strong></td>
-                        <td>15 &ndash; 25 minutes</td>
-                        <td>4,800 ms</td>
-                        <td class="highlight-green">240 ms</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Currency Normalization</strong></td>
-                        <td>Manual conversion</td>
-                        <td class="highlight-green">Automatic (Live NBU)</td>
-                        <td class="highlight-green">Automatic (Live NBU)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Customs Duty &amp; VAT Calc</strong></td>
-                        <td>Spreadsheet estimation</td>
-                        <td class="highlight-green">Instant Exact Math</td>
-                        <td class="highlight-green">Instant Exact Math</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Automated Test Suite</strong></td>
-                        <td>None</td>
-                        <td class="highlight-green">172 Automated Tests</td>
-                        <td class="highlight-green">100% CI Pass Rate</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Metric / Parameter</th>
+                            <th scope="col">Manual Workflow</th>
+                            <th scope="col">Scout Engine (Uncached)</th>
+                            <th scope="col">Scout Engine (Redis Hit)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Query Time across 6 Sites</strong></td>
+                            <td>15 &ndash; 25 minutes</td>
+                            <td>4,800 ms</td>
+                            <td class="highlight-green">240 ms</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Currency Normalization</strong></td>
+                            <td>Manual conversion</td>
+                            <td class="highlight-green">Automatic (Live NBU)</td>
+                            <td class="highlight-green">Automatic (Live NBU)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Customs Duty &amp; VAT Calc</strong></td>
+                            <td>Spreadsheet estimation</td>
+                            <td class="highlight-green">Instant Exact Math</td>
+                            <td class="highlight-green">Instant Exact Math</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Automated Test Suite</strong></td>
+                            <td>None</td>
+                            <td class="highlight-green">172 Automated Tests</td>
+                            <td class="highlight-green">100% CI Pass Rate</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <h2>4. Key Production Lessons</h2>
             <ol>
@@ -202,5 +244,6 @@
             </div>
         </div>
     </div>
+    <script src="case-study.js"></script>
 </body>
 </html>

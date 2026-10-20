@@ -55,7 +55,7 @@
 <body>
     <div class="article-container">
         <header class="article-header-nav">
-            <a href="https://artemrivnyi.com" class="back-link">
+            <a href="../index.html#case-study" class="back-link">
                 ← Back to artemrivnyi.com
             </a>
             <span class="badge-category">Architecture Case Study</span>
@@ -85,29 +85,70 @@
             <h2>1. Architectural Blueprint</h2>
             <p>The platform separates ingestion from compute-heavy AI inference through an asynchronous worker topology backed by Redis:</p>
 
-            <div class="diagram-box">[ Incoming Customer Email via Gmail / Webhook ]
-                     │
-                     ▼
-       [ Ingestion API / Flask Service ]
-                     │
-                     ▼ (Enqueue Task: JSON Payload)
-          [ Redis Message Broker (RQ) ]
-                     │
-       ┌─────────────┴─────────────┐
-       ▼                           ▼
-[ Async Worker 1 ]          [ Async Worker 2 ]
-       │
-       ├──► [ Policy Retrieval: FAISS Vector Index ]
-       │         ▲
-       │         │ (Semantic Search across Store Knowledge Base)
-       │         ▼
-       ├──► [ Local Inference: Ollama (Gemma 7B) ]
-       │         │ (Classifies Intent, Drafts Response, Enforces JSON Schema)
-       │         ▼
-       ├──► [ Human-in-the-Loop Admin Dashboard (Streamlit) ]
-       │         │ (Review / Approve / Reject high-risk warranty queries)
-       │         ▼
-       └──► [ Outbound SMTP / Gmail API ] ──► [ Customer Receives Resolution ]</div>
+            <div class="arch-flow-card">
+                <div class="arch-flow-header">
+                    <span class="arch-flow-title">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                        Privacy-Preserving On-Premise AI Pipeline
+                    </span>
+                    <span class="arch-flow-status"><span class="pulse-dot"></span> 100% On-Prem &bull; Zero PII Leakage</span>
+                </div>
+                <div class="arch-nodes-container">
+                    <div class="arch-node">
+                        <div class="arch-node-main">
+                            <span class="arch-node-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            </span>
+                            <span class="arch-node-name">Customer Email Ingress</span>
+                        </div>
+                        <span class="arch-node-tag">Gmail Webhook / IMAP</span>
+                    </div>
+
+                    <div class="arch-connector-down">↓</div>
+
+                    <div class="arch-node">
+                        <div class="arch-node-main">
+                            <span class="arch-node-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                            </span>
+                            <span class="arch-node-name">Flask API &amp; Redis Task Broker (RQ)</span>
+                        </div>
+                        <span class="arch-node-tag">&lt;15ms Ingestion ACK</span>
+                    </div>
+
+                    <div class="arch-connector-down">↓ (Decoupled Queue Workers)</div>
+
+                    <div class="arch-branches">
+                        <div class="arch-branch-card primary">
+                            <div class="arch-branch-header">
+                                <span class="arch-branch-title">FAISS Vector Retrieval</span>
+                                <span class="arch-branch-badge primary">Semantic Search</span>
+                            </div>
+                            <p class="arch-branch-desc">Extracts top-3 verified store policies via cosine similarity embeddings to prevent hallucination.</p>
+                        </div>
+
+                        <div class="arch-branch-card primary">
+                            <div class="arch-branch-header">
+                                <span class="arch-branch-title">Local Ollama (Gemma 7B)</span>
+                                <span class="arch-branch-badge primary">Private Inference</span>
+                            </div>
+                            <p class="arch-branch-desc">Classifies intent, extracts metadata, drafts customer resolution strictly within local Docker boundary.</p>
+                        </div>
+                    </div>
+
+                    <div class="arch-connector-down">↓</div>
+
+                    <div class="arch-node">
+                        <div class="arch-node-main">
+                            <span class="arch-node-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            </span>
+                            <span class="arch-node-name">Streamlit Review UI / Automated SMTP Outbound</span>
+                        </div>
+                        <span class="arch-node-tag">99.4% Policy Grounding</span>
+                    </div>
+                </div>
+            </div>
 
             <h2>2. Core Engineering Challenges &amp; Solutions</h2>
 
@@ -136,42 +177,44 @@
 
             <h2>3. Performance &amp; Operational Metrics</h2>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Parameter</th>
-                        <th>Manual Handling</th>
-                        <th>Public Cloud API (OpenAI)</th>
-                        <th>Privacy-First On-Prem System</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Average Response Latency</strong></td>
-                        <td>4 &ndash; 12 hours</td>
-                        <td>~1.8 seconds</td>
-                        <td class="highlight-green">~2.2 seconds</td>
-                    </tr>
-                    <tr>
-                        <td><strong>External Data Leakage Risk</strong></td>
-                        <td>Low (Internal staff)</td>
-                        <td>High (Third-party cloud)</td>
-                        <td class="highlight-green">Zero (Fully on-premises)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Recurring AI API Token Cost</strong></td>
-                        <td>N/A (Staff labor)</td>
-                        <td>$0.03 &ndash; $0.06 / email</td>
-                        <td class="highlight-green">$0.00 / email (Fixed compute)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Policy Adherence Rate</strong></td>
-                        <td>Variable by agent</td>
-                        <td>~92% (Hallucination risk)</td>
-                        <td class="highlight-green">99.4% (Grounded via FAISS)</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Parameter</th>
+                            <th scope="col">Manual Handling</th>
+                            <th scope="col">Public Cloud API (OpenAI)</th>
+                            <th scope="col">Privacy-First On-Prem System</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Average Response Latency</strong></td>
+                            <td>4 &ndash; 12 hours</td>
+                            <td>~1.8 seconds</td>
+                            <td class="highlight-green">~2.2 seconds</td>
+                        </tr>
+                        <tr>
+                            <td><strong>External Data Leakage Risk</strong></td>
+                            <td>Low (Internal staff)</td>
+                            <td>High (Third-party cloud)</td>
+                            <td class="highlight-green">Zero (Fully on-premises)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Recurring AI API Token Cost</strong></td>
+                            <td>N/A (Staff labor)</td>
+                            <td>$0.03 &ndash; $0.06 / email</td>
+                            <td class="highlight-green">$0.00 / email (Fixed compute)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Policy Adherence Rate</strong></td>
+                            <td>Variable by agent</td>
+                            <td>~92% (Hallucination risk)</td>
+                            <td class="highlight-green">99.4% (Grounded via FAISS)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <h2>4. Key Production Lessons</h2>
             <ol>
@@ -194,5 +237,6 @@
             </div>
         </div>
     </div>
+    <script src="case-study.js"></script>
 </body>
 </html>

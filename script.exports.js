@@ -1512,5 +1512,38 @@ function initSectionNavRail() {
     }, { passive: true });
 }
 
-export { debounce, setupMobileMenu, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initAnalyticsTracking, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher, initSectionNavRail };
+// 18. Scroll Position Preservation & Restoration across Transitions
+function initScrollRestoration() {
+    const savePos = () => {
+        try {
+            sessionStorage.setItem('portfolio_scroll_y', String(window.scrollY));
+        } catch {
+            // ignore
+        }
+    };
+
+    window.addEventListener('beforeunload', savePos, { passive: true });
+
+    document.querySelectorAll('a[href^="docs/"], a[href^="http"]').forEach((link) => {
+        link.addEventListener('click', savePos, { passive: true });
+    });
+
+    if (!window.location.hash) {
+        try {
+            const savedY = sessionStorage.getItem('portfolio_scroll_y');
+            if (savedY !== null && !isNaN(Number(savedY)) && Number(savedY) > 60) {
+                requestAnimationFrame(() => {
+                    window.scrollTo({
+                        top: Number(savedY),
+                        behavior: 'instant'
+                    });
+                });
+            }
+        } catch {
+            // ignore
+        }
+    }
+}
+
+export { debounce, setupMobileMenu, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initAnalyticsTracking, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher, initSectionNavRail, initScrollRestoration };
 
