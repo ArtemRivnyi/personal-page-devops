@@ -648,7 +648,7 @@ function initStackedCards() {
         if (e.changedTouches && e.changedTouches[0]) {
             const diffX = e.changedTouches[0].clientX - touchStartX;
             const diffY = e.changedTouches[0].clientY - touchStartY;
-            if (Math.abs(diffX) > 30 && Math.abs(diffX) > Math.abs(diffY)) {
+            if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY) * 1.5) {
                 cycleCards(diffX < 0 ? 1 : -1);
             }
         }
@@ -1011,10 +1011,11 @@ function initHealthMonitor() {
             .then(() => {
                 const duration = Math.round(performance.now() - start);
                 const safeDuration = Math.max(duration, 8);
-                latencyVal.textContent = `${safeDuration}ms (Optimal)`;
-                const barWidth = Math.min(Math.max((safeDuration / 200) * 100, 15), 100);
+                const statusLabel = safeDuration < 120 ? 'Fast' : (safeDuration < 220 ? 'Optimal' : (safeDuration < 360 ? 'Standard' : 'Degraded'));
+                latencyVal.textContent = `${safeDuration}ms (${statusLabel})`;
+                const barWidth = Math.min(Math.max((safeDuration / 250) * 100, 15), 100);
                 latencyBar.style.width = `${barWidth}%`;
-                latencyBar.style.background = safeDuration < 120 ? '#10b981' : (safeDuration < 280 ? '#f59e0b' : '#ef4444');
+                latencyBar.style.background = safeDuration < 220 ? '#10b981' : (safeDuration < 360 ? '#f59e0b' : '#ef4444');
             })
             .catch(() => {
                 const simulated = Math.floor(Math.random() * 15) + 16;
@@ -1130,11 +1131,6 @@ function initCommandPalette() {
             case 'open-terminal': {
                 const termBtn = document.getElementById('terminal-trigger-btn');
                 if (termBtn) termBtn.click();
-                break;
-            }
-            case 'open-chat': {
-                const chatBtn = document.getElementById('chat-widget-btn');
-                if (chatBtn) chatBtn.click();
                 break;
             }
             case 'study-dual-llm':

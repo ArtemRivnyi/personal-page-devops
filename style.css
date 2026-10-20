@@ -88,8 +88,26 @@ body {
     height: 100vh;
     pointer-events: none;
     z-index: 0;
-    opacity: 5%;
+    opacity: 3%;
     transition: opacity 0.3s ease;
+}
+
+/* Ambient Film Grain Overlay (@maxy.tools inspiration) */
+.ambient-grain-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 3.2%;
+    mix-blend-mode: overlay;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ambient-grain-overlay {
+        display: none;
+    }
 }
 
 /* Minimal Header Navigation (@onlyrenbl style) */
@@ -412,12 +430,18 @@ body.light-theme .site-header {
     padding: 10px 18px;
     border-radius: 8px;
     text-decoration: none;
-    transition: opacity 0.15s, transform 0.15s;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 25%), 0 4px 14px rgb(0 0 0 / 22%);
+    transition: opacity 0.15s, transform 0.15s, box-shadow 0.15s;
 }
 
 .hero-btn-primary:hover {
-    opacity: 90%;
+    opacity: 92%;
     transform: translateY(-1px);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 35%), 0 6px 20px rgb(0 0 0 / 30%);
+}
+
+.hero-btn-primary:active {
+    transform: translateY(0);
 }
 
 .availability-status-pill {
@@ -426,6 +450,10 @@ body.light-theme .site-header {
     gap: 8px;
     font-size: 0.88rem;
     color: var(--text-secondary);
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
 }
 
 .pulsing-green-dot {
@@ -1218,60 +1246,63 @@ body.light-theme .kpi-chip {
 
 .stacked-cards-wrapper {
     position: relative;
-    width: 280px;
-    height: 220px;
-    margin: 16px auto;
+    width: 100%;
+    max-width: 380px;
+    height: 240px;
+    margin: 12px auto;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    background: var(--card-bg);
+    box-shadow: 0 12px 32px rgb(0 0 0 / 40%);
     cursor: pointer;
-    perspective: 1000px;
     touch-action: pan-y;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.stacked-cards-wrapper:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 16px 40px rgb(0 0 0 / 55%);
 }
 
 .stacked-card {
     position: absolute;
     inset: 0;
-    border-radius: 14px;
+    border-radius: 16px;
     overflow: hidden;
-    border: 1px solid var(--border-subtle);
     background: var(--card-bg);
-    box-shadow: 0 10px 28px rgb(0 0 0 / 40%);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, opacity 0.4s ease;
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Physical overlapping angles */
+/* Active card: visible and interaction-ready */
 .card-pos-1 {
     z-index: 4;
-    transform: rotate(-2deg);
+    opacity: 100%;
+    transform: scale(1);
+    pointer-events: auto;
 }
 
-.card-pos-2 {
-    z-index: 3;
-    transform: rotate(3deg) translate(6px, 8px);
-}
-
-.card-pos-3 {
-    z-index: 2;
-    transform: rotate(-5deg) translate(-8px, 16px);
-}
-
+/* Inactive cards: clean fade instead of awkward rotations */
+.card-pos-2,
+.card-pos-3,
 .card-pos-4 {
     z-index: 1;
-    transform: rotate(6deg) translate(12px, 24px);
+    opacity: 0%;
+    transform: scale(0.97);
+    pointer-events: none;
 }
 
-/* Fan-out on hover */
-.stacked-cards-wrapper:hover .card-pos-1 { transform: rotate(-8deg) translate(-26px, -14px) scale(1.03); }
-
-.stacked-cards-wrapper:hover .card-pos-2 { transform: rotate(1deg) translate(0, -4px) scale(1.03); }
-
-.stacked-cards-wrapper:hover .card-pos-3 { transform: rotate(8deg) translate(28px, 6px) scale(1.03); }
-
-.stacked-cards-wrapper:hover .card-pos-4 { transform: rotate(14deg) translate(48px, 16px) scale(1.03); }
+/* Subtle, Apple-grade image hover zoom */
+.stacked-cards-wrapper:hover .card-pos-1 .stacked-card-img {
+    transform: scale(1.03);
+}
 
 .stacked-card-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .stacked-card-caption {
@@ -1279,10 +1310,12 @@ body.light-theme .kpi-chip {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 8px 12px;
-    background: linear-gradient(transparent, rgb(0 0 0 / 85%));
+    padding: 10px 14px;
+    background: linear-gradient(to top, rgb(0 0 0 / 88%) 0%, rgb(0 0 0 / 45%) 65%, transparent 100%);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     color: #fff;
-    font-size: 0.74rem;
+    font-size: 0.76rem;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -1294,20 +1327,24 @@ body.light-theme .kpi-chip {
 
 .caption-shuffle-tag {
     font-size: 0.68rem;
-    color: var(--accent-cyan);
-    background: rgb(0 0 0 / 60%);
-    padding: 2px 7px;
-    border-radius: 4px;
+    color: var(--accent-blue);
+    background: rgb(13 17 23 / 80%);
+    padding: 3px 8px;
+    border-radius: 6px;
     border: 1px solid rgb(56 189 248 / 30%);
     white-space: nowrap;
     flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s ease;
 }
 
 .stack-controls-row {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
     margin-top: 14px;
 }
 
@@ -1330,16 +1367,16 @@ body.light-theme .kpi-chip {
 }
 
 .stack-nav-btn:hover {
-    background: var(--bg-tertiary);
-    border-color: var(--accent-cyan);
-    color: var(--accent-cyan);
+    background: var(--bg-elevated);
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
     transform: scale(1.08);
 }
 
 .stack-shuffle-btn {
     background: var(--bg-secondary);
     border: 1px solid var(--border-subtle);
-    color: var(--text-primary);
+    color: var(--text-secondary);
     padding: 6px 14px;
     border-radius: 20px;
     font-size: 0.8rem;
@@ -1354,9 +1391,9 @@ body.light-theme .kpi-chip {
 }
 
 .stack-shuffle-btn:hover {
-    background: var(--bg-tertiary);
-    border-color: var(--accent-cyan);
-    color: var(--accent-cyan);
+    background: var(--bg-elevated);
+    border-color: var(--accent-blue);
+    color: var(--text-primary);
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgb(0 0 0 / 25%);
 }
@@ -1365,13 +1402,13 @@ body.light-theme .kpi-chip {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 6px;
-    margin-top: 8px;
+    gap: 8px;
+    margin-top: 10px;
 }
 
 .stack-dot {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background: var(--border-subtle);
     border: none;
@@ -1380,15 +1417,20 @@ body.light-theme .kpi-chip {
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.stack-dot:hover {
+    background: var(--text-secondary);
+}
+
 .stack-dot.active {
-    background: var(--accent-cyan);
-    width: 18px;
-    border-radius: 4px;
+    background: var(--accent-blue);
+    width: 22px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgb(56 189 248 / 40%);
 }
 
 .stack-hint {
     text-align: center;
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     color: var(--text-muted);
     margin-top: 8px;
 }
@@ -2662,11 +2704,7 @@ body.light-theme .kpi-chip {
     opacity: 100%;
 }
 
-body:has(#chat-drawer:not([hidden])) .section-nav-rail {
-    opacity: 0% !important;
-    pointer-events: none !important;
-    transform: translateY(-50%) translateX(16px);
-}
+
 
 .nav-rail-track {
     display: flex;
@@ -2769,57 +2807,34 @@ body:has(#chat-drawer:not([hidden])) .section-nav-rail {
     margin-right: 4px;
 }
 
-@media (width <= 768px) {
+@media (width <= 768px), (height <= 640px) {
     .section-nav-rail {
-        right: 6px;
-        opacity: 50%;
-    }
-
-    .nav-rail-track {
-        gap: 7px;
-        padding: 8px 3px;
-        background: rgb(15 23 42 / 75%);
-    }
-
-    .nav-rail-item {
-        width: 10px;
-        height: 10px;
-    }
-
-    .nav-rail-dot {
-        width: 4px;
-        height: 4px;
-    }
-
-    .nav-rail-item.active .nav-rail-dot {
-        width: 4px;
-        height: 13px;
-    }
-
-    .nav-rail-tooltip {
         display: none;
     }
 }
 
-/* Back to top button */
+/* Back to top button (Decoupled to bottom-left to eliminate collisions with nav-rail and chat widget) */
 #back-to-top {
     position: fixed;
-    bottom: 80px;
-    right: 24px;
-    width: 40px;
-    height: 40px;
+    bottom: 24px;
+    left: 24px;
+    right: auto;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-    background: var(--bg-secondary);
+    background: rgb(22 27 34 / 85%);
     border: 1px solid var(--border-subtle);
     color: var(--text-primary);
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     cursor: pointer;
     display: none;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgb(0 0 0 / 20%);
-    transition: all 0.15s;
-    z-index: 90;
+    box-shadow: 0 6px 20px rgb(0 0 0 / 30%);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 950;
 }
 
 #back-to-top.visible {
@@ -2827,8 +2842,11 @@ body:has(#chat-drawer:not([hidden])) .section-nav-rail {
 }
 
 #back-to-top:hover {
-    border-color: var(--border-hover);
+    background: var(--bg-elevated);
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
     transform: translateY(-2px);
+    box-shadow: 0 8px 26px rgb(0 0 0 / 40%);
 }
 
 /* ── MOBILE MENU TOGGLE (Burger) ── */
@@ -3048,21 +3066,13 @@ body:has(#chat-drawer:not([hidden])) .section-nav-rail {
         max-width: 100%;
     }
 
-    .floating-chat-container {
-        bottom: 16px;
-        right: 16px;
-    }
-
-    .chat-widget-pill {
-        padding: 8px 14px;
-        font-size: 0.82rem;
-    }
-
     #back-to-top {
-        bottom: 70px;
-        right: 16px;
-        width: 36px;
-        height: 36px;
+        bottom: 18px;
+        left: 16px;
+        right: auto;
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
     }
 
     .heatmap-container {
@@ -3076,8 +3086,9 @@ body:has(#chat-drawer:not([hidden])) .section-nav-rail {
     }
 
     .stacked-cards-wrapper {
-        width: 240px;
-        height: 190px;
+        width: 100%;
+        max-width: 360px;
+        height: 220px;
     }
 
     .company-logo-row {
@@ -3199,8 +3210,9 @@ body:has(#chat-drawer:not([hidden])) .section-nav-rail {
     }
 
     .stacked-cards-wrapper {
-        width: 220px;
-        height: 170px;
+        width: 100%;
+        max-width: 100%;
+        height: 200px;
     }
 
     .outside-story {

@@ -135,6 +135,14 @@
     <!-- Subtle Matrix Background Ambient Canvas -->
     <canvas id="matrix-canvas" aria-hidden="true"></canvas>
 
+    <!-- Ambient Film Grain Overlay (inspired by maxy.tools & modern UI) -->
+    <svg id="ambient-grain" class="ambient-grain-overlay" aria-hidden="true">
+        <filter id="grain-filter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"></feTurbulence>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#grain-filter)"></rect>
+    </svg>
+
     <!-- Minimal Header Navigation (@onlyrenbl style) -->
     <header class="site-header">
         <div class="header-inner">
@@ -929,7 +937,7 @@
 
                 <!-- Right: Interactive Rotated Stacked Photo Cards -->
                 <div class="outside-stack-col">
-                    <div class="stacked-cards-wrapper" id="tournament-stack" title="Click to shuffle photos • Hover to fan out">
+                    <div class="stacked-cards-wrapper" id="tournament-stack" title="Tournament Showcase Gallery • Click photo to enlarge">
                         <!-- Card 1: Gold Cups & Trophies (Top Card) -->
                         <div class="stacked-card card-pos-1" data-index="0">
                             <img src="assets/tournament/cups_trophies.jpg" alt="Official Tournament Trophies with Red Bull" class="stacked-card-img lightbox-trigger">
@@ -977,7 +985,7 @@
                         <button type="button" class="stack-dot" data-index="2" aria-label="View photo 3"></button>
                         <button type="button" class="stack-dot" data-index="3" aria-label="View photo 4"></button>
                     </div>
-                    <p class="stack-hint">Swipe or click Next to shuffle &bull; Click image to enlarge</p>
+                    <p class="stack-hint">Click or swipe to browse &bull; Tap photo to enlarge in HD</p>
                 </div>
             </div>
 
@@ -1720,60 +1728,7 @@
     <!-- Back to top button -->
     <button id="back-to-top" type="button" title="Back to Top" aria-label="Back to top">↑</button>
 
-    <!-- Floating AI Chat Assistant Widget (@onlyrenbl frame_40s signature feature) -->
-    <div class="floating-chat-container">
-        <button type="button" id="chat-widget-btn" class="chat-widget-pill" aria-label="Open AI chat with Artem">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-            <span>Chat with Artem</span>
-        </button>
 
-        <!-- Floating Chat Drawer / Popover -->
-        <div id="chat-drawer" class="chat-drawer" hidden role="dialog" aria-modal="true" aria-label="Chat with Artem AI Assistant">
-            <div class="chat-header">
-                <div class="chat-header-user">
-                    <div class="chat-avatar-wrap">
-                        <span class="chat-avatar-mini" aria-hidden="true">AR</span>
-                        <span class="chat-online-indicator" aria-hidden="true"></span>
-                    </div>
-                    <div class="chat-user-text">
-                        <strong>Chat with Artem</strong>
-                        <span class="chat-online-status">ONLINE</span>
-                    </div>
-                </div>
-                <button type="button" id="chat-close-btn" class="chat-close-btn" aria-label="Close chat window">✕</button>
-            </div>
-
-            <div class="chat-messages" id="chat-messages">
-                <div class="chat-msg bot-msg">
-                    <div class="msg-avatar-icon">
-                        <span aria-hidden="true">AR</span>
-                    </div>
-                    <div class="msg-bubble">
-                        Hey! I'm Artem — feel free to ask about my cloud architecture, DevOps pipelines, AI projects, or anything else on the site.
-                    </div>
-                </div>
-            </div>
-
-            <div class="chat-quick-chips" id="chat-quick-chips">
-                <button type="button" class="quick-chip" data-query="stack">What is Artem's tech stack?</button>
-                <button type="button" class="quick-chip" data-query="byour">Tell me about Byour</button>
-                <button type="button" class="quick-chip" data-query="tournament">Outside the IDE tournament?</button>
-                <button type="button" class="quick-chip" data-query="contact">How can I hire Artem?</button>
-            </div>
-
-            <form class="chat-input-bar" id="chat-input-form">
-                <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off" aria-label="Chat input">
-                <button type="submit" class="chat-send-btn" aria-label="Send message">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <line x1="22" y1="2" x2="11" y2="13"></line>
-                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                    </svg>
-                </button>
-            </form>
-        </div>
-    </div>
 
     <!-- Lightbox Modal (For Fullscreen Certificate / Diploma / Tournament Viewing) -->
     <div id="lightbox-modal" class="lightbox-modal" hidden role="dialog" aria-modal="true" aria-label="Media Lightbox Viewer">
@@ -1833,11 +1788,7 @@
                     <span class="cmd-item-title">Open Interactive DevOps Terminal (~ or &gt;_)</span>
                     <span class="cmd-item-tag">CLI</span>
                 </button>
-                <button type="button" class="cmd-item" data-action="open-chat">
-                    <span class="cmd-item-icon">🤖</span>
-                    <span class="cmd-item-title">Chat with Artem AI Assistant</span>
-                    <span class="cmd-item-tag">AI</span>
-                </button>
+
 
                 <!-- Group: Architecture Deep Dives -->
                 <div class="cmd-group-title">Architecture Case Studies</div>
