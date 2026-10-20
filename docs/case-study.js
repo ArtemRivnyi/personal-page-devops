@@ -1,4 +1,4 @@
-// Case Study Interactive Navigation, Smart Dock & Scroll Restoration
+// Case Study Interactive Navigation, Smart Dock & Top Scroll Handling
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Intelligent Back Navigation (returns to exact prior scroll position in history)
     const handleBackNavigation = (e) => {
@@ -85,33 +85,19 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', updateFloatingDock, { passive: true });
     updateFloatingDock();
 
-    // 4. Case Study Reading Position Preservation
-    const pageKey = 'cs_scroll_' + window.location.pathname.split('/').pop();
-
-    const saveReadingPos = () => {
-        try {
-            sessionStorage.setItem(pageKey, String(window.scrollY));
-        } catch {
-            // ignore
-        }
-    };
-
-    window.addEventListener('beforeunload', saveReadingPos);
-    document.querySelectorAll('a').forEach((a) => {
-        a.addEventListener('click', saveReadingPos);
-    });
-
+    // 4. Ensure fresh case study articles always start from the top
     try {
-        const savedPos = sessionStorage.getItem(pageKey);
-        if (savedPos !== null && !isNaN(Number(savedPos)) && Number(savedPos) > 60 && !window.location.hash) {
-            requestAnimationFrame(() => {
-                window.scrollTo({
-                    top: Number(savedPos),
-                    behavior: 'instant'
-                });
-            });
-        }
+        // Clear any old/stale case study scroll keys from previous sessions
+        Object.keys(sessionStorage).forEach((key) => {
+            if (key.startsWith('cs_scroll_')) {
+                sessionStorage.removeItem(key);
+            }
+        });
     } catch {
         // ignore
+    }
+
+    if (!window.location.hash) {
+        window.scrollTo(0, 0);
     }
 });
