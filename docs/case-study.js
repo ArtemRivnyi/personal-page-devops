@@ -1,28 +1,37 @@
-// Case Study Interactive Navigation & Scroll Restoration
+// Case Study Interactive Navigation, Smart Dock & Scroll Restoration
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Intelligent Back Navigation (returns to exact prior scroll position in history)
     const handleBackNavigation = (e) => {
-        if (window.history.length > 1) {
+        if (e && e.preventDefault) {
             e.preventDefault();
+        }
+        if (window.history.length > 1 && document.referrer && document.referrer.includes(window.location.host)) {
             window.history.back();
+        } else {
+            window.location.href = '../index.html#case-study';
         }
     };
 
-    document.querySelectorAll('.back-link, .bottom-back-link').forEach((btn) => {
+    document.querySelectorAll('.back-link, .bottom-back-link, .cs-back-trigger').forEach((btn) => {
         btn.addEventListener('click', handleBackNavigation);
     });
 
-    // 2. Back to Top text buttons
-    document.querySelectorAll('.back-to-top-text-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+    // 2. Smooth Back to Top
+    const handleScrollToTop = (e) => {
+        if (e && e.preventDefault) {
+            e.preventDefault();
+        }
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
+    };
+
+    document.querySelectorAll('.back-to-top-text-btn, .cs-top-trigger').forEach((btn) => {
+        btn.addEventListener('click', handleScrollToTop);
     });
 
-    // 3. Floating Quick-Exit & Top Dock
+    // 3. Floating Quick-Exit & Top Dock with Smart Footer Hiding
     let floatingDock = document.querySelector('.floating-case-dock');
     if (!floatingDock) {
         floatingDock = document.createElement('nav');
@@ -49,21 +58,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const floatingTopBtn = floatingDock.querySelector('.floating-case-top');
     if (floatingTopBtn) {
-        floatingTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+        floatingTopBtn.addEventListener('click', handleScrollToTop);
     }
 
+    const footerElement = document.querySelector('.case-study-footer-actions') || document.querySelector('.author-card');
+    let isFooterVisible = false;
+
     const updateFloatingDock = () => {
-        if (window.scrollY > 280) {
+        if (window.scrollY > 280 && !isFooterVisible) {
             floatingDock.classList.add('visible');
         } else {
             floatingDock.classList.remove('visible');
         }
     };
+
+    if (footerElement && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                isFooterVisible = entry.isIntersecting;
+                updateFloatingDock();
+            });
+        }, { threshold: 0.1 });
+        observer.observe(footerElement);
+    }
 
     window.addEventListener('scroll', updateFloatingDock, { passive: true });
     updateFloatingDock();
@@ -71,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Case Study Reading Position Preservation
     const pageKey = 'cs_scroll_' + window.location.pathname.split('/').pop();
 
-    // Save scroll on unload / link clicks
     const saveReadingPos = () => {
         try {
             sessionStorage.setItem(pageKey, String(window.scrollY));
@@ -85,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
         a.addEventListener('click', saveReadingPos);
     });
 
-    // Restore position if returning to this article
     try {
         const savedPos = sessionStorage.getItem(pageKey);
         if (savedPos !== null && !isNaN(Number(savedPos)) && Number(savedPos) > 60 && !window.location.hash) {

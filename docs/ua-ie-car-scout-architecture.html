@@ -20,7 +20,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="case-study.css">
+    <link rel="stylesheet" href="case-study.css?v=2.2">
+    <style>
+      .case-study-footer-actions { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 24px; padding: 16px 20px; background: rgba(22, 27, 34, 0.8); border: 1px solid rgba(240, 246, 252, 0.1); border-radius: 10px; }
+      .cs-actions-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+      .cs-btn-primary { background: #1f6feb; color: #fff !important; border: 1px solid #388bfd; padding: 9px 20px; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 0.88rem; box-shadow: 0 4px 14px rgba(31, 111, 235, 0.35); }
+      .cs-btn-secondary { background: rgba(240, 246, 252, 0.06); color: #f0f6fc !important; border: 1px solid rgba(240, 246, 252, 0.1); padding: 8px 16px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; }
+      .cs-btn-ghost { background: transparent; border: 1px solid rgba(240, 246, 252, 0.15); color: #8b949e; padding: 8px 14px; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-family: inherit; }
+    </style>
 
     <!-- Google Analytics 4 (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-K6EZQYRLEL"></script>
@@ -231,30 +238,73 @@
             </ol>
         </article>
 
-        <!-- Author Footer Card -->
-        <div class="author-card">
-            <div class="author-info">
-                <h4>Artem Rivnyi</h4>
-                <p>DevOps &amp; Cloud Infrastructure Engineer based in Co. Wicklow, Ireland. Proven production experience in AWS, Kubernetes, Terraform, and high-availability systems.</p>
-                <div class="author-links">
-                    <a href="https://artemrivnyi.com">Portfolio (artemrivnyi.com) ↗</a>
-                    <a href="https://github.com/ArtemRivnyi" target="_blank" rel="noopener">GitHub ↗</a>
-                    <a href="https://www.linkedin.com/in/artem-rivnyi" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <!-- More Architecture Case Studies -->
+        <section class="more-case-studies" aria-label="Explore more architectural case studies">
+            <div class="more-cases-header">
+                <span class="more-cases-label">TECHNICAL DEEP DIVES</span>
+                <h3 class="more-cases-title">Explore More Architecture Case Studies</h3>
+            </div>
+            <div class="more-cases-grid">
+                <a href="dual-llm-failover-architecture.html" class="more-case-card">
+                    <div>
+                        <span class="more-case-tag">AI Reliability &bull; Circuit Breakers</span>
+                        <div class="more-case-heading">Dual-LLM Failover: Zero-Outage Microservice</div>
+                        <p class="more-case-desc">Sub-second circuit breakers, Gemini 2.0 Flash primary, and automated fallback to GPT-4o-mini.</p>
+                    </div>
+                    <span class="more-case-cta">Read Case Study &rarr;</span>
+                </a>
+                <a href="ai-email-support-architecture.html" class="more-case-card">
+                    <div>
+                        <span class="more-case-tag">Local AI &bull; Edge Computing</span>
+                        <div class="more-case-heading">Privacy-First AI Email Support &amp; Triage Agent</div>
+                        <p class="more-case-desc">Quantized Gemma SLMs, FAISS vector retrieval, and zero cloud API leakage for sensitive customer support.</p>
+                    </div>
+                    <span class="more-case-cta">Read Case Study &rarr;</span>
+                </a>
+                <a href="aws-s3-simulator-architecture.html" class="more-case-card">
+                    <div>
+                        <span class="more-case-tag">Cloud &bull; Distributed Systems</span>
+                        <div class="more-case-heading">AWS S3 Multi-Region Storage Simulator</div>
+                        <p class="more-case-desc">MinIO storage clusters, Python FastAPI emulation, and zero-egress local integration testing.</p>
+                    </div>
+                    <span class="more-case-cta">Read Case Study &rarr;</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer: Author & Action Bar -->
+        <footer class="case-study-footer">
+            <div class="author-card">
+                <div class="author-info">
+                    <h4>Artem Rivnyi</h4>
+                    <p>DevOps &amp; Cloud Infrastructure Engineer, AI Systems Specialist based in Co. Wicklow, Ireland. Proven production experience in AWS, Kubernetes, Terraform, and high-availability systems.</p>
+                    <div class="author-links">
+                        <a href="https://github.com/ArtemRivnyi" target="_blank" rel="noopener">GitHub Profile ↗</a>
+                        <a href="https://www.linkedin.com/in/artem-rivnyi" target="_blank" rel="noopener">LinkedIn ↗</a>
+                        <a href="https://t.me/artem_rivnyi" target="_blank" rel="noopener">Telegram ↗</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Bottom Article Navigation -->
-        <nav class="article-bottom-nav" aria-label="End of article navigation">
-            <a href="../index.html#case-study" class="bottom-back-link">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                Back to Portfolio (artemrivnyi.com)
-            </a>
-            <button type="button" class="back-to-top-text-btn" aria-label="Scroll back to top">
-                Back to Top ↑
-            </button>
-        </nav>
+            <!-- Unified Action Bar -->
+            <nav class="case-study-footer-actions" aria-label="End of article navigation">
+                <div class="cs-actions-left">
+                    <a href="../index.html#case-study" class="cs-btn-primary cs-back-trigger">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        Back to Portfolio (artemrivnyi.com)
+                    </a>
+                    <a href="Artem.Rivnyi.CV.html" class="cs-btn-secondary">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        View Interactive CV
+                    </a>
+                </div>
+                <button type="button" class="cs-btn-ghost cs-top-trigger" aria-label="Scroll back to top">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+                    Back to Top
+                </button>
+            </nav>
+        </footer>
     </div>
-    <script src="case-study.js"></script>
+    <script src="case-study.js?v=2.2"></script>
 </body>
 </html>

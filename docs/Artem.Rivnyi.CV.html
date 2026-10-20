@@ -543,14 +543,50 @@
       background: #047857;
     }
 
+    .cv-nav-footer {
+      max-width: 210mm;
+      margin: 20px auto 40px;
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .cv-top-btn {
+      background: transparent;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 8.2pt;
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+    }
+
+    .cv-top-btn:hover {
+      color: #38bdf8;
+      border-color: #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
+    }
+
     @media print {
-      .cv-nav-header {
+      .cv-nav-header,
+      .cv-nav-footer {
         display: none !important;
       }
     }
 
     @media (max-width: 800px) {
-      .cv-nav-header {
+      .cv-nav-header,
+      .cv-nav-footer {
         margin: 10px 12px;
         padding: 8px 12px;
       }
@@ -931,15 +967,43 @@
     </div>
   </div>
 
+  <!-- Screen-only Bottom Navigation Bar (Hidden when printing/saving PDF) -->
+  <footer class="cv-nav-footer" aria-label="CV bottom navigation">
+    <a href="../index.html#experience" class="cv-back-link cv-back-trigger">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Portfolio (artemrivnyi.com)
+    </a>
+    <div class="cv-actions">
+      <button type="button" class="cv-top-btn" id="cv-top-btn" aria-label="Scroll to top">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+        Top
+      </button>
+      <button type="button" class="cv-print-btn" onclick="window.print()" title="Print or save as PDF">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        Print / Save PDF
+      </button>
+    </div>
+  </footer>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const backLink = document.getElementById('cv-back-link');
-      if (backLink) {
-        backLink.addEventListener('click', (e) => {
-          if (window.history.length > 1) {
-            e.preventDefault();
-            window.history.back();
-          }
+      const handleBack = (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        if (window.history.length > 1 && document.referrer && document.referrer.includes(window.location.host)) {
+          window.history.back();
+        } else {
+          window.location.href = '../index.html#experience';
+        }
+      };
+
+      document.querySelectorAll('#cv-back-link, .cv-back-trigger').forEach((el) => {
+        el.addEventListener('click', handleBack);
+      });
+
+      const topBtn = document.getElementById('cv-top-btn');
+      if (topBtn) {
+        topBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         });
       }
     });
