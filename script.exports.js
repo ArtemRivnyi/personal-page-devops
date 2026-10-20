@@ -1344,7 +1344,7 @@ function initTopologySwitcher() {
             kpiEl.innerHTML = views[key].kpis;
             descEl.classList.remove('topology-fade-out');
             kpiEl.classList.remove('topology-fade-out');
-        }, 180);
+        }, 200);
 
         if (isManual && typeof window.gtag === 'function') {
             window.gtag('event', 'topology_tab_switch', {
@@ -1443,7 +1443,14 @@ function initSectionNavRail() {
             e.preventDefault();
             setActiveItem(item);
 
-            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const headerOffset = 70;
+            const elementPosition = targetSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+            window.scrollTo({
+                top: Math.max(0, offsetPosition),
+                behavior: 'smooth'
+            });
 
             if (typeof history.pushState === 'function') {
                 history.pushState(null, '', `#${sectionId}`);

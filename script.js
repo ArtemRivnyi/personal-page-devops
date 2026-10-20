@@ -777,23 +777,26 @@ function initChatWidget() {
 
 // Back to Top Button
 function initBackToTop() {
-    const backToTopButton = document.getElementById('back-to-top');
-    if (!backToTopButton) return;
+    const desktopBtn = document.getElementById('back-to-top');
+    const mobileBtn = document.getElementById('mobile-back-to-top');
+    const buttons = [desktopBtn, mobileBtn].filter(Boolean);
+    if (!buttons.length) return;
 
     const handleScroll = () => {
-        if (window.scrollY > 300) {
-            backToTopButton.classList.add('visible');
-        } else {
-            backToTopButton.classList.remove('visible');
-        }
+        const isScrolled = window.scrollY > 300;
+        buttons.forEach((btn) => {
+            btn.classList.toggle('visible', isScrolled);
+        });
     };
 
-    window.addEventListener('scroll', debounce(handleScroll, 100), { passive: true });
+    window.addEventListener('scroll', debounce(handleScroll, 80), { passive: true });
 
-    backToTopButton.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+    buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     });
 }
@@ -1423,7 +1426,7 @@ function initTopologySwitcher() {
             kpiEl.innerHTML = views[key].kpis;
             descEl.classList.remove('topology-fade-out');
             kpiEl.classList.remove('topology-fade-out');
-        }, 180);
+        }, 200);
 
         if (isManual && typeof window.gtag === 'function') {
             window.gtag('event', 'topology_tab_switch', {
@@ -1522,7 +1525,14 @@ function initSectionNavRail() {
             e.preventDefault();
             setActiveItem(item);
 
-            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const headerOffset = 70;
+            const elementPosition = targetSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+            window.scrollTo({
+                top: Math.max(0, offsetPosition),
+                behavior: 'smooth'
+            });
 
             if (typeof history.pushState === 'function') {
                 history.pushState(null, '', `#${sectionId}`);
