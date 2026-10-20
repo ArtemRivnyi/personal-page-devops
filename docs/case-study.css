@@ -506,3 +506,130 @@ td {
         gap: 10px;
     }
 }
+
+/* Bottom Article Navigation */
+.article-bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+}
+
+.bottom-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent-blue);
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.bottom-back-link:hover {
+    color: #7dd3fc;
+    text-decoration: underline;
+}
+
+.back-to-top-text-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+}
+
+.back-to-top-text-btn:hover {
+    background: rgb(240 246 252 / 6%);
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+}
+
+/* Floating Case Study Navigation Dock */
+.floating-case-dock {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 990;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: rgb(13 17 23 / 88%);
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    padding: 5px 8px;
+    box-shadow: 0 8px 30px rgb(0 0 0 / 45%);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+}
+
+.floating-case-dock.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.floating-case-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+}
+
+.floating-case-btn:hover {
+    color: var(--text-primary);
+    background: rgb(240 246 252 / 10%);
+}
+
+.floating-case-btn.floating-case-back:hover {
+    color: var(--accent-blue);
+}
+
+.floating-case-btn.floating-case-top:hover {
+    color: var(--accent-green);
+}
+
+.floating-case-divider {
+    width: 1px;
+    height: 16px;
+    background: var(--border);
+    margin: 0 2px;
+}
+
+@media (width <= 600px) {
+    .floating-case-dock {
+        bottom: 18px;
+        right: 18px;
+        padding: 4px 6px;
+    }
+
+    .floating-case-btn {
+        padding: 6px 10px;
+        font-size: 0.78rem;
+    }
+}
+
