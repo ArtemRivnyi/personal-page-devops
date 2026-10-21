@@ -98,7 +98,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=25">
+    <link rel="stylesheet" href="style.css?v=26">
 
     <!-- Google Analytics 4 (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-K6EZQYRLEL"></script>
@@ -229,12 +229,23 @@
 
             <!-- Action CTA -->
             <div class="hero-cta-row">
-                <a href="docs/Artem.Rivnyi.CV.pdf" class="hero-btn-primary" download>
-                    Download CV
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
-                </a>
+                <div class="hero-cv-btn-group">
+                    <a href="docs/Artem.Rivnyi.CV.html" class="hero-btn-primary" aria-label="View interactive CV in browser">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <span>View CV</span>
+                    </a>
+                    <a href="docs/Artem.Rivnyi.CV.pdf" class="hero-btn-secondary" download="Artem.Rivnyi.CV.pdf" aria-label="Download CV as PDF (1.0 MB)" title="Download CV as PDF (1.0 MB)">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        <span>Download PDF</span>
+                    </a>
+                </div>
                 <div class="availability-status-pill">
                     <span class="pulsing-green-dot" aria-hidden="true"></span>
                     <span>Available for new opportunities</span>
