@@ -18,8 +18,8 @@
     <meta name="twitter:description" content="Technical Case Study: Building Zero-Outage AI Microservices with Google Gemini &amp; OpenAI Circuit Breakers.">
     <meta name="twitter:image" content="https://artemrivnyi.com/assets/Portfolio_Screenshot.png?v=2">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="case-study.css?v=2.2">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="case-study.css?v=2026.10.21.5">
     <style>
       .case-study-footer-actions { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 24px; padding: 16px 20px; background: rgba(22, 27, 34, 0.8); border: 1px solid rgba(240, 246, 252, 0.1); border-radius: 10px; }
       .cs-actions-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
@@ -144,7 +144,12 @@
                         <span class="arch-node-tag">HTTPS / REST JSON</span>
                     </div>
 
-                    <div class="arch-connector-down">↓</div>
+                    <div class="arch-flow-connector" aria-hidden="true">
+                        <div class="connector-line"></div>
+                        <div class="connector-arrow">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
 
                     <div class="arch-node" data-flow-step="2">
                         <div class="arch-node-main">
@@ -156,7 +161,12 @@
                         <span class="arch-node-tag">Distributed Token Bucket</span>
                     </div>
 
-                    <div class="arch-connector-down">↓</div>
+                    <div class="arch-flow-connector" aria-hidden="true">
+                        <div class="connector-line"></div>
+                        <div class="connector-arrow">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
 
                     <div class="arch-node" data-flow-step="3">
                         <div class="arch-node-main">
@@ -168,7 +178,16 @@
                         <span class="arch-node-tag">Pydantic Strict Contract</span>
                     </div>
 
-                    <div class="arch-connector-down">↓ (Circuit Breaker Evaluation)</div>
+                    <div class="arch-flow-connector" aria-hidden="true">
+                        <div class="connector-line"></div>
+                        <span class="connector-pill">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                            Circuit Breaker Evaluation
+                        </span>
+                        <div class="connector-arrow">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
 
                     <!-- Dual Provider Routing Branches -->
                     <div class="arch-branches">
@@ -189,7 +208,12 @@
                         </div>
                     </div>
 
-                    <div class="arch-connector-down">↓</div>
+                    <div class="arch-flow-connector" aria-hidden="true">
+                        <div class="connector-line"></div>
+                        <div class="connector-arrow">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
 
                     <div class="arch-node" data-flow-step="4">
                         <div class="arch-node-main">
@@ -412,6 +436,6 @@ LLM_FAILOVER_COUNT = <span class="syn-cls">Counter</span>(<span class="syn-str">
             </nav>
         </footer>
     </div>
-    <script src="case-study.js?v=2.3"></script>
+    <script src="case-study.js?v=2026.10.21.5"></script>
 </body>
 </html>

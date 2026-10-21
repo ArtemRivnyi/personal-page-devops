@@ -1,11 +1,16 @@
 // Case Study Interactive Navigation, Smart Dock & Top Scroll Handling
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Intelligent Back Navigation (returns to exact prior scroll position in history)
+    // 1. Intelligent Back Navigation (guarantees direct return to Portfolio)
     const handleBackNavigation = (e) => {
         if (e && e.preventDefault) {
             e.preventDefault();
         }
-        if (window.history.length > 1 && document.referrer && document.referrer.includes(window.location.host)) {
+        const referrer = document.referrer ? document.referrer.toLowerCase() : '';
+        const currentHost = window.location.host.toLowerCase();
+        // ONLY use history.back() if the direct previous page was the portfolio root (NOT another case study in /docs/)
+        const isDirectFromPortfolioRoot = referrer.includes(currentHost) && !referrer.includes('/docs/');
+
+        if (window.history.length > 1 && isDirectFromPortfolioRoot) {
             window.history.back();
         } else {
             window.location.href = '../index.html#case-study';
@@ -178,18 +183,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let isRunning = false;
 
+        const setNodeStatus = (node, statusText, statusClass = 'sim-status-active') => {
+            if (!node) return;
+            node.classList.add('sim-active');
+            const tag = node.querySelector('.arch-node-tag');
+            if (tag) {
+                if (!tag.hasAttribute('data-orig-text')) {
+                    tag.setAttribute('data-orig-text', tag.textContent.trim());
+                }
+                tag.textContent = statusText;
+                tag.className = `arch-node-tag ${statusClass}`;
+            }
+        };
+
+        const setBranchStatus = (branchCard, badgeText, badgeClass = 'success') => {
+            if (!branchCard) return;
+            const badge = branchCard.querySelector('.arch-branch-badge');
+            if (badge) {
+                if (!badge.hasAttribute('data-orig-text')) {
+                    badge.setAttribute('data-orig-text', badge.textContent.trim());
+                }
+                badge.textContent = badgeText;
+                badge.className = `arch-branch-badge ${badgeClass}`;
+            }
+        };
+
         const clearSimulationStates = () => {
             card.querySelectorAll('.sim-active, .sim-fail, .sim-success').forEach((el) => {
                 el.classList.remove('sim-active', 'sim-fail', 'sim-success');
             });
+            card.querySelectorAll('.arch-node-tag').forEach((tag) => {
+                if (tag.hasAttribute('data-orig-text')) {
+                    tag.textContent = tag.getAttribute('data-orig-text');
+                    tag.className = 'arch-node-tag';
+                }
+            });
+            card.querySelectorAll('.arch-branch-card').forEach((cardEl) => {
+                const badge = cardEl.querySelector('.arch-branch-badge');
+                if (badge && badge.hasAttribute('data-orig-text')) {
+                    badge.textContent = badge.getAttribute('data-orig-text');
+                    const isPrimary = cardEl.classList.contains('primary');
+                    badge.className = `arch-branch-badge ${isPrimary ? 'primary' : 'fallback'}`;
+                }
+            });
             card.querySelectorAll('.sim-packet-badge').forEach((badge) => badge.remove());
-        };
-
-        const createBadge = (text, type = 'info') => {
-            const badge = document.createElement('span');
-            badge.className = `sim-packet-badge ${type}`;
-            badge.textContent = text;
-            return badge;
         };
 
         const updateTicker = (message, pulseType = 'info') => {
@@ -218,13 +255,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const nodes = card.querySelectorAll('.arch-node');
             const branchPrimary = card.querySelector('.arch-branch-card.primary');
             const branchFallback = card.querySelector('.arch-branch-card.fallback');
+            const hasFourNodes = nodes.length >= 4;
 
-            // Timeline Steps
             // Step 1: Ingress
             setTimeout(() => {
                 if (nodes[0]) {
-                    nodes[0].classList.add('sim-active');
-                    nodes[0].appendChild(createBadge('Step 1: Active'));
+                    setNodeStatus(nodes[0], 'Step 1: Active', 'sim-status-active');
                     if (isDualLLM) {
                         updateTicker('[TRACE 00.1s] POST /api/v1/classify ➔ Nginx Ingress received payload (HTTP 200)');
                     } else if (isCarScout) {
@@ -239,11 +275,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }, 100);
 
-            // Step 2: Gateway / Cache / Engine
+            // Step 2: Gateway / Broker / Cache
             setTimeout(() => {
                 if (nodes[1]) {
-                    nodes[1].classList.add('sim-active');
-                    nodes[1].appendChild(createBadge('Step 2: Processed'));
+                    setNodeStatus(nodes[1], 'Step 2: Processed', 'sim-status-active');
                     if (isDualLLM) {
                         updateTicker('[TRACE 00.9s] Redis Token Bucket Rate-Limiter ➔ Allowed (12 req/min budget)');
                     } else if (isCarScout) {
@@ -258,83 +293,89 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }, 850);
 
-            // Step 3: Engine / Schema / Retrieval
-            setTimeout(() => {
-                if (nodes[2]) {
-                    nodes[2].classList.add('sim-active');
-                    nodes[2].appendChild(createBadge('Step 3: Verified'));
-                    if (isDualLLM) {
-                        updateTicker('[TRACE 01.7s] FastAPI Inference Service ➔ Enforcing strict Pydantic JSON contract');
-                    } else if (isCarScout) {
-                        updateTicker('[TRACE 01.7s] Multi-Tier Orchestrator: Cheerio Fast HTTP & Puppeteer Stealth Pool active');
-                    } else if (isS3Sim) {
-                        updateTicker('[TRACE 01.7s] S3 Engine Ingestion: Writing object data chunks to local Docker volume');
-                    } else if (isAIEmail) {
-                        updateTicker('[TRACE 01.7s] Decoupled Worker ➔ FAISS vector retrieval matched verified store policies');
-                    } else {
-                        updateTicker('[TRACE 01.7s] Processing contract validated ➔ Schema enforced');
+            if (hasFourNodes) {
+                // Step 3 (For 4-node topologies like Dual-LLM)
+                setTimeout(() => {
+                    if (nodes[2]) {
+                        setNodeStatus(nodes[2], 'Step 3: Verified', 'sim-status-active');
+                        if (isDualLLM) {
+                            updateTicker('[TRACE 01.7s] FastAPI Inference Service ➔ Enforcing strict Pydantic JSON contract');
+                        }
                     }
-                }
-            }, 1650);
+                }, 1650);
 
-            // Step 4: Routing Branches
-            setTimeout(() => {
-                const primaryHeader = branchPrimary ? (branchPrimary.querySelector('.arch-branch-header') || branchPrimary) : null;
-                const fallbackHeader = branchFallback ? (branchFallback.querySelector('.arch-branch-header') || branchFallback) : null;
-
-                if (isDualLLM) {
-                    if (branchPrimary && primaryHeader) {
+                // Step 4: Dual-Branch Routing & Circuit Breaker
+                setTimeout(() => {
+                    if (branchPrimary) {
                         branchPrimary.classList.add('sim-fail');
-                        primaryHeader.appendChild(createBadge('>1.2s Timeout Exceeded', 'warning'));
+                        setBranchStatus(branchPrimary, '>1.2s Timeout Exceeded', 'warning');
                         updateTicker('[TRACE 02.5s] ⚠️ Primary Gemini 2.0 Flash: Timeout >1,200ms budget breached ➔ Breaker Tripped!', 'failover');
                     }
                     setTimeout(() => {
-                        if (branchFallback && fallbackHeader) {
+                        if (branchFallback) {
                             branchFallback.classList.add('sim-success');
-                            fallbackHeader.appendChild(createBadge('Hot-Standby Fallback (32ms)', 'success'));
+                            setBranchStatus(branchFallback, 'Fallback Active (32ms)', 'success');
                             updateTicker('[TRACE 03.1s] 🔄 Hot-Standby Engaged: OpenAI GPT-4o-mini resolved ticket in 32ms!', 'success');
                         }
                     }, 600);
-                } else {
-                    if (branchPrimary && primaryHeader) {
+                }, 2450);
+
+                // Step 5: Final Delivery
+                setTimeout(() => {
+                    const finalNode = nodes[nodes.length - 1];
+                    if (finalNode) {
+                        setNodeStatus(finalNode, 'Final: Verified', 'sim-status-success');
+                        updateTicker('[TRACE 03.9s] 📊 Prometheus metrics recorded: llm_failover_total++ ➔ Response Delivered (HTTP 200 OK)', 'success');
+                    }
+                }, 3650);
+            } else {
+                // Step 3 (For 3-node topologies: Branch Processing)
+                setTimeout(() => {
+                    if (branchPrimary) {
                         branchPrimary.classList.add('sim-success');
-                        primaryHeader.appendChild(createBadge('Route Verified', 'success'));
                         if (isCarScout) {
-                            updateTicker('[TRACE 02.5s] Static Portals Scraped via Cheerio (<150ms) + Cloudflare Bypassed');
+                            setBranchStatus(branchPrimary, 'Static Scraped (<150ms)', 'success');
+                            updateTicker('[TRACE 01.7s] Cheerio Fast HTTP: Sub-150ms extraction complete for static portals');
                         } else if (isS3Sim) {
-                            updateTicker('[TRACE 02.5s] Observability Stack: Prometheus metrics scraped + Promtail streaming to Loki');
+                            setBranchStatus(branchPrimary, 'Metrics Scraped', 'success');
+                            updateTicker('[TRACE 01.7s] Observability Stack: Prometheus metrics scraped + Promtail streaming');
                         } else if (isAIEmail) {
-                            updateTicker('[TRACE 02.5s] Private Local Ollama (Gemma 7B): Intent classified (100% on-premise)');
+                            setBranchStatus(branchPrimary, 'Vector Matched', 'success');
+                            updateTicker('[TRACE 01.7s] Decoupled Worker ➔ FAISS vector retrieval matched verified store policies');
                         }
                     }
-                    if (branchFallback && fallbackHeader) {
+                    if (branchFallback) {
                         branchFallback.classList.add('sim-success');
-                        fallbackHeader.appendChild(createBadge('Telemetry OK', 'success'));
+                        if (isCarScout) {
+                            setBranchStatus(branchFallback, 'Cloudflare Bypassed', 'success');
+                        } else if (isS3Sim) {
+                            setBranchStatus(branchFallback, 'Logs Streamed', 'success');
+                        } else if (isAIEmail) {
+                            setBranchStatus(branchFallback, 'Intent Classified', 'success');
+                        }
                     }
-                }
-            }, 2450);
+                }, 1750);
 
-            // Step 5: Final Delivery / Metrics
-            setTimeout(() => {
-                const finalNode = nodes[nodes.length - 1];
-                if (finalNode) {
-                    finalNode.classList.add('sim-active');
-                    finalNode.appendChild(createBadge('Final: Verified', 'success'));
-                    if (isDualLLM) {
-                        updateTicker('[TRACE 03.9s] 📊 Prometheus metrics recorded: llm_failover_total++ ➔ Response Delivered (HTTP 200 OK)', 'success');
-                    } else if (isCarScout) {
-                        updateTicker('[TRACE 03.9s] 💶 Irish Revenue Tax Engine: Live FX + VRT + Customs + VAT 23% computed', 'success');
-                    } else if (isS3Sim) {
-                        updateTicker('[TRACE 03.9s] 📊 Autoprovisioned Grafana Dashboard: Live metrics updated ($0.00 cloud egress)', 'success');
-                    } else if (isAIEmail) {
-                        updateTicker('[TRACE 03.9s] 🛡️ Customer Dispatch: 99.4% grounded response ready (Zero PII leakage)', 'success');
-                    } else {
-                        updateTicker('[TRACE 03.9s] Execution complete ➔ Result delivered to client (HTTP 200 OK)', 'success');
+                // Step 4 (For 3-node topologies: Final Delivery)
+                setTimeout(() => {
+                    const finalNode = nodes[nodes.length - 1];
+                    if (finalNode) {
+                        setNodeStatus(finalNode, 'Final: Verified', 'sim-status-success');
+                        if (isCarScout) {
+                            updateTicker('[TRACE 02.8s] 💶 Irish Revenue Tax Engine: Live FX + VRT + Customs + VAT 23% computed', 'success');
+                        } else if (isS3Sim) {
+                            updateTicker('[TRACE 02.8s] 📊 Autoprovisioned Grafana Dashboard: Live metrics updated ($0.00 cloud egress)', 'success');
+                        } else if (isAIEmail) {
+                            updateTicker('[TRACE 02.8s] 🛡️ Customer Dispatch: 99.4% grounded response ready (Zero PII leakage)', 'success');
+                        } else {
+                            updateTicker('[TRACE 02.8s] Pipeline complete ➔ Result delivered (HTTP 200 OK)', 'success');
+                        }
                     }
-                }
-            }, 3650);
+                }, 2850);
+            }
 
             // Completion
+            const completionDelay = hasFourNodes ? 4750 : 3950;
             setTimeout(() => {
                 playBtn.classList.remove('simulating');
                 playBtn.classList.add('completed');
@@ -358,8 +399,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (playText) playText.textContent = 'Simulate Live Flow';
                     updateTicker('Telemetry Trace: Standby • Click "Simulate Live Flow" to trace real-time execution flow');
                     isRunning = false;
-                }, 3400);
-            }, 4750);
+                }, 3200);
+            }, completionDelay);
         });
     });
 });

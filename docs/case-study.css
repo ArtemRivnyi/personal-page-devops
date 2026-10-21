@@ -285,29 +285,126 @@ pre code {
 }
 
 .arch-node-name {
-    font-size: 0.88rem;
+    font-size: 0.94rem;
     font-weight: 600;
-    color: #fff;
-    font-family: 'JetBrains Mono', monospace;
+    color: #f0f6fc;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.015em;
 }
 
 .arch-node-tag {
-    font-size: 0.72rem;
-    font-family: 'JetBrains Mono', monospace;
-    padding: 2px 7px;
-    border-radius: 4px;
+    font-size: 0.74rem;
+    font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 5px;
     background: rgb(240 246 252 / 6%);
+    border: 1px solid rgb(240 246 252 / 10%);
     color: var(--text-secondary);
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.arch-node-tag.sim-status-active {
+    background: rgb(56 189 248 / 18%);
+    border-color: rgb(56 189 248 / 55%);
+    color: #38bdf8;
+    box-shadow: 0 0 12px rgb(56 189 248 / 30%);
+    font-weight: 600;
+}
+
+.arch-node-tag.sim-status-success {
+    background: rgb(63 185 80 / 18%);
+    border-color: rgb(63 185 80 / 60%);
+    color: #3fb950;
+    box-shadow: 0 0 12px rgb(63 185 80 / 35%);
+    font-weight: 600;
+}
+
+.arch-node-tag.sim-status-fail {
+    background: rgb(248 81 73 / 20%);
+    border-color: rgb(248 81 73 / 60%);
+    color: #ff7b72;
+    box-shadow: 0 0 12px rgb(248 81 73 / 35%);
+    font-weight: 600;
+}
+
+/* Modern Architecture Flow Connectors */
+.arch-flow-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 6px 0;
+    position: relative;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.arch-flow-connector .connector-line {
+    width: 2px;
+    height: 18px;
+    background: linear-gradient(180deg, rgb(56 189 248 / 60%), rgb(56 189 248 / 15%));
+    position: relative;
+    border-radius: 1px;
+}
+
+.arch-flow-connector .connector-pill {
+    font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: #8b949e;
+    background: rgb(22 27 34 / 85%);
+    border: 1px solid rgb(240 246 252 / 12%);
+    padding: 2.5px 10px;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.01em;
+}
+
+.arch-flow-connector .connector-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-blue);
+    opacity: 0.85;
+    animation: arrowFloat 2s infinite ease-in-out;
+}
+
+@keyframes arrowFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(3px);
+    }
 }
 
 .arch-connector-down {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 8px;
     color: var(--text-muted);
-    font-size: 0.8rem;
-    margin: -3px 0;
+    font-size: 0.74rem;
+    font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+    margin: 5px 0;
+    padding: 2px 0;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.arch-connector-down::before,
+.arch-connector-down::after {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgb(240 246 252 / 16%), transparent);
 }
 
 .arch-branches {
@@ -347,31 +444,53 @@ pre code {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
 }
 
 .arch-branch-title {
-    font-size: 0.84rem;
+    font-size: 0.92rem;
     font-weight: 600;
-    color: #fff;
-    font-family: 'JetBrains Mono', monospace;
+    color: #f0f6fc;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.015em;
 }
 
 .arch-branch-badge {
-    font-size: 0.7rem;
+    font-size: 0.72rem;
+    font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
     font-weight: 600;
-    padding: 2px 6px;
-    border-radius: 4px;
+    padding: 2.5px 8px;
+    border-radius: 5px;
     text-transform: uppercase;
+    letter-spacing: 0.02em;
+    transition: all 0.25s ease;
+    white-space: nowrap;
 }
 
 .arch-branch-badge.primary {
     background: rgb(63 185 80 / 15%);
+    border: 1px solid rgb(63 185 80 / 30%);
     color: var(--accent-green);
 }
 
 .arch-branch-badge.fallback {
     background: rgb(245 158 11 / 15%);
+    border: 1px solid rgb(245 158 11 / 30%);
     color: #f59e0b;
+}
+
+.arch-branch-badge.warning {
+    background: rgb(248 81 73 / 22%) !important;
+    border-color: rgb(248 81 73 / 60%) !important;
+    color: #ff7b72 !important;
+    box-shadow: 0 0 14px rgb(248 81 73 / 40%) !important;
+}
+
+.arch-branch-badge.success {
+    background: rgb(63 185 80 / 22%) !important;
+    border-color: rgb(63 185 80 / 60%) !important;
+    color: #3fb950 !important;
+    box-shadow: 0 0 14px rgb(63 185 80 / 40%) !important;
 }
 
 .arch-branch-desc {
@@ -488,10 +607,6 @@ pre code {
     transform: scale(1.01);
 }
 
-.arch-node.sim-active .arch-node-tag {
-    display: none;
-}
-
 .arch-branch-card {
     position: relative;
     transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
@@ -504,19 +619,11 @@ pre code {
     animation: shakePulse 0.4s ease;
 }
 
-.arch-branch-card.sim-fail .arch-branch-badge {
-    display: none;
-}
-
 .arch-branch-card.sim-success {
     border-color: var(--accent-green) !important;
     background: linear-gradient(180deg, rgb(63 185 80 / 15%) 0%, var(--bg-code) 100%) !important;
     box-shadow: 0 0 18px rgb(63 185 80 / 35%);
     transform: scale(1.02);
-}
-
-.arch-branch-card.sim-success .arch-branch-badge {
-    display: none;
 }
 
 @keyframes shakePulse {
@@ -752,6 +859,7 @@ pre::-webkit-scrollbar-thumb:hover {
     padding: 10px 14px;
     background: rgb(22 27 34 / 85%);
     border-bottom: 1px solid var(--border);
+    -webkit-user-select: none;
     user-select: none;
     gap: 12px;
 }
@@ -844,15 +952,36 @@ pre::-webkit-scrollbar-thumb:hover {
 
 .code-window pre {
     margin: 0;
-    padding: 16px 18px;
+    padding: 18px 20px;
     border: none;
     border-radius: 0;
-    background: transparent;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.82rem;
-    line-height: 1.62;
+    background: #0d1117;
+    font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+    font-size: 0.84rem;
+    line-height: 1.65;
     overflow-x: auto;
-    color: #c9d1d9;
+    color: #e6edf3;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(240 246 252 / 20%) #0d1117;
+}
+
+.code-window pre::-webkit-scrollbar {
+    height: 8px;
+}
+
+.code-window pre::-webkit-scrollbar-track {
+    background: #0d1117;
+    border-radius: 0 0 10px 10px;
+}
+
+.code-window pre::-webkit-scrollbar-thumb {
+    background: rgb(240 246 252 / 20%);
+    border-radius: 4px;
+    border: 2px solid #0d1117;
+}
+
+.code-window pre::-webkit-scrollbar-thumb:hover {
+    background: rgb(240 246 252 / 38%);
 }
 
 .code-window code {
@@ -864,44 +993,53 @@ pre::-webkit-scrollbar-thumb:hover {
     color: inherit;
 }
 
-/* Syntax Highlighting Tokens */
+/* Syntax Highlighting Tokens (GitHub Dark Vibrant Palette) */
+.code-window .syn-kw,
 .syn-kw {
-    color: #ff7b72;
+    color: #ff7b72 !important;
     font-weight: 600;
 }
 
+.code-window .syn-fn,
 .syn-fn {
-    color: #d2a8ff;
+    color: #d2a8ff !important;
 }
 
+.code-window .syn-str,
 .syn-str {
-    color: #a5d6ff;
+    color: #a5d6ff !important;
 }
 
+.code-window .syn-cls,
 .syn-cls {
-    color: #ffa657;
-    font-weight: 500;
+    color: #ffa657 !important;
+    font-weight: 600;
 }
 
+.code-window .syn-num,
 .syn-num {
-    color: #79c0ff;
+    color: #79c0ff !important;
 }
 
+.code-window .syn-cm,
 .syn-cm {
-    color: #8b949e;
+    color: #8b949e !important;
     font-style: italic;
 }
 
+.code-window .syn-dec,
 .syn-dec {
-    color: #7ee787;
+    color: #7ee787 !important;
 }
 
+.code-window .syn-op,
 .syn-op {
-    color: #ff7b72;
+    color: #ff7b72 !important;
 }
 
+.code-window .syn-var,
 .syn-var {
-    color: #e6edf3;
+    color: #e6edf3 !important;
 }
 
 /* Results Table & Responsive Container */
@@ -1160,6 +1298,7 @@ td {
     background: rgb(22 27 34 / 80%);
     border: 1px solid var(--border);
     border-radius: 9px;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
