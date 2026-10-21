@@ -2035,6 +2035,34 @@ body.light-theme .kpi-chip {
     color: var(--accent-blue);
 }
 
+.latency-disclaimer {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-subtle);
+    font-size: 0.72rem;
+    line-height: 1.45;
+    color: var(--text-muted);
+}
+
+.latency-disclaimer-icon {
+    font-size: 0.85rem;
+    color: var(--accent-blue);
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.latency-disclaimer-text {
+    margin: 0;
+}
+
+.latency-disclaimer-text strong {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
 .health-services-list {
     display: flex;
     flex-direction: column;

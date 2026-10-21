@@ -98,7 +98,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=26">
+    <link rel="stylesheet" href="style.css?v=27">
 
     <!-- Google Analytics 4 (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-K6EZQYRLEL"></script>
@@ -1616,6 +1616,12 @@
                     <span class="latency-edge-node">Route: Anycast CDN &bull; TLS 1.3 Strict</span>
                     <button type="button" id="recheck-health-btn" class="recheck-health-btn">&#x21bb; Re-probe</button>
                 </div>
+                <div class="latency-disclaimer">
+                    <span class="latency-disclaimer-icon" aria-hidden="true">&#9432;</span>
+                    <p class="latency-disclaimer-text">
+                        <strong>Layer 7 HTTP Roundtrip:</strong> Measures live TLS 1.3 handshake + origin processing (Frankfurt, DE) with cache bypassed, not raw OS ICMP ping. Typical RTT: <strong>45&ndash;120ms</strong> within EU/UK, <strong>180&ndash;360ms</strong> transatlantic/remote.
+                    </p>
+                </div>
             </div>
 
             <div class="health-services-list">
@@ -1679,7 +1685,7 @@
                         <span class="service-status-dot dot-green"></span>
                         <div>
                             <span class="service-name">CI/CD Deployment Pipeline</span>
-                            <span class="service-meta">GitHub Actions &bull; 49 Jest Tests &bull; 0 Lint Errors</span>
+                            <span class="service-meta">GitHub Actions &bull; 75 Jest Tests &bull; 0 Lint Errors</span>
                         </div>
                     </div>
                     <span class="service-badge-healthy">PASSING</span>

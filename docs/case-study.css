@@ -815,8 +815,13 @@ pre {
     padding: 16px;
     overflow-x: auto;
     color: var(--text-primary);
-    scrollbar-width: thin;
-    scrollbar-color: rgb(240 246 252 / 18%) transparent;
+}
+
+@supports (scrollbar-width: thin) {
+    pre {
+        scrollbar-width: thin;
+        scrollbar-color: rgb(240 246 252 / 18%) transparent;
+    }
 }
 
 pre::-webkit-scrollbar {
@@ -961,8 +966,13 @@ pre::-webkit-scrollbar-thumb:hover {
     line-height: 1.65;
     overflow-x: auto;
     color: #e6edf3;
-    scrollbar-width: thin;
-    scrollbar-color: rgb(240 246 252 / 20%) #0d1117;
+}
+
+@supports (scrollbar-width: thin) {
+    .code-window pre {
+        scrollbar-width: thin;
+        scrollbar-color: rgb(240 246 252 / 20%) #0d1117;
+    }
 }
 
 .code-window pre::-webkit-scrollbar {
