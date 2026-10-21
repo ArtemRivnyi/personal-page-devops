@@ -582,6 +582,108 @@ pre code {
     }
 }
 
+/* ── TELEMETRY STRIP (Trendshift & GitHub Trending inspiration) ── */
+.case-telemetry-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 18px 0 24px;
+    padding: 10px 14px;
+    background: rgb(22 27 34 / 45%);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+}
+
+.telemetry-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 8px;
+    background: rgb(240 246 252 / 5%);
+    border: 1px solid rgb(240 246 252 / 10%);
+    border-radius: 5px;
+    color: var(--text-secondary);
+}
+
+.telemetry-pill strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.telemetry-dot.live {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent-green);
+    box-shadow: 0 0 8px var(--accent-green);
+    animation: liveRadarPulse 2s infinite ease-in-out;
+}
+
+@keyframes liveRadarPulse {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.9;
+    }
+
+    50% {
+        transform: scale(1.35);
+        opacity: 0.5;
+    }
+}
+
+/* Live Trace Ticker inside Architecture Card */
+.arch-live-ticker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgb(13 17 23 / 95%);
+    border: 1px solid rgb(56 139 253 / 25%);
+    border-radius: 6px;
+    padding: 7px 12px;
+    margin-bottom: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.73rem;
+    color: #e6edf3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all 0.25s ease;
+}
+
+.arch-live-ticker.active-trace {
+    border-color: var(--accent-blue);
+    background: rgb(13 17 23);
+    box-shadow: 0 0 12px rgb(56 139 253 / 20%), inset 0 0 6px rgb(56 139 253 / 10%);
+}
+
+.ticker-pulse {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    box-shadow: 0 0 6px var(--accent-blue);
+    flex-shrink: 0;
+}
+
+.ticker-pulse.failover {
+    background: #f85149;
+    box-shadow: 0 0 8px #f85149;
+}
+
+.ticker-pulse.success {
+    background: var(--accent-green);
+    box-shadow: 0 0 8px var(--accent-green);
+}
+
+.ticker-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 /* ── INLINE CODE & GENERIC PRE BASELINE ── */
 p code,
 li code,

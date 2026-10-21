@@ -188,6 +188,20 @@ document.addEventListener('DOMContentLoaded', () => {
             return badge;
         };
 
+        const updateTicker = (message, pulseType = 'info') => {
+            const ticker = card.querySelector('.arch-live-ticker');
+            if (!ticker) return;
+            ticker.classList.add('active-trace');
+            const pulse = ticker.querySelector('.ticker-pulse');
+            const text = ticker.querySelector('.ticker-text');
+            if (pulse) {
+                pulse.className = `ticker-pulse ${pulseType}`;
+            }
+            if (text) {
+                text.textContent = message;
+            }
+        };
+
         playBtn.addEventListener('click', () => {
             if (isRunning) return;
             isRunning = true;
@@ -207,6 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (nodes[0]) {
                     nodes[0].classList.add('sim-active');
                     nodes[0].appendChild(createBadge('Step 1: Request Ingress (200 OK)'));
+                    updateTicker('[TRACE 00.1s] POST /api/v1/classify ➔ Nginx Ingress received payload (HTTP 200)');
                 }
             }, 100);
 
@@ -215,6 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (nodes[1]) {
                     nodes[1].classList.add('sim-active');
                     nodes[1].appendChild(createBadge('Step 2: Token Bucket Check (Allowed)'));
+                    updateTicker('[TRACE 00.9s] Redis Token Bucket Rate-Limiter ➔ Allowed (12 req/min budget)');
                 }
             }, 850);
 
@@ -223,6 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (nodes[2]) {
                     nodes[2].classList.add('sim-active');
                     nodes[2].appendChild(createBadge('Step 3: Schema Enforced'));
+                    updateTicker('[TRACE 01.7s] FastAPI Inference Service ➔ Enforcing strict Pydantic JSON contract');
                 }
             }, 1650);
 
@@ -235,17 +252,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (branchPrimary && primaryHeader) {
                         branchPrimary.classList.add('sim-fail');
                         primaryHeader.appendChild(createBadge('>1.2s Timeout Exceeded', 'warning'));
+                        updateTicker('[TRACE 02.5s] ⚠️ Primary Gemini 2.0 Flash: Timeout >1,200ms budget breached ➔ Breaker Tripped!', 'failover');
                     }
                     setTimeout(() => {
                         if (branchFallback && fallbackHeader) {
                             branchFallback.classList.add('sim-success');
                             fallbackHeader.appendChild(createBadge('Hot-Standby Fallback (32ms)', 'success'));
+                            updateTicker('[TRACE 03.1s] 🔄 Hot-Standby Engaged: OpenAI GPT-4o-mini resolved ticket in 32ms!', 'success');
                         }
-                    }, 500);
+                    }, 600);
                 } else {
                     if (branchPrimary && primaryHeader) {
                         branchPrimary.classList.add('sim-success');
                         primaryHeader.appendChild(createBadge('Route Executed', 'success'));
+                        updateTicker('[TRACE 02.5s] Primary pipeline executed successfully ➔ Response validated');
                     }
                     if (branchFallback && fallbackHeader) {
                         branchFallback.classList.add('sim-success');
@@ -260,22 +280,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (finalNode) {
                     finalNode.classList.add('sim-active');
                     finalNode.appendChild(createBadge('Final: HTTP 200 OK + Metrics Saved', 'success'));
+                    updateTicker('[TRACE 03.9s] 📊 Prometheus metrics recorded: llm_failover_total++ ➔ Response Delivered (HTTP 200 OK)', 'success');
                 }
-            }, 3550);
+            }, 3650);
 
             // Completion
             setTimeout(() => {
                 playBtn.classList.remove('simulating');
                 playBtn.classList.add('completed');
                 if (playText) playText.textContent = '✓ Flow Verified';
+                updateTicker('✅ Execution Trace Complete: Zero Outage Achieved (Failover latency <48ms)', 'success');
 
                 setTimeout(() => {
                     clearSimulationStates();
                     playBtn.classList.remove('completed');
                     if (playText) playText.textContent = 'Simulate Live Flow';
+                    updateTicker('Telemetry Trace: Standby • Click "Simulate Live Flow" to execute real-time circuit breaker routing');
                     isRunning = false;
-                }, 2800);
-            }, 4600);
+                }, 3200);
+            }, 4750);
         });
     });
 });

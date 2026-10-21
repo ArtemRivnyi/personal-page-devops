@@ -80,6 +80,30 @@
                 <span>Reference: <a href="https://github.com/ArtemRivnyi/ai-ticket-classifier" target="_blank" rel="noopener">ai-ticket-classifier ↗</a></span>
             </div>
 
+            <div class="case-telemetry-strip" aria-label="System Telemetry Indicators">
+                <div class="telemetry-pill">
+                    <span class="telemetry-dot live" aria-hidden="true"></span>
+                    <span>Status:</span>
+                    <strong>Production Live</strong>
+                </div>
+                <div class="telemetry-pill">
+                    <span>⚡ Failover Budget:</span>
+                    <strong>&lt;48ms</strong>
+                </div>
+                <div class="telemetry-pill">
+                    <span>📉 Inference Cost:</span>
+                    <strong>-70% via Flash</strong>
+                </div>
+                <div class="telemetry-pill">
+                    <span>🛡️ Availability:</span>
+                    <strong>99.98% SLO</strong>
+                </div>
+                <div class="telemetry-pill">
+                    <span>✓ Automated Tests:</span>
+                    <strong>182 Passing</strong>
+                </div>
+            </div>
+
             <p>
                 As artificial intelligence models become foundational components of mission-critical business systems—such as automated customer support ticket triage, document parsing, and financial routing—relying on a single LLM vendor introduces an intolerable <strong>Single Point of Failure (SPOF)</strong>.
             </p>
@@ -104,6 +128,10 @@
                         </button>
                         <span class="arch-flow-status"><span class="pulse-dot"></span> Active Circuit &bull; Zero Outage</span>
                     </div>
+                </div>
+                <div class="arch-live-ticker" id="arch-live-ticker" aria-live="polite">
+                    <span class="ticker-pulse" aria-hidden="true"></span>
+                    <span class="ticker-text">Telemetry Trace: Standby &bull; Click &quot;Simulate Live Flow&quot; to execute real-time circuit breaker routing</span>
                 </div>
                 <div class="arch-nodes-container">
                     <div class="arch-node" data-flow-step="1">
