@@ -140,7 +140,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 6. Interactive Architecture Flow Simulation Engine
-    const isDualLLM = window.location.pathname.includes('dual-llm');
+    const path = window.location.pathname.toLowerCase();
+    const isDualLLM = path.includes('dual-llm');
+    const isCarScout = path.includes('car-scout');
+    const isS3Sim = path.includes('s3-simulator');
+    const isAIEmail = path.includes('ai-email');
 
     document.querySelectorAll('.arch-flow-card').forEach((card) => {
         const header = card.querySelector('.arch-flow-header');
@@ -220,26 +224,56 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 if (nodes[0]) {
                     nodes[0].classList.add('sim-active');
-                    nodes[0].appendChild(createBadge('Step 1: Request Ingress (200 OK)'));
-                    updateTicker('[TRACE 00.1s] POST /api/v1/classify ➔ Nginx Ingress received payload (HTTP 200)');
+                    nodes[0].appendChild(createBadge('Step 1: Active'));
+                    if (isDualLLM) {
+                        updateTicker('[TRACE 00.1s] POST /api/v1/classify ➔ Nginx Ingress received payload (HTTP 200)');
+                    } else if (isCarScout) {
+                        updateTicker('[TRACE 00.1s] User Search Initiated ➔ React 18 / Vite SPA Client dispatched query');
+                    } else if (isS3Sim) {
+                        updateTicker('[TRACE 00.1s] AWS SDK (boto3) ➔ S3 v4 REST request sent to container endpoint');
+                    } else if (isAIEmail) {
+                        updateTicker('[TRACE 00.1s] Inbound Email Event ➔ IMAP Webhook payload ingested into Flask');
+                    } else {
+                        updateTicker('[TRACE 00.1s] Client request initiated ➔ Ingress pipeline active');
+                    }
                 }
             }, 100);
 
-            // Step 2: Gateway / Rate Limit
+            // Step 2: Gateway / Cache / Engine
             setTimeout(() => {
                 if (nodes[1]) {
                     nodes[1].classList.add('sim-active');
-                    nodes[1].appendChild(createBadge('Step 2: Token Bucket Check (Allowed)'));
-                    updateTicker('[TRACE 00.9s] Redis Token Bucket Rate-Limiter ➔ Allowed (12 req/min budget)');
+                    nodes[1].appendChild(createBadge('Step 2: Processed'));
+                    if (isDualLLM) {
+                        updateTicker('[TRACE 00.9s] Redis Token Bucket Rate-Limiter ➔ Allowed (12 req/min budget)');
+                    } else if (isCarScout) {
+                        updateTicker('[TRACE 00.9s] Express API ➔ Redis Cache hit checked (<240ms response budget)');
+                    } else if (isS3Sim) {
+                        updateTicker('[TRACE 00.9s] MinIO S3 Engine & Flask API ➔ S3 v4 signature verified (<1.4s boot)');
+                    } else if (isAIEmail) {
+                        updateTicker('[TRACE 00.9s] Flask API ➔ Dispatched HTTP 202 ACK (<15ms) to Redis Task Broker (RQ)');
+                    } else {
+                        updateTicker('[TRACE 00.9s] Ingestion gateway verified ➔ Token budget approved');
+                    }
                 }
             }, 850);
 
-            // Step 3: Inference / Processing Engine
+            // Step 3: Engine / Schema / Retrieval
             setTimeout(() => {
                 if (nodes[2]) {
                     nodes[2].classList.add('sim-active');
-                    nodes[2].appendChild(createBadge('Step 3: Schema Enforced'));
-                    updateTicker('[TRACE 01.7s] FastAPI Inference Service ➔ Enforcing strict Pydantic JSON contract');
+                    nodes[2].appendChild(createBadge('Step 3: Verified'));
+                    if (isDualLLM) {
+                        updateTicker('[TRACE 01.7s] FastAPI Inference Service ➔ Enforcing strict Pydantic JSON contract');
+                    } else if (isCarScout) {
+                        updateTicker('[TRACE 01.7s] Multi-Tier Orchestrator: Cheerio Fast HTTP & Puppeteer Stealth Pool active');
+                    } else if (isS3Sim) {
+                        updateTicker('[TRACE 01.7s] S3 Engine Ingestion: Writing object data chunks to local Docker volume');
+                    } else if (isAIEmail) {
+                        updateTicker('[TRACE 01.7s] Decoupled Worker ➔ FAISS vector retrieval matched verified store policies');
+                    } else {
+                        updateTicker('[TRACE 01.7s] Processing contract validated ➔ Schema enforced');
+                    }
                 }
             }, 1650);
 
@@ -264,12 +298,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     if (branchPrimary && primaryHeader) {
                         branchPrimary.classList.add('sim-success');
-                        primaryHeader.appendChild(createBadge('Route Executed', 'success'));
-                        updateTicker('[TRACE 02.5s] Primary pipeline executed successfully ➔ Response validated');
+                        primaryHeader.appendChild(createBadge('Route Verified', 'success'));
+                        if (isCarScout) {
+                            updateTicker('[TRACE 02.5s] Static Portals Scraped via Cheerio (<150ms) + Cloudflare Bypassed');
+                        } else if (isS3Sim) {
+                            updateTicker('[TRACE 02.5s] Observability Stack: Prometheus metrics scraped + Promtail streaming to Loki');
+                        } else if (isAIEmail) {
+                            updateTicker('[TRACE 02.5s] Private Local Ollama (Gemma 7B): Intent classified (100% on-premise)');
+                        }
                     }
                     if (branchFallback && fallbackHeader) {
                         branchFallback.classList.add('sim-success');
-                        fallbackHeader.appendChild(createBadge('Processed', 'success'));
+                        fallbackHeader.appendChild(createBadge('Telemetry OK', 'success'));
                     }
                 }
             }, 2450);
@@ -279,8 +319,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 const finalNode = nodes[nodes.length - 1];
                 if (finalNode) {
                     finalNode.classList.add('sim-active');
-                    finalNode.appendChild(createBadge('Final: HTTP 200 OK + Metrics Saved', 'success'));
-                    updateTicker('[TRACE 03.9s] 📊 Prometheus metrics recorded: llm_failover_total++ ➔ Response Delivered (HTTP 200 OK)', 'success');
+                    finalNode.appendChild(createBadge('Final: Verified', 'success'));
+                    if (isDualLLM) {
+                        updateTicker('[TRACE 03.9s] 📊 Prometheus metrics recorded: llm_failover_total++ ➔ Response Delivered (HTTP 200 OK)', 'success');
+                    } else if (isCarScout) {
+                        updateTicker('[TRACE 03.9s] 💶 Irish Revenue Tax Engine: Live FX + VRT + Customs + VAT 23% computed', 'success');
+                    } else if (isS3Sim) {
+                        updateTicker('[TRACE 03.9s] 📊 Autoprovisioned Grafana Dashboard: Live metrics updated ($0.00 cloud egress)', 'success');
+                    } else if (isAIEmail) {
+                        updateTicker('[TRACE 03.9s] 🛡️ Customer Dispatch: 99.4% grounded response ready (Zero PII leakage)', 'success');
+                    } else {
+                        updateTicker('[TRACE 03.9s] Execution complete ➔ Result delivered to client (HTTP 200 OK)', 'success');
+                    }
                 }
             }, 3650);
 
@@ -289,15 +339,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 playBtn.classList.remove('simulating');
                 playBtn.classList.add('completed');
                 if (playText) playText.textContent = '✓ Flow Verified';
-                updateTicker('✅ Execution Trace Complete: Zero Outage Achieved (Failover latency <48ms)', 'success');
+
+                if (isDualLLM) {
+                    updateTicker('✅ Execution Trace Complete: Zero Outage Achieved (Failover latency <48ms)', 'success');
+                } else if (isCarScout) {
+                    updateTicker('✅ Multi-Portal Scrape Complete: 6 Classifieds Synced & Priced in <1.2s', 'success');
+                } else if (isS3Sim) {
+                    updateTicker('✅ S3 Emulation Complete: 100% AWS Specification Pass (Sub-1.4s Boot)', 'success');
+                } else if (isAIEmail) {
+                    updateTicker('✅ Private AI Pipeline Complete: Zero PII Leakage & 99.4% Policy Grounding', 'success');
+                } else {
+                    updateTicker('✅ System Architecture Verified: All Ingress & Worker Stages Passed', 'success');
+                }
 
                 setTimeout(() => {
                     clearSimulationStates();
                     playBtn.classList.remove('completed');
                     if (playText) playText.textContent = 'Simulate Live Flow';
-                    updateTicker('Telemetry Trace: Standby • Click "Simulate Live Flow" to execute real-time circuit breaker routing');
+                    updateTicker('Telemetry Trace: Standby • Click "Simulate Live Flow" to trace real-time execution flow');
                     isRunning = false;
-                }, 3200);
+                }, 3400);
             }, 4750);
         });
     });

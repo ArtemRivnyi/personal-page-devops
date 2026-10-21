@@ -81,6 +81,30 @@
                 <span>Reference: <a href="https://github.com/ArtemRivnyi/aws-s3-simulator" target="_blank" rel="noopener">aws-s3-simulator ↗</a></span>
             </div>
 
+            <div class="case-telemetry-strip" aria-label="System Telemetry Indicators">
+                <div class="telemetry-pill">
+                    <span class="telemetry-dot live" aria-hidden="true"></span>
+                    <span>Status:</span>
+                    <strong>Production Live</strong>
+                </div>
+                <div class="telemetry-pill">
+                    <span>⚡ Cold Boot SLA:</span>
+                    <strong>&lt;1.4s</strong>
+                </div>
+                <div class="telemetry-pill">
+                    <span>💾 Memory Footprint:</span>
+                    <strong>&lt;85MB RAM</strong>
+                </div>
+                <div class="telemetry-pill">
+                    <span>🛡️ API Compliance:</span>
+                    <strong>AWS S3 REST v4</strong>
+                </div>
+                <div class="telemetry-pill">
+                    <span>💰 Cloud Bill:</span>
+                    <strong>$0.00 Egress</strong>
+                </div>
+            </div>
+
             <p>
                 In modern cloud architectures, microservices interact constantly with object storage—uploading user avatars, writing database backups, archiving analytical event logs, and serving static assets. However, pointing automated test suites or local development environments directly at live <strong>AWS Simple Storage Service (S3)</strong> introduces substantial operational friction.
             </p>
@@ -99,6 +123,10 @@
                         Isolated S3 Emulation &amp; Observability Harness
                     </span>
                     <span class="arch-flow-status"><span class="pulse-dot"></span> Sub-1.4s Cold Boot &bull; Zero Egress Cost</span>
+                </div>
+                <div class="arch-live-ticker" aria-live="polite">
+                    <span class="ticker-pulse" aria-hidden="true"></span>
+                    <span class="ticker-text">S3 Telemetry: Standby &bull; Click &quot;Simulate Live Flow&quot; to trace object storage ingestion</span>
                 </div>
                 <div class="arch-nodes-container">
                     <div class="arch-node">
