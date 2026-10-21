@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     btn.classList.remove('copied');
                     if (copyText) copyText.textContent = origText;
                 }, 2000);
-            } catch (err) {
+            } catch {
                 // Clipboard copy failed silently
             }
         });
