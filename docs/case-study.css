@@ -389,6 +389,419 @@ pre code {
     color: var(--accent-blue);
 }
 
+/* ── ANIMATED ARCHITECTURE FLOW SYSTEM ── */
+.arch-flow-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.arch-flow-play-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgb(56 139 253 / 12%);
+    border: 1px solid rgb(56 139 253 / 30%);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.arch-flow-play-btn:hover {
+    background: rgb(56 139 253 / 22%);
+    border-color: var(--accent-blue);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgb(56 139 253 / 25%);
+}
+
+.arch-flow-play-btn:active {
+    transform: translateY(0);
+}
+
+.arch-flow-play-btn.simulating {
+    background: rgb(245 158 11 / 15%);
+    border-color: rgb(245 158 11 / 40%);
+    color: #fbbf24;
+    cursor: wait;
+}
+
+.arch-flow-play-btn.completed {
+    background: rgb(63 185 80 / 15%);
+    border-color: rgb(63 185 80 / 40%);
+    color: var(--accent-green);
+}
+
+/* Ambient Connector Flow Stream */
+.arch-connector-down {
+    position: relative;
+    overflow: hidden;
+    padding: 3px 0;
+}
+
+.arch-connector-down::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 16px;
+    background: linear-gradient(180deg, transparent, var(--accent-blue), transparent);
+    animation: connectorStream 2.4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+@keyframes connectorStream {
+    0% {
+        top: -16px;
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+/* Simulation Active State Highlighting */
+.arch-node {
+    position: relative;
+    transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+.arch-node.sim-active {
+    border-color: var(--accent-blue);
+    background: linear-gradient(90deg, rgb(56 139 253 / 12%) 0%, var(--bg-code) 100%);
+    box-shadow: 0 0 16px rgb(56 139 253 / 25%), inset 0 0 8px rgb(56 139 253 / 10%);
+    transform: scale(1.01);
+}
+
+.arch-node.sim-active .arch-node-tag {
+    display: none;
+}
+
+.arch-branch-card {
+    position: relative;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+.arch-branch-card.sim-fail {
+    border-color: #f85149 !important;
+    background: linear-gradient(180deg, rgb(248 81 73 / 12%) 0%, var(--bg-code) 100%) !important;
+    box-shadow: 0 0 16px rgb(248 81 73 / 30%);
+    animation: shakePulse 0.4s ease;
+}
+
+.arch-branch-card.sim-fail .arch-branch-badge {
+    display: none;
+}
+
+.arch-branch-card.sim-success {
+    border-color: var(--accent-green) !important;
+    background: linear-gradient(180deg, rgb(63 185 80 / 15%) 0%, var(--bg-code) 100%) !important;
+    box-shadow: 0 0 18px rgb(63 185 80 / 35%);
+    transform: scale(1.02);
+}
+
+.arch-branch-card.sim-success .arch-branch-badge {
+    display: none;
+}
+
+@keyframes shakePulse {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-3px);
+    }
+
+    75% {
+        transform: translateX(3px);
+    }
+}
+
+/* Sim packet pulse badge */
+.sim-packet-badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: var(--accent-blue);
+    color: #fff;
+    box-shadow: 0 0 12px var(--accent-blue);
+    animation: packetFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+}
+
+.sim-packet-badge.warning {
+    background: #f85149;
+    box-shadow: 0 0 12px #f85149;
+}
+
+.sim-packet-badge.success {
+    background: var(--accent-green);
+    box-shadow: 0 0 12px var(--accent-green);
+}
+
+@keyframes packetFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .arch-connector-down::after {
+        animation: none;
+    }
+
+    .arch-branch-card.sim-fail {
+        animation: none;
+    }
+}
+
+/* ── INLINE CODE & GENERIC PRE BASELINE ── */
+p code,
+li code,
+td code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.84em;
+    background: rgb(240 246 252 / 8%);
+    border: 1px solid rgb(240 246 252 / 12%);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #58a6ff;
+    word-break: break-word;
+}
+
+pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.84rem;
+    line-height: 1.6;
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    color: var(--text-primary);
+    scrollbar-width: thin;
+    scrollbar-color: rgb(240 246 252 / 18%) transparent;
+}
+
+pre::-webkit-scrollbar {
+    height: 6px;
+}
+
+pre::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+pre::-webkit-scrollbar-thumb {
+    background: rgb(240 246 252 / 20%);
+    border-radius: 3px;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+    background: rgb(240 246 252 / 35%);
+}
+
+/* ── MODERN IDE CODE WINDOW COMPONENT ── */
+.code-window {
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 22px 0;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgb(0 0 0 / 35%);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.code-window:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 12px 36px rgb(0 0 0 / 45%);
+}
+
+.code-window-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: rgb(22 27 34 / 85%);
+    border-bottom: 1px solid var(--border);
+    user-select: none;
+    gap: 12px;
+}
+
+.code-window-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.code-dots {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.code-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.code-dot.red {
+    background: #ff5f56;
+}
+
+.code-dot.yellow {
+    background: #ffbd2e;
+}
+
+.code-dot.green {
+    background: #27c93f;
+}
+
+.code-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.76rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.code-window-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.code-lang-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: rgb(56 139 253 / 12%);
+    border: 1px solid rgb(56 139 253 / 25%);
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.code-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgb(240 246 252 / 6%);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 4px 9px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.code-copy-btn:hover {
+    background: rgb(240 246 252 / 12%);
+    color: #fff;
+    border-color: var(--border-hover);
+}
+
+.code-copy-btn.copied {
+    background: rgb(63 185 80 / 15%);
+    border-color: rgb(63 185 80 / 40%);
+    color: var(--accent-green);
+}
+
+.code-window pre {
+    margin: 0;
+    padding: 16px 18px;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.62;
+    overflow-x: auto;
+    color: #c9d1d9;
+}
+
+.code-window code {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+}
+
+/* Syntax Highlighting Tokens */
+.syn-kw {
+    color: #ff7b72;
+    font-weight: 600;
+}
+
+.syn-fn {
+    color: #d2a8ff;
+}
+
+.syn-str {
+    color: #a5d6ff;
+}
+
+.syn-cls {
+    color: #ffa657;
+    font-weight: 500;
+}
+
+.syn-num {
+    color: #79c0ff;
+}
+
+.syn-cm {
+    color: #8b949e;
+    font-style: italic;
+}
+
+.syn-dec {
+    color: #7ee787;
+}
+
+.syn-op {
+    color: #ff7b72;
+}
+
+.syn-var {
+    color: #e6edf3;
+}
+
 /* Results Table & Responsive Container */
 .table-responsive {
     width: 100%;

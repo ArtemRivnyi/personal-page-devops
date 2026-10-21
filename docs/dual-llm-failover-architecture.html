@@ -91,16 +91,22 @@
             <h2>1. Architectural Blueprint</h2>
             <p>The system follows an asynchronous resilient proxy pattern backed by a distributed Redis rate-limiter and circuit breaker:</p>
 
-            <div class="arch-flow-card">
+            <div class="arch-flow-card" id="dual-llm-flow">
                 <div class="arch-flow-header">
                     <span class="arch-flow-title">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
                         Dual-LLM Circuit Breaker &amp; Failover Topology
                     </span>
-                    <span class="arch-flow-status"><span class="pulse-dot"></span> Active Circuit &bull; Zero Outage</span>
+                    <div class="arch-flow-header-actions">
+                        <button type="button" class="arch-flow-play-btn" id="simulate-circuit-btn" aria-label="Simulate Live Request Flow">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            <span>Simulate Live Flow</span>
+                        </button>
+                        <span class="arch-flow-status"><span class="pulse-dot"></span> Active Circuit &bull; Zero Outage</span>
+                    </div>
                 </div>
                 <div class="arch-nodes-container">
-                    <div class="arch-node">
+                    <div class="arch-node" data-flow-step="1">
                         <div class="arch-node-main">
                             <span class="arch-node-icon">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
@@ -112,7 +118,7 @@
 
                     <div class="arch-connector-down">↓</div>
 
-                    <div class="arch-node">
+                    <div class="arch-node" data-flow-step="2">
                         <div class="arch-node-main">
                             <span class="arch-node-icon">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
@@ -124,7 +130,7 @@
 
                     <div class="arch-connector-down">↓</div>
 
-                    <div class="arch-node">
+                    <div class="arch-node" data-flow-step="3">
                         <div class="arch-node-main">
                             <span class="arch-node-icon">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
@@ -138,7 +144,7 @@
 
                     <!-- Dual Provider Routing Branches -->
                     <div class="arch-branches">
-                        <div class="arch-branch-card primary">
+                        <div class="arch-branch-card primary" data-flow-branch="primary">
                             <div class="arch-branch-header">
                                 <span class="arch-branch-title">Google Gemini 2.0 Flash</span>
                                 <span class="arch-branch-badge primary">Primary (99.9%)</span>
@@ -146,7 +152,7 @@
                             <p class="arch-branch-desc">Sub-450ms p95 latency, cost-optimized at ~$0.075/1M tokens. Returns validated JSON with HTTP 200 OK.</p>
                         </div>
 
-                        <div class="arch-branch-card fallback">
+                        <div class="arch-branch-card fallback" data-flow-branch="fallback">
                             <div class="arch-branch-header">
                                 <span class="arch-branch-title">OpenAI GPT-4o-mini</span>
                                 <span class="arch-branch-badge fallback">Hot Standby</span>
@@ -157,7 +163,7 @@
 
                     <div class="arch-connector-down">↓</div>
 
-                    <div class="arch-node">
+                    <div class="arch-node" data-flow-step="4">
                         <div class="arch-node-main">
                             <span class="arch-node-icon">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
@@ -193,51 +199,73 @@
             <h2>3. Circuit Breaker Implementation (Python)</h2>
             <p>Below is the hardened resilience wrapper pattern utilized in the production service:</p>
 
-            <pre><code>import time
-import logging
-from prometheus_client import Counter, Histogram
+            <div class="code-window" data-code-file="services/circuit_breaker.py">
+                <div class="code-window-header">
+                    <div class="code-window-left">
+                        <div class="code-dots" aria-hidden="true">
+                            <span class="code-dot red"></span>
+                            <span class="code-dot yellow"></span>
+                            <span class="code-dot green"></span>
+                        </div>
+                        <span class="code-title">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            services/circuit_breaker.py
+                        </span>
+                    </div>
+                    <div class="code-window-actions">
+                        <span class="code-lang-badge">Python 3.11</span>
+                        <button type="button" class="code-copy-btn" aria-label="Copy circuit breaker Python code">
+                            <svg class="copy-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span class="copy-text">Copy</span>
+                        </button>
+                    </div>
+                </div>
+                <pre><code><span class="syn-kw">import</span> time
+<span class="syn-kw">import</span> logging
+<span class="syn-kw">from</span> prometheus_client <span class="syn-kw">import</span> <span class="syn-cls">Counter</span>, <span class="syn-cls">Histogram</span>
 
-logger = logging.getLogger("ai_pipeline")
+logger = logging.<span class="syn-fn">getLogger</span>(<span class="syn-str">"ai_pipeline"</span>)
 
-# Observability Metrics
-LLM_LATENCY = Histogram("llm_request_duration_seconds", "Latency per provider", ["provider"])
-LLM_FAILOVER_COUNT = Counter("llm_failover_total", "Number of fallback triggers", ["from_provider", "to_provider", "reason"])
+<span class="syn-cm"># Observability Metrics</span>
+LLM_LATENCY = <span class="syn-cls">Histogram</span>(<span class="syn-str">"llm_request_duration_seconds"</span>, <span class="syn-str">"Latency per provider"</span>, [<span class="syn-str">"provider"</span>])
+LLM_FAILOVER_COUNT = <span class="syn-cls">Counter</span>(<span class="syn-str">"llm_failover_total"</span>, <span class="syn-str">"Number of fallback triggers"</span>, [<span class="syn-str">"from_provider"</span>, <span class="syn-str">"to_provider"</span>, <span class="syn-str">"reason"</span>])
 
-class DualLLMPipeline:
-    def __init__(self, gemini_client, openai_client, timeout_sec: float = 1.2):
-        self.gemini = gemini_client
-        self.openai = openai_client
-        self.timeout = timeout_sec
+<span class="syn-kw">class</span> <span class="syn-cls">DualLLMPipeline</span>:
+    <span class="syn-kw">def</span> <span class="syn-fn">__init__</span>(<span class="syn-dec">self</span>, gemini_client, openai_client, timeout_sec: <span class="syn-cls">float</span> = <span class="syn-num">1.2</span>):
+        <span class="syn-dec">self</span>.gemini = gemini_client
+        <span class="syn-dec">self</span>.openai = openai_client
+        <span class="syn-dec">self</span>.timeout = timeout_sec
 
-    def classify_ticket(self, prompt: str) -&gt; dict:
-        start_time = time.monotonic()
+    <span class="syn-kw">def</span> <span class="syn-fn">classify_ticket</span>(<span class="syn-dec">self</span>, prompt: <span class="syn-cls">str</span>) -&gt; <span class="syn-cls">dict</span>:
+        start_time = time.<span class="syn-fn">monotonic</span>()
 
-        # 1. Attempt Primary: Google Gemini 2.0 Flash
-        try:
-            with LLM_LATENCY.labels(provider="gemini").time():
-                response = self.gemini.generate_content(
+        <span class="syn-cm"># 1. Attempt Primary: Google Gemini 2.0 Flash</span>
+        <span class="syn-kw">try</span>:
+            <span class="syn-kw">with</span> LLM_LATENCY.<span class="syn-fn">labels</span>(provider=<span class="syn-str">"gemini"</span>).<span class="syn-fn">time</span>():
+                response = <span class="syn-dec">self</span>.gemini.<span class="syn-fn">generate_content</span>(
                     prompt,
-                    timeout=self.timeout
+                    timeout=<span class="syn-dec">self</span>.timeout
                 )
-                return self._format_response(response.text, provider="gemini", start=start_time)
-        except Exception as exc:
-            reason = type(exc).__name__
-            logger.warning(f"Primary Gemini failed ({reason}). Triggering fallback to OpenAI.")
-            LLM_FAILOVER_COUNT.labels(from_provider="gemini", to_provider="openai", reason=reason).inc()
+                <span class="syn-kw">return</span> <span class="syn-dec">self</span>.<span class="syn-fn">_format_response</span>(response.text, provider=<span class="syn-str">"gemini"</span>, start=start_time)
+        <span class="syn-kw">except</span> <span class="syn-cls">Exception</span> <span class="syn-kw">as</span> exc:
+            reason = <span class="syn-fn">type</span>(exc).__name__
+            logger.<span class="syn-fn">warning</span>(<span class="syn-str">f"Primary Gemini failed ({reason}). Triggering fallback to OpenAI."</span>)
+            LLM_FAILOVER_COUNT.<span class="syn-fn">labels</span>(from_provider=<span class="syn-str">"gemini"</span>, to_provider=<span class="syn-str">"openai"</span>, reason=reason).<span class="syn-fn">inc</span>()
 
-        # 2. Automated Hot-Standby Fallback: OpenAI GPT-4o-mini
-        try:
-            with LLM_LATENCY.labels(provider="openai").time():
-                response = self.openai.chat.completions.create(
-                    model="gpt-4o-mini",
-                    messages=[{"role": "user", "content": prompt}],
-                    timeout=1.8
+        <span class="syn-cm"># 2. Automated Hot-Standby Fallback: OpenAI GPT-4o-mini</span>
+        <span class="syn-kw">try</span>:
+            <span class="syn-kw">with</span> LLM_LATENCY.<span class="syn-fn">labels</span>(provider=<span class="syn-str">"openai"</span>).<span class="syn-fn">time</span>():
+                response = <span class="syn-dec">self</span>.openai.chat.completions.<span class="syn-fn">create</span>(
+                    model=<span class="syn-str">"gpt-4o-mini"</span>,
+                    messages=[{<span class="syn-str">"role"</span>: <span class="syn-str">"user"</span>, <span class="syn-str">"content"</span>: prompt}],
+                    timeout=<span class="syn-num">1.8</span>
                 )
-                content = response.choices[0].message.content
-                return self._format_response(content, provider="openai", start=start_time)
-        except Exception as fatal_exc:
-            logger.error(f"Critical: Both LLM providers failed. Error: {fatal_exc}")
-            raise RuntimeError("Exhausted all available AI inference providers.")</code></pre>
+                content = response.choices[<span class="syn-num">0</span>].message.content
+                <span class="syn-kw">return</span> <span class="syn-dec">self</span>.<span class="syn-fn">_format_response</span>(content, provider=<span class="syn-str">"openai"</span>, start=start_time)
+        <span class="syn-kw">except</span> <span class="syn-cls">Exception</span> <span class="syn-kw">as</span> fatal_exc:
+            logger.<span class="syn-fn">error</span>(<span class="syn-str">f"Critical: Both LLM providers failed. Error: {fatal_exc}"</span>)
+            <span class="syn-kw">raise</span> <span class="syn-cls">RuntimeError</span>(<span class="syn-str">"Exhausted all available AI inference providers."</span>)</code></pre>
+            </div>
 
             <h2>4. Measured Production Results</h2>
 
