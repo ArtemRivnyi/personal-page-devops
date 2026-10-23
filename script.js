@@ -1387,6 +1387,23 @@ function initDevOpsTerminal() {
                 appendLine("Theme preference toggled.");
                 break;
             }
+            case 'admin':
+            case 'optout': {
+                try {
+                    const active = localStorage.getItem('ga_developer_optout') === 'true';
+                    if (active) {
+                        localStorage.removeItem('ga_developer_optout');
+                        appendLine("🛡️ Google Analytics: Developer opt-out DISABLED. Your visits will be tracked.");
+                    } else {
+                        localStorage.setItem('ga_developer_optout', 'true');
+                        window['ga-disable-G-K6EZQYRLEL'] = true;
+                        appendLine("🛡️ Google Analytics: Developer opt-out ENABLED. Your visits on this device are now excluded from all analytics.");
+                    }
+                } catch {
+                    appendLine("Failed to access localStorage.");
+                }
+                break;
+            }
             case 'clear':
                 output.innerHTML = '';
                 break;
