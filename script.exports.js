@@ -1618,5 +1618,24 @@ function initScrollRestoration() {
     }
 }
 
-export { debounce, setupMobileMenu, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initAnalyticsTracking, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher, initSectionNavRail, initScrollRestoration };
+function initAdminModeNotification() {
+    try {
+        if (window.location.search.indexOf('admin=1') !== -1 || window.location.search.indexOf('optout=1') !== -1 || window.location.hash === '#admin') {
+            const toast = document.getElementById('copy-toast');
+            if (toast) {
+                const originalHtml = toast.innerHTML;
+                toast.innerHTML = '<span class="toast-check">&check;</span> Developer Device: GA4 disabled on this phone/browser';
+                toast.removeAttribute('hidden');
+                setTimeout(() => {
+                    toast.setAttribute('hidden', '');
+                    toast.innerHTML = originalHtml;
+                }, 4500);
+            }
+        }
+    } catch {
+        // ignore
+    }
+}
+
+export { debounce, setupMobileMenu, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initAnalyticsTracking, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher, initSectionNavRail, initScrollRestoration, initAdminModeNotification };
 

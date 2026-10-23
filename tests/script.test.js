@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { debounce, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher, initSectionNavRail, initScrollRestoration } from '../script.exports.js';
+import { debounce, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher, initSectionNavRail, initScrollRestoration, initAdminModeNotification } from '../script.exports.js';
 
 // Mock canvas getContext before any tests run (without jest.fn)
 beforeAll(() => {
@@ -1105,6 +1105,41 @@ describe('initScrollRestoration', () => {
       });
       done();
     }, 50);
+  });
+});
+
+describe('initAdminModeNotification', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <div id="copy-toast" hidden>Email copied</div>
+    `;
+    window.history.pushState({}, '', '/');
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+    window.history.pushState({}, '', '/');
+  });
+
+  test('should handle missing toast gracefully', () => {
+    document.body.innerHTML = '';
+    window.history.pushState({}, '', '/?admin=1');
+    expect(() => initAdminModeNotification()).not.toThrow();
+  });
+
+  test('should show toast when ?admin=1 is in URL search', () => {
+    window.history.pushState({}, '', '/?admin=1');
+    initAdminModeNotification();
+    const toast = document.getElementById('copy-toast');
+    expect(toast.hasAttribute('hidden')).toBe(false);
+    expect(toast.textContent).toContain('Developer Device: GA4 disabled');
+  });
+
+  test('should not show toast when not admin', () => {
+    window.history.pushState({}, '', '/');
+    initAdminModeNotification();
+    const toast = document.getElementById('copy-toast');
+    expect(toast.hasAttribute('hidden')).toBe(true);
   });
 });
 

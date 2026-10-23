@@ -1735,7 +1735,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 18. Scroll Position Preservation across Transitions
     initScrollRestoration();
+
+    // 19. Developer GA Opt-Out Notification for Phone & PC
+    initAdminModeNotification();
 });
+
+function initAdminModeNotification() {
+    try {
+        if (window.location.search.indexOf('admin=1') !== -1 || window.location.search.indexOf('optout=1') !== -1 || window.location.hash === '#admin') {
+            const toast = document.getElementById('copy-toast');
+            if (toast) {
+                const originalHtml = toast.innerHTML;
+                toast.innerHTML = '<span class="toast-check">&check;</span> Developer Device: GA4 disabled on this phone/browser';
+                toast.removeAttribute('hidden');
+                setTimeout(() => {
+                    toast.setAttribute('hidden', '');
+                    toast.innerHTML = originalHtml;
+                }, 4500);
+            }
+        }
+    } catch {
+        // ignore
+    }
+}
 
 // 18. Scroll Position Preservation & Restoration across Transitions
 function initScrollRestoration() {
