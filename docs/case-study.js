@@ -262,15 +262,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (nodes[0]) {
                     setNodeStatus(nodes[0], 'Step 1: Active', 'sim-status-active');
                     if (isDualLLM) {
-                        updateTicker('[TRACE 00.1s] POST /api/v1/classify ➔ Nginx Ingress received payload (HTTP 200)');
+                        updateTicker('[TRACE 00.1s] POST /api/v1/classify -> Nginx Ingress received payload (HTTP 200)');
                     } else if (isCarScout) {
-                        updateTicker('[TRACE 00.1s] User Search Initiated ➔ React 18 / Vite SPA Client dispatched query');
+                        updateTicker('[TRACE 00.1s] User Search Initiated -> React 18 / Vite SPA Client dispatched query');
                     } else if (isS3Sim) {
-                        updateTicker('[TRACE 00.1s] AWS SDK (boto3) ➔ S3 v4 REST request sent to container endpoint');
+                        updateTicker('[TRACE 00.1s] AWS SDK (boto3) -> S3 v4 REST request sent to container endpoint');
                     } else if (isAIEmail) {
-                        updateTicker('[TRACE 00.1s] Inbound Email Event ➔ IMAP Webhook payload ingested into Flask');
+                        updateTicker('[TRACE 00.1s] Inbound Email Event -> IMAP Webhook payload ingested into Flask');
                     } else {
-                        updateTicker('[TRACE 00.1s] Client request initiated ➔ Ingress pipeline active');
+                        updateTicker('[TRACE 00.1s] Client request initiated -> Ingress pipeline active');
                     }
                 }
             }, 100);
@@ -280,15 +280,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (nodes[1]) {
                     setNodeStatus(nodes[1], 'Step 2: Processed', 'sim-status-active');
                     if (isDualLLM) {
-                        updateTicker('[TRACE 00.9s] Redis Token Bucket Rate-Limiter ➔ Allowed (12 req/min budget)');
+                        updateTicker('[TRACE 00.9s] Redis Token Bucket Rate-Limiter -> Allowed (12 req/min budget)');
                     } else if (isCarScout) {
-                        updateTicker('[TRACE 00.9s] Express API ➔ Redis Cache hit checked (<240ms response budget)');
+                        updateTicker('[TRACE 00.9s] Express API -> Redis Cache hit checked (<240ms response budget)');
                     } else if (isS3Sim) {
-                        updateTicker('[TRACE 00.9s] MinIO S3 Engine & Flask API ➔ S3 v4 signature verified (<1.4s boot)');
+                        updateTicker('[TRACE 00.9s] MinIO S3 Engine & Flask API -> S3 v4 signature verified (<1.4s boot)');
                     } else if (isAIEmail) {
-                        updateTicker('[TRACE 00.9s] Flask API ➔ Dispatched HTTP 202 ACK (<15ms) to Redis Task Broker (RQ)');
+                        updateTicker('[TRACE 00.9s] Flask API -> Dispatched HTTP 202 ACK (<15ms) to Redis Task Broker (RQ)');
                     } else {
-                        updateTicker('[TRACE 00.9s] Ingestion gateway verified ➔ Token budget approved');
+                        updateTicker('[TRACE 00.9s] Ingestion gateway verified -> Token budget approved');
                     }
                 }
             }, 850);
@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (nodes[2]) {
                         setNodeStatus(nodes[2], 'Step 3: Verified', 'sim-status-active');
                         if (isDualLLM) {
-                            updateTicker('[TRACE 01.7s] FastAPI Inference Service ➔ Enforcing strict Pydantic JSON contract');
+                            updateTicker('[TRACE 01.7s] FastAPI Inference Service -> Enforcing strict Pydantic JSON contract');
                         }
                     }
                 }, 1650);
@@ -309,13 +309,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (branchPrimary) {
                         branchPrimary.classList.add('sim-fail');
                         setBranchStatus(branchPrimary, '>1.2s Timeout Exceeded', 'warning');
-                        updateTicker('[TRACE 02.5s] ⚠️ Primary Gemini 2.0 Flash: Timeout >1,200ms budget breached ➔ Breaker Tripped!', 'failover');
+                        updateTicker('[TRACE 02.5s] [WARN] Primary Gemini 2.0 Flash: Timeout >1,200ms budget breached -> Breaker Tripped!', 'failover');
                     }
                     setTimeout(() => {
                         if (branchFallback) {
                             branchFallback.classList.add('sim-success');
                             setBranchStatus(branchFallback, 'Fallback Active (32ms)', 'success');
-                            updateTicker('[TRACE 03.1s] 🔄 Hot-Standby Engaged: OpenAI GPT-4o-mini resolved ticket in 32ms!', 'success');
+                            updateTicker('[TRACE 03.1s] [HOT-STANDBY] Hot-Standby Engaged: OpenAI GPT-4o-mini resolved ticket in 32ms!', 'success');
                         }
                     }, 600);
                 }, 2450);
@@ -325,7 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const finalNode = nodes[nodes.length - 1];
                     if (finalNode) {
                         setNodeStatus(finalNode, 'Final: Verified', 'sim-status-success');
-                        updateTicker('[TRACE 03.9s] 📊 Prometheus metrics recorded: llm_failover_total++ ➔ Response Delivered (HTTP 200 OK)', 'success');
+                        updateTicker('[TRACE 03.9s] [METRIC] Prometheus metrics recorded: llm_failover_total++ -> Response Delivered (HTTP 200 OK)', 'success');
                     }
                 }, 3650);
             } else {
@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             updateTicker('[TRACE 01.7s] Observability Stack: Prometheus metrics scraped + Promtail streaming');
                         } else if (isAIEmail) {
                             setBranchStatus(branchPrimary, 'Vector Matched', 'success');
-                            updateTicker('[TRACE 01.7s] Decoupled Worker ➔ FAISS vector retrieval matched verified store policies');
+                            updateTicker('[TRACE 01.7s] Decoupled Worker -> FAISS vector retrieval matched verified store policies');
                         }
                     }
                     if (branchFallback) {
@@ -362,13 +362,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (finalNode) {
                         setNodeStatus(finalNode, 'Final: Verified', 'sim-status-success');
                         if (isCarScout) {
-                            updateTicker('[TRACE 02.8s] 💶 Irish Revenue Tax Engine: Live FX + VRT + Customs + VAT 23% computed', 'success');
+                            updateTicker('[TRACE 02.8s] [TAX] Irish Revenue Tax Engine: Live FX + VRT + Customs + VAT 23% computed', 'success');
                         } else if (isS3Sim) {
-                            updateTicker('[TRACE 02.8s] 📊 Autoprovisioned Grafana Dashboard: Live metrics updated ($0.00 cloud egress)', 'success');
+                            updateTicker('[TRACE 02.8s] [METRIC] Autoprovisioned Grafana Dashboard: Live metrics updated ($0.00 cloud egress)', 'success');
                         } else if (isAIEmail) {
-                            updateTicker('[TRACE 02.8s] 🛡️ Customer Dispatch: 99.4% grounded response ready (Zero PII leakage)', 'success');
+                            updateTicker('[TRACE 02.8s] [DISPATCH] Customer Dispatch: 99.4% grounded response ready (Zero PII leakage)', 'success');
                         } else {
-                            updateTicker('[TRACE 02.8s] Pipeline complete ➔ Result delivered (HTTP 200 OK)', 'success');
+                            updateTicker('[TRACE 02.8s] Pipeline complete -> Result delivered (HTTP 200 OK)', 'success');
                         }
                     }
                 }, 2850);
@@ -379,18 +379,18 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 playBtn.classList.remove('simulating');
                 playBtn.classList.add('completed');
-                if (playText) playText.textContent = '✓ Flow Verified';
+                if (playText) playText.textContent = '[VERIFIED] Flow Verified';
 
                 if (isDualLLM) {
-                    updateTicker('✅ Execution Trace Complete: Zero Outage Achieved (Failover latency <48ms)', 'success');
+                    updateTicker('[OK] Execution Trace Complete: Zero Outage Achieved (Failover latency <48ms)', 'success');
                 } else if (isCarScout) {
-                    updateTicker('✅ Multi-Portal Scrape Complete: 6 Classifieds Synced & Priced in <1.2s', 'success');
+                    updateTicker('[OK] Multi-Portal Scrape Complete: 6 Classifieds Synced & Priced in <1.2s', 'success');
                 } else if (isS3Sim) {
-                    updateTicker('✅ S3 Emulation Complete: 100% AWS Specification Pass (Sub-1.4s Boot)', 'success');
+                    updateTicker('[OK] S3 Emulation Complete: 100% AWS Specification Pass (Sub-1.4s Boot)', 'success');
                 } else if (isAIEmail) {
-                    updateTicker('✅ Private AI Pipeline Complete: Zero PII Leakage & 99.4% Policy Grounding', 'success');
+                    updateTicker('[OK] Private AI Pipeline Complete: Zero PII Leakage & 99.4% Policy Grounding', 'success');
                 } else {
-                    updateTicker('✅ System Architecture Verified: All Ingress & Worker Stages Passed', 'success');
+                    updateTicker('[OK] System Architecture Verified: All Ingress & Worker Stages Passed', 'success');
                 }
 
                 setTimeout(() => {

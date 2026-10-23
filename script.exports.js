@@ -1311,11 +1311,11 @@ function initDevOpsTerminal() {
                     const active = localStorage.getItem('ga_developer_optout') === 'true';
                     if (active) {
                         localStorage.removeItem('ga_developer_optout');
-                        appendLine("🛡️ Google Analytics: Developer opt-out DISABLED. Your visits will be tracked.");
+                        appendLine("Google Analytics: Developer opt-out DISABLED. Your visits will be tracked.");
                     } else {
                         localStorage.setItem('ga_developer_optout', 'true');
                         window['ga-disable-G-K6EZQYRLEL'] = true;
-                        appendLine("🛡️ Google Analytics: Developer opt-out ENABLED. Your visits on this device are now excluded from all analytics.");
+                        appendLine("Google Analytics: Developer opt-out ENABLED. Your visits on this device are now excluded from all analytics.");
                     }
                 } catch {
                     appendLine("Failed to access localStorage.");
@@ -1619,4 +1619,4 @@ function initScrollRestoration() {
 }
 
 export { debounce, setupMobileMenu, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initAnalyticsTracking, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher, initSectionNavRail, initScrollRestoration };
-
+

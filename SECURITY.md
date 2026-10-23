@@ -4,7 +4,7 @@ Security and operational reliability are top priorities for **DevOps Portfolio &
 
 ---
 
-## 🛡️ Supported Versions
+## ️ Supported Versions
 
 Only active release versions receive security patches and updates:
 
@@ -15,7 +15,7 @@ Only active release versions receive security patches and updates:
 
 ---
 
-## 🔒 Reporting a Vulnerability
+##  Reporting a Vulnerability
 
 **Please DO NOT report security vulnerabilities through public GitHub issues or discussions.**
 
@@ -37,7 +37,7 @@ If you discover a security vulnerability, please report it privately:
 
 ---
 
-## 🏛️ Security Guidelines & Best Practices
+## ️ Security Guidelines & Best Practices
 
 * **Zero External Runtime Vulnerabilities**: Static frontend assets served with strict CSP and HSTS headers on Nginx/Render.
 * **Automated CI Scanning**: Workflows execute automated linting, DOM unit tests, and style checks before deployment.

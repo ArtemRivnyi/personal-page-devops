@@ -9,7 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
 
 async function syncActivity() {
-    console.log('🔄 Fetching live GitHub contributions for ArtemRivnyi (2026)...');
+    console.log('[INFO] Fetching live GitHub contributions for ArtemRivnyi (2026)...');
     const res = await fetch('https://github-contributions-api.jogruber.de/v4/ArtemRivnyi?y=2026');
     if (!res.ok) {
         throw new Error(`Failed to fetch contributions: HTTP ${res.status}`);
@@ -25,7 +25,7 @@ async function syncActivity() {
     }
 
     const formattedTotal = parsedTotal.toLocaleString('en-US');
-    console.log(`✅ Total contributions in 2026 (validated): ${formattedTotal}`);
+    console.log(`[SUCCESS] Total contributions in 2026 (validated): ${formattedTotal}`);
 
     // Update index.html counter badges
     const indexPath = path.join(rootDir, 'index.html');
@@ -39,7 +39,7 @@ async function syncActivity() {
         `$1${formattedTotal} contributions in 2026$2`
     );
     fs.writeFileSync(indexPath, indexHtml, 'utf8');
-    console.log('✅ Updated index.html counters.');
+    console.log('[SUCCESS] Updated index.html counters.');
 
     // Update script.js and script.exports.js
     for (const file of ['script.js', 'script.exports.js']) {
@@ -51,14 +51,14 @@ async function syncActivity() {
                 `'2026': { total: '${formattedTotal}', countText: '${formattedTotal} contributions in 2026' }`
             );
             fs.writeFileSync(filePath, content, 'utf8');
-            console.log(`✅ Updated ${file} total.`);
+            console.log(`[SUCCESS] Updated ${file} total.`);
         }
     }
 
-    console.log('🎉 GitHub activity sync completed successfully!');
+    console.log('[SUCCESS] GitHub activity sync completed successfully!');
 }
 
 syncActivity().catch(err => {
-    console.error('❌ Error during sync:', err.message);
+    console.error('[ERROR] Error during sync:', err.message);
     process.exit(1);
 });

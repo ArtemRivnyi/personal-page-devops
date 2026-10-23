@@ -15,22 +15,22 @@ A high-performance, interactive **DevOps & Cloud Systems Portfolio** showcasing 
 
 ---
 
-## 📝 Table of Contents
+## Table of Contents
 
-* [🌐 Live Platform & Architecture](#-live-platform--architecture)
-* [🎯 Core Engineering Objectives](#-core-engineering-objectives)
-* [🛠️ Tech Stack & Tooling](#%EF%B8%8F-tech-stack--tooling)
-* [✨ What Makes This Portfolio Unique](#-what-makes-this-portfolio-unique)
-* [🔄 CI/CD Pipeline Workflow](#-cicd-pipeline-workflow)
-* [📡 Cluster Telemetry & Latency Diagnostics](#-cluster-telemetry--latency-diagnostics)
-* [🧪 Automated Testing & Quality Gates](#-automated-testing--quality-gates)
-* [📁 Repository Structure](#-repository-structure)
-* [🚀 Local Development](#-local-development)
-* [🧰 Maintainer & Contact](#-maintainer--contact)
+* [Live Platform & Architecture](#live-platform--architecture)
+* [Core Engineering Objectives](#core-engineering-objectives)
+* [Tech Stack & Tooling](#tech-stack--tooling)
+* [Key Architectural Highlights](#key-architectural-highlights)
+* [CI/CD Pipeline Workflow](#cicd-pipeline-workflow)
+* [Cluster Telemetry & Latency Diagnostics](#cluster-telemetry--latency-diagnostics)
+* [Automated Testing & Quality Gates](#automated-testing--quality-gates)
+* [Repository Structure](#repository-structure)
+* [Local Development](#local-development)
+* [Maintainer & Contact](#maintainer--contact)
 
 ---
 
-## 🌐 Live Platform & Architecture
+## Live Platform & Architecture
 
 * **Production URL**: [https://artemrivnyi.com/](https://artemrivnyi.com/)
 * **Edge Routing**: AWS Route53 Anycast DNS &rarr; TLS 1.3 Strict &rarr; Render EU-Central (Frankfurt)
@@ -40,7 +40,7 @@ A high-performance, interactive **DevOps & Cloud Systems Portfolio** showcasing 
 
 ---
 
-## 🎯 Core Engineering Objectives
+## Core Engineering Objectives
 
 | Goal | Implementation | Recruiter & Engineering Value |
 | :-- | :-- | :-- |
@@ -51,7 +51,7 @@ A high-performance, interactive **DevOps & Cloud Systems Portfolio** showcasing 
 
 ---
 
-## 🛠️ Tech Stack & Tooling
+## Tech Stack & Tooling
 
 | Domain | Technologies & Standards | Purpose |
 | :-- | :-- | :-- |
@@ -62,7 +62,7 @@ A high-performance, interactive **DevOps & Cloud Systems Portfolio** showcasing 
 
 ---
 
-## ✨ What Makes This Portfolio Unique
+## Key Architectural Highlights
 
 Unlike typical static web resumes, this platform functions as a **living, test-driven distributed system showcase**:
 
@@ -81,7 +81,7 @@ Unlike typical static web resumes, this platform functions as a **living, test-d
 
 ---
 
-## 🔄 CI/CD Pipeline Workflow
+## CI/CD Pipeline Workflow
 
 The repository is protected by an automated GitHub Actions pipeline (`.github/workflows/cicd.yml`) that runs on every pull request and push to `main`:
 
@@ -101,7 +101,7 @@ graph TD
 
 ---
 
-## 📡 Cluster Telemetry & Latency Diagnostics
+## Cluster Telemetry & Latency Diagnostics
 
 The footer **99.9% Uptime** pill launches a live diagnostics modal that runs a real HTTP probe:
 
@@ -115,7 +115,7 @@ The footer **99.9% Uptime** pill launches a live diagnostics modal that runs a r
 
 ---
 
-## 🧪 Automated Testing & Quality Gates
+## Automated Testing & Quality Gates
 
 The test suite covers DOM interactions, state machines, simulation flow engines, keyboard navigators, and theme toggling:
 
@@ -137,7 +137,7 @@ npm run ci
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```text
 personal-page-devops/
@@ -167,7 +167,7 @@ personal-page-devops/
 
 ---
 
-## 🚀 Local Development
+## Local Development
 
 ### Option 1: Docker (Recommended)
 
@@ -197,11 +197,11 @@ npx serve .
 
 ---
 
-## 🧰 Maintainer & Contact
+## Maintainer & Contact
 
 **Artem Rivnyi** &mdash; *DevOps, Cloud Infrastructure & AI Systems Specialist*
 
-* 🌐 **Website**: [artemrivnyi.com](https://artemrivnyi.com)
-* 💼 **LinkedIn**: [linkedin.com/in/artem-rivnyi](https://www.linkedin.com/in/artem-rivnyi/)
-* 📧 **Email**: [artemrivnyi@outlook.com](mailto:artemrivnyi@outlook.com)
-* 💻 **GitHub**: [github.com/ArtemRivnyi](https://github.com/ArtemRivnyi)
+* **Website**: [artemrivnyi.com](https://artemrivnyi.com)
+* **LinkedIn**: [linkedin.com/in/artem-rivnyi](https://www.linkedin.com/in/artem-rivnyi/)
+* **Email**: [artemrivnyi@outlook.com](mailto:artemrivnyi@outlook.com)
+* **GitHub**: [github.com/ArtemRivnyi](https://github.com/ArtemRivnyi)

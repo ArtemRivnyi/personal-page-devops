@@ -2,7 +2,7 @@
 
 Thank you for your interest in improving this project!
 
-## 🚀 Getting Started
+##  Getting Started
 
 1. Fork and clone the repository:
    ```bash
@@ -14,7 +14,7 @@ Thank you for your interest in improving this project!
    npm install
    ```
 
-## 🧪 Testing & Validation
+##  Testing & Validation
 
 Before submitting changes, ensure all linting and test suites pass:
 ```bash
@@ -28,7 +28,7 @@ npm run lint
 npm run lint:css
 ```
 
-## 📝 Code Standards
+##  Code Standards
 
 * **Vanilla Architecture**: Keep the frontend lightweight with vanilla HTML, CSS, and JS (no bulky UI frameworks).
 * **Responsive Design**: Ensure layouts render smoothly across mobile, tablet, and desktop viewports.
