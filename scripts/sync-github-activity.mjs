@@ -16,9 +16,16 @@ async function syncActivity() {
     }
 
     const data = await res.json();
-    const total2026 = data.total?.[2026] || 1034;
-    const formattedTotal = total2026.toLocaleString('en-US');
-    console.log(`✅ Total contributions in 2026: ${formattedTotal}`);
+    const rawTotal = data?.total?.[2026];
+    const parsedTotal = Number.parseInt(rawTotal, 10);
+
+    // Security check: validate that API response is a legitimate positive integer
+    if (Number.isNaN(parsedTotal) || parsedTotal < 0 || parsedTotal > 1000000) {
+        throw new Error(`Invalid or suspicious contribution total received from API: ${rawTotal}`);
+    }
+
+    const formattedTotal = parsedTotal.toLocaleString('en-US');
+    console.log(`✅ Total contributions in 2026 (validated): ${formattedTotal}`);
 
     // Update index.html counter badges
     const indexPath = path.join(rootDir, 'index.html');

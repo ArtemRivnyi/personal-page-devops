@@ -18,10 +18,19 @@ resource "aws_s3_bucket_website_configuration" "portfolio_website" {
 resource "aws_s3_bucket_public_access_block" "portfolio_website" {
   bucket = aws_s3_bucket.portfolio_website.id
 
-  block_public_acls       = false
-  block_public_policy     = false
-  ignore_public_acls      = false
-  restrict_public_buckets = false
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+# CloudFront Origin Access Control (OAC) for secure S3 origin
+resource "aws_cloudfront_origin_access_control" "oac" {
+  name                              = "s3-portfolio-oac"
+  description                       = "OAC for static portfolio S3 bucket"
+  origin_access_control_origin_type = "s3"
+  signing_behavior                  = "always"
+  signing_protocol                  = "sigv4"
 }
 
 resource "aws_s3_bucket_policy" "portfolio_website" {
@@ -31,23 +40,31 @@ resource "aws_s3_bucket_policy" "portfolio_website" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid       = "PublicReadGetObject"
+        Sid       = "AllowCloudFrontServicePrincipalReadOnly"
         Effect    = "Allow"
-        Principal = "*"
-        Action    = "s3:GetObject"
-        Resource  = "${aws_s3_bucket.portfolio_website.arn}/*"
+        Principal = {
+          Service = "cloudfront.amazonaws.com"
+        }
+        Action   = "s3:GetObject"
+        Resource = "${aws_s3_bucket.portfolio_website.arn}/*"
+        Condition = {
+          StringEquals = {
+            "AWS:SourceArn" = aws_cloudfront_distribution.s3_distribution.arn
+          }
+        }
       },
     ]
   })
-  
+
   depends_on = [aws_s3_bucket_public_access_block.portfolio_website]
 }
 
 # CloudFront Distribution for CDN
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
-    domain_name = aws_s3_bucket.portfolio_website.bucket_regional_domain_name
-    origin_id   = "S3-${aws_s3_bucket.portfolio_website.bucket}"
+    domain_name              = aws_s3_bucket.portfolio_website.bucket_regional_domain_name
+    origin_id                = "S3-${aws_s3_bucket.portfolio_website.bucket}"
+    origin_access_control_id = aws_cloudfront_origin_access_control.oac.id
   }
 
   enabled             = true

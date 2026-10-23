@@ -17,24 +17,24 @@ A high-performance, interactive **DevOps & Cloud Systems Portfolio** showcasing 
 
 ## 📝 Table of Contents
 
-*   [🌐 Live Platform & Architecture](#-live-platform--architecture)
-*   [🎯 Core Engineering Objectives](#-core-engineering-objectives)
-*   [🛠️ Tech Stack & Tooling](#-tech-stack--tooling)
-*   [✨ What Makes This Portfolio Unique](#-what-makes-this-portfolio-unique)
-*   [🔄 CI/CD Pipeline Workflow](#-cicd-pipeline-workflow)
-*   [📡 Cluster Telemetry & Latency Diagnostics](#-cluster-telemetry--latency-diagnostics)
-*   [🧪 Automated Testing & Quality Gates](#-automated-testing--quality-gates)
-*   [📁 Repository Structure](#-repository-structure)
-*   [🚀 Local Development](#-local-development)
-*   [🧰 Maintainer & Contact](#-maintainer--contact)
+* [🌐 Live Platform & Architecture](#-live-platform--architecture)
+* [🎯 Core Engineering Objectives](#-core-engineering-objectives)
+* [🛠️ Tech Stack & Tooling](#%EF%B8%8F-tech-stack--tooling)
+* [✨ What Makes This Portfolio Unique](#-what-makes-this-portfolio-unique)
+* [🔄 CI/CD Pipeline Workflow](#-cicd-pipeline-workflow)
+* [📡 Cluster Telemetry & Latency Diagnostics](#-cluster-telemetry--latency-diagnostics)
+* [🧪 Automated Testing & Quality Gates](#-automated-testing--quality-gates)
+* [📁 Repository Structure](#-repository-structure)
+* [🚀 Local Development](#-local-development)
+* [🧰 Maintainer & Contact](#-maintainer--contact)
 
 ---
 
 ## 🌐 Live Platform & Architecture
 
-*   **Production URL**: [https://artemrivnyi.com/](https://artemrivnyi.com/)
-*   **Edge Routing**: AWS Route53 Anycast DNS &rarr; TLS 1.3 Strict &rarr; Render EU-Central (Frankfurt)
-*   **Origin Container**: Nginx 1.25 Alpine running inside hardened Docker container
+* **Production URL**: [https://artemrivnyi.com/](https://artemrivnyi.com/)
+* **Edge Routing**: AWS Route53 Anycast DNS &rarr; TLS 1.3 Strict &rarr; Render EU-Central (Frankfurt)
+* **Origin Container**: Nginx 1.25 Alpine running inside hardened Docker container
 
 ![Portfolio Screenshot](./assets/Portfolio_Screenshot.png)
 
@@ -70,8 +70,8 @@ Unlike typical static web resumes, this platform functions as a **living, test-d
    Case studies (`/docs/case-study-*.html`) feature an animated request-flow engine with in-place node status transitions (`Processing &bull; In Flight &rarr; 200 OK / Verified`), branch path illumination, and single-click return navigation with session scroll restoration.
 2. **Dual-Action CV Access**:
    Hero CTA splits into:
-   - **View CV**: Opens a responsive, search-engine indexed, print-friendly interactive HTML resume in-browser with zero download requirements.
-   - **Download PDF**: Instant 1MB single-page formatted PDF download for corporate ATS platforms.
+   * **View CV**: Opens a responsive, search-engine indexed, print-friendly interactive HTML resume in-browser with zero download requirements.
+   * **Download PDF**: Instant 1MB single-page formatted PDF download for corporate ATS platforms.
 3. **Interactive DevOps Terminal**:
    Pressing the backtick key (`` ` ``) or clicking the terminal trigger opens an embedded Linux-style CLI supporting commands (`help`, `status`, `docker ps`, `clear`, `exit`).
 4. **Command Palette (`Ctrl+K` / `⌘K`)**:
@@ -89,7 +89,7 @@ The repository is protected by an automated GitHub Actions pipeline (`.github/wo
 graph TD
     A[Git Push to main] --> B[GitHub Actions Runner]
     B --> C[ESLint & Stylelint Quality Check]
-    C --> D[HTML5 Semantic & Accessibility Validation]
+    B --> D[HTML5 Semantic & Accessibility Validation]
     D --> E[Jest Test Suite: 75 Passed Tests]
     E --> F{All Checks Pass?}
     F -->|Yes| G[Docker Production Build]
@@ -105,13 +105,13 @@ graph TD
 
 The footer **99.9% Uptime** pill launches a live diagnostics modal that runs a real HTTP probe:
 
-- **What is measured**: Application-layer (Layer 7) HTTP HEAD request to `/favicon.ico` with `cache: 'no-store'`.
-- **Components measured**: DNS lookup + TCP handshake + TLS 1.3 cryptographic negotiation + Nginx Docker proxy dispatch + browser JavaScript event loop resolution.
-- **Why it differs from ICMP ping**: ICMP pings operate at Layer 3/4 via OS kernel packets and ignore web server load and TLS handshakes. Layer 7 RTT measures real visitor perception.
-- **Typical benchmarks**:
-  - **EU / UK**: 45–120ms (near Frankfurt origin)
-  - **Eastern Europe**: 90–220ms
-  - **US / Transatlantic**: 180–360ms
+* **What is measured**: Application-layer (Layer 7) HTTP HEAD request to `/favicon.ico` with `cache: 'no-store'`.
+* **Components measured**: DNS lookup + TCP handshake + TLS 1.3 cryptographic negotiation + Nginx Docker proxy dispatch + browser JavaScript event loop resolution.
+* **Why it differs from ICMP ping**: ICMP pings operate at Layer 3/4 via OS kernel packets and ignore web server load and TLS handshakes. Layer 7 RTT measures real visitor perception.
+* **Typical benchmarks**:
+  * **EU / UK**: 45–120ms (near Frankfurt origin)
+  * **Eastern Europe**: 90–220ms
+  * **US / Transatlantic**: 180–360ms
 
 ---
 
@@ -130,9 +130,10 @@ npm test
 npm run ci
 ```
 
-### Coverage Overview:
-- `script.exports.js`: Matrix rain canvas, theme switcher, GitHub heatmap rendering, terminal emulator, command palette, health probe modal, architecture navigation scroll restoration.
-- `case-study.js`: Architecture flow simulation lifecycle, node status badges, branch illumination, clipboard copy API with fallback.
+### Coverage Overview
+
+* `script.exports.js`: Matrix rain canvas, theme switcher, GitHub heatmap rendering, terminal emulator, command palette, health probe modal, architecture navigation scroll restoration.
+* `case-study.js`: Architecture flow simulation lifecycle, node status badges, branch illumination, clipboard copy API with fallback.
 
 ---
 
@@ -144,13 +145,14 @@ personal-page-devops/
 │   └── cicd.yml           # Automated CI/CD pipeline
 ├── assets/                # Optimized architecture diagrams & screenshots
 ├── docs/
-│   ├── Artem.Rivnyi.CV.html           # Interactive in-browser CV (Zero download)
-│   ├── Artem.Rivnyi.CV.pdf            # ATS-friendly downloadable resume
-│   ├── case-study-car-scout.html      # UA-IE Car Scout case study
-│   ├── case-study-dual-llm.html       # Dual-LLM classifier case study
-│   ├── case-study-s3-simulator.html   # AWS S3 simulator & MinIO case study
-│   ├── case-study.css                 # Dedicated case study styling & responsive layout
-│   └── case-study.js                  # Architecture simulation engine & back navigation
+│   ├── Artem.Rivnyi.CV.html                  # Interactive in-browser CV (Zero download)
+│   ├── Artem.Rivnyi.CV.pdf                   # ATS-friendly downloadable resume
+│   ├── ai-email-support-architecture.html    # AI Email Support Architecture case study
+│   ├── aws-s3-simulator-architecture.html    # AWS S3 simulator & MinIO case study
+│   ├── dual-llm-failover-architecture.html   # Dual-LLM classifier case study
+│   ├── ua-ie-car-scout-architecture.html     # UA-IE Car Scout case study
+│   ├── case-study.css                        # Dedicated case study styling & responsive layout
+│   └── case-study.js                         # Architecture simulation engine & back navigation
 ├── tests/
 │   └── script.test.js     # 75 Jest unit tests
 ├── Dockerfile             # Production multi-stage Nginx container
@@ -199,7 +201,7 @@ npx serve .
 
 **Artem Rivnyi** &mdash; *DevOps, Cloud Infrastructure & AI Systems Specialist*
 
-*   🌐 **Website**: [artemrivnyi.com](https://artemrivnyi.com)
-*   💼 **LinkedIn**: [linkedin.com/in/artem-rivnyi](https://www.linkedin.com/in/artem-rivnyi/)
-*   📧 **Email**: [artemrivnyi@outlook.com](mailto:artemrivnyi@outlook.com)
-*   💻 **GitHub**: [github.com/ArtemRivnyi](https://github.com/ArtemRivnyi)
+* 🌐 **Website**: [artemrivnyi.com](https://artemrivnyi.com)
+* 💼 **LinkedIn**: [linkedin.com/in/artem-rivnyi](https://www.linkedin.com/in/artem-rivnyi/)
+* 📧 **Email**: [artemrivnyi@outlook.com](mailto:artemrivnyi@outlook.com)
+* 💻 **GitHub**: [github.com/ArtemRivnyi](https://github.com/ArtemRivnyi)
