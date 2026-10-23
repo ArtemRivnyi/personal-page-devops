@@ -47,7 +47,7 @@ A high-performance, interactive **DevOps & Cloud Systems Portfolio** showcasing 
 | **Interactive Architecture Simulations** | Custom simulation engine in case studies demonstrating request packet travel across microservices. | Eliminates static text diagrams; demonstrates real systems thinking and step-by-step failure/recovery flows. |
 | **2K Macro-Typography Architecture Blueprints** | Bento-style 2K Retina showcase cards with high-contrast macro typography and interactive Lightbox modal zoom. | Instant scannability on 2K/4K displays and mobile viewports with zero squinting; inspectable system diagrams. |
 | **Frictionless Recruiter Experience** | Dual-choice Hero CTA: View interactive HTML CV directly in browser without downloading vs. 1-click PDF download. | Zero friction for hiring teams reviewing credentials on mobile or locked-down corporate laptops. |
-| **Production Telemetry & Transparency** | Live modal measuring real Layer 7 HTTP fetch roundtrip to Frankfurt origin, backed by dual GA4 and Microsoft Clarity. | Transparent, verifiable infrastructure health; proves deep understanding of networking vs. synthetic ICMP pings. |
+| **Production Telemetry & Transparency** | Live modal measuring real Layer 7 HTTP fetch roundtrip to Frankfurt origin with latency breakdown and SLA transparency. | Transparent, verifiable infrastructure health; proves deep understanding of networking vs. synthetic ICMP pings. |
 | **Zero-Flake CI/CD Gates** | Automated pipeline executing 78 Jest unit tests, ESLint, Stylelint, and HTML-validate on every commit. | 100% automated quality assurance from commit to zero-downtime deployment. |
 
 ---
