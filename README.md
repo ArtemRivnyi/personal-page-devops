@@ -1,7 +1,7 @@
 # Personal Portfolio & Cloud Infrastructure Showcase
 
 [![CI/CD Pipeline](https://github.com/ArtemRivnyi/personal-page-devops/actions/workflows/cicd.yml/badge.svg)](https://github.com/ArtemRivnyi/personal-page-devops/actions)
-![Jest Tests](https://img.shields.io/badge/Tests-75%20Passed-10b981?style=flat-square&logo=jest&logoColor=white)
+![Jest Tests](https://img.shields.io/badge/Tests-78%20Passed-10b981?style=flat-square&logo=jest&logoColor=white)
 ![Code Quality](https://img.shields.io/badge/Code%20Quality-A%2B%20(0%20Lint%20Errors)-4CAF50?style=flat-square)
 ![Live Demo](https://img.shields.io/badge/Live%20Demo-Online-28A745?style=flat-square)
 
@@ -45,9 +45,10 @@ A high-performance, interactive **DevOps & Cloud Systems Portfolio** showcasing 
 | Goal | Implementation | Recruiter & Engineering Value |
 | :-- | :-- | :-- |
 | **Interactive Architecture Simulations** | Custom simulation engine in case studies demonstrating request packet travel across microservices. | Eliminates static text diagrams; demonstrates real systems thinking and step-by-step failure/recovery flows. |
+| **2K Macro-Typography Architecture Blueprints** | Bento-style 2K Retina showcase cards with high-contrast macro typography and interactive Lightbox modal zoom. | Instant scannability on 2K/4K displays and mobile viewports with zero squinting; inspectable system diagrams. |
 | **Frictionless Recruiter Experience** | Dual-choice Hero CTA: View interactive HTML CV directly in browser without downloading vs. 1-click PDF download. | Zero friction for hiring teams reviewing credentials on mobile or locked-down corporate laptops. |
-| **Production Telemetry & Transparency** | Live modal measuring real Layer 7 HTTP fetch roundtrip to Frankfurt origin with latency breakdown and SLA transparency. | Transparent, verifiable infrastructure health; proves deep understanding of networking vs. synthetic ICMP pings. |
-| **Zero-Flake CI/CD Gates** | Automated pipeline executing 75 Jest unit tests, ESLint, Stylelint, and HTML-validate on every commit. | 100% automated quality assurance from commit to zero-downtime deployment. |
+| **Production Telemetry & Transparency** | Live modal measuring real Layer 7 HTTP fetch roundtrip to Frankfurt origin, backed by dual GA4 and Microsoft Clarity. | Transparent, verifiable infrastructure health; proves deep understanding of networking vs. synthetic ICMP pings. |
+| **Zero-Flake CI/CD Gates** | Automated pipeline executing 78 Jest unit tests, ESLint, Stylelint, and HTML-validate on every commit. | 100% automated quality assurance from commit to zero-downtime deployment. |
 
 ---
 
@@ -55,10 +56,10 @@ A high-performance, interactive **DevOps & Cloud Systems Portfolio** showcasing 
 
 | Domain | Technologies & Standards | Purpose |
 | :-- | :-- | :-- |
-| **Infrastructure / DevOps** | Docker, Nginx Alpine, Render, AWS Route53, GitHub Actions | Containerization, reverse proxying, high availability, edge DNS, CI/CD |
+| **Infrastructure / DevOps** | Docker, Nginx Alpine, Render, AWS Route53, Terraform, GitHub Actions | Containerization, reverse proxying, high availability, edge DNS, IaC, CI/CD |
 | **Frontend Architecture** | Modern Vanilla JavaScript (ES2021+), CSS Modern Tokens, Semantic HTML5 | Zero-dependency, blisteringly fast load times (<400ms), 100/100 Lighthouse performance |
-| **Testing & Quality Assurance** | Jest (75 unit tests), ESLint, Stylelint, HTML-Validate | Test-driven state management, style conformity, and accessibility verification |
-| **Case Study Microservices** | NextStep DealShop, Dual-LLM Circuit Breaker, MinIO S3 Sim, Puppeteer Stealth Car Scout | Production case studies with interactive architectural diagrams and incident walkthroughs |
+| **Testing & Quality Assurance** | Jest (78 unit tests), ESLint, Stylelint, HTML-Validate | Test-driven state management, style conformity, and accessibility verification |
+| **Case Study Microservices** | DealShop Marketplace, Dual-LLM Circuit Breaker, MinIO S3 Sim, UA-IE Car Scout | Production case studies with interactive architectural diagrams and incident walkthroughs |
 
 ---
 
@@ -68,16 +69,18 @@ Unlike typical static web resumes, this platform functions as a **living, test-d
 
 1. **Interactive Architecture Simulator**:
    Case studies (`/docs/case-study-*.html`) feature an animated request-flow engine with in-place node status transitions (`Processing &bull; In Flight &rarr; 200 OK / Verified`), branch path illumination, and single-click return navigation with session scroll restoration.
-2. **Dual-Action CV Access**:
+2. **2K Macro-Typography Blueprints & Lightbox Modal**:
+   High-contrast, corporate-grade showcase cards for DealShop, AI Ticket Classifier, CarScout, and S3 Simulator. Clicking any diagram opens an interactive 2K Retina Lightbox modal with keyboard ESC navigation.
+3. **Dual-Action CV Access**:
    Hero CTA splits into:
    * **View CV**: Opens a responsive, search-engine indexed, print-friendly interactive HTML resume in-browser with zero download requirements.
    * **Download PDF**: Instant 1MB single-page formatted PDF download for corporate ATS platforms.
-3. **Interactive DevOps Terminal**:
+4. **Interactive DevOps Terminal**:
    Pressing the backtick key (`` ` ``) or clicking the terminal trigger opens an embedded Linux-style CLI supporting commands (`help`, `status`, `docker ps`, `clear`, `exit`).
-4. **Command Palette (`Ctrl+K` / `⌘K`)**:
+5. **Command Palette (`Ctrl+K` / `⌘K`)**:
    Global keyboard-first navigation modal across case studies, GitHub repositories, and system monitors.
-5. **Real GitHub Heatmap (2024–2026)**:
-   Dynamic year switcher showing 1,002+ verified open-source contributions across 53 weeks.
+6. **Real GitHub Heatmap (2024–2026)**:
+   Dynamic year switcher showing 1,002+ verified open-source contributions across 53 weeks with automated daily CI sync.
 
 ---
 
@@ -90,7 +93,7 @@ graph TD
     A[Git Push to main] --> B[GitHub Actions Runner]
     B --> C[ESLint & Stylelint Quality Check]
     B --> D[HTML5 Semantic & Accessibility Validation]
-    D --> E[Jest Test Suite: 75 Passed Tests]
+    D --> E[Jest Test Suite: 78 Passed Tests]
     E --> F{All Checks Pass?}
     F -->|Yes| G[Docker Production Build]
     F -->|No| H[Pipeline Terminated & Alert Triggered]
@@ -123,7 +126,7 @@ The test suite covers DOM interactions, state machines, simulation flow engines,
 # Run full validation suite (ESLint, Stylelint, HTML-validate)
 npm run validate
 
-# Run Jest unit test suite (75 tests)
+# Run Jest unit test suite (78 tests)
 npm test
 
 # Run full CI workflow locally
@@ -142,27 +145,35 @@ npm run ci
 ```text
 personal-page-devops/
 ├── .github/workflows/
-│   └── cicd.yml           # Automated CI/CD pipeline
-├── assets/                # Optimized architecture diagrams & screenshots
+│   ├── cicd.yml                       # Automated CI/CD & security scanning pipeline
+│   └── daily-heatmap-sync.yml         # Automated GitHub contributions sync cron
+├── assets/                            # Optimized 2K Retina WebP architecture diagrams & media
 ├── docs/
-│   ├── Artem.Rivnyi.CV.html                  # Interactive in-browser CV (Zero download)
-│   ├── Artem.Rivnyi.CV.pdf                   # ATS-friendly downloadable resume
+│   ├── Artem.Rivnyi.CV.html           # Interactive in-browser CV (Zero download)
+│   ├── Artem.Rivnyi.CV.pdf            # ATS-friendly downloadable resume
 │   ├── ai-email-support-architecture.html    # AI Email Support Architecture case study
 │   ├── aws-s3-simulator-architecture.html    # AWS S3 simulator & MinIO case study
 │   ├── dual-llm-failover-architecture.html   # Dual-LLM classifier case study
 │   ├── ua-ie-car-scout-architecture.html     # UA-IE Car Scout case study
-│   ├── case-study.css                        # Dedicated case study styling & responsive layout
-│   └── case-study.js                         # Architecture simulation engine & back navigation
+│   ├── case-study.css                 # Dedicated case study styling & responsive layout
+│   └── case-study.js                  # Architecture simulation engine & back navigation
+├── scripts/
+│   ├── generate_showcase_graphics.py  # 2K Retina macro-typography blueprint generator
+│   └── sync-github-activity.mjs       # Live contribution telemetry fetcher
+├── terraform/                         # Infrastructure as Code templates
 ├── tests/
-│   └── script.test.js     # 75 Jest unit tests
-├── Dockerfile             # Production multi-stage Nginx container
-├── docker-compose.yml     # Local orchestration configuration
-├── index.html             # Main portfolio landing page
-├── nginx.conf             # Hardened Nginx configuration (gzip, security headers, caching)
-├── package.json           # Scripts, engines, and development dependencies
-├── script.exports.js      # ES module exports for test runner
-├── script.js              # Production client-side logic
-└── style.css              # Core responsive stylesheet & modern design tokens
+│   └── script.test.js                 # 78 Jest unit tests (100% passing)
+├── Dockerfile                         # Production multi-stage Nginx container
+├── docker-compose.yml                 # Local orchestration configuration
+├── index.html                         # Main portfolio landing page with 2K Lightbox
+├── llms.txt                           # Standardized entity graph for LLM & AI agents
+├── nginx.conf                         # Hardened Nginx configuration (gzip, CSP, caching)
+├── package.json                       # Scripts, engines, and development dependencies
+├── robots.txt                         # AI crawlers allowlist (GPTBot, ClaudeBot, Perplexity)
+├── script.exports.js                  # ES module exports for test runner
+├── script.js                          # Production client-side logic
+├── sitemap.xml                        # SEO & Search Engine sitemap
+└── style.css                          # Core responsive stylesheet & modern design tokens
 ```
 
 ---
