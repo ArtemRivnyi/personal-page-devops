@@ -9,7 +9,9 @@ body.dark-theme {
     /* @drstudiooo Dark Mode & Elevation Design System */
     --bg-primary: #0d1117;
     --bg-secondary: #161b22;
+    --bg-tertiary: #21262d;
     --bg-elevated: #21262d;
+    --bg-card: #161b22;
     --card-bg: #161b22;
     --card-hover-bg: #1c2128;
     --border-subtle: rgb(240 246 252 / 10%);
@@ -18,6 +20,7 @@ body.dark-theme {
     --text-secondary: #8b949e;
     --text-muted: #6e7681;
     --accent-blue: #38bdf8;
+    --accent-cyan: #38bdf8;
     --accent-hover: #0284c7;
     --accent-green: #3fb950;
     --accent-glow: rgb(56 189 248 / 15%);
@@ -36,15 +39,18 @@ body.light-theme {
     /* Clean Light Mode Architecture */
     --bg-primary: #f8fafc;
     --bg-secondary: #fff;
+    --bg-tertiary: #e2e8f0;
     --bg-elevated: #f1f5f9;
+    --bg-card: #fff;
     --card-bg: #fff;
     --card-hover-bg: #f8fafc;
     --border-subtle: rgb(31 35 40 / 12%);
     --border-hover: rgb(31 35 40 / 24%);
     --text-primary: #0f172a;
     --text-secondary: #475569;
-    --text-muted: #94a3b8;
+    --text-muted: #526071;
     --accent-blue: #0284c7;
+    --accent-cyan: #0284c7;
     --accent-hover: #0369a1;
     --accent-green: #16a34a;
     --accent-glow: rgb(2 132 199 / 15%);
@@ -77,6 +83,26 @@ body {
     overflow-x: hidden;
     max-width: 100vw;
     width: 100%;
+}
+
+/* Accessibility: Skip to Content Link */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    background: var(--accent-blue);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    z-index: 9999;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 12px;
 }
 
 /* Background Matrix Canvas Ambient */
@@ -1035,11 +1061,62 @@ body.light-theme .site-header {
     box-shadow: 0 4px 12px rgb(0 0 0 / 25%);
 }
 
+body:not(.dark-theme) .mini-icon-box,
+body.light-theme .mini-icon-box {
+    background: #f1f5f9;
+    border-color: rgb(31 35 40 / 12%);
+    color: var(--text-primary);
+}
+
+body:not(.dark-theme) .mini-icon-box:hover,
+body.light-theme .mini-icon-box:hover {
+    background: #e2e8f0;
+    border-color: rgb(31 35 40 / 25%);
+    color: var(--accent-blue);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
+}
+
 .mini-icon-box svg {
     width: 15px;
     height: 15px;
     display: block;
     flex-shrink: 0;
+}
+
+/* Adaptive SVG fills and strokes across themes */
+.adaptive-icon-fill {
+    fill: var(--text-primary);
+}
+
+.adaptive-icon-stroke {
+    stroke: var(--text-secondary);
+}
+
+body:not(.dark-theme) .adaptive-icon-stroke,
+body.light-theme .adaptive-icon-stroke {
+    stroke: #334155;
+}
+
+.icon-react-stroke {
+    stroke: #61dafb;
+}
+
+.icon-react-fill {
+    fill: #61dafb;
+}
+
+body:not(.dark-theme) .icon-react-stroke,
+body.light-theme .icon-react-stroke {
+    stroke: #0284c7;
+}
+
+body:not(.dark-theme) .icon-react-fill,
+body.light-theme .icon-react-fill {
+    fill: #0284c7;
+}
+
+.ubuntu-hole {
+    fill: var(--card-bg);
 }
 
 .card-links-row {

@@ -21,13 +21,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="case-study.css?v=2026.10.21.5">
-    <style>
-      .case-study-footer-actions { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 24px; padding: 16px 20px; background: rgba(22, 27, 34, 0.8); border: 1px solid rgba(240, 246, 252, 0.1); border-radius: 10px; }
-      .cs-actions-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-      .cs-btn-primary { background: #1f6feb; color: #fff !important; border: 1px solid #388bfd; padding: 9px 20px; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 0.88rem; box-shadow: 0 4px 14px rgba(31, 111, 235, 0.35); }
-      .cs-btn-secondary { background: rgba(240, 246, 252, 0.06); color: #f0f6fc !important; border: 1px solid rgba(240, 246, 252, 0.1); padding: 8px 16px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; }
-      .cs-btn-ghost { background: transparent; border: 1px solid rgba(240, 246, 252, 0.15); color: #8b949e; padding: 8px 14px; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-family: inherit; }
-    </style>
 
     <!-- Google Analytics 4 (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-K6EZQYRLEL"></script>
@@ -65,8 +58,22 @@
             <a href="../index.html#case-study" class="back-link">
                 ← Back to artemrivnyi.com
             </a>
-            <span class="badge-category">Production Case Study</span>
+            <div class="header-nav-right">
+                <span class="badge-category">Production Case Study</span>
+                <button type="button" class="cs-theme-toggle-btn" aria-label="Toggle theme" title="Toggle theme"></button>
+            </div>
         </header>
+
+        <!-- Quick Switcher Between All 4 Case Studies -->
+        <nav class="case-study-quick-nav" aria-label="Architecture case studies switcher">
+            <span class="cs-quick-nav-label">Case Studies:</span>
+            <div class="cs-quick-nav-pills">
+                <a href="dual-llm-failover-architecture.html" class="cs-quick-pill">⚡ Dual-LLM Resilience</a>
+                <a href="ua-ie-car-scout-architecture.html" class="cs-quick-pill active">🚗 UA-IE Car Scout</a>
+                <a href="aws-s3-simulator-architecture.html" class="cs-quick-pill">📦 AWS S3 Simulator</a>
+                <a href="ai-email-support-architecture.html" class="cs-quick-pill">🤖 AI Support Agent</a>
+            </div>
+        </nav>
 
         <article>
             <h1>UA-IE Car Scout: Cross-Border Market Intelligence &amp; Real-Time Tax Clearance Engine</h1>
