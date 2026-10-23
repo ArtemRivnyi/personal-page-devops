@@ -861,10 +861,10 @@ body.light-theme .site-header {
 
 .phone-mockup {
     position: relative;
-    height: 94%;
-    max-height: 255px;
+    width: 126px;
+    height: 255px;
+    flex: 0 0 126px;
     aspect-ratio: 9 / 19.5;
-    width: auto;
     border-radius: 26px;
     border: 3px solid #27272a;
     background: #000;
