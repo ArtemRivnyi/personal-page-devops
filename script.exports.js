@@ -1892,6 +1892,50 @@ function initFeaturedVideo() {
 
     video.muted = true;
 
+    const soundBtn = document.getElementById('featured-sound-btn');
+    if (soundBtn) {
+        soundBtn.addEventListener('click', () => {
+            const isMuted = video.muted;
+            if (isMuted) {
+                if (!video.src || !video.src.includes('byour_intro_full.mp4')) {
+                    const currentTime = video.currentTime || 0;
+                    video.src = 'assets/byour_intro_full.mp4';
+                    try {
+                        video.currentTime = currentTime;
+                    } catch {
+                        // Ignore restricted playback in test envs
+                    }
+                }
+                video.muted = false;
+                video.volume = 1.0;
+                if (typeof video.play === 'function') {
+                    const playPromise = video.play();
+                    if (playPromise && typeof playPromise.catch === 'function') {
+                        playPromise.catch(() => {});
+                    }
+                }
+                soundBtn.classList.add('sound-active');
+                soundBtn.setAttribute('aria-label', 'Mute video sound');
+                const mutedIcon = soundBtn.querySelector('.sound-icon-muted');
+                const onIcon = soundBtn.querySelector('.sound-icon-on');
+                const label = soundBtn.querySelector('.sound-btn-text');
+                if (mutedIcon) mutedIcon.setAttribute('hidden', '');
+                if (onIcon) onIcon.removeAttribute('hidden');
+                if (label) label.textContent = 'Sound On';
+            } else {
+                video.muted = true;
+                soundBtn.classList.remove('sound-active');
+                soundBtn.setAttribute('aria-label', 'Unmute video sound');
+                const mutedIcon = soundBtn.querySelector('.sound-icon-muted');
+                const onIcon = soundBtn.querySelector('.sound-icon-on');
+                const label = soundBtn.querySelector('.sound-btn-text');
+                if (mutedIcon) mutedIcon.removeAttribute('hidden');
+                if (onIcon) onIcon.setAttribute('hidden', '');
+                if (label) label.textContent = 'Sound Off';
+            }
+        });
+    }
+
     if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {

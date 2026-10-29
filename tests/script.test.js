@@ -596,6 +596,45 @@ describe('initFeaturedVideo', () => {
     observerCallback([{ isIntersecting: true }]);
     observerCallback([{ isIntersecting: false }]);
   });
+
+  test('should toggle sound on and off when featured-sound-btn is clicked', () => {
+    const video = document.createElement('video');
+    video.className = 'featured-video';
+    video.src = 'assets/byour_demo.mp4';
+    video.play = () => Promise.resolve();
+    video.pause = () => {};
+    document.body.appendChild(video);
+
+    const soundBtn = document.createElement('button');
+    soundBtn.id = 'featured-sound-btn';
+    soundBtn.innerHTML = `
+      <svg class="sound-icon-muted"></svg>
+      <svg class="sound-icon-on" hidden></svg>
+      <span class="sound-btn-text">Sound Off</span>
+    `;
+    document.body.appendChild(soundBtn);
+
+    initFeaturedVideo();
+
+    expect(video.muted).toBe(true);
+
+    // Click to unmute
+    soundBtn.click();
+    expect(video.muted).toBe(false);
+    expect(video.src).toContain('byour_intro_full.mp4');
+    expect(soundBtn.classList.contains('sound-active')).toBe(true);
+    expect(soundBtn.querySelector('.sound-btn-text').textContent).toBe('Sound On');
+    expect(soundBtn.querySelector('.sound-icon-muted').hasAttribute('hidden')).toBe(true);
+    expect(soundBtn.querySelector('.sound-icon-on').hasAttribute('hidden')).toBe(false);
+
+    // Click to mute again
+    soundBtn.click();
+    expect(video.muted).toBe(true);
+    expect(soundBtn.classList.contains('sound-active')).toBe(false);
+    expect(soundBtn.querySelector('.sound-btn-text').textContent).toBe('Sound Off');
+    expect(soundBtn.querySelector('.sound-icon-muted').hasAttribute('hidden')).toBe(false);
+    expect(soundBtn.querySelector('.sound-icon-on').hasAttribute('hidden')).toBe(true);
+  });
 });
 
 describe('initGitHubHeatmap', () => {
