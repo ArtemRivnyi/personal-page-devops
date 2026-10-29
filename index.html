@@ -98,7 +98,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=30">
+    <link rel="stylesheet" href="style.css?v=31">
 
     <!-- Google Analytics 4 (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-K6EZQYRLEL"></script>
@@ -282,14 +282,20 @@
         <section class="section-block" id="featured">
             <div class="featured-showcase-card project">
                 <div class="featured-media-side">
-                    <div class="featured-preview-box">
+                    <div class="featured-preview-box lightbox-trigger" data-target="assets/byour_intro_full.mp4" data-caption="BYOUR Platform — Minerva AI Intelligent Hiring Infrastructure (Official Walkthrough)" data-alt="BYOUR Platform Full Walkthrough Video" title="Click to watch full BYOUR walkthrough video">
                         <video class="featured-img featured-video" width="960" height="540" loop muted playsinline poster="assets/byour_demo_poster.webp" preload="metadata">
                             <source src="assets/byour_demo.mp4" type="video/mp4">
                             <img src="assets/byour_demo_poster.webp" alt="BYOUR Platform — Minerva AI Applicant Ranking Demo" class="featured-img" width="960" height="540" loading="lazy">
                         </video>
-                        <div class="preview-overlay-badge">LIVE PLATFORM</div>
-                        <button type="button" class="preview-play-badge lightbox-trigger" data-target="assets/byour_intro_full.mp4" data-caption="BYOUR Platform — Minerva AI Intelligent Hiring Infrastructure (Official Walkthrough)" data-alt="BYOUR Platform Full Walkthrough Video" aria-label="Watch full BYOUR walkthrough video">
-                            <span class="play-icon-glow" aria-hidden="true"></span>
+                        <div class="preview-hover-play" aria-hidden="true">
+                            <span class="preview-hover-circle">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="featured-media-footer">
+                        <span class="live-pulse-badge"><span class="live-pulse-dot" aria-hidden="true"></span>LIVE PLATFORM</span>
+                        <button type="button" class="media-walkthrough-btn lightbox-trigger" data-target="assets/byour_intro_full.mp4" data-caption="BYOUR Platform — Minerva AI Intelligent Hiring Infrastructure (Official Walkthrough)" data-alt="BYOUR Platform Full Walkthrough Video" aria-label="Watch full BYOUR walkthrough video">
                             <svg class="play-icon-svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
                             <span>Watch Walkthrough (1:00)</span>
                         </button>
@@ -1982,7 +1988,7 @@ Type <span class="cli-cmd-hint">'help'</span>, <span class="cli-cmd-hint">'neofe
         </div>
     </div>
 
-    <script src="script.js?v=28"></script>
+    <script src="script.js?v=29"></script>
 </body>
 
 </html>
