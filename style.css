@@ -765,8 +765,8 @@ body.light-theme .live-pulse-dot {
     background: rgb(15 23 42 / 85%);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    color: #94a3b8;
-    border: 1px solid rgb(56 189 248 / 30%);
+    color: #f8fafc;
+    border: 1px solid rgb(56 189 248 / 35%);
     border-radius: 9999px;
     padding: 5px 12px;
     font-size: 0.75rem;
@@ -774,6 +774,8 @@ body.light-theme .live-pulse-dot {
     cursor: pointer;
     box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .media-sound-btn:hover,
@@ -786,13 +788,21 @@ body.light-theme .live-pulse-dot {
 }
 
 .media-sound-btn.sound-active {
-    background: rgb(14 165 233 / 20%);
+    background: rgb(14 165 233 / 25%);
     border-color: #38bdf8;
     color: #38bdf8;
 }
 
 .sound-icon {
     flex-shrink: 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.sound-icon[hidden],
+.sound-icon-on[hidden],
+.sound-icon-muted[hidden] {
+    display: none !important;
 }
 
 body.light-theme .media-walkthrough-btn {

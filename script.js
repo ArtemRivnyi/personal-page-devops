@@ -2086,8 +2086,8 @@ function initFeaturedVideo() {
                 const mutedIcon = soundBtn.querySelector('.sound-icon-muted');
                 const onIcon = soundBtn.querySelector('.sound-icon-on');
                 const label = soundBtn.querySelector('.sound-btn-text');
-                if (mutedIcon) mutedIcon.removeAttribute('hidden');
-                if (onIcon) onIcon.setAttribute('hidden', '');
+                if (mutedIcon) { mutedIcon.removeAttribute('hidden'); mutedIcon.style.display = 'inline-block'; }
+                if (onIcon) { onIcon.setAttribute('hidden', ''); onIcon.style.display = 'none'; }
                 if (label) label.textContent = 'Sound Off';
             }
         });
