@@ -1,25 +1,23 @@
-# Stage 1: Build and Test
-FROM node:18-alpine AS builder
+# Stage 1: Validate Static Assets & Quality Gates
+FROM node:22-alpine AS builder
 
 WORKDIR /build
 
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production && npm cache clean --force
+# Install dependencies for validation gate
+RUN npm ci
 
-# Copy source files
+# Copy source files and verify lint/HTML/CSS invariants
 COPY . .
+RUN npm run validate
 
-# Stage 2: Production Image
-FROM nginx:alpine
+# Stage 2: Hardened Production Image
+FROM nginx:1.27-alpine-slim
 
-# Install security updates
-RUN apk upgrade --no-cache
-
-# Remove default nginx files
-RUN rm -rf /usr/share/nginx/html/*
+# Install security updates & remove default nginx files
+RUN apk upgrade --no-cache && rm -rf /usr/share/nginx/html/*
 
 # Copy static files from builder
 COPY --from=builder /build/index.html /usr/share/nginx/html/

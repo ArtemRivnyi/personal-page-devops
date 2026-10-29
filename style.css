@@ -598,6 +598,17 @@ body.light-theme .site-header {
     overflow: hidden;
     border: 1px solid var(--border-subtle);
     background: #000;
+    aspect-ratio: 16 / 9;
+}
+
+.featured-preview-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgb(56 189 248 / 12%) 1px, transparent 1px);
+    background-size: 4px 4px;
+    pointer-events: none;
+    opacity: 45%;
 }
 
 .featured-img {
@@ -1470,6 +1481,15 @@ body.light-theme .kpi-chip {
     box-shadow: 0 16px 40px rgb(0 0 0 / 55%);
 }
 
+.stacked-cards-wrapper:focus {
+    outline: none;
+}
+
+.stacked-cards-wrapper:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 3px;
+}
+
 .stacked-card {
     position: absolute;
     inset: 0;
@@ -1557,8 +1577,8 @@ body.light-theme .kpi-chip {
     background: var(--bg-secondary);
     border: 1px solid var(--border-subtle);
     color: var(--text-primary);
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
@@ -1589,6 +1609,9 @@ body.light-theme .kpi-chip {
     cursor: pointer;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    min-width: 58px;
+    font-variant-numeric: tabular-nums;
     gap: 6px;
     transition: all 0.2s ease;
     -webkit-user-select: none;
@@ -1612,6 +1635,7 @@ body.light-theme .kpi-chip {
 }
 
 .stack-dot {
+    position: relative;
     width: 7px;
     height: 7px;
     border-radius: 50%;
@@ -1620,6 +1644,12 @@ body.light-theme .kpi-chip {
     padding: 0;
     cursor: pointer;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stack-dot::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
 }
 
 .stack-dot:hover {
@@ -1638,6 +1668,37 @@ body.light-theme .kpi-chip {
     font-size: 0.74rem;
     color: var(--text-muted);
     margin-top: 8px;
+}
+
+.stack-hint .hint-touch {
+    display: none;
+}
+
+.stack-hint .hint-desktop {
+    display: inline;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .stack-nav-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .stack-hint .hint-desktop {
+        display: none;
+    }
+
+    .stack-hint .hint-touch {
+        display: inline;
+    }
+
+    .chat-input-bar input,
+    .cmd-input,
+    .cli-input-field,
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 1rem;
+    }
 }
 
 /* Visually Hidden Suite Container (Keeps 100% Jest compatibility without visual clutter) */
@@ -2542,7 +2603,7 @@ body.light-theme .kpi-chip {
 /* FLOATING CHAT WIDGET (@onlyrenbl frame_40s) */
 .floating-chat-container {
     position: fixed;
-    bottom: 24px;
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
     right: 24px;
     z-index: 999;
 }
@@ -2574,6 +2635,8 @@ body.light-theme .kpi-chip {
     right: 0;
     width: 360px;
     height: 480px;
+    max-height: calc(100vh - 96px);
+    max-height: calc(100dvh - 96px);
     background: var(--card-bg);
     border: 1px solid var(--border-subtle);
     border-radius: 16px;
@@ -2685,6 +2748,7 @@ body.light-theme .kpi-chip {
 .chat-messages {
     flex: 1;
     overflow-y: auto;
+    overscroll-behavior: contain;
     padding: 16px;
     display: flex;
     flex-direction: column;
@@ -2842,14 +2906,90 @@ body.light-theme .kpi-chip {
 
 .lightbox-close {
     position: absolute;
-    top: -40px;
+    top: -44px;
     right: 0;
-    background: transparent;
-    border: none;
-    color: #fff;
-    font-size: 2rem;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgb(22 27 34 / 85%);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
     cursor: pointer;
     line-height: 1;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.lightbox-close:hover {
+    background: var(--bg-elevated);
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+    transform: scale(1.08);
+}
+
+.lightbox-close:focus {
+    outline: none;
+}
+
+.lightbox-close:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+}
+
+.lightbox-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgb(22 27 34 / 85%);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.lightbox-nav-btn[hidden] {
+    display: none;
+}
+
+.lightbox-prev-btn {
+    left: -58px;
+}
+
+.lightbox-next-btn {
+    right: -58px;
+}
+
+.lightbox-nav-btn:hover {
+    background: var(--bg-elevated);
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-nav-btn:focus {
+    outline: none;
+}
+
+.lightbox-nav-btn:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
 }
 
 .lightbox-image-wrap {
@@ -2888,7 +3028,7 @@ body.light-theme .kpi-chip {
     font-size: 0.88rem;
     font-weight: 500;
     box-shadow: 0 8px 30px rgb(0 0 0 / 40%);
-    z-index: 1000;
+    z-index: 1010;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -3040,7 +3180,7 @@ body.light-theme .kpi-chip {
     margin-right: 4px;
 }
 
-@media (width <= 768px), (height <= 480px) {
+@media (width <= 1024px), (height <= 500px) {
     .section-nav-rail {
         display: none;
     }
@@ -3127,7 +3267,7 @@ body.light-theme .kpi-chip {
 /* Mobile-only Back to top button (shows on touch screens when rail is hidden) */
 .mobile-back-to-top {
     position: fixed;
-    bottom: 20px;
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
     right: 20px;
     width: 38px;
     height: 38px;
@@ -3173,7 +3313,7 @@ body.light-theme .mobile-back-to-top:hover {
     color: var(--accent-blue);
 }
 
-@media (width <= 768px), (height <= 480px) {
+@media (width <= 1024px), (height <= 500px) {
     .mobile-back-to-top.visible {
         display: flex;
     }
@@ -3246,6 +3386,14 @@ body.light-theme .mobile-back-to-top:hover {
 @media (width <= 768px) {
     .mobile-menu-toggle {
         display: inline-flex;
+    }
+
+    .lightbox-prev-btn {
+        left: 8px;
+    }
+
+    .lightbox-next-btn {
+        right: 8px;
     }
 
     .nav-menu {
@@ -3410,7 +3558,7 @@ body.light-theme .mobile-back-to-top:hover {
     }
 
     .mobile-back-to-top {
-        bottom: 18px;
+        bottom: calc(74px + env(safe-area-inset-bottom, 0px));
         right: 16px;
         width: 38px;
         height: 38px;
@@ -3656,6 +3804,7 @@ body.light-theme .mobile-back-to-top:hover {
 .cmd-results-list {
     flex: 1;
     overflow-y: auto;
+    overscroll-behavior: contain;
     padding: 8px;
     max-height: 380px;
 }
@@ -3794,8 +3943,15 @@ body.light-theme .mobile-back-to-top:hover {
 }
 
 .cli-btn-close {
+    position: relative;
     background: #ff5f56;
     cursor: pointer;
+}
+
+.cli-btn-close::before {
+    content: '';
+    position: absolute;
+    inset: -10px;
 }
 
 .cli-btn-close:hover {
@@ -3823,6 +3979,7 @@ body.light-theme .mobile-back-to-top:hover {
 .cli-terminal-body {
     flex: 1;
     overflow-y: auto;
+    overscroll-behavior: contain;
     padding: 14px 16px;
     font-size: 0.8rem;
     line-height: 1.5;
@@ -3839,6 +3996,33 @@ body.light-theme .mobile-back-to-top:hover {
 .cli-cmd-hint {
     color: #7ee787;
     font-weight: 600;
+}
+
+.cli-quick-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px 16px;
+    background: #121820;
+    border-top: 1px solid #21262d;
+}
+
+.cli-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    padding: 3px 9px;
+    border-radius: 6px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    color: #7ee787;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.cli-chip:hover {
+    background: #21262d;
+    border-color: #58a6ff;
+    color: #f0f6fc;
 }
 
 .cli-input-line {

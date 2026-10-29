@@ -263,15 +263,63 @@ function initLightbox() {
     const caption = document.getElementById('lightbox-caption');
     const closeBtn = document.getElementById('lightbox-close');
     const backdrop = document.getElementById('lightbox-backdrop');
+    const prevBtn = document.getElementById('lightbox-prev-btn');
+    const nextBtn = document.getElementById('lightbox-next-btn');
 
     if (!modal || !img) return;
 
-    function openLightbox(src, alt, captionText) {
-        img.src = src;
-        img.alt = alt || 'Fullscreen preview';
-        if (caption) {
-            caption.textContent = captionText || alt || '';
+    let lastActiveTrigger = null;
+    let galleryItems = [];
+    let galleryIndex = -1;
+
+    const tournamentGalleryItems = [
+        { src: 'assets/tournament/cups_trophies.jpg', alt: 'Official Tournament Trophies with Red Bull', caption: 'Official Trophies • Red Bull & Yalantis Sponsored' },
+        { src: 'assets/tournament/img_1.jpg', alt: 'Windigo Arena Stage & Battlestations', caption: 'Windigo Arena Stage • 100+ LAN Participants' },
+        { src: 'assets/tournament/img_2.jpg', alt: 'Live Matches & Red Bull Awards', caption: 'CS:GO & Dota 2 Finals • Live Broadcast' },
+        { src: 'assets/tournament/img_7.jpg', alt: 'Awards Ceremony', caption: 'Awards Ceremony • University Champions' }
+    ];
+
+    function syncBackgroundStack(idx) {
+        const dots = document.querySelectorAll('.stack-dot');
+        if (dots.length > idx && dots[idx]) {
+            dots[idx].click();
         }
+    }
+
+    function renderGalleryItem(idx) {
+        if (!galleryItems.length) return;
+        galleryIndex = ((idx % galleryItems.length) + galleryItems.length) % galleryItems.length;
+        const current = galleryItems[galleryIndex];
+        img.src = current.src;
+        img.alt = current.alt || 'Fullscreen preview';
+        if (caption) {
+            const baseCaption = current.caption || current.alt || '';
+            caption.textContent = galleryItems.length > 1
+                ? `[${galleryIndex + 1} / ${galleryItems.length}] ${baseCaption}`
+                : baseCaption;
+        }
+        syncBackgroundStack(galleryIndex);
+    }
+
+    function openLightbox(src, alt, captionText, items = [], activeIdx = -1, triggerEl = null) {
+        lastActiveTrigger = triggerEl || document.activeElement;
+        galleryItems = items;
+        galleryIndex = activeIdx;
+
+        if (galleryItems.length > 1 && galleryIndex >= 0) {
+            if (prevBtn) prevBtn.removeAttribute('hidden');
+            if (nextBtn) nextBtn.removeAttribute('hidden');
+            renderGalleryItem(galleryIndex);
+        } else {
+            if (prevBtn) prevBtn.setAttribute('hidden', '');
+            if (nextBtn) nextBtn.setAttribute('hidden', '');
+            img.src = src;
+            img.alt = alt || 'Fullscreen preview';
+            if (caption) {
+                caption.textContent = captionText || alt || '';
+            }
+        }
+
         modal.removeAttribute('hidden');
         document.body.style.overflow = 'hidden';
         if (closeBtn) closeBtn.focus();
@@ -280,6 +328,9 @@ function initLightbox() {
     function closeLightbox() {
         modal.setAttribute('hidden', '');
         document.body.style.overflow = '';
+        if (lastActiveTrigger && typeof lastActiveTrigger.focus === 'function') {
+            lastActiveTrigger.focus();
+        }
     }
 
     if (closeBtn) {
@@ -290,11 +341,72 @@ function initLightbox() {
         backdrop.addEventListener('click', closeLightbox);
     }
 
+    if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (galleryItems.length > 1) {
+                renderGalleryItem(galleryIndex - 1);
+            }
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (galleryItems.length > 1) {
+                renderGalleryItem(galleryIndex + 1);
+            }
+        });
+    }
+
     document.addEventListener('keydown', (e) => {
-        if (!modal.hasAttribute('hidden') && e.key === 'Escape') {
+        if (modal.hasAttribute('hidden')) return;
+
+        if (e.key === 'Escape') {
             closeLightbox();
+        } else if ((e.key === 'ArrowLeft' || e.key === 'Left') && galleryItems.length > 1) {
+            renderGalleryItem(galleryIndex - 1);
+        } else if ((e.key === 'ArrowRight' || e.key === 'Right') && galleryItems.length > 1) {
+            renderGalleryItem(galleryIndex + 1);
+        } else if (e.key === 'Tab') {
+            const focusable = [closeBtn, prevBtn, nextBtn].filter((el) => el && !el.hasAttribute('hidden'));
+            if (focusable.length > 1) {
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
+            }
         }
     });
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+    modal.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches.length === 1) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }
+    }, { passive: true });
+
+    modal.addEventListener('touchend', (e) => {
+        if (galleryItems.length <= 1) return;
+        if (e.changedTouches && e.changedTouches.length === 1) {
+            const deltaX = e.changedTouches[0].clientX - touchStartX;
+            const deltaY = e.changedTouches[0].clientY - touchStartY;
+            if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
+                if (deltaX < 0) {
+                    renderGalleryItem(galleryIndex + 1);
+                } else {
+                    renderGalleryItem(galleryIndex - 1);
+                }
+            }
+        }
+    }, { passive: true });
 
     // Attach click listeners to all trigger elements
     const triggers = document.querySelectorAll('.lightbox-trigger');
@@ -309,13 +421,25 @@ function initLightbox() {
                 let captionText = alt;
 
                 const parentSlide = trigger.closest ? trigger.closest('.carousel-slide') : null;
+                const parentStacked = trigger.closest ? trigger.closest('.stacked-card') : null;
                 if (parentSlide) {
                     const slideCaption = parentSlide.querySelector('.carousel-caption');
                     if (slideCaption) {
                         captionText = slideCaption.textContent.trim();
                     }
+                } else if (parentStacked) {
+                    const stackedCaption = parentStacked.querySelector('.stacked-card-caption span:first-child');
+                    if (stackedCaption) {
+                        captionText = stackedCaption.textContent.trim();
+                    }
                 }
-                openLightbox(src, alt, captionText);
+
+                const tourneyIdx = tournamentGalleryItems.findIndex((item) => src && (src.includes(item.src) || item.src.includes(src)));
+                if (tourneyIdx !== -1) {
+                    openLightbox(src, alt, captionText, tournamentGalleryItems, tourneyIdx, trigger);
+                } else {
+                    openLightbox(src, alt, captionText, [], -1, trigger);
+                }
             } else if (trigger.dataset && trigger.dataset.target) {
                 const src = trigger.dataset.target;
                 let alt = trigger.dataset.alt || (trigger.textContent ? trigger.textContent.trim() : 'Preview');
@@ -328,7 +452,7 @@ function initLightbox() {
                         captionText = alt;
                     }
                 }
-                openLightbox(src, alt, captionText);
+                openLightbox(src, alt, captionText, [], -1, trigger);
             }
         });
     });
@@ -736,26 +860,43 @@ function initStackedCards() {
     const nextBtn = document.getElementById('stack-next-btn');
     const shuffleBtn = document.getElementById('stack-shuffle-btn');
     const dots = document.querySelectorAll('.stack-dot');
+    const counterText = document.getElementById('stack-counter-text');
 
     const classes = ['card-pos-1', 'card-pos-2', 'card-pos-3', 'card-pos-4'];
 
+    function getCardLogicalIndex(card) {
+        if (card.dataset.index !== undefined) {
+            const parsed = parseInt(card.dataset.index, 10);
+            if (!Number.isNaN(parsed)) return parsed;
+        }
+        return cards.indexOf(card);
+    }
+
     function updateDots() {
-        if (!dots.length) return;
         const topCard = cards.find((c) => c.classList.contains('card-pos-1'));
-        if (topCard && topCard.dataset.index !== undefined) {
-            const activeIdx = parseInt(topCard.dataset.index, 10);
+        if (!topCard) return;
+        const activeIdx = getCardLogicalIndex(topCard);
+        if (activeIdx < 0) return;
+
+        if (dots.length) {
             dots.forEach((dot, idx) => {
-                dot.classList.toggle('active', idx === activeIdx);
+                const isActive = idx === activeIdx;
+                dot.classList.toggle('active', isActive);
+                dot.setAttribute('aria-current', isActive ? 'true' : 'false');
             });
+        }
+        if (counterText) {
+            counterText.textContent = `${activeIdx + 1} / ${cards.length}`;
         }
     }
 
     function cycleCards(step = 1) {
+        const len = classes.length;
         cards.forEach((card) => {
-            for (let i = 0; i < classes.length; i++) {
+            for (let i = 0; i < len; i++) {
                 if (card.classList.contains(classes[i])) {
                     card.classList.remove(classes[i]);
-                    const nextIdx = ((i + step) % classes.length + classes.length) % classes.length;
+                    const nextIdx = ((i - step) % len + len) % len;
                     card.classList.add(classes[nextIdx]);
                     break;
                 }
@@ -763,6 +904,17 @@ function initStackedCards() {
         });
         updateDots();
     }
+
+    // Track swipe timestamp to suppress synthesized mobile ghost-clicks
+    let lastSwipeTime = 0;
+
+    stack.addEventListener('click', (e) => {
+        if (Date.now() - lastSwipeTime < 350) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+        }
+    }, true);
 
     // 1. Stack / caption click (preserves test requirement: if img, return)
     stack.addEventListener('click', (e) => {
@@ -793,13 +945,13 @@ function initStackedCards() {
     }
 
     // 3. Dot indicator navigation
-    dots.forEach((dot) => {
+    dots.forEach((dot, dotIdx) => {
         dot.addEventListener('click', (e) => {
             e.stopPropagation();
-            const targetIdx = parseInt(dot.dataset.index || '0', 10);
+            const targetIdx = dot.dataset.index !== undefined ? parseInt(dot.dataset.index, 10) : dotIdx;
             const topCard = cards.find((c) => c.classList.contains('card-pos-1'));
             if (!topCard) return;
-            const currentIdx = parseInt(topCard.dataset.index || '0', 10);
+            const currentIdx = getCardLogicalIndex(topCard);
             const diff = targetIdx - currentIdx;
             if (diff !== 0) {
                 cycleCards(diff);
@@ -807,22 +959,40 @@ function initStackedCards() {
         });
     });
 
-    // 4. Touch swipe navigation for mobile
+    // 4. Keyboard arrow navigation for PC
+    stack.setAttribute('tabindex', '0');
+    stack.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            cycleCards(1);
+        } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            cycleCards(-1);
+        }
+    });
+
+    // 5. Touch swipe navigation for mobile (Pixel / Android) with multi-touch guard
     let touchStartX = 0;
     let touchStartY = 0;
+    let isMultiTouch = false;
 
     stack.addEventListener('touchstart', (e) => {
-        if (e.touches && e.touches[0]) {
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
+        if (!e.touches || e.touches.length !== 1) {
+            isMultiTouch = true;
+            return;
         }
+        isMultiTouch = false;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
     }, { passive: true });
 
     stack.addEventListener('touchend', (e) => {
+        if (isMultiTouch) return;
         if (e.changedTouches && e.changedTouches[0]) {
             const diffX = e.changedTouches[0].clientX - touchStartX;
             const diffY = e.changedTouches[0].clientY - touchStartY;
             if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY) * 1.5) {
+                lastSwipeTime = Date.now();
                 cycleCards(diffX < 0 ? 1 : -1);
             }
         }
@@ -1261,13 +1431,40 @@ function initDevOpsTerminal() {
         const cmd = raw.toLowerCase().trim();
         switch (cmd) {
             case 'help':
-                appendLine("Available commands:\n  status      - Display cluster status & telemetry\n  docker ps   - List active production containers\n  terraform   - List managed IaC infrastructure modules\n  curl        - Probe artemrivnyi.com HTTP response headers\n  cat resume  - Print ASCII summary and trigger resume\n  ping        - Run live edge latency test\n  theme       - Toggle Dark / Light theme mode\n  clear       - Clear terminal output\n  exit        - Close this terminal session");
+                appendLine("Available commands:\n  neofetch    - Render ASCII architecture card & node specs\n  topology    - Render ASCII cloud & Multi-AZ network map\n  status      - Display cluster status & telemetry\n  docker ps   - List active production containers\n  terraform   - List managed IaC infrastructure modules\n  curl        - Probe artemrivnyi.com HTTP response headers\n  cat resume  - Print ASCII summary and trigger resume\n  ping        - Run live edge latency test\n  theme       - Toggle Dark / Light theme mode\n  clear       - Clear terminal output\n  exit        - Close this terminal session");
+                break;
+            case 'topology':
+            case 'arch':
+                appendLine([
+                    '  [AWS Route53 Anycast DNS] ──► [CloudFront + Nginx 1.27 TLS 1.3]',
+                    '                                         │',
+                    '         ┌───────────────────────────────┼───────────────────────────────┐',
+                    '         ▼                               ▼                               ▼',
+                    '  [ECS Fargate: Minerva]        [Dual-LLM AI Gateway]          [MinIO S3 Cluster]',
+                    '  │ Auto-Heal <60s RTO          │ Circuit Breaker <180ms       │ Object Telemetry',
+                    '  ▼                             ▼                              ▼',
+                    '  [RDS Aurora Multi-AZ]         [AWS Bedrock / OpenAI]         [Prometheus + Grafana]'
+                ].join('\n'));
+                break;
+            case 'neofetch':
+            case 'ascii':
+            case 'whoami':
+                appendLine([
+                    '  ▄████▄   ██▀███     artem@cloud-node-01',
+                    ' ▒████▀██  ▓██ ▒ ██▒  -------------------',
+                    ' ▒███  ██  ▓██ ░▄█ ▒  OS: Alpine Linux v3.20 (x86_64)',
+                    ' ▒███▄▄██  ▒██▀▀█▄    Host: AWS Multi-AZ Edge Node',
+                    '  ▓█   ▓██▒░██▓ ▒██▒  Ingress: Nginx 1.27.x / TLS 1.3',
+                    '  ▒▒   ▓▒█░░ ▒▓ ░▒▓░  Runtime: Node.js v22 LTS + Docker',
+                    '   ▒   ▒▒ ░  ░▒ ░ ▒░  CI/CD: GitHub Actions (83/83 Jest)',
+                    '   ░   ▒     ░░   ░   Uptime: 99.98% SLA • Zero-CLS UI'
+                ].join('\n'));
                 break;
             case 'status':
-                appendLine("CLUSTER STATUS: ALL SYSTEMS OPERATIONAL\n  • Domain:      artemrivnyi.com (200 OK)\n  • Ingress:     Nginx 1.25 Alpine / TLS 1.3\n  • DNS:         AWS Route53 Anycast (Healthy)\n  • CI/CD:       GitHub Actions (53 Tests Passing)\n  • Uptime:      99.98% SLA Guaranteed");
+                appendLine("CLUSTER STATUS: ALL SYSTEMS OPERATIONAL\n  • Domain:      artemrivnyi.com (200 OK)\n  • Ingress:     Nginx 1.27 Alpine / TLS 1.3\n  • DNS:         AWS Route53 Anycast (Healthy)\n  • CI/CD:       GitHub Actions (83 Tests Passing)\n  • Uptime:      99.98% SLA Guaranteed");
                 break;
             case 'docker ps':
-                appendLine("CONTAINER ID   IMAGE                          COMMAND                  CREATED        STATUS        PORTS\na8f190e2b41c   nginx:1.25-alpine             \"nginx -g 'daemon of…\"   3 weeks ago    Up 3 weeks    0.0.0.0:443->443/tcp\n7c39b1a5e110   artemrivnyi/ai-ticket-clf:v2  \"python app.py\"          2 weeks ago    Up 2 weeks    0.0.0.0:8000->8000/tcp\n41c098df23a1   artemrivnyi/aws-s3-sim:v1.4   \"python server.py\"       2 weeks ago    Up 2 weeks    0.0.0.0:9000->9000/tcp\n93e118ba012b   minio/minio:RELEASE.2024      \"minio server /data\"     2 weeks ago    Up 2 weeks    0.0.0.0:9001->9001/tcp");
+                appendLine("CONTAINER ID   IMAGE                          COMMAND                  CREATED        STATUS        PORTS\na8f190e2b41c   nginx:1.27-alpine-slim        \"nginx -g 'daemon of…\"   3 weeks ago    Up 3 weeks    0.0.0.0:443->443/tcp\n7c39b1a5e110   artemrivnyi/ai-ticket-clf:v2  \"python app.py\"          2 weeks ago    Up 2 weeks    0.0.0.0:8000->8000/tcp\n41c098df23a1   artemrivnyi/aws-s3-sim:v1.4   \"python server.py\"       2 weeks ago    Up 2 weeks    0.0.0.0:9000->9000/tcp\n93e118ba012b   minio/minio:RELEASE.2024      \"minio server /data\"     2 weeks ago    Up 2 weeks    0.0.0.0:9001->9001/tcp");
                 break;
             case 'terraform':
             case 'terraform state list':
@@ -1275,7 +1472,7 @@ function initDevOpsTerminal() {
                 break;
             case 'curl':
             case 'curl -i artemrivnyi.com':
-                appendLine("HTTP/2 200 OK\nserver: nginx/1.25.4\ndate: Mon, 19 Oct 2026 00:00:00 GMT\ncontent-type: text/html; charset=UTF-8\nstrict-transport-security: max-age=31536000; includeSubDomains\nx-content-type-options: nosniff\nx-frame-options: DENY\ncontent-security-policy: default-src 'self' https:;\naccess-control-allow-origin: *\ncf-cache-status: HIT");
+                appendLine("HTTP/2 200 OK\nserver: nginx/1.27.4\ndate: Thu, 29 Oct 2026 00:00:00 GMT\ncontent-type: text/html; charset=UTF-8\nstrict-transport-security: max-age=31536000; includeSubDomains\nx-content-type-options: nosniff\nx-frame-options: DENY\ncontent-security-policy: default-src 'self' https:;\naccess-control-allow-origin: *\ncf-cache-status: HIT");
                 break;
             case 'cat resume':
             case 'cat resume.txt': {
@@ -1333,6 +1530,16 @@ function initDevOpsTerminal() {
                 appendLine(`zsh: command not found: ${raw}. Type 'help' to see valid commands.`);
                 break;
         }
+    });
+
+    const quickChips = modal.querySelectorAll('.cli-chip');
+    quickChips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+            const cmdToRun = chip.dataset.cmd;
+            if (!cmdToRun) return;
+            input.value = cmdToRun;
+            form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+        });
     });
 }
 

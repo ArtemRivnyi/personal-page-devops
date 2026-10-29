@@ -370,7 +370,13 @@ describe('initLightbox', () => {
         <img src="tourney.jpg" alt="Trophy Cup" class="lightbox-trigger">
         <div class="carousel-caption">Trophy Cup Winner 2021</div>
       </div>
-      <button type="button" class="lightbox-trigger view-diploma-btn" data-target="diploma.png">View Diploma</button>
+      <button id="lightbox-prev-btn" type="button" hidden>‹</button>
+        <button id="lightbox-next-btn" type="button" hidden>›</button>
+        <button type="button" class="lightbox-trigger view-diploma-btn" data-target="diploma.png">View Diploma</button>
+        <div class="stacked-card">
+          <img src="assets/tournament/cups_trophies.jpg" alt="Cups" class="lightbox-trigger">
+          <div class="stacked-card-caption"><span>Official Trophies</span></div>
+        </div>
     `;
   });
 
@@ -449,6 +455,74 @@ describe('initLightbox', () => {
 
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
     expect(modal.hasAttribute('hidden')).toBe(true);
+  });
+
+  test('should restore focus to trigger button upon close', () => {
+    initLightbox();
+    const btnTrigger = document.querySelector('button.lightbox-trigger');
+    const closeBtn = document.getElementById('lightbox-close');
+
+    btnTrigger.focus();
+    btnTrigger.click();
+    expect(document.getElementById('lightbox-modal').hasAttribute('hidden')).toBe(false);
+
+    closeBtn.click();
+    expect(document.activeElement).toBe(btnTrigger);
+  });
+
+  test('should navigate gallery photos in lightbox via buttons, arrows, and touch swipes with focus trap', () => {
+    initLightbox();
+    const tourneyImg = document.querySelector('.stacked-card img.lightbox-trigger');
+    const modal = document.getElementById('lightbox-modal');
+    const prevBtn = document.getElementById('lightbox-prev-btn');
+    const nextBtn = document.getElementById('lightbox-next-btn');
+    const closeBtn = document.getElementById('lightbox-close');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    tourneyImg.click();
+    expect(modal.hasAttribute('hidden')).toBe(false);
+    expect(prevBtn.hasAttribute('hidden')).toBe(false);
+    expect(nextBtn.hasAttribute('hidden')).toBe(false);
+    expect(lightboxImg.src).toContain('cups_trophies.jpg');
+
+    // 1. Next button
+    nextBtn.click();
+    expect(lightboxImg.src).toContain('img_1.jpg');
+
+    // 2. Keyboard ArrowRight
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+    expect(lightboxImg.src).toContain('img_2.jpg');
+
+    // 3. Keyboard ArrowLeft
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
+    expect(lightboxImg.src).toContain('img_1.jpg');
+
+    // 4. Touch swipe left (next)
+    modal.dispatchEvent(new TouchEvent('touchstart', {
+      touches: [{ clientX: 200, clientY: 100 }]
+    }));
+    modal.dispatchEvent(new TouchEvent('touchend', {
+      changedTouches: [{ clientX: 100, clientY: 100 }]
+    }));
+    expect(lightboxImg.src).toContain('img_2.jpg');
+
+    // 5. Touch swipe right (prev)
+    modal.dispatchEvent(new TouchEvent('touchstart', {
+      touches: [{ clientX: 100, clientY: 100 }]
+    }));
+    modal.dispatchEvent(new TouchEvent('touchend', {
+      changedTouches: [{ clientX: 200, clientY: 100 }]
+    }));
+    expect(lightboxImg.src).toContain('img_1.jpg');
+
+    // 6. Focus trap on Tab
+    closeBtn.focus();
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true }));
+    expect(document.activeElement).toBe(nextBtn);
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', shiftKey: false }));
+    expect(document.activeElement).toBe(closeBtn);
+    closeBtn.click();
   });
 });
 
@@ -541,8 +615,8 @@ describe('initStackedCards', () => {
     // click stack background
     stack.click();
 
-    expect(cards[0].classList.contains('card-pos-2')).toBe(true);
-    expect(cards[1].classList.contains('card-pos-3')).toBe(true);
+    expect(cards[1].classList.contains('card-pos-1')).toBe(true);
+    expect(cards[0].classList.contains('card-pos-4')).toBe(true);
   });
 
   test('should not cycle stack if clicking directly on img (handled by lightbox)', () => {
@@ -553,6 +627,90 @@ describe('initStackedCards', () => {
 
     img.click();
     expect(card.classList.contains('card-pos-1')).toBe(true);
+  });
+
+  test('should navigate forward and backward via buttons, dots, keyboard, and touch swipes with ghost-click suppression', () => {
+    document.body.innerHTML = `
+      <div id="tournament-stack">
+        <div class="stacked-card card-pos-1" data-index="0"><img src="cups.jpg"></div>
+        <div class="stacked-card card-pos-2" data-index="1"><img src="stage.jpg"></div>
+        <div class="stacked-card card-pos-3" data-index="2"><img src="matches.jpg"></div>
+        <div class="stacked-card card-pos-4" data-index="3"><img src="awards.jpg"></div>
+      </div>
+      <button type="button" id="stack-prev-btn">‹</button>
+      <button type="button" id="stack-shuffle-btn"><span id="stack-counter-text">1 / 4</span></button>
+      <button type="button" id="stack-next-btn">›</button>
+      <div id="stack-dots">
+        <button type="button" class="stack-dot active" data-index="0"></button>
+        <button type="button" class="stack-dot" data-index="1"></button>
+        <button type="button" class="stack-dot" data-index="2"></button>
+        <button type="button" class="stack-dot" data-index="3"></button>
+      </div>
+    `;
+
+    initStackedCards();
+    const stack = document.getElementById('tournament-stack');
+    const cards = stack.querySelectorAll('.stacked-card');
+    const prevBtn = document.getElementById('stack-prev-btn');
+    const nextBtn = document.getElementById('stack-next-btn');
+    const shuffleBtn = document.getElementById('stack-shuffle-btn');
+    const counter = document.getElementById('stack-counter-text');
+    const dots = document.querySelectorAll('.stack-dot');
+
+    // 1. Next button advances 0 -> 1
+    nextBtn.click();
+    expect(cards[1].classList.contains('card-pos-1')).toBe(true);
+    expect(counter.textContent).toBe('2 / 4');
+    expect(dots[1].classList.contains('active')).toBe(true);
+    expect(dots[1].getAttribute('aria-current')).toBe('true');
+
+    // 2. Prev button reverses 1 -> 0
+    prevBtn.click();
+    expect(cards[0].classList.contains('card-pos-1')).toBe(true);
+    expect(counter.textContent).toBe('1 / 4');
+
+    // 3. Shuffle / Counter button advances 0 -> 1
+    shuffleBtn.click();
+    expect(cards[1].classList.contains('card-pos-1')).toBe(true);
+    expect(counter.textContent).toBe('2 / 4');
+
+    // 4. Dot direct jump 1 -> 3
+    dots[3].click();
+    expect(cards[3].classList.contains('card-pos-1')).toBe(true);
+    expect(counter.textContent).toBe('4 / 4');
+    expect(dots[3].getAttribute('aria-current')).toBe('true');
+
+    // 5. Keyboard ArrowRight (3 -> 0) and ArrowLeft (0 -> 3)
+    stack.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+    expect(cards[0].classList.contains('card-pos-1')).toBe(true);
+    expect(counter.textContent).toBe('1 / 4');
+
+    stack.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
+    expect(cards[3].classList.contains('card-pos-1')).toBe(true);
+    expect(counter.textContent).toBe('4 / 4');
+
+    // 6. Multi-touch pinch is ignored
+    const pinchStart = new Event('touchstart');
+    pinchStart.touches = [{ clientX: 200, clientY: 100 }, { clientX: 250, clientY: 100 }];
+    stack.dispatchEvent(pinchStart);
+    const pinchEnd = new Event('touchend');
+    pinchEnd.changedTouches = [{ clientX: 50, clientY: 100 }];
+    stack.dispatchEvent(pinchEnd);
+    expect(cards[3].classList.contains('card-pos-1')).toBe(true);
+
+    // 7. Single-finger swipe left advances 3 -> 0 and suppresses immediate ghost click
+    const swipeStart = new Event('touchstart');
+    swipeStart.touches = [{ clientX: 250, clientY: 100 }];
+    stack.dispatchEvent(swipeStart);
+    const swipeEnd = new Event('touchend');
+    swipeEnd.changedTouches = [{ clientX: 100, clientY: 105 }];
+    stack.dispatchEvent(swipeEnd);
+    expect(cards[0].classList.contains('card-pos-1')).toBe(true);
+    expect(counter.textContent).toBe('1 / 4');
+
+    // Immediate synthesized ghost click within 350ms is suppressed
+    stack.click();
+    expect(cards[0].classList.contains('card-pos-1')).toBe(true);
   });
 });
 
@@ -917,6 +1075,33 @@ describe('initDevOpsTerminal', () => {
     input.value = 'clear';
     form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
     expect(output.textContent).toBe('');
+  });
+
+  test('should run neofetch command and render ASCII telemetry badge', () => {
+    initDevOpsTerminal();
+    const form = document.getElementById('cli-form');
+    const input = document.getElementById('cli-input');
+    const output = document.getElementById('cli-output');
+
+    input.value = 'neofetch';
+    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    expect(output.textContent).toContain('artem@cloud-node-01');
+    expect(output.textContent).toContain('Nginx 1.27.x');
+  });
+
+  test('should run topology command via quick chip click', () => {
+    const modal = document.getElementById('cli-terminal-modal');
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'cli-chip';
+    chip.dataset.cmd = 'topology';
+    modal.appendChild(chip);
+
+    initDevOpsTerminal();
+    const output = document.getElementById('cli-output');
+    chip.click();
+    expect(output.textContent).toContain('AWS Route53 Anycast DNS');
+    expect(output.textContent).toContain('MinIO S3 Cluster');
   });
 
   test('should close terminal on exit command', () => {
