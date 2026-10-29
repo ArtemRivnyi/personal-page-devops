@@ -709,6 +709,17 @@ body.light-theme .site-header {
     display: inline-block;
 }
 
+body.light-theme .live-pulse-badge {
+    color: #0284c7;
+    background: rgb(2 132 199 / 10%);
+    border-color: rgb(2 132 199 / 30%);
+}
+
+body.light-theme .live-pulse-dot {
+    background: #0284c7;
+    box-shadow: 0 0 6px #0284c7;
+}
+
 .media-walkthrough-btn {
     display: inline-flex;
     align-items: center;
@@ -869,7 +880,35 @@ body.light-theme .site-header {
     margin-top: 2px;
 }
 
+.tech-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 5px;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-subtle);
+    font-weight: 500;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+.tech-pill .pill-icon {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+}
+
+.tech-pill:hover {
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+}
+
 .mini-tech-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
     font-size: 0.75rem;
     padding: 2px 7px;
     border-radius: 4px;
@@ -877,6 +916,18 @@ body.light-theme .site-header {
     color: var(--text-muted);
     border: 1px solid var(--border-subtle);
     font-weight: 500;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+.mini-tech-pill .pill-icon {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+}
+
+.mini-tech-pill:hover {
+    border-color: var(--border-hover);
+    color: var(--text-primary);
 }
 
 /* Ref Projects Grid (2-Column Minimalist Cards matching frame_15s.png) */
@@ -2528,7 +2579,7 @@ body.light-theme .kpi-chip {
 .company-wordmark {
     height: 38px;
     width: auto;
-    max-width: 110px;
+    max-width: 140px;
     object-fit: contain;
     background: #0d1117;
     border: 1px solid var(--border-subtle);
@@ -2550,6 +2601,27 @@ body.light-theme .kpi-chip {
     transform: scale(1.05);
     border-color: var(--accent-blue);
     box-shadow: 0 4px 14px rgb(56 189 248 / 25%);
+}
+
+/* Light Theme Adaptations for Company Logos */
+body.light-theme .company-wordmark {
+    background: #f1f5f9;
+    border-color: rgb(31 35 40 / 12%);
+    box-shadow: 0 1px 4px rgb(0 0 0 / 6%);
+}
+
+body.light-theme .company-avatar {
+    background: #f1f5f9;
+    border-color: rgb(31 35 40 / 12%);
+    box-shadow: 0 2px 6px rgb(0 0 0 / 8%);
+}
+
+body.light-theme .company-logo-dealshop {
+    content: url("assets/company_dealshop_light.svg");
+}
+
+body.light-theme .company-logo-byour {
+    content: url("assets/company_byour_black.png");
 }
 
 /* EDUCATION LOGO (DNU) */
@@ -3716,8 +3788,9 @@ body.light-theme .mobile-back-to-top:hover {
     }
 
     .company-logo-row {
-        flex-wrap: wrap;
-        gap: 10px;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 12px;
     }
 
     .clean-section-title {
