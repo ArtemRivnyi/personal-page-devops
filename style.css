@@ -380,7 +380,7 @@ body.light-theme .site-header {
     background: var(--bg-secondary);
     border: 1px solid var(--border-subtle);
     vertical-align: baseline;
-    margin: 0 2px;
+    margin: 0 1px 0 2px;
     transition: border-color 0.15s, background-color 0.15s;
 }
 
@@ -1409,10 +1409,17 @@ body.light-theme .kpi-chip {
 
 .role-preview-trigger,
 .cert-verify-action {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
     margin-top: 10px;
 }
 
 .inline-preview-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
     background: transparent;
     border: 1px solid var(--border-subtle);
     border-radius: 6px;
@@ -1421,6 +1428,8 @@ body.light-theme .kpi-chip {
     font-weight: 500;
     color: var(--accent-blue);
     cursor: pointer;
+    white-space: nowrap;
+    text-decoration: none;
     transition: all 0.15s;
 }
 
@@ -3267,7 +3276,7 @@ body.light-theme .kpi-chip {
 /* Mobile-only Back to top button (shows on touch screens when rail is hidden) */
 .mobile-back-to-top {
     position: fixed;
-    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
     right: 20px;
     width: 38px;
     height: 38px;
@@ -3558,7 +3567,7 @@ body.light-theme .mobile-back-to-top:hover {
     }
 
     .mobile-back-to-top {
-        bottom: calc(74px + env(safe-area-inset-bottom, 0px));
+        bottom: calc(24px + env(safe-area-inset-bottom, 0px));
         right: 16px;
         width: 38px;
         height: 38px;
