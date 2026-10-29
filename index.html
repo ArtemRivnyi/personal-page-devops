@@ -98,7 +98,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=29">
+    <link rel="stylesheet" href="style.css?v=30">
 
     <!-- Google Analytics 4 (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-K6EZQYRLEL"></script>
@@ -283,8 +283,16 @@
             <div class="featured-showcase-card project">
                 <div class="featured-media-side">
                     <div class="featured-preview-box">
-                        <img src="assets/byour_demo.webp" alt="BYOUR Platform — Minerva AI Applicant Ranking Demo" class="featured-img lightbox-trigger" width="960" height="540" loading="lazy" decoding="async">
+                        <video class="featured-img featured-video" width="960" height="540" loop muted playsinline poster="assets/byour_demo_poster.webp" preload="metadata">
+                            <source src="assets/byour_demo.mp4" type="video/mp4">
+                            <img src="assets/byour_demo_poster.webp" alt="BYOUR Platform — Minerva AI Applicant Ranking Demo" class="featured-img" width="960" height="540" loading="lazy">
+                        </video>
                         <div class="preview-overlay-badge">LIVE PLATFORM</div>
+                        <button type="button" class="preview-play-badge lightbox-trigger" data-target="assets/byour_intro_full.mp4" data-caption="BYOUR Platform — Minerva AI Intelligent Hiring Infrastructure (Official Walkthrough)" data-alt="BYOUR Platform Full Walkthrough Video" aria-label="Watch full BYOUR walkthrough video">
+                            <span class="play-icon-glow" aria-hidden="true"></span>
+                            <svg class="play-icon-svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                            <span>Watch Walkthrough (1:00)</span>
+                        </button>
                     </div>
                 </div>
                 <div class="featured-details-side">
@@ -321,6 +329,9 @@
                         <a href="https://byour.co/" target="_blank" rel="noopener" class="text-arrow-link">
                             Visit Platform ↗
                         </a>
+                        <button type="button" class="text-arrow-link-btn lightbox-trigger" data-target="assets/byour_intro_full.mp4" data-caption="BYOUR Platform — Minerva AI Intelligent Hiring Infrastructure (Official Walkthrough)" data-alt="BYOUR Platform Full Walkthrough Video">
+                            Watch Walkthrough ▶
+                        </button>
                     </div>
                 </div>
             </div>
@@ -918,7 +929,7 @@
                             <span class="mini-tag"><svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Route53</span>
                         </div>
                         <div class="role-preview-trigger">
-                            <button type="button" class="inline-preview-btn lightbox-trigger" data-target="assets/byour_demo.webp" data-caption="BYOUR — Intelligent Hiring Infrastructure &amp; AWS Cloud Architecture" data-alt="BYOUR Platform Preview">
+                            <button type="button" class="inline-preview-btn lightbox-trigger" data-target="assets/byour_intro_full.mp4" data-caption="BYOUR — Minerva AI Intelligent Hiring Infrastructure (Official Walkthrough)" data-alt="BYOUR Platform Full Walkthrough Video">
                                 View Platform Preview ↗
                             </button>
                         </div>
@@ -1826,6 +1837,7 @@
             <button type="button" class="lightbox-nav-btn lightbox-prev-btn" id="lightbox-prev-btn" aria-label="Previous photo" hidden>&lsaquo;</button>
             <div class="lightbox-image-wrap">
                 <img id="lightbox-img" src="assets/diploma_bachelor.png" alt="Fullscreen preview" class="lightbox-img">
+                <video id="lightbox-video" class="lightbox-video" controls playsinline preload="metadata" hidden></video>
             </div>
             <button type="button" class="lightbox-nav-btn lightbox-next-btn" id="lightbox-next-btn" aria-label="Next photo" hidden>&rsaquo;</button>
             <div id="lightbox-caption" class="lightbox-caption"></div>
@@ -1970,7 +1982,7 @@ Type <span class="cli-cmd-hint">'help'</span>, <span class="cli-cmd-hint">'neofe
         </div>
     </div>
 
-    <script src="script.js?v=27"></script>
+    <script src="script.js?v=28"></script>
 </body>
 
 </html>

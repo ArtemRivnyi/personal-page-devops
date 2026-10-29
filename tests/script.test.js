@@ -2,9 +2,9 @@
  * @jest-environment jsdom
  */
 
-import { debounce, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher, initSectionNavRail, initScrollRestoration, initAdminModeNotification } from '../script.exports.js';
+import { debounce, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher, initSectionNavRail, initScrollRestoration, initAdminModeNotification, initFeaturedVideo } from '../script.exports.js';
 
-// Mock canvas getContext before any tests run (without jest.fn)
+// Mock canvas getContext and HTMLMediaElement play/pause before any tests run (without jest.fn)
 beforeAll(() => {
   HTMLCanvasElement.prototype.getContext = function() {
     return {
@@ -15,6 +15,11 @@ beforeAll(() => {
       textBaseline: '',
     };
   };
+
+  HTMLMediaElement.prototype.play = function() {
+    return Promise.resolve();
+  };
+  HTMLMediaElement.prototype.pause = function() {};
 });
 
 describe('debounce function', () => {
@@ -364,6 +369,7 @@ describe('initLightbox', () => {
         <div id="lightbox-backdrop"></div>
         <button id="lightbox-close" type="button">×</button>
         <img id="lightbox-img" src="" alt="">
+        <video id="lightbox-video" hidden></video>
         <div id="lightbox-caption"></div>
       </div>
       <div class="carousel-slide">
@@ -523,6 +529,72 @@ describe('initLightbox', () => {
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', shiftKey: false }));
     expect(document.activeElement).toBe(closeBtn);
     closeBtn.click();
+  });
+
+  test('should handle video target in lightbox and reset upon close', () => {
+    const video = document.getElementById('lightbox-video');
+    video.play = () => Promise.resolve();
+    video.pause = () => {};
+
+    const videoTrigger = document.createElement('button');
+    videoTrigger.className = 'lightbox-trigger';
+    videoTrigger.dataset.target = 'assets/byour_intro_full.mp4';
+    videoTrigger.dataset.caption = 'BYOUR Walkthrough Video';
+    document.body.appendChild(videoTrigger);
+
+    initLightbox();
+
+    videoTrigger.click();
+    const modal = document.getElementById('lightbox-modal');
+    const img = document.getElementById('lightbox-img');
+
+    expect(modal.hasAttribute('hidden')).toBe(false);
+    expect(video.hasAttribute('hidden')).toBe(false);
+    expect(img.hasAttribute('hidden')).toBe(true);
+    expect(video.src).toContain('byour_intro_full.mp4');
+
+    const closeBtn = document.getElementById('lightbox-close');
+    closeBtn.click();
+    expect(modal.hasAttribute('hidden')).toBe(true);
+    expect(video.hasAttribute('hidden')).toBe(true);
+  });
+});
+
+describe('initFeaturedVideo', () => {
+  beforeEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  test('should handle missing video element gracefully', () => {
+    expect(() => initFeaturedVideo()).not.toThrow();
+  });
+
+  test('should set video to muted and observe via IntersectionObserver if present', () => {
+    const video = document.createElement('video');
+    video.className = 'featured-video';
+    video.play = () => Promise.resolve();
+    video.pause = () => {};
+    document.body.appendChild(video);
+
+    let observedElement = null;
+    let observerCallback = null;
+    window.IntersectionObserver = class {
+      constructor(callback) {
+        observerCallback = callback;
+      }
+      observe(el) {
+        observedElement = el;
+      }
+    };
+
+    initFeaturedVideo();
+
+    expect(video.muted).toBe(true);
+    expect(observedElement).toBe(video);
+
+    // Test observer entry triggers
+    observerCallback([{ isIntersecting: true }]);
+    observerCallback([{ isIntersecting: false }]);
   });
 });
 

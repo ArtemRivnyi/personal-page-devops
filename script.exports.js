@@ -260,6 +260,7 @@ function initTournamentCarousel() {
 function initLightbox() {
     const modal = document.getElementById('lightbox-modal');
     const img = document.getElementById('lightbox-img');
+    const video = document.getElementById('lightbox-video');
     const caption = document.getElementById('lightbox-caption');
     const closeBtn = document.getElementById('lightbox-close');
     const backdrop = document.getElementById('lightbox-backdrop');
@@ -290,6 +291,12 @@ function initLightbox() {
         if (!galleryItems.length) return;
         galleryIndex = ((idx % galleryItems.length) + galleryItems.length) % galleryItems.length;
         const current = galleryItems[galleryIndex];
+        if (video) {
+            if (typeof video.pause === 'function') video.pause();
+            video.src = '';
+            video.setAttribute('hidden', '');
+        }
+        img.removeAttribute('hidden');
         img.src = current.src;
         img.alt = current.alt || 'Fullscreen preview';
         if (caption) {
@@ -306,6 +313,32 @@ function initLightbox() {
         galleryItems = items;
         galleryIndex = activeIdx;
 
+        const isVideo = typeof src === 'string' && (src.endsWith('.mp4') || src.endsWith('.webm'));
+
+        if (isVideo && video) {
+            img.setAttribute('hidden', '');
+            video.removeAttribute('hidden');
+            video.src = src;
+            try {
+                video.currentTime = 0;
+            } catch {
+                // Ignore in mock or restricted environments
+            }
+            if (typeof video.play === 'function') {
+                const playPromise = video.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => {});
+                }
+            }
+        } else {
+            if (video) {
+                if (typeof video.pause === 'function') video.pause();
+                video.src = '';
+                video.setAttribute('hidden', '');
+            }
+            img.removeAttribute('hidden');
+        }
+
         if (galleryItems.length > 1 && galleryIndex >= 0) {
             if (prevBtn) prevBtn.removeAttribute('hidden');
             if (nextBtn) nextBtn.removeAttribute('hidden');
@@ -313,8 +346,10 @@ function initLightbox() {
         } else {
             if (prevBtn) prevBtn.setAttribute('hidden', '');
             if (nextBtn) nextBtn.setAttribute('hidden', '');
-            img.src = src;
-            img.alt = alt || 'Fullscreen preview';
+            if (!isVideo) {
+                img.src = src;
+                img.alt = alt || 'Fullscreen preview';
+            }
             if (caption) {
                 caption.textContent = captionText || alt || '';
             }
@@ -328,6 +363,11 @@ function initLightbox() {
     function closeLightbox() {
         modal.setAttribute('hidden', '');
         document.body.style.overflow = '';
+        if (video) {
+            if (typeof video.pause === 'function') video.pause();
+            video.src = '';
+            video.setAttribute('hidden', '');
+        }
         if (lastActiveTrigger && typeof lastActiveTrigger.focus === 'function') {
             lastActiveTrigger.focus();
         }
@@ -1844,5 +1884,37 @@ function initAdminModeNotification() {
     }
 }
 
-export { debounce, setupMobileMenu, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initAnalyticsTracking, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher, initSectionNavRail, initScrollRestoration, initAdminModeNotification };
+
+// 20. Featured Video Autoplay and Viewport Observation
+function initFeaturedVideo() {
+    const video = document.querySelector('.featured-video');
+    if (!video) return;
+
+    video.muted = true;
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    if (typeof video.play === 'function') {
+                        const playPromise = video.play();
+                        if (playPromise && typeof playPromise.catch === 'function') {
+                            playPromise.catch(() => {});
+                        }
+                    }
+                } else if (typeof video.pause === 'function') {
+                    video.pause();
+                }
+            });
+        }, { threshold: 0.25 });
+        observer.observe(video);
+    } else if (typeof video.play === 'function') {
+        const playPromise = video.play();
+        if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch(() => {});
+        }
+    }
+}
+
+export { debounce, setupMobileMenu, setupThemeToggle, MatrixRain, initTournamentCarousel, initLightbox, initGitHubHeatmap, REAL_CONTRIBUTIONS_2026, initStackedCards, initChatWidget, initCopyEmail, initAnalyticsTracking, initHealthMonitor, initCommandPalette, initSpotlightCards, initDevOpsTerminal, initTopologySwitcher, initSectionNavRail, initScrollRestoration, initAdminModeNotification, initFeaturedVideo };
 

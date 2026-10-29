@@ -45,3 +45,4 @@ Thumbs.db
 # Reference media
 tips/
 *.mp4
+!assets/*.mp4
