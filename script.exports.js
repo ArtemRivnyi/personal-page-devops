@@ -1534,7 +1534,7 @@ function initDevOpsTerminal() {
                 ].join('\n'));
                 break;
             case 'status':
-                appendLine("CLUSTER STATUS: ALL SYSTEMS OPERATIONAL\n  • Domain:      artemrivnyi.com (200 OK)\n  • Ingress:     Nginx 1.27 Alpine / TLS 1.3\n  • DNS:         AWS Route53 Anycast (Healthy)\n  • CI/CD:       GitHub Actions (89 Tests Passing)\n  • Uptime:      99.98% SLA Guaranteed");
+                appendLine("CLUSTER STATUS: ALL SYSTEMS OPERATIONAL\n  • Domain:      artemrivnyi.com (200 OK)\n  • Marketplace: dealshop.ie (Dublin Edge / Online)\n  • Ingress:     Nginx 1.27 Alpine / TLS 1.3\n  • DNS:         AWS Route53 Anycast (Healthy)\n  • CI/CD:       GitHub Actions (89 Tests Passing)\n  • Uptime:      99.98% SLA Guaranteed");
                 break;
             case 'docker ps':
                 appendLine("CONTAINER ID   IMAGE                          COMMAND                  CREATED        STATUS        PORTS\na8f190e2b41c   nginx:1.27-alpine-slim        \"nginx -g 'daemon of…\"   3 weeks ago    Up 3 weeks    0.0.0.0:443->443/tcp\n7c39b1a5e110   artemrivnyi/ai-ticket-clf:v2  \"python app.py\"          2 weeks ago    Up 2 weeks    0.0.0.0:8000->8000/tcp\n41c098df23a1   artemrivnyi/aws-s3-sim:v1.4   \"python server.py\"       2 weeks ago    Up 2 weeks    0.0.0.0:9000->9000/tcp\n93e118ba012b   minio/minio:RELEASE.2024      \"minio server /data\"     2 weeks ago    Up 2 weeks    0.0.0.0:9001->9001/tcp");

@@ -11,6 +11,7 @@ COPY script.js /usr/share/nginx/html/
 COPY robots.txt /usr/share/nginx/html/
 COPY sitemap.xml /usr/share/nginx/html/
 COPY llms.txt /usr/share/nginx/html/
+COPY favicon.ico /usr/share/nginx/html/
 
 # Copy assets and docs folders
 COPY assets /usr/share/nginx/html/assets/
