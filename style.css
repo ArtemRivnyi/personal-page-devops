@@ -793,6 +793,44 @@ body.light-theme .live-pulse-dot {
     color: #38bdf8;
 }
 
+.video-sound-overlay,
+body.light-theme .video-sound-overlay {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 5;
+    background: rgb(15 23 42 / 85%);
+    color: #f8fafc;
+    border: 1px solid rgb(56 189 248 / 35%);
+    box-shadow: 0 4px 14px rgb(0 0 0 / 50%);
+}
+
+.video-sound-overlay:hover,
+.video-sound-overlay:focus-visible,
+body.light-theme .video-sound-overlay:hover,
+body.light-theme .video-sound-overlay:focus-visible {
+    background: rgb(2 132 199 / 95%);
+    border-color: #38bdf8;
+    color: #fff;
+    transform: scale(1.04);
+}
+
+.video-sound-overlay.sound-active,
+body.light-theme .video-sound-overlay.sound-active {
+    background: rgb(14 165 233 / 25%);
+    border-color: #38bdf8;
+    color: #38bdf8;
+}
+
+@media (width <= 600px) {
+    .video-sound-overlay {
+        top: 8px;
+        right: 8px;
+        padding: 4px 10px;
+        font-size: 0.72rem;
+    }
+}
+
 .sound-icon {
     flex-shrink: 0;
     display: inline-block;
@@ -1338,10 +1376,11 @@ body.light-theme .mini-icon-box:hover {
 }
 
 .mini-icon-box svg {
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
     display: block;
     flex-shrink: 0;
+    shape-rendering: geometricprecision;
 }
 
 /* Adaptive SVG fills and strokes across themes */
@@ -4281,6 +4320,25 @@ body.light-theme .mobile-back-to-top:hover {
     color: #c9d1d9;
     white-space: pre-wrap;
     word-break: break-word;
+    scrollbar-width: thin;
+    scrollbar-color: #30363d transparent;
+}
+
+.cli-terminal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.cli-terminal-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.cli-terminal-body::-webkit-scrollbar-thumb {
+    background: #30363d;
+    border-radius: 3px;
+}
+
+.cli-terminal-body::-webkit-scrollbar-thumb:hover {
+    background: #484f58;
 }
 
 .cli-welcome-banner {

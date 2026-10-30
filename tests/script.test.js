@@ -558,6 +558,48 @@ describe('initLightbox', () => {
     expect(modal.hasAttribute('hidden')).toBe(true);
     expect(video.hasAttribute('hidden')).toBe(true);
   });
+
+  test('should pause background featured video when lightbox opens and resume on close without overlapping audio', () => {
+    let backgroundPaused = false;
+    let backgroundPlayed = false;
+
+    const backgroundVideo = document.createElement('video');
+    backgroundVideo.className = 'featured-video';
+    backgroundVideo.pause = () => { backgroundPaused = true; };
+    backgroundVideo.play = () => { backgroundPlayed = true; return Promise.resolve(); };
+    document.body.appendChild(backgroundVideo);
+
+    const videoTrigger = document.createElement('button');
+    videoTrigger.className = 'lightbox-trigger';
+    videoTrigger.dataset.target = 'assets/byour_intro_full.mp4';
+    document.body.appendChild(videoTrigger);
+
+    initLightbox();
+
+    videoTrigger.click();
+    expect(backgroundPaused).toBe(true);
+
+    const closeBtn = document.getElementById('lightbox-close');
+    closeBtn.click();
+    expect(backgroundPlayed).toBe(true);
+  });
+
+  test('should ignore lightbox trigger if click originates on featured-sound-btn', () => {
+    const previewBox = document.createElement('div');
+    previewBox.className = 'featured-preview-box lightbox-trigger';
+    previewBox.dataset.target = 'assets/byour_intro_full.mp4';
+
+    const soundBtn = document.createElement('button');
+    soundBtn.id = 'featured-sound-btn';
+    previewBox.appendChild(soundBtn);
+    document.body.appendChild(previewBox);
+
+    initLightbox();
+
+    const modal = document.getElementById('lightbox-modal');
+    soundBtn.click();
+    expect(modal.hasAttribute('hidden')).toBe(true);
+  });
 });
 
 describe('initFeaturedVideo', () => {

@@ -313,6 +313,13 @@ function initLightbox() {
         galleryItems = items;
         galleryIndex = activeIdx;
 
+        // Silence background media so audio never plays from two sources
+        document.querySelectorAll('video, audio').forEach((mediaEl) => {
+            if (mediaEl !== video && typeof mediaEl.pause === 'function') {
+                mediaEl.pause();
+            }
+        });
+
         const isVideo = typeof src === 'string' && (src.endsWith('.mp4') || src.endsWith('.webm'));
 
         if (isVideo && video) {
@@ -367,6 +374,29 @@ function initLightbox() {
             if (typeof video.pause === 'function') video.pause();
             video.src = '';
             video.setAttribute('hidden', '');
+        }
+        // Resume background featured video preview playback
+        const featuredVideo = document.querySelector('.featured-video');
+        if (featuredVideo && typeof featuredVideo.play === 'function') {
+            const playPromise = featuredVideo.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(() => {
+                    featuredVideo.muted = true;
+                    const soundBtn = document.getElementById('featured-sound-btn');
+                    if (soundBtn) {
+                        soundBtn.classList.remove('sound-active');
+                        soundBtn.setAttribute('aria-label', 'Unmute video sound');
+                        const mutedIcon = soundBtn.querySelector('.sound-icon-muted');
+                        const onIcon = soundBtn.querySelector('.sound-icon-on');
+                        const label = soundBtn.querySelector('.sound-btn-text');
+                        if (mutedIcon) { mutedIcon.removeAttribute('hidden'); mutedIcon.style.display = 'inline-block'; }
+                        if (onIcon) { onIcon.setAttribute('hidden', ''); onIcon.style.display = 'none'; }
+                        if (label) label.textContent = 'Sound Off';
+                    }
+                    const retry = featuredVideo.play();
+                    if (retry && typeof retry.catch === 'function') retry.catch(() => {});
+                });
+            }
         }
         if (lastActiveTrigger && typeof lastActiveTrigger.focus === 'function') {
             lastActiveTrigger.focus();
@@ -452,6 +482,9 @@ function initLightbox() {
     const triggers = document.querySelectorAll('.lightbox-trigger');
     triggers.forEach((trigger) => {
         trigger.addEventListener('click', (e) => {
+            if (e.target && e.target.closest && e.target.closest('#featured-sound-btn')) {
+                return;
+            }
             e.preventDefault();
             e.stopPropagation();
 
@@ -1496,12 +1529,12 @@ function initDevOpsTerminal() {
                     ' ▒███▄▄██  ▒██▀▀█▄    Host: AWS Multi-AZ Edge Node',
                     '  ▓█   ▓██▒░██▓ ▒██▒  Ingress: Nginx 1.27.x / TLS 1.3',
                     '  ▒▒   ▓▒█░░ ▒▓ ░▒▓░  Runtime: Node.js v22 LTS + Docker',
-                    '   ▒   ▒▒ ░  ░▒ ░ ▒░  CI/CD: GitHub Actions (83/83 Jest)',
+                    '   ▒   ▒▒ ░  ░▒ ░ ▒░  CI/CD: GitHub Actions (89/89 Jest)',
                     '   ░   ▒     ░░   ░   Uptime: 99.98% SLA • Zero-CLS UI'
                 ].join('\n'));
                 break;
             case 'status':
-                appendLine("CLUSTER STATUS: ALL SYSTEMS OPERATIONAL\n  • Domain:      artemrivnyi.com (200 OK)\n  • Ingress:     Nginx 1.27 Alpine / TLS 1.3\n  • DNS:         AWS Route53 Anycast (Healthy)\n  • CI/CD:       GitHub Actions (83 Tests Passing)\n  • Uptime:      99.98% SLA Guaranteed");
+                appendLine("CLUSTER STATUS: ALL SYSTEMS OPERATIONAL\n  • Domain:      artemrivnyi.com (200 OK)\n  • Ingress:     Nginx 1.27 Alpine / TLS 1.3\n  • DNS:         AWS Route53 Anycast (Healthy)\n  • CI/CD:       GitHub Actions (89 Tests Passing)\n  • Uptime:      99.98% SLA Guaranteed");
                 break;
             case 'docker ps':
                 appendLine("CONTAINER ID   IMAGE                          COMMAND                  CREATED        STATUS        PORTS\na8f190e2b41c   nginx:1.27-alpine-slim        \"nginx -g 'daemon of…\"   3 weeks ago    Up 3 weeks    0.0.0.0:443->443/tcp\n7c39b1a5e110   artemrivnyi/ai-ticket-clf:v2  \"python app.py\"          2 weeks ago    Up 2 weeks    0.0.0.0:8000->8000/tcp\n41c098df23a1   artemrivnyi/aws-s3-sim:v1.4   \"python server.py\"       2 weeks ago    Up 2 weeks    0.0.0.0:9000->9000/tcp\n93e118ba012b   minio/minio:RELEASE.2024      \"minio server /data\"     2 weeks ago    Up 2 weeks    0.0.0.0:9001->9001/tcp");
@@ -1894,7 +1927,11 @@ function initFeaturedVideo() {
 
     const soundBtn = document.getElementById('featured-sound-btn');
     if (soundBtn) {
-        soundBtn.addEventListener('click', () => {
+        soundBtn.addEventListener('click', (e) => {
+            if (e) {
+                if (typeof e.stopPropagation === 'function') e.stopPropagation();
+                if (typeof e.preventDefault === 'function') e.preventDefault();
+            }
             const isMuted = video.muted;
             if (isMuted) {
                 if (!video.src || !video.src.includes('byour_intro_full.mp4')) {
