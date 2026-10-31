@@ -1150,6 +1150,8 @@ body.light-theme .media-sound-btn.sound-active {
     transform: translateX(-50%) translateY(0);
 }
 
+.card-media-wrap .card-status-badge { display: none !important; }
+
 .card-status-badge {
     position: absolute;
     top: 10px;
