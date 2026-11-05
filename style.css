@@ -2079,12 +2079,14 @@ body.light-theme .kpi-chip {
 .heatmap-container {
     overflow-x: auto;
     padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
 }
 
 .heatmap-body {
     display: flex;
     gap: 8px;
-    min-width: 720px;
+    width: max-content;
+    min-width: 0;
 }
 
 .heatmap-days-col {
@@ -2101,17 +2103,32 @@ body.light-theme .kpi-chip {
 }
 
 .heatmap-scrollable {
-    flex: 1;
+    width: max-content;
 }
 
 .heatmap-months-row {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(53, 11px);
+    column-gap: 3px;
     font-size: 10px;
     color: var(--text-muted);
     margin-bottom: 6px;
-    padding-left: 2px;
+    padding-left: 0;
+    width: max-content;
 }
+
+.month-col.m-jan { grid-column: 1 / span 5; }
+.month-col.m-feb { grid-column: 6 / span 4; }
+.month-col.m-mar { grid-column: 10 / span 4; }
+.month-col.m-apr { grid-column: 14 / span 4; }
+.month-col.m-may { grid-column: 18 / span 5; }
+.month-col.m-jun { grid-column: 23 / span 4; }
+.month-col.m-jul { grid-column: 27 / span 4; }
+.month-col.m-aug { grid-column: 31 / span 5; }
+.month-col.m-sep { grid-column: 36 / span 4; }
+.month-col.m-oct { grid-column: 40 / span 5; }
+.month-col.m-nov { grid-column: 45 / span 4; }
+.month-col.m-dec { grid-column: 49 / span 5; }
 
 .heatmap-grid {
     display: grid;
@@ -2119,6 +2136,7 @@ body.light-theme .kpi-chip {
     grid-auto-flow: column;
     grid-auto-columns: 11px;
     gap: 3px;
+    width: max-content;
 }
 
 .heatmap-cell {

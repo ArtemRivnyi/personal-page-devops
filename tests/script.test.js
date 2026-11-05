@@ -707,13 +707,13 @@ describe('initGitHubHeatmap', () => {
     expect(cells.length).toBe(53 * 7);
   });
 
-  test('should render active cells for known 2026 contribution dates matching 1,002 contributions', () => {
+  test('should render active cells for known 2026 contribution dates matching 1,940 contributions', () => {
     initGitHubHeatmap();
     const activeCells = document.querySelectorAll('.heatmap-cell:not(.level-0)');
-    expect(activeCells.length).toBe(82);
-    expect(REAL_CONTRIBUTIONS_2026.length).toBe(82);
+    expect(activeCells.length).toBe(120);
+    expect(REAL_CONTRIBUTIONS_2026.length).toBe(120);
     const totalCount = REAL_CONTRIBUTIONS_2026.reduce((acc, cur) => acc + cur.c, 0);
-    expect(totalCount).toBe(1002);
+    expect(totalCount).toBe(1940);
   });
 
   test('should switch years and update headings when clicking year buttons', () => {
