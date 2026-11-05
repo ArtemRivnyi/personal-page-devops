@@ -587,10 +587,47 @@
     }
 
     @media (max-width: 800px) {
+      body {
+        background-color: #f1f5f9;
+        padding: 0;
+      }
+      .page {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: auto !important;
+        margin: 12px 0 !important;
+        padding: 18px 14px !important;
+        border-radius: 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
       .cv-nav-header,
       .cv-nav-footer {
-        margin: 10px 12px;
+        margin: 10px 8px;
         padding: 8px 12px;
+      }
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .header-right {
+        text-align: left;
+      }
+      .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .certs-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .split-col {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .exp-header {
+        flex-wrap: wrap;
+        gap: 4px;
       }
     }
   </style>
