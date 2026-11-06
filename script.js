@@ -298,11 +298,12 @@ const REAL_CONTRIBUTIONS_2026 = [
     { w: 44, d: 1, lvl: 2, c: 17, date: 'Nov 2, 2026' },
     { w: 44, d: 2, lvl: 1, c:  1, date: 'Nov 3, 2026' },
     { w: 44, d: 3, lvl: 4, c: 60, date: 'Nov 4, 2026' },
-    { w: 44, d: 4, lvl: 4, c: 127, date: 'Nov 5, 2026' },
+    { w: 44, d: 4, lvl: 4, c: 150, date: 'Nov 5, 2026' },
+    { w: 44, d: 5, lvl: 2, c: 28, date: 'Nov 6, 2026' },
 ];
 
 const GITHUB_YEARS = {
-    '2026': { total: '1,940', countText: '1,940 contributions in 2026' },
+    '2026': { total: '1,991', countText: '1,991 contributions in 2026' },
     '2025': { total: '527', countText: '527 contributions in 2025' },
     '2024': { total: '0', countText: '0 contributions in 2024' },
     '2023': { total: '12', countText: '12 contributions in 2023' },
