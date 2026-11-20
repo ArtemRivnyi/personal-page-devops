@@ -133,17 +133,17 @@ def create_dealshop_showcase():
     # Stat 1
     draw.rounded_rectangle([(right_x, 595), (right_x + half_w, 855)], radius=16, fill=(15, 23, 42), outline=(16, 185, 129), width=2)
     draw.text((right_x + 35, 625), "VERIFIED AUTOMATED SUITE", fill=(110, 231, 183), font=get_font('bold', 22))
-    draw.text((right_x + 35, 665), "1,647 TESTS", fill=(52, 211, 153), font=get_font('bold', 56))
-    draw.text((right_x + 35, 755), "100% Pass in Vitest, Playwright E2E", fill=(203, 213, 225), font=get_font('regular', 19))
-    draw.text((right_x + 35, 785), "& Flutter Google Play suites.", fill=(203, 213, 225), font=get_font('regular', 19))
+    draw.text((right_x + 35, 665), "6,000+ TESTS", fill=(52, 211, 153), font=get_font('bold', 56))
+    draw.text((right_x + 35, 755), "5,629 Vitest + 329 Flutter + 191 E2E", fill=(203, 213, 225), font=get_font('regular', 19))
+    draw.text((right_x + 35, 785), "with 100% Pass Rate in CI/CD.", fill=(203, 213, 225), font=get_font('regular', 19))
 
     # Stat 2
     bx2 = right_x + half_w + 25
     draw.rounded_rectangle([(bx2, 595), (bx2 + half_w, 855)], radius=16, fill=(15, 23, 42), outline=(56, 189, 248), width=2)
     draw.text((bx2 + 35, 625), "GAELIC & ENGLISH PARITY", fill=(125, 211, 252), font=get_font('bold', 22))
-    draw.text((bx2 + 35, 665), "3,776 KEYS", fill=(56, 189, 248), font=get_font('bold', 56))
-    draw.text((bx2 + 35, 755), "100% bilingual translation parity", fill=(203, 213, 225), font=get_font('regular', 19))
-    draw.text((bx2 + 35, 785), "with Next.js internationalization.", fill=(203, 213, 225), font=get_font('regular', 19))
+    draw.text((bx2 + 35, 665), "4,500+ KEYS", fill=(56, 189, 248), font=get_font('bold', 56))
+    draw.text((bx2 + 35, 755), "4,515 keys with 100% parity", fill=(203, 213, 225), font=get_font('regular', 19))
+    draw.text((bx2 + 35, 785), "Gaeilge & English Next.js i18n.", fill=(203, 213, 225), font=get_font('regular', 19))
 
     im.save('assets/dealshop_showcase_hd.webp', 'WEBP', quality=95)
     print("Created assets/dealshop_showcase_hd.webp")
