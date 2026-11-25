@@ -88,17 +88,23 @@
       }
       .page {
         margin: 0;
-        padding: 9mm 13mm 11mm 13mm;
+        padding: 9mm 13mm 10mm 13mm;
         box-shadow: none;
         width: 100%;
         height: 297mm;
         max-height: 297mm;
+        box-sizing: border-box;
         overflow: hidden;
         border-radius: 0;
         page-break-after: always;
+        break-after: page;
+        page-break-inside: avoid;
+        break-inside: avoid;
       }
-      .page:last-child {
+      .page:last-child,
+      .page:last-of-type {
         page-break-after: avoid;
+        break-after: avoid;
       }
       @page {
         size: A4 portrait;
@@ -586,7 +592,7 @@
       }
     }
 
-    @media (max-width: 800px) {
+    @media screen and (max-width: 800px) {
       body {
         background-color: #f1f5f9;
         padding: 0;
@@ -659,7 +665,7 @@
       <div class="header-right">
         <div>Co. Wicklow, Ireland</div>
         <div><a href="mailto:artemrivnyi@outlook.com">artemrivnyi@outlook.com</a> | Tel: +353-87-005-5579</div>
-        <div><a href="https://github.com/ArtemRivnyi" target="_blank" rel="noopener">github.com/ArtemRivnyi</a> (1,700+ Contributions)</div>
+        <div><a href="https://github.com/ArtemRivnyi" target="_blank" rel="noopener">github.com/ArtemRivnyi</a> (2,100+ Contributions in 2026)</div>
         <div><a href="https://linkedin.com/in/artem-rivnyi" target="_blank" rel="noopener">linkedin.com/in/artem-rivnyi</a></div>
         <div><a href="https://artemrivnyi.com" target="_blank" rel="noopener">artemrivnyi.com</a></div>
       </div>
@@ -669,7 +675,7 @@
     <section>
       <div class="section-title">Professional Summary</div>
       <p class="summary-text">
-        Proactive Cloud & DevOps Engineer with hands-on production experience architecting resilient cloud infrastructure on AWS, automating multi-stage CI/CD pipelines, and shipping enterprise-grade cross-platform systems. Proven expertise operating under strict Non-Disclosure Agreements (NDA) on scalable AI platforms, designing modular Terraform/Terragrunt architectures, orchestrating containerized microservices, and leading full-cycle software delivery from system design to Google Play Store releases. Demonstrates unwavering momentum with 1,700+ GitHub contributions over the past year, backed by deep competence in SRE observability (Prometheus/Grafana), Docker, Linux administration, and autonomous AI workflows.
+        Proactive Cloud & DevOps Engineer with hands-on production experience architecting resilient cloud infrastructure on AWS, automating multi-stage CI/CD pipelines, and shipping enterprise-grade cross-platform systems. Proven expertise operating under strict Non-Disclosure Agreements (NDA) on scalable AI platforms, designing modular Terraform/Terragrunt architectures, orchestrating containerized microservices, and leading full-cycle software delivery from system design to Google Play Store releases. Demonstrates unwavering momentum with 2,100+ GitHub contributions in 2026 alone, backed by deep competence in SRE observability (Prometheus/Grafana), Docker, Linux administration, and autonomous AI workflows.
       </p>
     </section>
 
@@ -709,6 +715,7 @@
             <span class="tag">Loki & Promtail Logging</span>
             <span class="tag">CloudWatch Metrics</span>
             <span class="tag">k6 Load Testing (1,000 req/s)</span>
+            <span class="tag">SRE Circuit Breaker</span>
           </div>
         </div>
 
